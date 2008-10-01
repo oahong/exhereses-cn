@@ -1,0 +1,38 @@
+# Copyright 1999-2008 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+FONT="pcf"
+
+require xfont multilib
+
+SUMMARY="WenQuanYi Bitmap Song CJK font"
+HOMEPAGE="http://wqy.sourceforge.net/en/"
+DOWNLOADS="mirror://sourceforge/wqy/${PN/song/font}-pcf-${PV/_p/-}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+
+WORK=${WORKBASE}/${PN}
+
+src_install() {
+    insinto /usr/${get_libdir}/X11/fonts/TTC/
+    doins *.pcf
+
+    # Install the fontconfig configuration
+    insinto /etc/fonts/conf.avail
+    doins "85-wqy-bitmapsong.conf"
+
+    fix_fonts
+}
+
+pkg_postinst() {
+	font_pkg_postinst
+	echo
+	einfo "This font installs a fontconfig configuration file."
+	einfo ""
+	einfo "To activate this font, run:"
+	einfo "eclectic fontconfig enable 85-wqy-bitmapsong.conf"
+	einfo
+	echo
+}

@@ -1,0 +1,15 @@
+# Copyright 1999-2008 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="http://fcitx.googlecode.com/svn/"
+require fcitx scm-svn
+
+DOWNLOADS=""
+
+SLOT="0"
+PLATFORMS=""
+
+# We really need an empty dir: "/usr/share/fcitx/xpm"?
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}/${PNV}-remove-empty-xpm-dir.patch"
+)
