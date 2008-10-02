@@ -34,8 +34,8 @@ src_prepare() {
     sed -i -e \
         's:xpm[[:space:]]::' Makefile.am \
         || die "sed failed"
+    expatch "${FILES}/${PNV}-asneeded.patch"
     if [[ ${PV} != "scm" ]] ; then
-        expatch "${FILES}/${PNV}-asneeded.patch"
         eautomake
     else
         eautoreconf
