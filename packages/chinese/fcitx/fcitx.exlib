@@ -44,14 +44,14 @@ src_prepare() {
 
 pkg_postinst() {
     einfo
-	einfo "You should export the following variables to use fcitx"
-	einfo " export XMODIFIERS=\"@im=fcitx\""
-	einfo " export XIM=fcitx"
-	einfo " export XIM_PROGRAM=fcitx"
-	einfo ""
-	einfo "If you want to use WuBi or ErBi"
-	einfo " cp /usr/share/fcitx/data/wbx.mb ~/.fcitx"
-	einfo " cp /usr/share/fcitx/data/erbi.mb ~/.fcitx"
-	einfo " cp /usr/share/fcitx/data/tables.conf ~/.fcitx"
-	einfo
+    einfo "You should export the following variables to use fcitx"
+    einfo " export XMODIFIERS=\"@im=fcitx\""
+    einfo " export XIM=fcitx"
+    einfo " export XIM_PROGRAM=fcitx"
+    einfo ""
+    einfo "If you want to use WuBi or ErBi"
+    einfo " cp /usr/share/fcitx/data/wbx.mb ~/.fcitx"
+    einfo " cp /usr/share/fcitx/data/erbi.mb ~/.fcitx"
+    einfo " cp /usr/share/fcitx/data/tables.conf ~/.fcitx"
+    einfo
 }

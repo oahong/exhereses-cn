@@ -16,7 +16,7 @@ PLATFORMS="~amd64 ~x86"
 WORK=${WORKBASE}/${PN}
 
 src_install() {
-    insinto /usr/${get_libdir}/X11/fonts/TTC/
+    insinto /usr/$(get_libdir)/X11/fonts/TTC/
     doins *.pcf
 
     # Install the fontconfig configuration
@@ -27,12 +27,12 @@ src_install() {
 }
 
 pkg_postinst() {
-	font_pkg_postinst
-	echo
-	einfo "This font installs a fontconfig configuration file."
-	einfo ""
-	einfo "To activate this font, run:"
-	einfo "eclectic fontconfig enable 85-wqy-bitmapsong.conf"
-	einfo
-	echo
+    font_pkg_postinst
+    echo
+    einfo "This font installs a fontconfig configuration file."
+    einfo ""
+    einfo "To activate this font, run:"
+    einfo "eclectic fontconfig enable 85-wqy-bitmapsong.conf"
+    einfo
+    echo
 }
