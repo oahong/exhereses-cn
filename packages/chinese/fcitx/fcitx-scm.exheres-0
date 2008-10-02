@@ -8,8 +8,3 @@ DOWNLOADS=""
 
 SLOT="0"
 PLATFORMS=""
-
-# We really need an empty dir: "/usr/share/fcitx/xpm"?
-DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}/${PNV}-remove-empty-xpm-dir.patch"
-)

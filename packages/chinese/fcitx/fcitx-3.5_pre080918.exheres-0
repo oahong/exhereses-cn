@@ -10,8 +10,6 @@ PLATFORMS="~x86 ~amd64"
 
 WORK="${WORKBASE}/${PNV/_pre*}"
 
-# We really need an empty dir: "/usr/share/fcitx/xpm"?
 DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}/${PNV/_pre*}-remove-empty-xpm-dir.patch"
     "${FILES}/${PNV}-asneeded.patch"
 )

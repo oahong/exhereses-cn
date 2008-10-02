@@ -27,7 +27,16 @@ BUGS_TO="fcitx-dev@googlegroups.com"
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( truetype )
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( AUTHORS Changeinfo README THANKS TODO )
 
+src_prepare() {
+    # We really need an empty dir: "/usr/share/fcitx/xpm"?
+    sed -i -e \
+        's:xpm[[:space:]]::' Makefile.am \
+        || die "sed failed"
+    default
+}
+
 pkg_postinst() {
+    einfo
 	einfo "You should export the following variables to use fcitx"
 	einfo " export XMODIFIERS=\"@im=fcitx\""
 	einfo " export XIM=fcitx"
@@ -37,5 +46,5 @@ pkg_postinst() {
 	einfo " cp /usr/share/fcitx/data/wbx.mb ~/.fcitx"
 	einfo " cp /usr/share/fcitx/data/erbi.mb ~/.fcitx"
 	einfo " cp /usr/share/fcitx/data/tables.conf ~/.fcitx"
-	echo
+	einfo
 }

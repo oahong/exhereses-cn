@@ -1,3 +1,6 @@
+Source: patch from gentoo (flameeyes@gentoo.org)
+Upstream: no, upstream is dead
+Reason: patch to fix building with --as-needed, Gentoo bug #225211
 Index: fcitx-3.5/src/Makefile.am
 ===================================================================
 --- fcitx-3.5.orig/src/Makefile.am
