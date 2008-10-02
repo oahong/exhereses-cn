@@ -9,7 +9,3 @@ SLOT="0"
 PLATFORMS="~x86 ~amd64"
 
 WORK="${WORKBASE}/${PNV/_pre*}"
-
-DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}/${PNV}-asneeded.patch"
-)
