@@ -1,0 +1,34 @@
+# Copyright 2008 Hong Hao
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'qterm-0.5.2.ebuild' from Gentoo, which is:
+#     Copyright 1999-2008 Gentoo Foundation
+
+require cmake
+
+SUMMARY="FQterm, a modern terminal emulator based on QTerm"
+DESCRIPTION="Yet another BBS client for Linux, written in Qt.
+FQterm is a fork of QTerm
+"
+HOMEPAGE="http://fqterm.googlecode.com"
+DOWNLOADS="http://fqterm.googlecode.com/files/${PNV}-src-r569.zip"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+# FIXME: Depends here is really a mess.
+# we need qt-gui qt-script, what is the equivalent options 
+# for exherbo?
+DEPENDENCIES="
+        x11-libs/qt:4[qt3support][webkit][ssl]
+    build:
+        app-arch/unzip
+"
+
+WORK=${WORKBASE}/${PN}
+
+src_prepare() {
+    # quick and dirty hack
+    expatch "${FILES}"/${PNV}-qad-openssl-fix.patch
+}
