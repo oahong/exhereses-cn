@@ -1,13 +1,13 @@
 # Copyright 1999-2008 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-FONT="TTC"
+FONT="TTF"
 
 require xfont multilib
 
-SUMMARY="WenQuanYi Hei-Ti Style (sans-serif) Chinese outline font"
+SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
 HOMEPAGE="http://wqy.sourceforge.net/cgi-bin/enindex.cgi?ZenHei(en)"
-DOWNLOADS="http://fundawang.lcuc.org.cn/wqy/${PN}-nightly_build.tar.gz"
+DOWNLOADS="mirror://sourceforge/wqy/${PNV}-0.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -16,26 +16,27 @@ PLATFORMS="~amd64 ~x86"
 WORK=${WORKBASE}/${PN}
 
 src_install() {
-    insinto /usr/$(get_libdir)/X11/fonts/TTC/
-    doins *.ttc
+    default
 
-    # Install the fontconfig configuration
+    insinto /usr/$(get_libdir)/X11/fonts/TTF/
+    doins *.ttf
+
+    # Install fontconfig configurations
     insinto /etc/fonts/conf.avail
-    doins "44-wqy-zenhei.conf"
-    doins "66-wqy-zenhei-sharp.conf"
+    doins "44-wqy-zenhei.conf" "66-wqy-zenhei-sharp.conf"
 
     fix_fonts
 }
 
 pkg_postinst() {
-    font_pkg_postinst
-    echo
+    xfont_pkg_postinst
+    einfo
     einfo "This font installs two fontconfig configuration files."
     einfo ""
     einfo "To activate preferred rendering, run:"
-    einfo "eclectic fontconfig enable 44-wqy-zenhei.conf"
+    einfo "eselect fontconfig enable 44-wqy-zenhei.conf"
     einfo
     einfo "To make the font only use embedded bitmap fonts when available, run:"
-    einfo "eclectic fontconfig enable 66-wqy-zenhei-sharp.conf"
-    echo
+    einfo "eselect fontconfig enable 66-wqy-zenhei-sharp.conf"
+    einfo
 }
