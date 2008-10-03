@@ -21,7 +21,7 @@ MYOPTIONS=""
 # we need qt-gui qt-script, what is the equivalent options 
 # for exherbo?
 DEPENDENCIES="
-        x11-libs/qt:4[qt3support][webkit][ssl]
+        x11-libs/qt:4[X][png][qt3support][webkit][ssl]
     build:
         app-arch/unzip
 "
