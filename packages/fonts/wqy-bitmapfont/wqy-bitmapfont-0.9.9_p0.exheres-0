@@ -28,6 +28,6 @@ src_install() {
 pkg_postinst() {
     einfo
     einfo "To activate this font, run:"
-    einfo "eselect fontconfig enable 85-wqy-bitmapsong.conf"
+    einfo "eclectic fontconfig enable 85-wqy-bitmapsong.conf"
     einfo
 }
