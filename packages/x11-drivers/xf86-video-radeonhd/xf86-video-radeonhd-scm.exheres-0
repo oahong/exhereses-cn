@@ -1,0 +1,50 @@
+# Copyright (c) 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'xf86-video-ati/xf86-video-ati-6.9.0.exheres-0', which is:
+#     Copyright (c) 2007 Alexander Færøy <ahf@exherbo.org>
+
+SCM_REPOSITORY="git://anongit.freedesktop.org/git/xorg/driver/xf86-video-radeonhd"
+require autotools xorg scm-git multilib
+
+SUMMARY="Xorg video driver for ati radeon hd card"
+DOWNLOADS=""
+
+LICENCES="fixme"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+# FIXME: Do we need an options for atombois/atombios-parser support?
+MYOPTIONS="dri"
+
+DEPENDENCIES="
+    build+run:
+        sys-apps/pciutils
+        >=x11-libs/libpciaccess-0.8
+        x11-libs/libXinerama
+        dri? ( >=x11-dri/libdrm-2.2 )
+    build:
+        x11-proto/fontsproto
+        x11-proto/randrproto
+        x11-proto/renderproto
+        x11-proto/videoproto
+        x11-proto/xextproto
+        x11-proto/xf86miscproto
+        x11-proto/xineramaproto
+        x11-proto/xproto
+        dri? ( x11-proto/xf86driproto )
+    run:
+        x11-server/xorg-server
+    "
+
+SUPPORTED_AUTOCONF=( 2.5 )
+SUPPORTED_AUTOMAKE=( 1.10 )
+
+src_prepare() {
+    eautoreconf
+}
+
+src_configure() {
+    econf \
+        $(option_enable dri) \
+        --enable-exa \
+        --with-xorg-module-dir=/usr/$(get_libdir)/xorg/modules
+}
