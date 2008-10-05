@@ -1,0 +1,82 @@
+
+
+SUMMARY="Smart Common Input Method platform"
+DESCRIPTION="Smart Common Input Method (SCIM) is an input method (IM) platform.
+It provides a common platform for various plugin modules and independent IM
+programs, as well as a set of modules and programs on its own.
+"
+HOMEPAGE="http://www.scim-im.org"
+DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="gtk" # doc
+
+# http://packages.debian.org/lenny/scim
+DEPENDENCIES="
+    build+run:
+        gtk? (
+            x11-libs/gtk+
+            x11-libs/pango
+            dev-libs/glib
+        )
+        dev-libs/atk
+        sys-devel/libtool
+        x11-libs/libX11
+    build:
+        dev-util/intltool
+        x11-libs/libXt
+        dev-lang/perl
+        dev-util/pkg-config
+    "
+#####################################
+# fixme: doc options
+#        doc? (
+#            app-doc/doxygen
+#            app-text/docbook-xsl-stylesheets
+#        )
+#    local myconf
+#    if ! option gtk ; then
+#        myconf="${myconf} --disable-panel-gtk \
+#            --disable-gtk2-immodule \
+#            --disable-setup-ui"
+#    fi
+#####################################
+
+DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
+    docs/developers docs/scim.cfg
+)
+
+src_configure() {
+    econf \
+        $(option_enable gtk panel-gtk) \
+        $(option_enable gtk gtk2-immodule) \
+        $(option_enable gtk setup-ui) \
+        --enable-ld-version-script \
+        --without-doxygen
+}
+
+src_install() {
+    default
+    if ! option gtk; then
+        rmdir "${IMAGE}/usr/lib/scim-1.0/1.4.0/SetupUI"
+        rmdir "${IMAGE}/usr/lib/scim-1.0/1.4.0/Helper"
+        rmdir "${IMAGE}/usr/lib/gtk-2.0/immodules"
+        rmdir "${IMAGE}/usr/lib/gtk-2.0"
+        rmdir "${IMAGE}/usr/share/pixmaps"
+    fi
+}
+
+pkg_postinst() {
+    einfo "For more infomation about how to setup scim, please take a look at:"
+    einfo "http://tinyurl.com/25djma"
+
+    [ -x /usr/bin/gtk-query-immodules-2.0 ] && gtk-query-immodules-2.0 > \
+    "${ROOT}"/etc/gtk-2.0/gtk.immodules
+}
+
+pkg_postrm() {
+    [ -x /usr/bin/gtk-query-immodules-2.0 ] && gtk-query-immodules-2.0 > \
+    "${ROOT}"/etc/gtk-2.0/gtk.immodules
+}
