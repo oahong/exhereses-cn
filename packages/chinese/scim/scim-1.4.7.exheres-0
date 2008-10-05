@@ -1,3 +1,7 @@
+# Copyright (c) 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'scim-1.4.7-r1.ebuild', which is:
+#     Copyright 1999-2008 Gentoo Foundation
 
 
 SUMMARY="Smart Common Input Method platform"
@@ -36,12 +40,6 @@ DEPENDENCIES="
 #            app-doc/doxygen
 #            app-text/docbook-xsl-stylesheets
 #        )
-#    local myconf
-#    if ! option gtk ; then
-#        myconf="${myconf} --disable-panel-gtk \
-#            --disable-gtk2-immodule \
-#            --disable-setup-ui"
-#    fi
 #####################################
 
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
@@ -49,17 +47,23 @@ DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
 )
 
 src_configure() {
+    # "option_enable" doesn't work here.
+    local myoptions
+    if ! option gtk ; then
+        myoptions="${myoptions} --disable-panel-gtk \
+            --disable-gtk2-immodule \
+            --disable-setup-ui"
+    fi
+
     econf \
-        $(option_enable gtk panel-gtk) \
-        $(option_enable gtk gtk2-immodule) \
-        $(option_enable gtk setup-ui) \
+        ${myoptions} \
         --enable-ld-version-script \
         --without-doxygen
 }
 
 src_install() {
     default
-    if ! option gtk; then
+    if ! option gtk ; then
         rmdir "${IMAGE}/usr/lib/scim-1.0/1.4.0/SetupUI"
         rmdir "${IMAGE}/usr/lib/scim-1.0/1.4.0/Helper"
         rmdir "${IMAGE}/usr/lib/gtk-2.0/immodules"

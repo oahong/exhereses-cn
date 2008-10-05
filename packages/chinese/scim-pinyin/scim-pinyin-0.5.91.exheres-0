@@ -1,0 +1,45 @@
+# Copyright (c) 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'scim-pinyin/scim-pinyin-0.5.91-r2.ebuild", which is:
+#     Copyright 1999-2008 Gentoo Foundation
+
+SUMMARY="Smart Pinyin IMEngine for Smart Common Input Method platform"
+DESCRIPTION="This package provides smart pinyin IM engine for SCIM. It includes
+the plugin modules and the data files. With this module you can use the smart
+pinyin input method for Chinese.
+"
+HOMEPAGE="www.scim-im.org"
+DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="debug nls" #FIXME:skim(kde3) support
+
+# TODO: Fix depends.
+# http://packages.debian.org/lenny/scim-pinyin
+DEPENDENCIES="
+    build+run:
+        x11-libs/libXt
+        chinese/scim
+        nls? ( sys-devel/gettext )
+    build:
+        dev-util/pkg-config
+    "
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/${PNV}-gcc43.patch" )
+
+src_configure() {
+    econf \
+        $(option_enable nls) \
+        $(option_enable debug) \
+        --disable-skim-support \
+        --disable-tools \
+        --disable-rpath
+}
+
+src_install() {
+    default
+    # Remove empty directory.
+    rmdir "${IMAGE}//usr/lib/scim-1.0/1.4.0/SetupUI"
+}
