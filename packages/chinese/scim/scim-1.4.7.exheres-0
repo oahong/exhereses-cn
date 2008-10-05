@@ -15,7 +15,7 @@ DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="gtk" # doc
+MYOPTIONS="gtk" # We need a doc option?
 
 # http://packages.debian.org/lenny/scim
 DEPENDENCIES="
@@ -35,7 +35,7 @@ DEPENDENCIES="
         dev-util/pkg-config
     "
 #####################################
-# fixme: doc options
+# fixme: doc options and
 #        doc? (
 #            app-doc/doxygen
 #            app-text/docbook-xsl-stylesheets
@@ -55,6 +55,7 @@ src_configure() {
             --disable-setup-ui"
     fi
 
+    #  What can scim do without "gtk" option?
     econf \
         ${myoptions} \
         --enable-ld-version-script \
