@@ -3,7 +3,6 @@
 # Based in part upon 'scim-1.4.7-r1.ebuild', which is:
 #     Copyright 1999-2008 Gentoo Foundation
 
-
 SUMMARY="Smart Common Input Method platform"
 DESCRIPTION="Smart Common Input Method (SCIM) is an input method (IM) platform.
 It provides a common platform for various plugin modules and independent IM
@@ -15,7 +14,7 @@ DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="gtk" # We need a doc option?
+MYOPTIONS="doc gtk" # We need a doc option?
 
 # http://packages.debian.org/lenny/scim
 DEPENDENCIES="
@@ -34,20 +33,13 @@ DEPENDENCIES="
         dev-lang/perl
         dev-util/pkg-config
     "
-#####################################
-# fixme: doc options and
-#        doc? (
-#            app-doc/doxygen
-#            app-text/docbook-xsl-stylesheets
-#        )
-#####################################
 
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
     docs/developers docs/scim.cfg
 )
 
 src_configure() {
-    # "option_enable" doesn't work here.
+    # "option_enable" doesn't work as expected.
     local myoptions
     if ! option gtk ; then
         myoptions="${myoptions} --disable-panel-gtk \
@@ -55,15 +47,20 @@ src_configure() {
             --disable-setup-ui"
     fi
 
-    #  What can scim do without "gtk" option?
     econf \
         ${myoptions} \
         --enable-ld-version-script \
         --without-doxygen
+#        $(option_with doc doxygen) \
 }
 
 src_install() {
     default
+    if option doc ; then
+        insinto /usr/share/doc/${PNV}
+        doins -r docs/html
+    fi
+    # Remove empty directories
     if ! option gtk ; then
         rmdir "${IMAGE}/usr/lib/scim-1.0/1.4.0/SetupUI"
         rmdir "${IMAGE}/usr/lib/scim-1.0/1.4.0/Helper"
@@ -74,7 +71,8 @@ src_install() {
 }
 
 pkg_postinst() {
-    einfo "For more infomation about how to setup scim, please take a look at:"
+    einfo "For more infomation about how to setup scim,"
+    einfo "please read the folling link:"
     einfo "http://tinyurl.com/25djma"
 
     [ -x /usr/bin/gtk-query-immodules-2.0 ] && gtk-query-immodules-2.0 > \
