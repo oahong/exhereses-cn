@@ -1,0 +1,49 @@
+# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'linux-fetion-0.8.1.ebuild' from Gentoo, which is:
+#     Copyright 1999-2008 Gentoo Foundation
+
+require qmake4
+
+SUMMARY="Linux Fetion, a QT4 IM client using CHINA MOBILE's Fetion Protocol"
+HOMEPAGE="http://www.libfetion.cn"
+DOWNLOADS="http://www.libfetion.cn/download/App/${PNV}.tar.gz"
+
+SLOT="0"
+LICENCES="GPL-2"
+MYOPTIONS="platform:amd64"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/openssl
+        net-misc/curl
+        x11-libs/qt:4[qt3support][sqlite][X]
+"
+
+src_prepare() {
+    if option platform:amd64 ; then
+        sed -i -e "/libfetion.a/c    LIBS +=  -lcurl ./libfetion_64.a" ${PN}.pro
+        sed -i -e "/libfetion_32.a/c    LIBS +=  -lcurl ./libfetion_64.a" ${PN}.pro
+    fi
+}
+
+linux_fetion_src_install() {
+    insinto /usr/share/libfetion
+    doins fetion_utf8_CN.qm
+
+    if [[ ${PV} == "scm" ]] ; then
+        doins -r skins sound
+        rm -rf $(find "${IMAGE}" -name .svn)
+    else
+        doins -r image sound
+    fi
+
+    insinto /usr/share/pixmaps
+    doins misc/fetion.png
+    insinto /usr/share/applications
+    doins misc/LibFetion.desktop
+
+    dobin ${PN}
+}
+
+export linux_fetion_src_install

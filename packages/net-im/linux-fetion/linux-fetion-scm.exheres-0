@@ -1,0 +1,21 @@
+# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="http://libfetion-gui.googlecode.com/svn"
+SCM_SUBPATH="qt4_src"
+
+require scm-svn linux-fetion
+
+DOWNLOADS=""
+
+PLATFORMS=""
+MYOPTIONS="doc"
+
+src_install() {
+    linux_fetion_src_install
+    if option doc ; then
+        insinto /usr/share/doc/${PNV}
+        doins APIDocs/html/*
+    fi
+}
+
