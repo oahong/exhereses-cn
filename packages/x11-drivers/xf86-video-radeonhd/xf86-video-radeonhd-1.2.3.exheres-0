@@ -3,9 +3,6 @@
 # Based in part upon 'xf86-video-ati/xf86-video-ati-6.9.0.exheres-0', which is:
 #     Copyright (c) 2007 Alexander Færøy <ahf@exherbo.org>
 
-SCM_REPOSITORY="git://anongit.freedesktop.org/git/xorg/driver/xf86-video-radeonhd"
-require xf86-video-radeonhd scm-git
+require xf86-video-radeonhd
 
-DOWNLOADS=""
-
-PLATFORMS=""
+PLATFORMS="~amd64 ~x86"
