@@ -24,7 +24,7 @@ DEPENDENCIES="
     build:
         dev-util/pkg-config
     "
-BUGS_TO="yuking@163.com"
+BUGS_TO="yuking_net@sohu.com"
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( "truetype xft" )
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( AUTHORS Changeinfo README THANKS TODO )
