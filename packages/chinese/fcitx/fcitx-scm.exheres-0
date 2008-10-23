@@ -1,7 +1,7 @@
 # Copyright 1999-2008 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_REPOSITORY="https://fcitx.svn.sourceforge.net/svnroot/fcitx/"
+SCM_REPOSITORY="http://fcitx.googlecode.com/svn/"
 require fcitx scm-svn
 
 DOWNLOADS=""
