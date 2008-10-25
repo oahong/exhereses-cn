@@ -11,7 +11,7 @@ DOWNLOADS="http://www.libfetion.cn/download/App/${PNV}.tar.gz"
 
 SLOT="0"
 LICENCES="GPL-2"
-MYOPTIONS="platform:amd64"
+MYOPTIONS="platform: amd64"
 
 DEPENDENCIES="
     build+run:
@@ -21,7 +21,7 @@ DEPENDENCIES="
 "
 
 src_prepare() {
-    if option platform:amd64 ; then
+    if option platform: amd64 ; then
         sed -i -e "/libfetion.a/c    LIBS +=  -lcurl ./libfetion_64.a" ${PN}.pro
         sed -i -e "/libfetion_32.a/c    LIBS +=  -lcurl ./libfetion_64.a" ${PN}.pro
     fi
