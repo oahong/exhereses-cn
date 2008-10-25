@@ -5,11 +5,11 @@
 
 require autotools xorg multilib
 
-SUMMARY="Xorg video driver for ati RADEON HD card"
+SUMMARY="Xorg video driver for ati Radeon HD card"
 
 LICENCES="fixme"
 SLOT="0"
-# FIXME: Do we need an options for atombois/atombios-parser support?
+# FIXME: options for atombois/atombios-parser support
 MYOPTIONS="dri"
 
 DEPENDENCIES="
@@ -27,7 +27,7 @@ DEPENDENCIES="
         x11-proto/xf86miscproto
         x11-proto/xineramaproto
         x11-proto/xproto
-        dri? ( x11-proto/xf86driproto )
+        dri? ( x11-proto/xf86driproto x11-proto/glproto )
     run:
         x11-server/xorg-server
     "
@@ -35,9 +35,9 @@ DEPENDENCIES="
 SUPPORTED_AUTOCONF=( 2.5 )
 SUPPORTED_AUTOMAKE=( 1.10 )
 
-src_prepare() {
-    eautoreconf
-}
+#src_prepare() {
+#    eautoreconf
+#}
 
 src_configure() {
     econf \
