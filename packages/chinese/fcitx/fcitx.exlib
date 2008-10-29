@@ -25,12 +25,12 @@ DEPENDENCIES="
         dev-util/pkg-config
     "
 BUGS_TO=(
-	"fcitx-dev@googlegroups.com"
-	"yuking_net@sohu.com"
+    "fcitx-dev@googlegroups.com"
+    "yuking_net@sohu.com"
 )
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( "truetype xft" )
-DEFAULT_SRC_INSTALL_EXTRA_DOCS=( AUTHORS Changeinfo README THANKS TODO )
+DEFAULT_SRC_INSTALL_EXTRA_DOCS=( "doc/cjkvinput.txt" "doc/pinyin.txt" )
 
 src_prepare() {
     expatch "${FILES}/${PNV}-asneeded.patch"
@@ -41,15 +41,21 @@ src_prepare() {
     fi
 }
 
+src_install() {
+    default
+    ebegin "Remove empty directory"
+        rmdir "${IMAGE}"/usr/share/${PN}/xpm
+    eend $?
+    rm -rvf "${IMAGE}"/usr/share/${PN}/doc
+}
+
 pkg_postinst() {
-    einfo "Remove empty directory"
-    rmdir "${IMAGE}/usr/share/${PN}/xpm"
     einfo
     einfo "You should export the following variables to use fcitx"
     einfo " export XMODIFIERS=\"@im=fcitx\""
     einfo " export XIM=fcitx"
     einfo " export XIM_PROGRAM=fcitx"
-    einfo ""
+    einfo
     einfo "If you want to use WuBi or ErBi"
     einfo " cp /usr/share/fcitx/data/wbx.mb ~/.fcitx"
     einfo " cp /usr/share/fcitx/data/erbi.mb ~/.fcitx"
