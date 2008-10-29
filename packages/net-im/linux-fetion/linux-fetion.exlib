@@ -21,9 +21,9 @@ DEPENDENCIES="
 "
 
 src_prepare() {
-    if option platform: amd64 ; then
-        sed -i -e "/libfetion.a/c    LIBS +=  -lcurl ./libfetion_64.a" ${PN}.pro
-        sed -i -e "/libfetion_32.a/c    LIBS +=  -lcurl ./libfetion_64.a" ${PN}.pro
+    if option platform:amd64 ; then
+        sed -i -e "/libfetion.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" ${PN}.pro
+        sed -i -e "/libfetion_32.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" ${PN}.pro
     fi
 }
 
