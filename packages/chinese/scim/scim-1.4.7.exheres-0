@@ -57,7 +57,7 @@ src_configure() {
 src_install() {
     default
     if option doc ; then
-        insinto /usr/share/doc/${PNV}
+        insinto /usr/share/doc/${PN}
         doins -r docs/html
     fi
     # Remove empty directories
