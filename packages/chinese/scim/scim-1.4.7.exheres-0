@@ -14,16 +14,14 @@ DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="doc gtk" # We need a doc option?
+MYOPTIONS="doc" # We need a doc option?
 
 # http://packages.debian.org/lenny/scim
 DEPENDENCIES="
     build+run:
-        gtk? (
-            x11-libs/gtk+
-            x11-libs/pango
-            dev-libs/glib
-        )
+        x11-libs/gtk+
+        x11-libs/pango
+        dev-libs/glib
         dev-libs/atk
         sys-devel/libtool
         x11-libs/libX11
@@ -39,19 +37,9 @@ DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
 )
 
 src_configure() {
-    # "option_enable" doesn't work as expected.
-    local myoptions
-    if ! option gtk ; then
-        myoptions="${myoptions} --disable-panel-gtk \
-            --disable-gtk2-immodule \
-            --disable-setup-ui"
-    fi
-
     econf \
-        ${myoptions} \
         --enable-ld-version-script \
         --without-doxygen
-#        $(option_with doc doxygen) \
 }
 
 src_install() {
@@ -59,14 +47,6 @@ src_install() {
     if option doc ; then
         insinto /usr/share/doc/${PN}
         doins -r docs/html
-    fi
-    # Remove empty directories
-    if ! option gtk ; then
-        rmdir "${IMAGE}/usr/lib/scim-1.0/1.4.0/SetupUI"
-        rmdir "${IMAGE}/usr/lib/scim-1.0/1.4.0/Helper"
-        rmdir "${IMAGE}/usr/lib/gtk-2.0/immodules"
-        rmdir "${IMAGE}/usr/lib/gtk-2.0"
-        rmdir "${IMAGE}/usr/share/pixmaps"
     fi
 }
 
