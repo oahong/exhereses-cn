@@ -5,7 +5,7 @@
 
 require qmake4
 
-SUMMARY="Linux Fetion, a QT4 IM client using CHINA MOBILE's Fetion Protocol"
+SUMMARY="Linux Fetion, a QT4 IM client using Fetion Protocol"
 HOMEPAGE="http://www.libfetion.cn"
 DOWNLOADS="http://www.libfetion.cn/download/App/${PNV}.tar.gz"
 
@@ -22,21 +22,17 @@ DEPENDENCIES="
 
 src_prepare() {
     if option platform:amd64 ; then
-        sed -i -e "/libfetion.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" ${PN}.pro
-        sed -i -e "/libfetion_32.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" ${PN}.pro
+        sed -i \
+            -e "/libfetion.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" \
+            -e "/libfetion_32.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" \
+            ${PN}.pro
     fi
 }
 
 linux_fetion_src_install() {
     insinto /usr/share/libfetion
     doins fetion_utf8_CN.qm
-
-    if [[ ${PV} == "scm" ]] ; then
-        doins -r skins sound
-        rm -rf $(find "${IMAGE}" -name .svn)
-    else
-        doins -r image sound
-    fi
+    doins -r skins sound
 
     insinto /usr/share/pixmaps
     doins misc/fetion.png
