@@ -7,7 +7,7 @@ require qmake4
 
 SUMMARY="Linux Fetion, a QT4 IM client using Fetion Protocol"
 HOMEPAGE="http://www.libfetion.cn"
-DOWNLOADS="http://www.libfetion.cn/download/App/${PNV}.tar.gz"
+DOWNLOADS="http://libfetion-gui.googlecode.com/files/${PNV}.tar.gz"
 
 SLOT="0"
 LICENCES="GPL-2"
