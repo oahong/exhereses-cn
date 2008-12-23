@@ -1,0 +1,57 @@
+# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'linuqq-0.8.1.ebuild' from Gentoo-China-Overlay, which is:
+#     Copyright 1999-2008 Gentoo Foundation
+
+QPVN=${PVN/pre/v-preview_i386}
+SUMMARY="Official Linux client for Tecent QQ"
+HOMEPAGE="http://im.qq.com/qq/linux"
+DOWNLOADS="http://dl_dir.qq.com/${PN}/${QPVN}.tar.gz"
+
+SLOT="0"
+LICENCES="FIXME"
+
+DEPENDENCIES="
+    run:
+        >=x11-libs/gtk+-2.10.8"
+
+WORK=${WORKBASE}/${QPVN}
+
+src_install() {
+    # binary and database
+    dodir /opt/${PN}
+    mv "${WORK}"/* "${IMAGE}"/opt/${PN}
+
+    # icon, menu entry and launch script"
+    insinto /usr/share/pixmaps
+    doins "${FILES}"/linuxqq.png
+
+    # menu entry written by ProgramFan@linuxsir
+    # orignal post: 
+    # http://www.linuxsir.org/bbs/showthread.php?t=338506&page=2&highlight=linuxqq+ebuild
+    insinto /usr/share/applications
+    hereins linux << DONE
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=QQ for Linux
+Comment=Tencent offical client for QQ IM protocal 
+Exec=/usr/bin/qq
+TryExec=qq
+Icon=/opt/linuxqq/icons/linuxqq.png
+Terminal=false
+Type=Application
+Categories=Network;InstantMessaging;
+StartupNotify=true
+Name[zh_CN]=QQ for Linux
+Comment[zh_CN]=腾讯 QQ 即时聊天工具
+DONE
+
+    herebin qq << EOF
+#!/bin/bash
+# launch script original written by acevery.
+pushd /opt/linuxqq
+./qq 2> /dev/null &
+popd
+EOF
+}
