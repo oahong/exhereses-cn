@@ -16,7 +16,7 @@ MYOPTIONS="platform: amd64"
 DEPENDENCIES="
     build+run:
         dev-libs/openssl
-        net-misc/curl
+        net-misc/curl[ssl]
         x11-libs/qt:4[qt3support][sqlite][X]
 "
 
