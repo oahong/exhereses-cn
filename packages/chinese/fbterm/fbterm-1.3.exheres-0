@@ -1,0 +1,10 @@
+# Copyright 2008 Hong Hao
+# Distributed under the terms of the GNU General Public License v2
+
+require common-metadata
+
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS=""
+
+DEFAULT_SRC_INSTALL_EXTRA_DOCS="im/inputmethod.txt"
