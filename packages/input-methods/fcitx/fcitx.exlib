@@ -43,7 +43,7 @@ src_prepare() {
 
 src_install() {
     default
-    ebegin "Remove empty directory"
+    ebegin "Removing empty directory"
         rmdir "${IMAGE}"/usr/share/${PN}/xpm
     eend $?
     rm -rvf "${IMAGE}"/usr/share/${PN}/doc
