@@ -1,0 +1,11 @@
+# Copyright 1999-2008 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+require fcitx
+
+DOWNLOADS="http://fcitx.googlecode.com/files/${PNV/_/-}.tar.bz2"
+
+SLOT="0"
+PLATFORMS="~x86 ~amd64"
+
+WORK="${WORKBASE}/${PNV/_/-}"
