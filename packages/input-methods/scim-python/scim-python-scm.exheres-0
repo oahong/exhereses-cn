@@ -1,0 +1,66 @@
+# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'scim-python-9999-r2.ebuild' from Gentoo China Overlay, which is:
+#     Copyright 1999-2008 Gentoo Foundation
+
+SCM_REPOSITORY="http://scim-python.googlecode.com/svn/"
+require autotools python scm-svn
+
+PYDBTAR="pinyin-database-0.1.10.5.tar.bz2"
+SUMMARY="A python wrapper for Smart Common Input Method (SCIM)"
+HOMEPAGE="http://scim-python.googlecode.com"
+DOWNLOADS="pinyin? ( http://scim-python.googlecode.com/files/${PYDBTAR} )"
+
+# PINYIN code-table is GPL / engine is LGPL
+LICENCES="LGPL 2.0 GPL 2.0"
+SLOT="0"
+PLATFORMS="x86"
+MYOPTIONS="
+    nls
+    pinyin [[ description = [ Build PinYin Input Method  ] ]]
+    xingma [[ description = [ Build XingMa Input Method Engine ] ]]"
+#    enwriter [[ description = [ Build XingMa Input Method Engine ] ]]"
+
+DEPENDENCIES="
+    build+run:
+        x11-libs/libXt
+        dev-lang/python[sqlite]
+        >=gnome-bindings/pygtk-2.10.1
+        input-methods/scim
+    build:
+        dev-util/pkg-config
+        dev-scm/cvs
+        sys-devel/gettext"
+    # post,suggested:
+    #    input-methods/scim-xingma
+#        enwriter? ( app-spell/enchant )
+
+REMOTE_IDS="googlecode:scim-python"
+BUGS_TO="http://code.google.com/p/scim-python/issues/list"
+
+UPSTREAM_CHANGELOG="http://code.google.com/p/scim-python/source/browse/trunk/ChangeLog"
+UPSTREAM_DOCUMENTATION="http://code.google.com/p/scim-python/w/list"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( pinyin xingma nls )
+DEFAULT_SRC_CONFIGURE_PARAMS=( "--disable-english-writer" )
+
+src_prepare() {
+	if option pinyin; then
+		unpack ${PYDBTAR}
+		cp "${FETCHEDDIR}/${PYDBTAR}" "${WORK}"/python/engine/PinYin
+		mv "py.db" "${WORK}/python/engine/PinYin" || die
+	fi
+    autopoint || die
+    AT_M4DIR=m4 eautoreconf
+
+    mv py-compile py-compile.orig
+    ln -s $(type -P true) py-compile
+}
+
+pkg_postinst() {
+    python_mod_optimize "$(python_get_sitedir)"/${PN} /usr/share/${PN}
+}
+
+pkg_postrm() {
+    python_mod_cleanup && python_mod_cleanup /usr/share/${PN}
+}
