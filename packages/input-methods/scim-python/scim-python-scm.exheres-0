@@ -58,9 +58,9 @@ src_prepare() {
 }
 
 pkg_postinst() {
-    python_mod_optimize "$(python_get_sitedir)"/${PN} /usr/share/${PN}
+    python_mod_optimize "$(python_get_sitedir)"/scim-0.1 /usr/share/${PN}
 }
 
 pkg_postrm() {
-    python_mod_cleanup && python_mod_cleanup /usr/share/${PN}
+    python_mod_cleanup && python_mod_cleanup /usr/share/scim-0.1
 }
