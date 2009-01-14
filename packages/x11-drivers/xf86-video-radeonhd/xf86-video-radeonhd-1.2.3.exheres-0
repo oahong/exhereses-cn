@@ -1,8 +1,0 @@
-# Copyright (c) 2008 Hong Hao <oahong@gmail.com>
-# Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'xf86-video-ati/xf86-video-ati-6.9.0.exheres-0', which is:
-#     Copyright (c) 2007 Alexander Færøy <ahf@exherbo.org>
-
-require xf86-video-radeonhd
-
-PLATFORMS="~amd64 ~x86"
