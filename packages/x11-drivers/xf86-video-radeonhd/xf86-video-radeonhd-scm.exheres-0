@@ -1,9 +1,36 @@
 # Copyright (c) 2008-2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_REPOSITORY="git://anongit.freedesktop.org/git/xorg/driver/xf86-video-radeonhd"
-require xf86-video-radeonhd scm-git
+require xorg
 
-DOWNLOADS=""
+SUMMARY="Xorg video driver for ati Radeon HD card"
 
+LICENCES="MIT"
+SLOT="0"
 PLATFORMS=""
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        sys-apps/pciutils
+        >=x11-libs/libpciaccess-0.8
+        x11-libs/libXinerama
+        dri? ( >=x11-dri/libdrm-2.2 )
+    build:
+        x11-proto/fontsproto
+        x11-proto/randrproto
+        x11-proto/renderproto
+        x11-proto/videoproto
+        x11-proto/xextproto
+        x11-proto/xf86miscproto
+        x11-proto/xineramaproto
+        x11-proto/xproto
+        dri? ( x11-proto/xf86driproto x11-proto/glproto )
+        >=x11-server/xorg-server-1.5.0
+    "
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --enable-dri
+    --enable-exa
+    --without-xserver-source
+)
