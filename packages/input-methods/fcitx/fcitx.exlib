@@ -1,9 +1,17 @@
 # Copyright 1999-2008 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-SUPPORTED_AUTOCONF="2.5"
-SUPPORTED_AUTOMAKE="1.9"
-require autotools
+if ever at_least scm; then
+    SUPPORTED_AUTOCONF="2.5"
+    SUPPORTED_AUTOMAKE="1.9"
+
+    SCM_TYPE=svn
+    SCM_REPOSITORY="${SCM_REPOSITORY:-"http://fcitx.googlecode.com/svn/"}"
+
+    require autotools scm
+else
+    DOWNLOADS="${DOWNLOADS}:-"http://fcitx.googlecode.com/files/${PNV}.tar.bz2"}"
+fi
 
 SUMMARY="Free Chinese Input Toy for X"
 DESCRIPTION="Fcitx(Free Chinese Input Toy of X) is a collection of Simplified
