@@ -21,14 +21,14 @@ method."
 HOMEPAGE="http://fcitx.googlecode.com"
 
 LICENCES="GPL-2"
-MYOPTIONS="xft [[ description = [ Use libXft to render fonts ] ]]"
+MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
         x11-libs/libX11
         x11-libs/libXrender
         x11-libs/libXt
-        xft? ( x11-libs/libXft )
+        x11-libs/libXft
     build:
         dev-util/pkg-config
     "
@@ -37,21 +37,19 @@ BUGS_TO=(
     "yuking_net@sohu.com"
 )
 
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( "xft" )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-xft )
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( "doc/cjkvinput.txt" "doc/pinyin.txt" )
 
 src_prepare() {
     if [[ ${PV} != "3.5_pre080918" ]] ; then
         eautoreconf
-    else
-        eautomake
     fi
 }
 
 src_install() {
     default
     ebegin "Removing empty directory"
-        rmdir "${IMAGE}"/usr/share/${PN}/xpm
+        rmdir "${IMAGE}"/usr/share/${PN}/xpm &> /dev/null
     eend $?
     rm -rvf "${IMAGE}"/usr/share/${PN}/doc
 }
