@@ -1,54 +1,39 @@
-# Copyright (c) 2008 Hong Hao <oahong@gmail.com>
+# Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'scim-1.4.7-r1.ebuild', which is:
-#     Copyright 1999-2008 Gentoo Foundation
 
 SUMMARY="Smart Common Input Method platform"
-DESCRIPTION="Smart Common Input Method (SCIM) is an input method (IM) platform.
-It provides a common platform for various plugin modules and independent IM
-programs, as well as a set of modules and programs on its own.
+DESCRIPTION="SCIM is an input method (IM) platform. It provides a common
+platform for various plugin modules and independent IM programs, as well
+as a set of modules and programs on its own. It is highly modularized and
+exposes abstract interfaces, so that plugin modules with different functions
+can easily communicate with each other. The currently supported module
+types are configuration, IM engine, front end, filter, and setup GUI.
 "
 HOMEPAGE="http://www.scim-im.org"
 DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
 
-LICENCES="GPL-2"
+LICENCES="LGPL-2.1"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="doc" # We need a doc option?
+MYOPTIONS="debug"
 
-# http://packages.debian.org/lenny/scim
 DEPENDENCIES="
-    build+run:
-        x11-libs/gtk+
-        x11-libs/pango
-        dev-libs/glib
-        dev-libs/atk
-        sys-devel/libtool
-        x11-libs/libX11
     build:
-        dev-util/intltool
-        x11-libs/libXt
-        dev-lang/perl
         dev-util/pkg-config
+        >=dev-util/intltool-0.33
+    build+run:
+        sys-devel/gettext
+        dev-lang/perl
+        x11-libs/libX11
+        >=x11-libs/gtk+-2.4.0
+        >=x11-libs/pango-1.1.0
     "
 
-DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
-    docs/developers docs/scim.cfg
+DEFAULT_SRC_CONFIGURATION_ENABLES=( debug )
+DEFAULT_SRC_CONFIGURATION_PARAMS=(
+    --without-doxygen
+    --enable-ld-version-script
 )
-
-src_configure() {
-    econf \
-        --enable-ld-version-script \
-        --without-doxygen
-}
-
-src_install() {
-    default
-    if option doc ; then
-        insinto /usr/share/doc/${PN}
-        doins -r docs/html
-    fi
-}
 
 pkg_postinst() {
     einfo "For more infomation about how to setup scim,"
