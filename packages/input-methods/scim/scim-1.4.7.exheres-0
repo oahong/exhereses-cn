@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-SUMMARY="Smart Common Input Method platform"
+SUMMARY="Smart Chinese/Common Input Method platform"
 DESCRIPTION="SCIM is an input method (IM) platform. It provides a common
 platform for various plugin modules and independent IM programs, as well
 as a set of modules and programs on its own. It is highly modularized and
@@ -29,15 +29,20 @@ DEPENDENCIES="
         >=x11-libs/pango-1.1.0
     "
 
-DEFAULT_SRC_CONFIGURATION_ENABLES=( debug )
-DEFAULT_SRC_CONFIGURATION_PARAMS=(
+REMOTE_IDS="sourceforge:scim"
+UPSTREAM_DOCUMENTATOIN="
+http://www.scim-im.org/wiki/documentation/installation_and_configuration/all/system_configuration"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/fix-missing-header-on-tests.diff" )
+DEFAULT_SRC_CONFIGURE_ENABLES=( debug )
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --enable-tests
     --without-doxygen
     --enable-ld-version-script
 )
 
 pkg_postinst() {
-    einfo "For more infomation about how to setup scim,"
-    einfo "please read the folling link:"
+    einfo "Read the following link to learn how to configure ${PN}:"
     einfo "http://tinyurl.com/25djma"
 
     [ -x /usr/bin/gtk-query-immodules-2.0 ] && gtk-query-immodules-2.0 > \

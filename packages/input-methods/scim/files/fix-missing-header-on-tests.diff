@@ -1,0 +1,23 @@
+Source: written by Hong Hao
+Upstream: no
+Reason: Fix missing headers on gcc-4.3 error when running tests.
+--- scim-1.4.7/tests/testsocketclient.cpp.orig	2009-01-18 09:24:05.000000000 +0000
++++ scim-1.4.7/tests/testsocketclient.cpp	2009-01-18 09:24:52.000000000 +0000
+@@ -29,6 +29,7 @@
+ #include "scim.h"
+ #include <ctype.h>
+ #include <unistd.h>
++#include <string.h>
+ 
+ static const char * test_string [] = 
+ {
+--- scim-1.4.7/tests/testiconvert.cpp.orig	2009-01-18 10:06:00.000000000 +0000
++++ scim-1.4.7/tests/testiconvert.cpp	2009-01-18 10:06:21.000000000 +0000
+@@ -26,6 +26,7 @@
+ #define Uses_SCIM_ICONV
+ 
+ #include "scim.h"
++#include <string.h>
+ 
+ static const char * utf8_strings [] = 
+ {
