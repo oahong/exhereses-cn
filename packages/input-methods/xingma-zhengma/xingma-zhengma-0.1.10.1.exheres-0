@@ -1,0 +1,37 @@
+# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+NEED_PYTHON="2.5"
+require distutils
+
+SUMMARY="XingMa tables for ZhengMa"
+HOMEPAGE="http://scim-python.googlecode.com"
+DOWNLOADS="http://scim-python.googlecode.com/files/${PNV}.tar.bz2"
+
+LICENCES="fixme"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-lang/python[sqlite]
+        input-methods/scim-python[xingma]
+        "
+
+PREFIXDIR="/usr/share/scim-python/engine/XingMa"
+
+src_compile() {
+    einfo "Be patient, this might take a few minitues..."
+    ebegin "Creating datebase for scim-python..."
+        python "${PREFIXDIR}"/XMCreateDB.py --debug -s zhengma.txt.bz2
+    eend $?
+}
+
+src_install() {
+    insinto "${PREFIXDIR}"/tables
+    doins zhengma.db
+
+    insinto /usr/share/scim/icons
+    doins zhengma.png
+}
