@@ -1,6 +1,6 @@
 Source: written by Hong Hao
 Upstream: no
-Reason: Fix missing headers on gcc-4.3 error when running tests.
+Reason: Fix missing headers on gcc-4.3 error when compiling tests im module.
 --- scim-1.4.7/tests/testsocketclient.cpp.orig	2009-01-18 09:24:05.000000000 +0000
 +++ scim-1.4.7/tests/testsocketclient.cpp	2009-01-18 09:24:52.000000000 +0000
 @@ -29,6 +29,7 @@

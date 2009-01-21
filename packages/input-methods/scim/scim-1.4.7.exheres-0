@@ -33,13 +33,13 @@ REMOTE_IDS="sourceforge:scim"
 UPSTREAM_DOCUMENTATOIN="
 http://www.scim-im.org/wiki/documentation/installation_and_configuration/all/system_configuration"
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/fix-missing-header-on-tests.diff" )
+#DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/fix-missing-header-on-tests-ime.diff" )
 DEFAULT_SRC_CONFIGURE_ENABLES=( debug )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-    --enable-tests
     --without-doxygen
     --enable-ld-version-script
 )
+#    --enable-tests
 
 pkg_postinst() {
     einfo "Read the following link to learn how to configure ${PN}:"
