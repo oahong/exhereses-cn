@@ -9,7 +9,7 @@ require autotools python scm-svn
 PYDBTAR="pinyin-database-0.1.10.5.tar.bz2"
 SUMMARY="A python wrapper for Smart Common Input Method (SCIM)"
 HOMEPAGE="http://scim-python.googlecode.com"
-DOWNLOADS="pinyin? ( http://scim-python.googlecode.com/files/${PYDBTAR} )"
+DOWNLOADS="http://scim-python.googlecode.com/files/${PYDBTAR}"
 
 # PINYIN code-table is GPL / engine is LGPL
 LICENCES="LGPL 2.0 GPL 2.0"
@@ -17,8 +17,8 @@ SLOT="0"
 PLATFORMS="x86"
 MYOPTIONS="
     nls
-    pinyin [[ description = [ Build PinYin Input Method  ] ]]
     xingma [[ description = [ Build XingMa Input Method Engine ] ]]"
+#    pinyin [[ description = [ Build PinYin Input Method  ] ]]
 #    enwriter [[ description = [ Build XingMa Input Method Engine ] ]]"
 
 DEPENDENCIES="
@@ -30,7 +30,15 @@ DEPENDENCIES="
     build:
         dev-util/pkg-config
         dev-scm/cvs
-        sys-devel/gettext"
+        sys-devel/gettext
+    post,suggested:
+        xingma? (
+            input-methods/xingma-cangjie5
+            input-methods/xingma-compose
+            input-methods/xingma-erbi-qingsong
+            input-methods/xingma-wubi86
+            input-methods/xingma-zhengma
+        )"
     # post,suggested:
     #    input-methods/scim-xingma
 #        enwriter? ( app-spell/enchant )
@@ -41,15 +49,17 @@ BUGS_TO="http://code.google.com/p/scim-python/issues/list"
 UPSTREAM_CHANGELOG="http://code.google.com/p/scim-python/source/browse/trunk/ChangeLog"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/scim-python/w/list"
 
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( pinyin xingma nls )
-DEFAULT_SRC_CONFIGURE_PARAMS=( "--disable-english-writer" )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( xingma nls )
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --disable-english-writer
+    --enable-pinyin
+)
 
 src_prepare() {
-	if option pinyin; then
-		unpack ${PYDBTAR}
-		cp "${FETCHEDDIR}/${PYDBTAR}" "${WORK}"/python/engine/PinYin
-		mv "py.db" "${WORK}/python/engine/PinYin" || die
-	fi
+	unpack ${PYDBTAR}
+	cp "${FETCHEDDIR}/${PYDBTAR}" "${WORK}"/python/engine/PinYin
+	mv "py.db" "${WORK}/python/engine/PinYin" || die
+
     autopoint || die
     AT_M4DIR=m4 eautoreconf
 
