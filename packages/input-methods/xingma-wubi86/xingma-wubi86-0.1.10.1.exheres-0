@@ -1,7 +1,7 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-XM_P="wubi"
+XM_PN="wubi"
 require xingma-tables
 
 SLOT="0"

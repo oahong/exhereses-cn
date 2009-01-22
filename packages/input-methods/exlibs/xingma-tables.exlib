@@ -19,12 +19,12 @@ DEPENDENCIES="
         input-methods/scim-python[xingma]
         "
 
-# To overide default MY_P value, XM_P must
+# To overide default MY_PN value, XM_PN must
 # be set before "require xingma-tables".
-if [[ -n "${XM_P}" ]] ; then
-    MY_P=${XM_P}
+if [[ -n "${XM_PN}" ]] ; then
+    MY_PN=${XM_PN}
 else
-    MY_P=${PN/xingma-}
+    MY_PN=${PN/xingma-}
 fi
 
 WORK=${WORKDIR}
@@ -33,16 +33,16 @@ PREFIXDIR="/usr/share/scim-python/engine/XingMa"
 xingma-tables_src_compile() {
     einfo "Be patient, this might take a few minitues..."
     ebegin "Creating datebase for scim-python"
-        python "${PREFIXDIR}"/XMCreateDB.py --debug -s "${MY_P}".txt.bz2 || die
+        python "${PREFIXDIR}"/XMCreateDB.py --debug -s "${MY_PN}".txt.bz2 || die
     eend $?
 }
 
 xingma-tables_src_install() {
     insinto "${PREFIXDIR}"/tables
-    doins "${MY_P}".db
+    doins "${MY_PN}".db
 
     insinto /usr/share/scim/icons
-    doins "${MY_P}".png
+    doins "${MY_PN}".png
 }
 
 export_exlib_phases src_compile src_install
