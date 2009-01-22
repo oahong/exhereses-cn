@@ -1,0 +1,48 @@
+# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+NEED_PYTHON="2.5"
+require distutils
+
+SUMMARY="XingMa tables for ${PN}"
+HOMEPAGE="http://scim-python.googlecode.com"
+DOWNLOADS="http://scim-python.googlecode.com/files/${PNV}.tar.bz2"
+
+LICENCES="GPL-2"
+#SLOT="0"
+#PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-lang/python[sqlite]
+        input-methods/scim-python[xingma]
+        "
+
+# To overide default MY_P value, XM_P must
+# be set before "require xingma-tables".
+if [[ -n "${XM_P}" ]] ; then
+    MY_P=${XM_P}
+else
+    MY_P=${PN/xingma-}
+fi
+
+WORK=${WORKDIR}
+PREFIXDIR="/usr/share/scim-python/engine/XingMa"
+
+xingma-tables_src_compile() {
+    einfo "Be patient, this might take a few minitues..."
+    ebegin "Creating datebase for scim-python"
+        python "${PREFIXDIR}"/XMCreateDB.py --debug -s "${MY_P}".txt.bz2 || die
+    eend $?
+}
+
+xingma-tables_src_install() {
+    insinto "${PREFIXDIR}"/tables
+    doins "${MY_P}".db
+
+    insinto /usr/share/scim/icons
+    doins "${MY_P}".png
+}
+
+export_exlib_phases src_compile src_install
