@@ -21,25 +21,16 @@ MYOPTIONS="debug nls" #FIXME:skim(kde3) support
 DEPENDENCIES="
     build+run:
         x11-libs/libXt
-        chinese/scim
+        input-method/scim
         nls? ( sys-devel/gettext )
     build:
         dev-util/pkg-config
     "
+DEFAULT_SRC_CONFIGURATION_ENABLES=( debug nls )
+DEFAULT_SRC_CONFIGURATION_PARAMS=(
+    --disable-skim-support
+    --disable-tools
+    --disable-rpath
+)
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/${PNV}-gcc43.patch" )
-
-src_configure() {
-    econf \
-        $(option_enable nls) \
-        $(option_enable debug) \
-        --disable-skim-support \
-        --disable-tools \
-        --disable-rpath
-}
-
-src_install() {
-    default
-    # Remove empty directory.
-    rmdir "${IMAGE}//usr/lib/scim-1.0/1.4.0/SetupUI"
-}

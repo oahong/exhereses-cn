@@ -26,21 +26,21 @@ DEPENDENCIES="
         x11-libs/libXt
         dev-lang/python[sqlite]
         >=gnome-bindings/pygtk-2.10.1
-        input-methods/scim
+        input-method/scim
     build:
         dev-util/pkg-config
         dev-scm/cvs
         sys-devel/gettext
     post,suggested:
         xingma? (
-            input-methods/xingma-cangjie5
-            input-methods/xingma-compose
-            input-methods/xingma-erbi-qingsong
-            input-methods/xingma-wubi86
-            input-methods/xingma-zhengma
+            input-method/xingma-cangjie5
+            input-method/xingma-compose
+            input-method/xingma-erbi-qingsong
+            input-method/xingma-wubi86
+            input-method/xingma-zhengma
         )"
     # post,suggested:
-    #    input-methods/scim-xingma
+    #    input-method/scim-xingma
 #        enwriter? ( app-spell/enchant )
 
 REMOTE_IDS="googlecode:scim-python"

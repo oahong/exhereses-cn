@@ -16,7 +16,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-lang/python[sqlite]
-        input-methods/scim-python[xingma]
+        input-method/scim-python[xingma]
         "
 
 # To overide default MY_PN value, XM_PN must
