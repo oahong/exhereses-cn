@@ -1,0 +1,32 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Intelligent phonetic input method library for Chinese"
+DESCRIPTION="libchewing provides the core algorithm and logic so that
+they can be shared among various input methods like JMCCE, xcin-chewing,
+scim-chewing, screen-chewing, etc.
+
+The Chewing input method is a smart bopomofo fonetics input method that is
+useful for inputing Mandarin Chinese based language.
+"
+HOMEPAGE="http://chewing.csie.net"
+DOWNLOADS="http://chewing.csie.net/download/${PN}/${PNV}.tar.bz2"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="debug
+    test [[ description = [ Build unit test using dev-libs/check ] ]]"
+
+DEPENDENCIES="
+    build:
+        test? ( >=dev-libs/check-0.9.4 )
+        dev-util/pkg-config
+"
+
+BUGS_TO="chewing-devel@googlegroups.com"
+
+UPSTREAM_CHANGELOG="http://chewing.csie.net/news.html"
+UPSTREAM_DOCUMENTATION="http://chewing.csie.net/faq.html[[lang=zh_TW]]"
+
+DEFAULT_SRC_CONFIGURE_ENABLES=( debug )
