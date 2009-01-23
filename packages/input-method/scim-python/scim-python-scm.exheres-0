@@ -4,6 +4,8 @@
 #     Copyright 1999-2008 Gentoo Foundation
 
 SCM_REPOSITORY="http://scim-python.googlecode.com/svn/"
+SUPPORTED_AUTOCONF=( 2.5 )
+SUPPORTED_AUTOMAKE=( 1.10 )
 require autotools python scm-svn
 
 PYDBTAR="pinyin-database-0.1.10.5.tar.bz2"
