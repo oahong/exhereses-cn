@@ -1,0 +1,55 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Smart Chinese/Common Input Method platform"
+DESCRIPTION="SCIM is an input method (IM) platform. It provides a common
+platform for various plugin modules and independent IM programs, as well
+as a set of modules and programs on its own. It is highly modularized and
+exposes abstract interfaces, so that plugin modules with different functions
+can easily communicate with each other. The currently supported module
+types are configuration, IM engine, front end, filter, and setup GUI.
+"
+HOMEPAGE="http://www.scim-im.org"
+DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="debug"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        >=dev-util/intltool-0.33
+    build+run:
+        sys-devel/gettext
+        dev-lang/perl
+        x11-libs/libX11
+        >=x11-libs/gtk+-2.4.0
+        >=x11-libs/pango-1.1.0
+    "
+
+REMOTE_IDS="sourceforge:scim"
+UPSTREAM_DOCUMENTATOIN="
+http://www.scim-im.org/wiki/documentation/installation_and_configuration/all/system_configuration"
+
+#DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/fix-missing-header-on-tests-ime.diff" )
+DEFAULT_SRC_CONFIGURE_ENABLES=( debug )
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --without-doxygen
+    --enable-ld-version-script
+)
+#    --enable-tests
+
+pkg_postinst() {
+    einfo "Read the following link to learn how to configure ${PN}:"
+    einfo "http://tinyurl.com/25djma"
+
+    [ -x /usr/bin/gtk-query-immodules-2.0 ] && gtk-query-immodules-2.0 > \
+    "${ROOT}"/etc/gtk-2.0/gtk.immodules
+}
+
+pkg_postrm() {
+    [ -x /usr/bin/gtk-query-immodules-2.0 ] && gtk-query-immodules-2.0 > \
+    "${ROOT}"/etc/gtk-2.0/gtk.immodules
+}
