@@ -34,7 +34,7 @@ UPSTREAM_DOCUMENTATOIN="
 http://www.scim-im.org/wiki/documentation/installation_and_configuration/all/system_configuration"
 
 #DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/fix-missing-header-on-tests-ime.diff" )
-DEFAULT_SRC_CONFIGURE_ENABLES=( debug )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --without-doxygen
     --enable-ld-version-script
