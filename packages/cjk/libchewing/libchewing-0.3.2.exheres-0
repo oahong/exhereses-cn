@@ -15,14 +15,15 @@ DOWNLOADS="http://chewing.csie.net/download/${PN}/${PNV}.tar.bz2"
 LICENCES="LGPL-2.1"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="debug
-    test [[ description = [ Build unit test using dev-libs/check ] ]]"
+MYOPTIONS="debug"
 
+# stolen from clamav-0.94.2.exheres-0
 DEPENDENCIES="
     build:
-        test? ( >=dev-libs/check-0.9.4 )
         dev-util/pkg-config
-"
+        build_options:recommended_tests? (
+            dev-libs/check [[ description = [ Necessary to run the testsuite ] ]]
+        )"
 
 BUGS_TO="chewing-devel@googlegroups.com"
 
