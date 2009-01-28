@@ -5,7 +5,7 @@
 
 require cmake
 
-SUMMARY="FQterm, a modern terminal emulator based on QTerm"
+SUMMARY="FQterm, a modern terminal emulator"
 DESCRIPTION="Yet another BBS client for Linux, written in Qt.
 FQterm is a fork of QTerm
 "
@@ -17,10 +17,9 @@ SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
 
-# FIXME: Depends here is really a mess.
-# we need qt-gui qt-script, what is the equivalent options 
-# for exherbo?
+# FIXME:
 DEPENDENCIES="
+    build+run:
         dev-libs/openssl
         x11-libs/qt:4[X][png][qt3support][webkit][ssl]
     build:
@@ -28,8 +27,3 @@ DEPENDENCIES="
 "
 
 WORK=${WORKBASE}/${PN}
-
-src_prepare() {
-    # quick and dirty hack
-    expatch "${FILES}"/${PNV}-qad-openssl-fix.patch
-}
