@@ -1,0 +1,28 @@
+# Copyright (c) 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Hangul input method module for SCIM"
+HOMEPAGE="www.scim-im.org"
+DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="debug " #FIXME:skim support
+
+DEPENDENCIES="
+    build+run:
+        cjk/libhangul
+        input-method/scim
+        sys-devel/gettext
+    build:
+        dev-util/pkg-config
+    "
+DEFAULT_SRC_CONFIGURATION_ENABLES=( debug )
+DEFAULT_SRC_CONFIGURATION_PARAMS=(
+    --disable-skim-support
+)
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/${PN}-gcc-4.3-missing-headers.diff
+)
