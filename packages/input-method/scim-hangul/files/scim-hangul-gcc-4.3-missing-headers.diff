@@ -1,3 +1,6 @@
+Source: Hong Hao <oahong@gmail.com>
+Upstream: no, I have no time.
+Reason: fix compile failure (missing header error) with gcc-4.3
 --- scim-hangul-0.3.2/src/scim_hangul_imengine.cpp.orig	2009-02-10 21:53:54.000000000 +0800
 +++ scim-hangul-0.3.2/src/scim_hangul_imengine.cpp	2009-02-10 21:51:53.000000000 +0800
 @@ -33,6 +33,7 @@
