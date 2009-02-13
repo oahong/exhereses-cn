@@ -5,7 +5,7 @@
 
 SUMMARY="Japanese Kana-Kanji Conversion Engine library"
 HOMEPAGE="http://sourceforge.jp/projects/anthy"
-DOWNLOADS="mirror://sourceforge.jp/${PN}/37336/${PNV}.tar.gz"
+DOWNLOADS="mirror://sourceforge.jp/${PN}/37536/${PNV}.tar.gz"
 
 # Dict is GPL, anything else is LGPL?
 LICENCES="LGPL-2.1 GPL-2"
@@ -15,7 +15,6 @@ MYOPTIONS="emacs"
 
 DEPENDENCIES="
     build:
-        sys-devel/libtool
         emacs? ( app-editors/emacs )
 "
 
@@ -31,8 +30,7 @@ src_configure() {
 
 src_install() {
     default
-
-    rm doc/Makefile*
     docinto doc
     dodoc doc/*
+    rm doc/Makefile*
 }

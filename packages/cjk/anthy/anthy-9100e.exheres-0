@@ -15,7 +15,6 @@ MYOPTIONS="emacs"
 
 DEPENDENCIES="
     build:
-        sys-devel/libtool
         emacs? ( app-editors/emacs )
 "
 
