@@ -1,14 +1,14 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 2008,2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'fcitx-3.5.ebuild', which is:
+#    Copyright 1999-2008 Gentoo Foundation
 
+# stolen from xorg.exlib
 if ever at_least scm; then
-    SUPPORTED_AUTOCONF="2.5"
-    SUPPORTED_AUTOMAKE="1.9"
-
     SCM_TYPE=svn
     SCM_REPOSITORY="${SCM_REPOSITORY:-"http://fcitx.googlecode.com/svn/"}"
 
-    require autotools scm
+    require scm autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ none ]  ]
 else
     DOWNLOADS="${DOWNLOADS}:-"http://fcitx.googlecode.com/files/${PNV}.tar.bz2"}"
 fi
@@ -17,7 +17,6 @@ SUMMARY="Free Chinese Input Toy for X"
 DESCRIPTION="Fcitx(Free Chinese Input Toy of X) is a collection of Simplified
 Chinese input methods for Linux. It supports WuBi, Pinyin, Erbi and QuWei input
 methods."
-
 HOMEPAGE="http://fcitx.googlecode.com"
 
 LICENCES="GPL-2"
@@ -32,13 +31,10 @@ DEPENDENCIES="
     build:
         dev-util/pkg-config
     "
-BUGS_TO=(
-    "fcitx-dev@googlegroups.com"
-    "yuking_net@sohu.com"
-)
+BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-xft )
-DEFAULT_SRC_INSTALL_EXTRA_DOCS=( "doc/cjkvinput.txt" "doc/pinyin.txt" )
+DEFAULT_SRC_INSTALL_EXTRA_DOCS=( doc/cjkvinput.txt doc/pinyin.txt )
 
 src_install() {
     default
