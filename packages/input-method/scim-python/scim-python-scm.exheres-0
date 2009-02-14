@@ -12,7 +12,7 @@ HOMEPAGE="http://scim-python.googlecode.com"
 DOWNLOADS="http://scim-python.googlecode.com/files/${PYDB}"
 
 # PINYIN code-table is GPL / engine is LGPL
-LICENCES="LGPL 2.0 GPL 2.0"
+LICENCES="LGPL-2.0 GPL-2.0"
 SLOT="0"
 PLATFORMS="x86"
 MYOPTIONS="
