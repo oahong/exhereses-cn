@@ -3,15 +3,13 @@
 # Based in part upon 'scim-python-9999-r2.ebuild' from Gentoo China Overlay, which is:
 #     Copyright 1999-2008 Gentoo Foundation
 
-SCM_REPOSITORY="http://scim-python.googlecode.com/svn/"
-SUPPORTED_AUTOCONF=( 2.5 )
-SUPPORTED_AUTOMAKE=( 1.10 )
-require autotools python scm-svn
+SCM_REPOSITORY="http://scim-python.googlecode.com/svn"
+require python scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
-PYDBTAR="pinyin-database-0.1.10.5.tar.bz2"
-SUMMARY="A python wrapper for Smart Common Input Method (SCIM)"
+PYDB="pinyin-database-0.1.10.5.tar.bz2"
+SUMMARY="python wrapper for Smart Common Input Method (SCIM)"
 HOMEPAGE="http://scim-python.googlecode.com"
-DOWNLOADS="http://scim-python.googlecode.com/files/${PYDBTAR}"
+DOWNLOADS="http://scim-python.googlecode.com/files/${PYDB}"
 
 # PINYIN code-table is GPL / engine is LGPL
 LICENCES="LGPL 2.0 GPL 2.0"
@@ -20,8 +18,7 @@ PLATFORMS="x86"
 MYOPTIONS="
     nls
     xingma [[ description = [ Build XingMa Input Method Engine ] ]]"
-#    pinyin [[ description = [ Build PinYin Input Method  ] ]]
-#    enwriter [[ description = [ Build XingMa Input Method Engine ] ]]"
+#    enwriter [[ description = [ description here ] ]]"
 
 DEPENDENCIES="
     build+run:
@@ -41,8 +38,6 @@ DEPENDENCIES="
             input-method/xingma-wubi86
             input-method/xingma-zhengma
         )"
-    # post,suggested:
-    #    input-method/scim-xingma
 #        enwriter? ( app-spell/enchant )
 
 REMOTE_IDS="googlecode:scim-python"
@@ -58,9 +53,9 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 )
 
 src_prepare() {
-	unpack ${PYDBTAR}
-	cp "${FETCHEDDIR}/${PYDBTAR}" "${WORK}"/python/engine/PinYin
-	mv "py.db" "${WORK}/python/engine/PinYin" || die
+	unpack ${PYDB}
+	cp "${FETCHEDDIR}/"${PYDB} "${WORK}"/python/engine/PinYin
+	mv py.db "${WORK}"/python/engine/PinYin || die
 
     autopoint || die
     AT_M4DIR=m4 eautoreconf
