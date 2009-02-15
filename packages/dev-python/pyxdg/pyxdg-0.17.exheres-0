@@ -18,7 +18,7 @@ DEPENDENCIES=""
 src_install () {
 	distutils_src_install
 
-	insinto /usr/share/doc/${P}/test
+	insinto /usr/share/doc/${PNV}/test
 	insopts -m 755
 	doins test/*
 }
