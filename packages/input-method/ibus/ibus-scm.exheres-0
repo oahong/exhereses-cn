@@ -1,6 +1,6 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'ibus-1.1.0.20090211.ebuild', which is:
+# Based in part upon 'ibus-1.1.0.20090211.ebuild' from Gentoo, which is:
 #    Copyright 1999-2009 Gentoo Foundation
 
 NEED_PYTHON=2.5:=
@@ -38,7 +38,7 @@ DEPENDENCIES="
         >=dev-doc/gtk-doc-1.9
     run:
         app-text/iso-codes
-        gnome-desktop/librsvg
+        gnome-desktop/librsvg [[ description = [ otherwise we can't display svg icons ] ]]
         >=gnome-bindings/pygtk-2.12.1
         >=dev-python/dbus-python-0.83.0
         dev-python/pyxdg
@@ -57,7 +57,7 @@ src_prepare() {
 
     autopoint || die "autopoint failed"
     gtkdocize --copy || die "gtkdocize failed"
-    AT_M4DIR=m4 eautoreconf
+    AT_M4DIR=m4 autotools_src_prepare
 
     # disable pyc compiling
     mv py-compile py-compile.orig
