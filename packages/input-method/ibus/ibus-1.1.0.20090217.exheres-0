@@ -4,4 +4,4 @@
 require ibus
 
 SLOT="0"
-PLATFORMS=""
+PLATFORMS="~x86"

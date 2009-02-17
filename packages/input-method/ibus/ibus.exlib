@@ -1,0 +1,105 @@
+# Copyright 2009 Hong Hao
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'ibus-1.1.0.20090211.ebuild' from Gentoo, which is:
+#    Copyright 1999-2009 Gentoo Foundation
+
+NEED_PYTHON=2.5:=
+require python
+
+if ever at_least scm ; then
+    SCM_REPOSITORY="git://github.com/phuang/ibus.git"
+    require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
+
+    DOWNLOADS=""
+    DEPENDENCIES="
+        build:
+            dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
+            >=sys-devel/gettext-0.16.1
+            >=dev-doc/gtk-doc-1.9
+    "
+else
+    DOWNLOADS="http://ibus.googlecode.com/files/${PNV}.tar.gz"
+    DEPENDENCIES="
+        build:
+            nls? ( >=sys-devel/gettext-0.16.1 )
+            doc? ( >=dev-doc/gtk-doc-1.9 )
+    "
+fi
+
+SUMMARY="Intelligent Input Bus for Linux / Unix"
+DESCRIPTION="Intelligent Input Bus (ibus) is a next generation input framework
+for Linux OS. It provides full featured and user friendly input method interface.
+It also may help developers to develop input method easily.
+"
+HOMEPAGE="http://ibus.googlecode.com"
+
+LICENCES="LGPL-2.1"
+MYOPTIONS="doc nls qt4"
+
+DEPENDENCIES="
+    build+run:
+        >=dev-libs/glib-2.18
+        dev-libs/dbus-glib
+        >=gnome-bindings/pygobject-2.15
+        sys-apps/dbus
+        >=gnome-platform/GConf-2.11.1
+        x11-libs/gtk+:2
+        x11-libs/libX11
+        sys-libs/glibc
+        qt4? ( x11-libs/qt:4[dbus] )
+    build:
+        dev-util/pkg-config
+    run:
+        app-text/iso-codes
+        gnome-desktop/librsvg [[ description = [ otherwise we can't display svg icons ] ]]
+        >=gnome-bindings/pygtk-2.12.1
+        >=dev-python/dbus-python-0.83.0
+        dev-python/pyxdg
+        x11-apps/notification-daemon
+"
+
+BUGS_TO="${HOMEPAGE}/issues/list"
+UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki/ReadMe"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls "qt4 qt4-immodule" "doc gtk-doc" )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --disable-iso-codes-check )
+
+src_prepare() {
+    if ever at_least scm ; then
+        autopoint || die "autopoint failed"
+        gtkdocize --copy || die "gtkdocize failed"
+        AT_M4DIR=m4 autotools_src_prepare
+    fi
+
+#    sed -i -e '/^enable_qt4=no$/d' configure.ac || die
+    sed -i -e "/TEMPLATE/ i\QMAKE_STRIP = true" client/qt4/${PN}.pro || die
+
+    # disable pyc compiling
+    mv py-compile py-compile.orig
+    ln -s $(type -P true) py-compile
+}
+
+src_install() {
+    default
+    rmdir "${IMAGE}"/usr/share/ibus/engine
+}
+
+pkg_postinst() {
+    einfo
+    einfo "This is a very experimental package, please report your bugs to"
+    einfo "${HOMEPAGE}/issues/list"
+    if ! option qt4; then
+        einfo "Missing qt4 option, ibus will not work with qt4 applications."
+    fi
+    einfo
+
+    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+
+    python_mod_optimize "$(python_get_sitedir)"/${PN} /usr/share/${PN}
+}
+
+pkg_postrm() {
+    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+
+    python_mod_cleanup  "$(python_get_sitedir)"/${PN} /usr/share/${PN}
+}
