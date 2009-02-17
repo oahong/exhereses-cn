@@ -1,34 +1,25 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-NEED_PYTHON=2.5:=
-require python
+# To overide the default value, MY_PN must
+# be set before "require xingma-tables".
+MY_PN=${MY_PN:-"${PN/xingma-}"}
 
-SUMMARY="XingMa tables for ${PN}"
+SUMMARY="XingMa table for ${MY_PN}"
 HOMEPAGE="http://scim-python.googlecode.com"
 DOWNLOADS="http://scim-python.googlecode.com/files/${PNV}.tar.bz2"
 
 LICENCES="GPL-2"
-#SLOT="0"
-#PLATFORMS="~x86"
 MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        dev-lang/python[sqlite]
+        >=dev-lang/python-2.5:=[sqlite]
         input-method/scim-python[xingma]
         "
 
-# To overide default MY_PN value, XM_PN must
-# be set before "require xingma-tables".
-if [[ -n "${XM_PN}" ]] ; then
-    MY_PN=${XM_PN}
-else
-    MY_PN=${PN/xingma-}
-fi
-
 WORK=${WORKDIR}
-PREFIXDIR="${ROOT}/usr/share/scim-python/engine/XingMa"
+PREFIXDIR=${ROOT}/usr/share/scim-python/engine/XingMa
 
 xingma-tables_src_compile() {
     einfo "Be patient, this might take a few minitues..."
