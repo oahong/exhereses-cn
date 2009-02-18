@@ -5,10 +5,9 @@
 
 # stolen from xorg.exlib
 if ever at_least scm; then
-    SCM_TYPE=svn
-    SCM_REPOSITORY="${SCM_REPOSITORY:-"http://fcitx.googlecode.com/svn/"}"
-
-    require scm autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ none ]  ]
+    SCM_REPOSITORY="http://fcitx.googlecode.com/svn"
+    require scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ none ]  ]
+    DOWNLOADS=""
 else
     DOWNLOADS="${DOWNLOADS}:-"http://fcitx.googlecode.com/files/${PNV}.tar.bz2"}"
 fi
@@ -38,10 +37,10 @@ DEFAULT_SRC_INSTALL_EXTRA_DOCS=( doc/cjkvinput.txt doc/pinyin.txt )
 
 src_install() {
     default
-    ebegin "Removing empty directory"
-        rmdir "${IMAGE}"/usr/share/${PN}/xpm &> /dev/null
+    ebegin "Removing empty directories"
+        rm -rf "${IMAGE}"/usr/share/${PN}/xpm
+        rm -rf "${IMAGE}"/usr/share/${PN}/doc
     eend $?
-    rm -rvf "${IMAGE}"/usr/share/${PN}/doc
 }
 
 pkg_postinst() {

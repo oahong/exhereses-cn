@@ -9,7 +9,3 @@ SLOT="0"
 PLATFORMS="~x86 ~amd64"
 
 WORK="${WORKBASE}/${PNV/_/-}"
-
-src_prepare() {
-    eautoreconf
-}

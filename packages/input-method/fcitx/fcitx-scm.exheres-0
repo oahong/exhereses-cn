@@ -5,7 +5,3 @@ require fcitx
 
 SLOT="0"
 PLATFORMS=""
-
-src_prepare() {
-    eautoreconf
-}
