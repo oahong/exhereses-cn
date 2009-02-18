@@ -3,7 +3,6 @@
 # Based in part upon 'ibus-pinyin-9999.ebuild' from Gentoo China Overlay, which is:
 #    Copyright 1999-2009 Gentoo Foundation
 
-NEED_PYTHON=2.5:=
 SCM_REPOSITORY="git://github.com/phuang/ibus-pinyin.git"
 require python scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
@@ -19,14 +18,14 @@ MYOPTIONS="nls"
 
 DEPENDENCIES="
     build+run:
-        dev-lang/python[sqlite] [[ description = [ To convert pinyin code table ] ]]
+        >=dev-lang/python-2.5:=[sqlite] [[ description = [ To convert pinyin code table ] ]]
     build:
         dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
         >=sys-devel/gettext-0.16.1
     run:
         >=input-method/ibus-1.1
     "
-
+BUGS_TO="http://code.google.com/p/ibus/issues/list oahong@gmail.com"
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls )
 
 src_prepare() {
