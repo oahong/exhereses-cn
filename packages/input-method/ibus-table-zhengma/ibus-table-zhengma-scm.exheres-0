@@ -1,0 +1,6 @@
+
+
+require ibus-tables
+
+SLOT="0"
+PLATFORMS=""
