@@ -36,7 +36,7 @@ HOMEPAGE="http://ibus.googlecode.com"
 LICENCES="LGPL-2.1"
 MYOPTIONS="doc nls qt4"
 
-DEPENDENCIES="
+DEPENDENCIES+="
     build+run:
         >=dev-libs/glib-2.18
         dev-libs/dbus-glib

@@ -9,7 +9,6 @@ if ever at_least scm ; then
     SCM_REPOSITORY="git://github.com/acevery/${PN}.git"
     require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
     DOWNLOADS=""
-
     DEPENDENCIES="
         build:
             dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
@@ -17,7 +16,6 @@ if ever at_least scm ; then
     "
 else
     DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
-
     DEPENDENCIES="
         build:
             nls? ( >=sys-devel/gettext-0.16.1 )"
@@ -30,12 +28,14 @@ DOWNLOADS=""
 LICENCES="LGPL-2.1"
 MYOPTIONS="nls" #extra
 
-DEPENDENCIES="
+DEPENDENCIES+="
     build+run:
         >=dev-lang/python-2.5:=[sqlite] [[ description = [ To convert pinyin code table ] ]]
         >=input-method/ibus-1.1
     build:
         dev-util/pkg-config
+    run:
+        dev-python/elementtree
     "
     # post,suggested
     #    input-method/ibus-table-zhengma
