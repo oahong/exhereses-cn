@@ -40,6 +40,10 @@ linux_fetion_src_install() {
     doins misc/LibFetion.desktop
 
     dobin ${PN}
+
+    ebegin "Removing .svn directories"
+        find "${IMAGE}" -name .svn -exec rm -rvf {} \;
+    eend $?
 }
 
 export linux_fetion_src_install
