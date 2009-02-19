@@ -1,0 +1,35 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+if ever at_least scm ; then
+    SCM_REPOSITORY="git://github.com/acevery/${PN}.git"
+    require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ] scm-git
+
+    DOWNLOADS=""
+else
+    DOWNLOADS="http://ibus.googlecode.com/files/${PNV}.tar.gz"
+fi
+
+SUMMARY="${PN/ibus-table-} code table for ibus-table input engine"
+HOMEPAGE="http://ibus.googlecode.com"
+
+LICENCES="GPL-3"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    run:
+        >=input-method/ibus-table-1.1
+    build:
+        >=dev-lang/python-2.5:=[sqlite]
+        dev-util/pkg-config
+"
+
+if [[ "${PN#extraphrase}" == ${PN} ]] ; then
+    MYOPTIONS="extra [[ description = [ Integrate extra Chinese phrases ] ]]"
+    DEPENDENCIES+="
+        build:
+            extra? ( >=input-method/ibus-table-extraphrase-0.1.2 )"
+    DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'extra extra-phrases' )
+fi
+
+BUGS_TO="${HOMEPAGE}/issues/list"
