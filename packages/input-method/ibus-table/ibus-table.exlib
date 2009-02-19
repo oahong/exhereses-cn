@@ -34,8 +34,6 @@ DEPENDENCIES+="
         >=input-method/ibus-1.1
     build:
         dev-util/pkg-config
-    run:
-        dev-python/elementtree
     "
     # post,suggested
     #    input-method/ibus-table-zhengma
