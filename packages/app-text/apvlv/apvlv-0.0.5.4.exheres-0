@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-SUMMARY="Apvlv is a PDF Viewer which behaves like vim using poppler"
+SUMMARY="a PDF viewer which behaves like vim"
 HOMEPAGE="http://apvlv.googlecode.com"
 DOWNLOADS="http://apvlv.googlecode.com/files/${PNV}.tar.gz"
 
@@ -17,6 +17,9 @@ DEPENDENCIES="
     build:
         dev-util/pkg-config
     "
+
+BUGS_TO="
+http://code.google.com/p/apvlv/issues/list oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
