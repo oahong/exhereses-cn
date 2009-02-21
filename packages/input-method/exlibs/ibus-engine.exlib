@@ -1,0 +1,62 @@
+# Copyright 2009 Hong Hao
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'ibus-table-9999.ebuild' from Gentoo China Overlay, which is:
+#    Copyright 1999-2009 Gentoo Foundation
+
+if ever at_least scm ; then
+    SCM_REPOSITORY="${SCM_REPOSITORY:-git://github.com/phuang/${PN}.git}"
+    require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
+    DOWNLOADS=""
+    EXTDEPENDS="
+            dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
+            >=sys-devel/gettext-0.16.1
+    "
+else
+    DOWNLOADS="${DOWNLOADS:-"${HOMEPAGE}/files/${PNV}.tar.gz"}"
+    EXTDEPENDS="
+            nls? ( >=sys-devel/gettext-0.16.1 )"
+fi
+
+export_exlib_phases src_prepare pkg_postinst pkg_postrm
+
+NEED_PYTHON=2.5:=
+require python
+
+SUMMARY="${SUMMARY:-"The ${PN/ibus-} engine(s) for IBus Framework"}"
+HOMEPAGE="http://ibus.googlecode.com"
+
+LICENCES="${LICENSE:-"GPL-2"}"
+SLOT="0"
+MYOPTIONS="nls"
+
+DEPENDENCIES+="
+    build:
+        ${EXTDEPENDS}
+        dev-util/pkg-config
+    run:
+        >=input-method/ibus-1.1
+    "
+
+BUGS_TO="http://code.google.com/p/ibus/issues/list oahong@gmail.com"
+UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/w/list"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls )
+
+ibus-engine_src_prepare() {
+    if ever at_least scm ; then
+        autopoint || die "autopoint failed"
+        AT_M4DIR="m4" autotools_src_prepare
+    fi
+
+    # disable python byte compiling
+    rm py-compile
+    ln -s "$(type -P true)" py-compile
+}
+
+ibus-engine_pkg_postinst() {
+    python_mod_optimize /usr/share/${PN}
+}
+
+ibus-engine_pkg_postrm() {
+    python_mod_cleanup /usr/share/${PN}
+}
