@@ -3,27 +3,9 @@
 # Based in part upon 'qterm-0.5.2.ebuild' from Gentoo, which is:
 #     Copyright 1999-2008 Gentoo Foundation
 
-require cmake
+require fqterm
 
-SUMMARY="FQterm, a modern terminal emulator"
-DESCRIPTION="Yet another BBS client for Linux, written in Qt.
-FQterm is a fork of QTerm
-"
-HOMEPAGE="http://fqterm.googlecode.com"
 DOWNLOADS="http://fqterm.googlecode.com/files/${PNV}-src-r569.zip"
 
-LICENCES="GPL-2"
-SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS=""
-
-# FIXME:
-DEPENDENCIES="
-    build+run:
-        dev-libs/openssl
-        x11-libs/qt:4[X][png][qt3support][webkit][ssl]
-    build:
-        app-arch/unzip
-"
-
 WORK=${WORKBASE}/${PN}

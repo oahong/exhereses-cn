@@ -1,0 +1,19 @@
+# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="http://fqterm.googlecode.com/svn"
+require fqterm scm-svn
+
+DOWLOADS="${HOMEPAGE}/files/QQWry.zip"
+PLATFORMS=""
+
+DEPENDENCIES+="
+    build+run:
+        sys-sound/alsa-lib"
+
+src_install() {
+    default
+    # IP location database file
+    insinto /usr/share/FQTerm
+    doins QQWry.Dat
+}
