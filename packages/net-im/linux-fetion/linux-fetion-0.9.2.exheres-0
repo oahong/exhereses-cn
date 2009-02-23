@@ -4,7 +4,3 @@
 require linux-fetion
 
 PLATFORMS="~amd64 ~x86"
-
-src_install() {
-    linux_fetion_src_install
-}

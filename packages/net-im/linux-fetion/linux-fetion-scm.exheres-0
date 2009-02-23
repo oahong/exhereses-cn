@@ -3,19 +3,7 @@
 
 SCM_REPOSITORY="http://libfetion-gui.googlecode.com/svn"
 SCM_SUBPATH="qt4_src"
-
 require scm-svn linux-fetion
 
 DOWNLOADS=""
-
 PLATFORMS=""
-MYOPTIONS="doc"
-
-src_install() {
-    linux_fetion_src_install
-    if option doc ; then
-        insinto /usr/share/doc/${PNV}
-        doins APIDocs/html/*
-    fi
-}
-

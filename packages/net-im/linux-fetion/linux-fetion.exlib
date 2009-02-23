@@ -1,17 +1,19 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'linux-fetion-0.8.1.ebuild' from Gentoo, which is:
+# Based in part upon 'linux-fetion-0.8.1.ebuild' from Gentoo China Overlay, which is:
 #     Copyright 1999-2008 Gentoo Foundation
 
 require qmake4
 
-SUMMARY="Linux Fetion, a QT4 IM client using Fetion Protocol"
+export_exlib_phases src_prepare src_install
+
+SUMMARY="a QT4 IM client using Fetion Protocol"
 HOMEPAGE="http://www.libfetion.cn"
 DOWNLOADS="http://libfetion-gui.googlecode.com/files/${PNV}.tar.gz"
 
 SLOT="0"
 LICENCES="GPL-2"
-MYOPTIONS="platform: amd64"
+MYOPTIONS="doc platform: amd64"
 
 DEPENDENCIES="
     build+run:
@@ -20,16 +22,16 @@ DEPENDENCIES="
         x11-libs/qt:4[qt3support][sqlite][X]
 "
 
-src_prepare() {
+linux-fetion_src_prepare() {
     if option platform:amd64 ; then
         sed -i \
             -e "/libfetion.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" \
             -e "/libfetion_32.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" \
-            ${PN}.pro
+            ${PN}.pro || die "sed failed"
     fi
 }
 
-linux_fetion_src_install() {
+linux-fetion_src_install() {
     insinto /usr/share/libfetion
     doins fetion_utf8_CN.qm
     doins -r skins sound
@@ -41,9 +43,12 @@ linux_fetion_src_install() {
 
     dobin ${PN}
 
+    if option doc ; then
+        insinto /usr/share/doc/${PNV}
+        doins APIDocs/html/*
+    fi
+
     ebegin "Removing .svn directories"
         find "${IMAGE}" -name .svn -exec rm -rvf {} \;
     eend $?
 }
-
-export linux_fetion_src_install
