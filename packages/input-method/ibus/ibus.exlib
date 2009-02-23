@@ -40,9 +40,8 @@ DEPENDENCIES+="
     build+run:
         >=dev-libs/glib-2.18
         dev-libs/dbus-glib
-        >=gnome-bindings/pygobject-2.15
         sys-apps/dbus
-        >=gnome-platform/GConf-2.11.1
+        >=gnome-platform/GConf-2.12
         x11-libs/gtk+:2
         x11-libs/libX11
         sys-libs/glibc
