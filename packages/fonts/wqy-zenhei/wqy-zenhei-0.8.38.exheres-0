@@ -7,7 +7,8 @@ require xfont multilib
 
 SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
 HOMEPAGE="http://wqy.sourceforge.net/cgi-bin/enindex.cgi?ZenHei(en)"
-DOWNLOADS="mirror://sourceforge/wqy/${PNV%%_*}-nightlybuild.tar.gz"
+DOWNLOADS="http://wenq.org/release/zenhei/${PNV}-0.tar.gz -> ${PNV}-0.tar"
+# http://wenq.org/release/zenhei/wqy-zenhei-0.8.38-0.tar.gz
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -21,7 +22,6 @@ src_install() {
     insinto /usr/$(get_libdir)/X11/fonts/TTF/
     doins *.ttc
 
-    # Install fontconfig configurations
     insinto /etc/fonts/conf.avail
     doins "44-wqy-zenhei.conf" "66-wqy-zenhei-sharp.conf"
 
