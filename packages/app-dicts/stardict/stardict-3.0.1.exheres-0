@@ -51,9 +51,6 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gnome gnome-support' spell )
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
-DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
-"doc/{FAQ,HowToCreateDictionary,StarDictFileFormat,Translation,HACKING}"
-)
 
 src_configure() {
     export PKG_CONFIG=$(type -P pkg-config)
@@ -62,8 +59,10 @@ src_configure() {
 
 src_install() {
     default
+    dodoc doc/{FAQ,HowToCreateDictionary,StarDictFileFormat,Translation,HACKING}
     insinto /usr/share/${PN}/data
     doins "${WORKBASE}"/QQWry.Dat
+
     rmdir "${IMAGE}"/usr/share/${PN}/dic
     rmdir "${IMAGE}"/usr/share/${PN}/treedict
 }
