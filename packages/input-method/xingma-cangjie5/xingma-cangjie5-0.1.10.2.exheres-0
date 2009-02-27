@@ -3,6 +3,4 @@
 
 require xingma-tables
 
-SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS=""
