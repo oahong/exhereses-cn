@@ -21,7 +21,7 @@ MYOPTIONS="debug nls" #FIXME:skim(kde3) support
 DEPENDENCIES="
     build+run:
         x11-libs/libXt
-        input-method/scim
+        input-methods/scim
         nls? ( sys-devel/gettext )
     build:
         dev-util/pkg-config

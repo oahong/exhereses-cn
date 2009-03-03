@@ -18,7 +18,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     run:
-        >=input-method/ibus-table-1.1
+        >=input-methods/ibus-table-1.1
     build:
         >=dev-lang/python-2.5:=[sqlite]
         dev-util/pkg-config
@@ -28,7 +28,7 @@ if [[ "${PN#extraphrase}" == ${PN} ]] ; then
     MYOPTIONS="extra [[ description = [ Integrate extra Chinese phrases ] ]]"
     DEPENDENCIES+="
         build:
-            extra? ( >=input-method/ibus-table-extraphrase-0.1.2 )"
+            extra? ( >=input-methods/ibus-table-extraphrase-0.1.2 )"
     DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'extra extra-phrases' )
 fi
 

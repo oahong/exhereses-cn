@@ -11,10 +11,10 @@ DEPENDENCIES+="
     build+run:
         dev-lang/python[sqlite] [[ description = [ To convert various code tables ] ]]
     post,suggested:
-        input-method/ibus-table-cangjie
-        input-method/ibus-table-erbi
-        input-method/ibus-table-wubi
-        input-method/ibus-table-zhengma
+        input-methods/ibus-table-cangjie
+        input-methods/ibus-table-erbi
+        input-methods/ibus-table-wubi
+        input-methods/ibus-table-zhengma
     "
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-additional )
