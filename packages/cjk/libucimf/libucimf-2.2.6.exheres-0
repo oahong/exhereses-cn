@@ -1,0 +1,21 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Unicode Console Input Method Framework"
+HOMEPAGE="http://ucimf.googlecode.com"
+DOWNLOADS="https://ucimf.googlecode.com/files/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="debug"
+
+DEPENDENCIES="
+    build+run:
+        sys-libs/zlib
+        media-libs/freetype:2"
+
+BUGS_TO="ucimf@googlegroups.com"
+REMOTE_IDS="sourceforge:ucimf"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
