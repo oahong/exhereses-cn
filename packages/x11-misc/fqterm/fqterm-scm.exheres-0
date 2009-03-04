@@ -4,16 +4,22 @@
 SCM_REPOSITORY="http://fqterm.googlecode.com/svn"
 require fqterm scm-svn
 
-DOWLOADS="${HOMEPAGE}/files/QQWry.zip"
+DOWNLOADS="${HOMEPAGE}/files/QQWry.zip"
 PLATFORMS=""
 
 DEPENDENCIES+="
     build+run:
         sys-sound/alsa-lib"
 
-src_install() {
+src_unpack() {
     default
+    scm_src_unpack
+}
+
+src_install() {
+    cmake_src_install
+
     # IP location database file
     insinto /usr/share/FQTerm
-    doins QQWry.Dat
+    doins "${WORKBASE}"/QQWry.Dat
 }
