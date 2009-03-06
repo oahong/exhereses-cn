@@ -61,7 +61,10 @@ BUGS_TO="${HOMEPAGE}/issues/list"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki/ReadMe"
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls "qt4 qt4-immodule" "doc gtk-doc" )
-DEFAULT_SRC_CONFIGURE_PARAMS=( --disable-iso-codes-check )
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    '--disable-iso-codes-check'
+    '--disable-dbus-python-check'
+)
 
 ibus_bootstrap() {
     autopoint || die "autopoint failed"
