@@ -26,6 +26,7 @@ else
     "
 fi
 
+MY_LINGUAS="zh_CN zh_TW" # ja kr
 SUMMARY="Intelligent Input Bus for Linux / Unix"
 DESCRIPTION="Intelligent Input Bus (ibus) is a next generation input framework
 for Linux OS. It provides full featured and user friendly input method interface.
@@ -34,7 +35,13 @@ It also may help developers to develop input method easily.
 HOMEPAGE="http://ibus.googlecode.com"
 
 LICENCES="LGPL-2.1"
-MYOPTIONS="doc nls qt4"
+MYOPTIONS="
+    doc
+    nls
+    qt4
+    linguas:
+        ${MY_LINGUAS}
+"
 
 DEPENDENCIES+="
     build+run:
@@ -55,10 +62,16 @@ DEPENDENCIES+="
         >=dev-python/dbus-python-0.83.0
         dev-python/pyxdg
         x11-apps/notification-daemon
+    post,suggested:
+        linguas:zh_CN? (
+            input-methods/ibus-pinyin
+            input-methods/ibus-table
+        )
+        linguas:zh_TW? ( input-methods/ibus-chewing )
 "
 
 BUGS_TO="${HOMEPAGE}/issues/list"
-UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki/ReadMe"
+UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls "qt4 qt4-immodule" "doc gtk-doc" )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
