@@ -14,8 +14,7 @@ DEPENDENCIES="
     build+run:
         media-libs/fontconfig
         media-libs/freetype
-    post,recommended:
-        input-methods/libucimf
-        input-methods/openvanilla-modules"
+    post,suggested:
+        cjk/fbterm-ucimf [[ description = [ it's required to input cjk characters using UCIMF ] ]]"
 
 DEFAULT_SRC_INSTALL_EXTRA_DOCS="im/inputmethod.txt"
