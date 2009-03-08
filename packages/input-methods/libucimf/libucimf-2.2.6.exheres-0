@@ -13,7 +13,9 @@ MYOPTIONS="debug"
 DEPENDENCIES="
     build+run:
         sys-libs/zlib
-        media-libs/freetype:2"
+        media-libs/freetype:2
+    post,recommended:
+        input-methods/openvanilla-modules [[ description = [ input method modules ] ]]"
 
 BUGS_TO="ucimf@googlegroups.com"
 REMOTE_IDS="sourceforge:ucimf"
