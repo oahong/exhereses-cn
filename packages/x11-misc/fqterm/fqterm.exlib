@@ -20,7 +20,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-libs/openssl
-        x11-libs/qt:4[X][png][qt3support][webkit][ssl]
+        x11-libs/qt:4[X][qt3support][webkit][ssl]
     build:
         app-arch/unzip
 "
