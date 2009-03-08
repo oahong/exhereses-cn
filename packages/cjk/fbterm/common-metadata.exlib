@@ -14,14 +14,4 @@ framebuffer, each window having scrollback history.
 HOMEPAGE="http://fbterm.googlecode.com"
 DOWNLOADS="http://fbterm.googlecode.com/files/${PNV}.tar.gz"
 
-LICENCES="GPL-2"
-MYOPTIONS=""
-
-DEPENDENCIES="
-    build:
-        dev-util/pkg-config
-    build+run:
-        media-libs/fontconfig
-        media-libs/freetype"
-
 BUGS_TO="http://code.google.com/p/fbterm/issues/list"
