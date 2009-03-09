@@ -14,13 +14,11 @@ PLATFORMS="~amd64 ~x86"
 WORK=${WORKBASE}/${PN}
 
 src_install() {
-    # do-docs
-    default
+    emagicdocs
 
     insinto /usr/$(get_libdir)/X11/fonts/misc/
     doins *.pcf
 
-    # Install the fontconfig configuration
     insinto /etc/fonts/conf.avail
     doins "85-wqy-bitmapsong.conf"
 }
