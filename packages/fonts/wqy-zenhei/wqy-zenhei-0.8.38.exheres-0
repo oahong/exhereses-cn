@@ -19,7 +19,7 @@ UPSTREAM_CHANGELOG="http://wenq.org/index.cgi?ZenHei_Pangu_ChangeLog"
 WORK=${WORKBASE}/${PN}
 
 src_install() {
-    default
+    emagicdocs
 
     insinto /usr/$(get_libdir)/X11/fonts/TTF/
     doins *.ttc
