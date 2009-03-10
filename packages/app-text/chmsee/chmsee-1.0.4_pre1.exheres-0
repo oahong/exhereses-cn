@@ -1,0 +1,51 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+#require freedesktop-mine freedesktop-desktop
+require flag-o-matic
+
+MY_PNV=${PNV/_/-}
+SUMMARY="HTML Help viewer for Unix/Linux"
+DESCRIPTION="ChmSee is an HTML Help viewer for Unix/Linux.
+It is based on CHMLIB and uses GTK2+ as frontend toolkit.
+Because of using gecko as the HTML rendering engine, it can
+support rich features of modern HTML page, such as CSS and JavaScript.
+"
+HOMEPAGE="https://chmsee.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/${MY_PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="firefox nls"
+
+DEPENDENCIES="
+    build+run:
+        >=dev-libs/glib-2.8
+        dev-libs/libxml2
+        firefox? ( net-www/firefox )
+        !firefox? ( dev-libs/xulrunner )
+        media-libs/chmlib
+        dev-libs/libgcrypt
+    build:
+        nls? ( sys-devel/gettext )
+        >=dev-util/intltool-0.37
+        dev-util/pkg-config"
+
+WORK=${WORKBASE}/${MY_PNV}
+BUGS_TO="http://code.google.com/p/chmsee/issues/list oahong@gmail.com"
+
+append-cppflags '-I/usr/include/nspr'
+
+src_configure() {
+    local myoptions
+    if option firefox ; then
+        myoptions="${myoptions} --with-gecko=firefox"
+    else
+        myoptions="${myoptions} --with-gecko=libxul"
+    fi
+    econf \
+        ${myoptions} \
+        $(option_enalble nls)
+}
+
