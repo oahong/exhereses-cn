@@ -1,7 +1,6 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-#require freedesktop-mine freedesktop-desktop
 require flag-o-matic
 
 MY_PNV=${PNV/_/-}
@@ -17,14 +16,13 @@ DOWNLOADS="${HOMEPAGE}/files/${MY_PNV}.tar.gz"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="firefox nls"
+MYOPTIONS="nls"
 
 DEPENDENCIES="
     build+run:
         >=dev-libs/glib-2.8
         dev-libs/libxml2
-        firefox? ( net-www/firefox )
-        !firefox? ( dev-libs/xulrunner )
+        dev-libs/xulrunner
         media-libs/chmlib
         dev-libs/libgcrypt
     build:
@@ -37,15 +35,5 @@ BUGS_TO="http://code.google.com/p/chmsee/issues/list oahong@gmail.com"
 
 append-cppflags '-I/usr/include/nspr'
 
-src_configure() {
-    local myoptions
-    if option firefox ; then
-        myoptions="${myoptions} --with-gecko=firefox"
-    else
-        myoptions="${myoptions} --with-gecko=libxul"
-    fi
-    econf \
-        ${myoptions} \
-        $(option_enalble nls)
-}
-
+DEFAULT_SRC_CONFIGURE_PARAMS=( '--with-gecko=libxul' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls )
