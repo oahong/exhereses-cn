@@ -1,0 +1,46 @@
+# Copyright 2008,2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'tint2-9999.ebuild', which is:
+#     Copyright 1999-2009 Gentoo Foundation
+
+SCM_REPOSITORY="http://tint2.googlecode.com/svn"
+require scm-svn toolchain-funcs
+
+SUMMARY="A lighweight panel and taskbar for openbox3"
+HOMEPAGE="http://tint2.googlecode.com"
+DOWNLOADS=""
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS=""
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        x11-libs/cairo
+        x11-libs/pango
+        x11-libs/libX11
+        x11-libs/libXinerama
+        media-libs/imlib2
+        >=dev-libs/glib-2.0
+    build:
+        dev-util/pkg-config
+"
+
+DEFAULT_SRC_COMPILE_PARAMS=(
+    CC="$(tc-getCC)"
+    LDFLAGS="${LDFLAGS}"
+    CFLAGS="${CFLAGS}"
+)
+
+src_prepare() {
+    mv src/* .
+}
+
+src_install() {
+    dobin tint2
+    doman doc/man/tint2.1
+    insinto /etc/xdg/tint2
+    newins tintrc06 tint2rc
+    dodoc tintrc0[1-7] doc/tint*
+}
