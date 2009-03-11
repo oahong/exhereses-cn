@@ -3,8 +3,8 @@
 # Based in part upon 'linuqq-0.8.1.ebuild' from Gentoo-China-Overlay, which is:
 #     Copyright 1999-2008 Gentoo Foundation
 
-#linuxqq-v1.0-preview3.i386
-QPNV=${PN}_v${PV/_pre/-preview}_i386
+#http://dl_dir.qq.com/linuxqq/linuxqq_v1.0.2-beta1_i386.tar.gz
+QPNV=${PN}_v${PV/_beta1/-beta1}_i386
 SUMMARY="Official Linux client for Tecent QQ"
 HOMEPAGE="http://im.qq.com/qq/linux"
 DOWNLOADS="http://dl_dir.qq.com/${PN}/${QPNV}.tar.gz"
