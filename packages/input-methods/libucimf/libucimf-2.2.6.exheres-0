@@ -2,6 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SUMMARY="Unicode Console Input Method Framework"
+DESCRIPTION="
+UCIMF(Unicode Console InputMethod Framework) is a program to supply inputmethod
+in unicode console enviroment. Its aim is to provide a permanent and consistent
+inputmethod solution for all the unicode console programs, like jfbterm, fbterm,
+fbiterm, ...and other 繁简日한 console program."
 HOMEPAGE="http://ucimf.googlecode.com"
 DOWNLOADS="https://ucimf.googlecode.com/files/${PNV}.tar.gz"
 
@@ -14,9 +19,11 @@ DEPENDENCIES="
     build+run:
         sys-libs/zlib
         media-libs/freetype:2
-    post,recommended:  [[ description = [ input method modules ] ]]
+    post,recommended:
         cjk/ucimf-openvanilla
-        input-methods/openvanilla-modules"
+            [[ description = [ To get openvanilla support for ucimf ] ]]
+        input-methods/openvanilla-modules
+            [[ description = [ To use various openvanilla input method modules ] ]]"
 
 BUGS_TO="ucimf@googlegroups.com"
 REMOTE_IDS="sourceforge:ucimf"
