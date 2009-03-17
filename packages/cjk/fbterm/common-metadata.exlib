@@ -3,9 +3,6 @@
 
 SUMMARY="a fast FrameBuffer based TERMinal emulator for linux"
 DESCRIPTION="
-FbTerm provides you with a fast terminal emulator that runs directly on your
-system's framebuffer. Using the framebuffer brings improved performance while
-allowing you to render UTF-8 text in the terminal.
 FbTerm aims to be at least as fast as the normal Linux kernel terminal while
 providing internationalization support and modern font handling with fontconfig.
 It allows you to create as many as 10 different terminal windows on the same

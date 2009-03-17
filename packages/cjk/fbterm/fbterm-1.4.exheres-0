@@ -12,9 +12,11 @@ DEPENDENCIES="
     build:
         dev-util/pkg-config
     build+run:
+        sys-libs/glibc
         media-libs/fontconfig
         media-libs/freetype
     post,suggested:
-        cjk/fbterm-ucimf [[ description = [ it's required to input cjk characters using UCIMF ] ]]"
+        sys-libs/gpm [[ description = [ To enable feature:  copy/past selected text between windows with mouse ] ]]
+        cjk/fbterm-ucimf [[ description = [ Required to input cjk characters using UCIMF ] ]]"
 
-DEFAULT_SRC_INSTALL_EXTRA_DOCS="im/inputmethod.txt"
+DEFAULT_SRC_INSTALL_EXTRA_DOCS="doc/inputmethod.txt"
