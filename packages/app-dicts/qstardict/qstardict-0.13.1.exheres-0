@@ -37,13 +37,8 @@ REMOTE_IDS="sourceforge:qstardict"
 UPSTREAM_CHANGELOG="http://qstardict.ylsoftware.com/changelog.php"
 
 src_configure() {
-    local myoptions
-    if ! option dbus ; then
-        myoptions="${myoptions} NO_DBUS=1"
-    fi
-    if ! option nls ; then
-        myoptions="${myoptions} NO_TRANSLATIONS=1"
-    fi
+    ! option dbus && myoptions+=" NO_DBUS=1"
+    ! option nls && myoptions+=" NO_TRANSLATIONS=1"
     eqmake4 ${myoptions}
 }
 
