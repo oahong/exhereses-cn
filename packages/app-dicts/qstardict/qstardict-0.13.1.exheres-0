@@ -1,0 +1,53 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'qstardict-0.13.1.ebuild' from Gentoo Taiwan Overlay, which is:
+#     Copyright 1999-2009 Gentoo Foundation
+
+require qmake4
+
+SUMMARY="International dictionary written using Qt4"
+DESCRIPTION="
+QStarDict is a dictionary program written using Qt4.
+The user interface is similar to StarDict.
+Main features:
+    * Full support of StarDict dictionaries
+    * Working in system tray
+    * Scanning mouse selection and showing popup window with translation of selected word
+    * Translations reformatting
+    * Plugins support
+"
+HOMEPAGE="http://qstardict.ylsoftware.com"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.bz2"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="nls dbus"
+
+#FIXME:
+DEPENDENCIES="
+    build+run:
+        x11-libs/libX11
+        x11-libs/qt:4[X][dbus?]
+        >=dev-libs/glib-2.0
+    build:
+        dev-util/pkg-config"
+
+REMOTE_IDS="sourceforge:qstardict"
+UPSTREAM_CHANGELOG="http://qstardict.ylsoftware.com/changelog.php"
+
+src_configure() {
+    local myoptions
+    if ! option dbus ; then
+        myoptions="${myoptions} NO_DBUS=1"
+    fi
+    if ! option nls ; then
+        myoptions="${myoptions} NO_TRANSLATIONS=1"
+    fi
+    eqmake4 ${myoptions}
+}
+
+src_install() {
+    default
+    rm -r "${IMAGE}"/usr/share/doc/${PN} || die "failed to remove unversioned docs"
+}
