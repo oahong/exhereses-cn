@@ -11,12 +11,22 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         dev-util/pkg-config
+        sys-libs/ncurses
     build+run:
         sys-libs/glibc
         media-libs/fontconfig
         media-libs/freetype
     post,suggested:
         sys-libs/gpm [[ description = [ To enable feature:  copy/past selected text between windows with mouse ] ]]
-        cjk/fbterm-ucimf [[ description = [ Required to input cjk characters using UCIMF ] ]]"
+        cjk/fbterm-ucimf [[ description = [ Required to input cjk characters using UCIMF ] ]]
+"
 
-DEFAULT_SRC_INSTALL_EXTRA_DOCS="doc/inputmethod.txt"
+src_install() {
+    default
+
+    # "[[ -s terminfo/fbterm ]]" always returns 0.
+    dodoc terminfo/fbterm doc/inputmethod.txt
+    dodir /usr/share/terminfo
+    $(type -P tic) -o "${IMAGE}/usr/share/terminfo/" \
+    "${WORK}"/terminfo/fbterm || die "Failed to generate terminfo database"
+}
