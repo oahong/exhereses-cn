@@ -8,7 +8,7 @@ require xfont multilib
 
 SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
 HOMEPAGE="http://wqy.sourceforge.net/cgi-bin/enindex.cgi?ZenHei(en)"
-DOWNLOADS="mirror://sourceforge/wqy/${PNV}-1.tar.gz"
+DOWNLOADS="mirror://sourceforge/wqy/${PNV/_pre03/-March}.tar.bz2 -> ${PNV}.tar.bz2"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -32,16 +32,16 @@ src_install() {
 pkg_postinst() {
     xfont_pkg_postinst
     elog
-    elog "This font installs three fontconfig configuration files."
-    elog ""
+    elog "This font has three fontconfig configuration files."
+    elog
     elog "To activate preferred rendering, run:"
     elog "eclectic fontconfig enable 44-wqy-zenhei.conf"
     elog
     elog "To make the font only use embedded bitmap fonts when available, run:"
     elog "eclectic fontconfig enable 66-wqy-zenhei-sharp.conf"
     elog
-    elog "Starting from 0.8.38, wqy-zenhei also has an embedded 13px bitmap"
-    elog "font, to completely disable it, run:"
+    elog "Starting from 0.8.38, wqy-zenhei also has an embedded 13px bitmap font,"
+    elog "to completely disable it when embedded bitmap fonts is used, run:"
     elog "eclectic fontconfig enable 66-wqy-zenhei-sharp-no13px.conf"
     elog
 }
