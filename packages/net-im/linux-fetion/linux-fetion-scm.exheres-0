@@ -7,3 +7,9 @@ require scm-svn linux-fetion
 
 DOWNLOADS=""
 PLATFORMS=""
+
+src_install() {
+    linux-fetion_src_install
+    rm -rf $(find "${IMAGE}" -name .svn) > /dev/null \
+    || die "failed to remove working copy administration area"
+}

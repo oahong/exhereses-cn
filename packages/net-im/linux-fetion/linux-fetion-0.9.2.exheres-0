@@ -4,3 +4,5 @@
 require linux-fetion
 
 PLATFORMS="~amd64 ~x86"
+
+WORK=${WORKBASE}/${PN/-/_}_${PV}

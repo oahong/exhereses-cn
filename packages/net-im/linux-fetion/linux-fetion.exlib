@@ -47,8 +47,4 @@ linux-fetion_src_install() {
         insinto /usr/share/doc/${PNV}
         doins APIDocs/html/*
     fi
-
-    ebegin "Removing .svn directories"
-        find "${IMAGE}" -name .svn -exec rm -rvf {} \;
-    eend $?
 }
