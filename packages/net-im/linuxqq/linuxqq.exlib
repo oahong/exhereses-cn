@@ -3,9 +3,7 @@
 # Based in part upon 'linuqq-0.8.1.ebuild' from Gentoo-China-Overlay, which is:
 #     Copyright 1999-2008 Gentoo Foundation
 
-require versionator
-
-MY_PNV=${PN}_v$(replace_version_separator 3 '-')_i386
+MY_PNV=${PN}_v$(ever replace 3 '-')_i386
 SUMMARY="Official Linux client for Tecent QQ"
 HOMEPAGE="http://im.qq.com/qq/linux"
 #http://dl_dir.qq.com/linuxqq/linuxqq_v1.0.2-beta1_i386.tar.gz
