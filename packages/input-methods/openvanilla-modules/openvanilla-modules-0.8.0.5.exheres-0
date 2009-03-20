@@ -3,9 +3,7 @@
 # Based in part upon 'openvanilla-modules-0.8.0.5.ebuild' from Gentoo Taiwan Overlay, which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
-require versionator
-
-MY_PNV="${PN}-$(replace_version_separator 3 '_')"
+MY_PNV=${PN}-$(ever replace 3 '_')
 SUMMARY="openvanilla modules for UCIMF (Unicode Input Method Framework)"
 HOMEPAGE="http://openvanilla.org http://ucimf.googlecode.com"
 DOWNLOADS="http://ucimf.googlecode.com/files/${MY_PNV}.tar.gz"
