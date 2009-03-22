@@ -27,5 +27,8 @@ DEPENDENCIES="
 
 BUGS_TO="ucimf@googlegroups.com"
 REMOTE_IDS="sourceforge:ucimf"
+UPSTREAM_DOCUMENTATION="
+http://ucimf.googlecode.com/files/UserManual.pdf [[ lang = zh_TW description = [ User Manual, PDF ] ]]
+http://code.google.com/p/ucimf/wiki [[ lang = zh_TW description = [ Wiki ] ]]"
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
