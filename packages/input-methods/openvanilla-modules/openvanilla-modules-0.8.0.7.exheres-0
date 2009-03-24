@@ -1,0 +1,51 @@
+# Copyright 2009 Hong Hao
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'openvanilla-modules-0.8.0.5.ebuild' from Gentoo Taiwan Overlay, which is:
+#    Copyright 1999-2008 Gentoo Foundation
+
+MY_PNV=${PN}-$(ever replace 3 '_')
+MY_LINGUAS="ja ko th vi zh_CN zh_HK zh_TW"
+SUMMARY="openvanilla modules for UCIMF (Unicode Input Method Framework)"
+HOMEPAGE="http://openvanilla.org http://ucimf.googlecode.com"
+DOWNLOADS="http://ucimf.googlecode.com/files/${MY_PNV}.tar.gz"
+
+LICENCES="BSD"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="
+linguas:
+    ${MY_LINGUAS}
+"
+
+DEPENDENCIES="
+    build+run:
+        >=dev-db/sqlite-3"
+
+WORK=${WORKBASE}/${MY_PNV}
+
+src_configure() {
+#DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
+#    'linguas:ja jp_JP' 'linguas:ko ko_KR' 'linguas:th th_TH'
+#    'linguas:vi vi_VN' 'linguas:zh_CN' 'linguas:zh_HK'
+#    'linguas:zh_TW' 'linguas:zh_TW zh_TW_hakka' 'linguas:zh_TW zh_TW_taigi'
+#)
+#    for lang in ${MY_LINGUAS}
+#    do
+#        if option linguas:${lang} ; then
+#            DEFAULT_SRC_CONFIGURE_OPTION_WITHS+=( )
+#        fi
+#    done
+
+    option linguas:ja && myoptions+="--with-jp_JP "
+    option linguas:ko && myoptions+="--with-ko_KR "
+    option linguas:th && myoptions+="--with-th_TH "
+    option linguas:vi && myoptions+="--with-vi_VN "
+    option linguas:zh_CN && myoptions+="--with-zh_CN "
+    option linguas:zh_HK && myoptions+="--with-zh_HK "
+    option linguas:zh_TW && \
+        myoptions+="--with-zh_TW --with-zh_TW_hakka --with-zh_TW_taigi "
+
+    econf \
+        ${myoptions} \
+        --without-asia
+}
