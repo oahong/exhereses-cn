@@ -7,6 +7,5 @@ SLOT="0"
 PLATFORMS=""
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-    '--enable-wubi86'
     '--enable-wubi98'
 )
