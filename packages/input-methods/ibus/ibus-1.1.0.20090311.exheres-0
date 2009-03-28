@@ -3,5 +3,10 @@
 
 require ibus
 
-SLOT="0"
 PLATFORMS="~x86"
+
+DEPENDENCIES+="
+build:
+    nls? ( >=sys-devel/gettext-0.16.1 )
+    doc? ( >=dev-doc/gtk-doc-1.9 )
+"
