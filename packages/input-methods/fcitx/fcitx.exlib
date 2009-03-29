@@ -19,6 +19,7 @@ methods."
 HOMEPAGE="http://fcitx.googlecode.com"
 
 LICENCES="GPL-2"
+SLOT="0"
 MYOPTIONS=""
 
 DEPENDENCIES="

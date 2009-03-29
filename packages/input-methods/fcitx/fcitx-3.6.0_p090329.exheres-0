@@ -1,0 +1,10 @@
+# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require fcitx
+
+MY_PNV=${PNV/_p/-}
+DOWNLOADS="http://gentoo-china-overlay.googlecode.com/files/${MY_PNV}.tar.gz"
+PLATFORMS="~x86"
+
+WORK=${WORKBASE}/${MY_PNV}

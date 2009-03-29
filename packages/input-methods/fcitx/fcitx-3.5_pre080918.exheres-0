@@ -4,8 +4,6 @@
 require fcitx
 
 DOWNLOADS="http://gentoo-china-overlay.googlecode.com/svn/distfiles/${PNV/_pre/-}.tar.bz2"
-
-SLOT="0"
-PLATFORMS="~x86 ~amd64"
+PLATFORMS="~amd64 ~x86"
 
 WORK="${WORKBASE}/${PNV/_pre*}"

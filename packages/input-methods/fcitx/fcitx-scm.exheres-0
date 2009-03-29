@@ -3,5 +3,4 @@
 
 require fcitx
 
-SLOT="0"
 PLATFORMS=""
