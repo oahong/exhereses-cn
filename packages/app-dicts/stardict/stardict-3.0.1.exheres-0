@@ -63,6 +63,5 @@ src_install() {
     insinto /usr/share/${PN}/data
     doins "${WORKBASE}"/QQWry.Dat
 
-    rmdir "${IMAGE}"/usr/share/${PN}/dic
-    rmdir "${IMAGE}"/usr/share/${PN}/treedict
+    keepdir /usr/share/${PN}/{dic,treedict}
 }
