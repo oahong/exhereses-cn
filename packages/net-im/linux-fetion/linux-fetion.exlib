@@ -29,6 +29,8 @@ linux-fetion_src_prepare() {
             -e "/libfetion_32.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" \
             ${PN}.pro || die "sed failed"
     fi
+    sed -i \
+        -e 's:;Network:;Network;:' misc/LibFetion.desktop || die "failed to fix desktop entry"
 }
 
 linux-fetion_src_install() {
