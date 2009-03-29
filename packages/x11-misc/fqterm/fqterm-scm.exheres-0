@@ -12,6 +12,7 @@ DEPENDENCIES+="
         sys-sound/alsa-lib"
 
 src_unpack() {
+    # unpack QQWry.zip
     default
     scm_src_unpack
 }

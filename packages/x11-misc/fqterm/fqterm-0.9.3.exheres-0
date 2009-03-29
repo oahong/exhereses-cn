@@ -1,7 +1,5 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'qterm-0.5.2.ebuild' from Gentoo, which is:
-#     Copyright 1999-2008 Gentoo Foundation
 
 require fqterm
 
