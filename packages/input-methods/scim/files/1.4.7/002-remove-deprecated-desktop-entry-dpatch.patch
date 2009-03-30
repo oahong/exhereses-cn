@@ -1,0 +1,35 @@
+Sources: Ming Hua <minghua-guest@users.alioth.debian.org>, from debian
+Upstream: not sure
+Reason: stop installing scim-setup.desktop into /usr/share/control-center-2.0/capplets
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 10_remove-deprecated-desktop-entry.dpatch by Ming Hua <minghua-guest@users.alioth.debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+##
+## DP: The freedesktop standard desktop entry location [1] is
+## DP: /usr/share/applications/, so we stop installing scim-setup.desktop into
+## DP: /usr/share/control-center-2.0/capplets/.
+## DP:
+## DP: NOTE:  This patch only changes extras/setup/Makefile.am, and the change
+## DP: necessary for extras/setup/Makefile.in is incorporated in
+## DP: 90_relibtoolize.dpatch.  If the relibtoolize patch is removed, this
+## DP: patch should change extras/setup/Makefile.in as well.
+## DP:
+## DP: 1. For example, see
+## DP:    http://standards.freedesktop.org/menu-spec/1.0/ar01s02.html
+
+@DPATCH@
+diff -urNad scim-1.4.7~/extras/setup/Makefile.am scim-1.4.7/extras/setup/Makefile.am
+--- scim-1.4.7~/extras/setup/Makefile.am	2007-06-26 09:31:50.000000000 -0500
++++ scim-1.4.7/extras/setup/Makefile.am	2007-07-22 01:56:58.000000000 -0500
+@@ -68,9 +68,6 @@
+ desktopdir       = $(datadir)/applications
+ desktop_in_files = scim-setup.desktop.in
+ desktop_DATA     = $(desktop_in_files:.desktop.in=.desktop)
+-
+-gnomeccdir       = $(datadir)/control-center-2.0/capplets
+-gnomecc_DATA     = $(desktop_in_files:.desktop.in=.desktop)
+ endif
+ 
+ EXTRA_DIST = $(desktop_in_files) scim-setup.in
+

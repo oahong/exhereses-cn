@@ -1,0 +1,24 @@
+Source: Ming Hua <minghua@rice.edu>, from debian
+Upstream: not sure
+Reason: fix the gtk immmodule installation directory.
+## 10_gtk-immodule-install-dir.dpatch by Ming Hua <minghua@rice.edu>
+## All lines beginning with `## DP:' are a description of the patch.
+##
+## DP: Change the gtk immodule installation directory from
+## DP: /usr/lib/gtk-2.0/immodules/ to
+## DP: /usr/lib/gtk-2.0/$(GTK_BINARY_VERSION)/immodules/.
+
+@DPATCH@
+diff -urNad scim-1.4.8~/configure.ac scim-1.4.8/configure.ac
+--- scim-1.4.8~/configure.ac	2007-06-26 09:31:57.000000000 -0500
++++ scim-1.4.8/configure.ac	2007-06-26 18:00:43.000000000 -0500
+@@ -235,7 +235,7 @@
+   if test -z "$GTK_LIBDIR)"; then
+     GTK_LIBDIR="$libdir"
+   fi
+-  GTK_IM_MODULEDIR=$GTK_LIBDIR/gtk-2.0/immodules
++  GTK_IM_MODULEDIR=$GTK_LIBDIR/gtk-2.0/$GTK_BINARY_VERSION/immodules
+   AC_SUBST(GTK_LIBDIR)
+   AC_SUBST(GTK_IM_MODULEDIR)
+   AC_SUBST(GTK_VERSION)
+

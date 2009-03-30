@@ -1,0 +1,64 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+export_exlib_phases src_configure src_install pkg_postinst pkg_postrm
+
+SUMMARY="Smart Common Input Method platform"
+DESCRIPTION="SCIM is an input method (IM) platform which provides not only
+a user friendly, full featured input method user interface for POSIX-style
+operating systems (including Linux, FreeBSD and other Unix), but also a
+development platform to make input method development easier."
+HOMEPAGE="http://www.scim-im.org"
+DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+MYOPTIONS="debug doc nls"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        >=dev-util/intltool-0.33
+        nls? ( sys-devel/gettext )
+    build+run:
+        dev-lang/perl
+        dev-libs/atk
+        x11-libs/libX11
+        >=x11-libs/gtk+-2.4
+        >=x11-libs/pango-1.1
+    "
+
+REMOTE_IDS="sourceforge:scim"
+UPSTREAM_DOCUMENTATOIN="
+${HOMEPAGE}/wiki/documentation/installation_and_configuration/all/system_configuration"
+
+DEFAULT_SRC_CONFIGURE_PARMAS=(
+        '--without-doxygen'
+        '--enable-ld-version-script'
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug nls )
+
+scim_src_configure() {
+    default
+}
+
+scim_src_install() {
+    default
+    if option doc ; then
+        docinto html
+        dodoc docs/html/*
+    fi
+}
+
+scim_pkg_postinst() {
+    einfo "Read the following link to learn how to configure ${PN}:"
+    einfo "http://tinyurl.com/25djma"
+
+    [[ -x /usr/bin/gtk-query-immodules-2.0 ]] && gtk-query-immodules-2.0 > \
+    "${ROOT}"/etc/gtk-2.0/gtk.immodules
+}
+
+scim_pkg_postrm() {
+    [[ -x /usr/bin/gtk-query-immodules-2.0 ]] && gtk-query-immodules-2.0 > \
+    "${ROOT}"/etc/gtk-2.0/gtk.immodules
+}
