@@ -39,9 +39,8 @@ DEFAULT_SRC_INSTALL_EXTRA_DOCS=( doc/cjkvinput.txt doc/pinyin.txt )
 src_install() {
     default
     ebegin "Removing empty directories"
-        rm -rf "${IMAGE}"/usr/share/${PN}/xpm
-        rm -rf "${IMAGE}"/usr/share/${PN}/doc
-    eend $?
+        rm -rf "${IMAGE}"/usr/share/${PN}/{xpm,doc}
+    eend $? || die "failed to remove empty directories"
 }
 
 pkg_postinst() {
