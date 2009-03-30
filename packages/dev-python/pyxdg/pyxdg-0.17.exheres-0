@@ -4,7 +4,7 @@
 NEED_PYTHON=2.4:=
 require distutils
 
-SUMMARY="a python module to deal with freedesktop.org specifications."
+SUMMARY="a python library to access freedesktop.org standards"
 HOMEPAGE="http://pyxdg.freedesktop.org"
 DOWNLOADS="http://www.freedesktop.org/~lanius/${PNV}.tar.gz"
 
@@ -13,12 +13,10 @@ SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
 
-DEPENDENCIES=""
-
 src_install () {
-	distutils_src_install
+    distutils_src_install
 
-	insinto /usr/share/doc/${PNV}/test
-	insopts -m 755
-	doins test/*
+    insinto /usr/share/doc/${PNV}/test
+    insopts -m 755
+    doins test/*
 }
