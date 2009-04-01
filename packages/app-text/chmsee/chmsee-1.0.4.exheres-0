@@ -31,6 +31,8 @@ DEPENDENCIES="
         dev-util/pkg-config"
 
 WORK=${WORKBASE}/${MY_PNV}
+
+REMOTE_IDS="freshmeat:ChmSee"
 BUGS_TO="http://code.google.com/p/chmsee/issues/list oahong@gmail.com"
 
 append-cppflags '-I/usr/include/nspr'
