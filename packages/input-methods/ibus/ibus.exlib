@@ -29,7 +29,7 @@ MYOPTIONS="
         ${MY_LINGUAS}
 "
 
-DEPENDENCIES+="
+DEPENDENCIES="
     build+run:
         >=dev-libs/glib-2.18
         dev-libs/dbus-glib
@@ -43,7 +43,7 @@ DEPENDENCIES+="
         dev-util/pkg-config
     run:
         app-text/iso-codes
-        gnome-desktop/librsvg [[ description = [ otherwise we can't display svg icons ] ]]
+        gnome-desktop/librsvg [[ description = [ to display svg icons ] ]]
         >=gnome-bindings/pygtk-2.12.1
         >=dev-python/dbus-python-0.83.0
         dev-python/pyxdg
@@ -70,7 +70,6 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 ibus_src_prepare() {
 #    sed -i -e '/^enable_qt4=no$/d' configure.ac || die
 #    sed -i -e "/TEMPLATE/ i\QMAKE_STRIP = true" client/qt4/${PN}.pro || die
-
     # disable pyc compiling
     mv py-compile py-compile.orig
     ln -s $(type -P true) py-compile
