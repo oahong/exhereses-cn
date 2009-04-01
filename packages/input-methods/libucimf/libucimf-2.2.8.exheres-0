@@ -27,6 +27,7 @@ DEPENDENCIES="
 
 BUGS_TO="ucimf@googlegroups.com"
 REMOTE_IDS="sourceforge:ucimf"
+UPSTREAM_CHANGELOG="http://ucimf.sourceforge.net/data/ChangeLog"
 UPSTREAM_DOCUMENTATION="
 http://ucimf.googlecode.com/files/UserManual.pdf [[ lang = zh_TW description = [ User Manual, PDF ] ]]
 http://code.google.com/p/ucimf/wiki [[ lang = zh_TW description = [ Wiki ] ]]"
