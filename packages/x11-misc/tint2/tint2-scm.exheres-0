@@ -20,6 +20,7 @@ DEPENDENCIES="
         x11-libs/cairo
         x11-libs/pango
         x11-libs/libX11
+        x11-libs/libXrandr
         x11-libs/libXinerama
         media-libs/imlib2
         >=dev-libs/glib-2.0
@@ -35,12 +36,13 @@ DEFAULT_SRC_COMPILE_PARAMS=(
 
 src_prepare() {
     mv src/* .
+    sed -i \
+        -e 's/^\(install: install-\)\(strip\)$/\1no\2/' \
+        -e 's/\.\./\./g' \
+        Makefile || die "failed sed Makefile"
 }
 
 src_install() {
-    dobin tint2
-    doman doc/man/tint2.1
-    insinto /etc/xdg/tint2
-    newins tintrc06 tint2rc
-    dodoc tintrc0[1-7] doc/tint*
+    default
+    dodoc tintrc0[2-7] doc/tint2*
 }
