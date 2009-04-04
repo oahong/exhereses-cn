@@ -19,6 +19,7 @@ DEPENDENCIES="
     build+run:
         sys-libs/zlib
         media-libs/freetype:2
+        group/utmp
     post,recommended:
         cjk/ucimf-openvanilla
             [[ description = [ To get openvanilla support for ucimf ] ]]
