@@ -5,9 +5,10 @@ require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ] sci
 
 PLATFORMS="~x86"
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/${PV}" )
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
 
 src_prepare() {
+    # FIXME:
     intltoolize --force --copy --automake || die "intltoolize failed"
     autotools_src_prepare
 }
