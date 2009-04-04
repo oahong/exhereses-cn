@@ -1,0 +1,26 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="StarDict Console Version"
+HOMEPAGE="http://sdcv.sourceforge.net"
+DOWNLOADS="mirror://sourceforge/sdcv/${PNV}.tar.bz2"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="nls"
+
+DEPENDENCIES="
+    build+run:
+        >=dev-libs/glib-2.6.1
+    build:
+        nls? ( sys-devel/gettext )"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/format.patch
+    "${FILES}"/manpage.patch
+    "${FILES}"/allignment.patch
+    "${FILES}"/sdcv-0.4.2-missing-headers.patch
+    -p0 "${FILES}"/sdcv-0.4.2-respect-HOME.patch
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls )
