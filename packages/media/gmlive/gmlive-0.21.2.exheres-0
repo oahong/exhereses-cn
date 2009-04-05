@@ -24,10 +24,10 @@ DEPENDENCIES="
         media/mplayer
         gnome? (
             >=gnome-desktop/totem-2.20
-            dev-lang/python:2.4=
+            >=dev-lang/python-2.4:=
         )
     build:
-        dev-util/intltools
+        dev-util/intltool
         nls? ( sys-devel/gettext )
 "
 
