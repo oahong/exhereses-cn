@@ -4,7 +4,7 @@
 MY_P=${PNV/pidgin-}
 SUMMARY="Fetion protocol plugin for libpurple"
 HOMEPAGE="http://github.com/gradetwo/fetion"
-DOWNLOADS="http://gentoo-china-overlay.googlecode.com/files/${MY_P}.tar.bz2"
+DOWNLOADS="http://www.logvinov.ru/files/dist/fetion/${MY_P}.tar.bz2"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -12,6 +12,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
+        dev-libs/glib
         >=net-im/pidgin-2.3.1[ssl]
     build:
         dev-util/pkg-config
@@ -22,13 +23,10 @@ REMOTE_IDS="sourceforge:fetion"
 
 WORK=${WORKBASE}/${MY_P}
 
-DEFAULT_SRC_INSTALL_EXTRA_SUBDIRS=( DOC )
-DEFAULT_SRC_INSTALL_EXTRA_DOCS=( API CHAT FILES LOGIN SKELETON )
+#DEFAULT_SRC_INSTALL_EXTRA_SUBDIRS=( DOC )
+#DEFAULT_SRC_INSTALL_EXTRA_DOCS=( API CHAT FILES LOGIN SKELETON )
 
 pkg_postinst() {
-    einfo
-    elog "This is not an official exherbo package, please report your"
-    elog "bugs to http://www.donews.net/gradetwo"
     einfo
     elog "Select the 'fetion' protocol to use this plugin"
     elog "Server IP is 221.130.44.193"
