@@ -13,8 +13,12 @@ MYOPTIONS="nls"
 DEPENDENCIES="
     build+run:
         >=dev-libs/glib-2.6.1
+        sys-libs/readline
     build:
         nls? ( sys-devel/gettext )"
+
+REMOTE_IDS="sourceforge:sdcv freshmeat:sdcv"
+UPSTREAM_CHANGELOG="http://freshmeat.net/urls/4320fe4af832dfdf57ecb4fd8b3384d9"
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/format.patch
