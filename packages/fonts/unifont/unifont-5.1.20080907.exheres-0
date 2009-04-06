@@ -1,0 +1,22 @@
+# Copyright 2009 Hong Hao  <oahong@gmail.com>
+# Distributed under the terms of the GNU General Purpose License v2
+
+require multilib xfont
+FONT=${PN}
+
+MY_PNV=${PNV}.ttf
+SUMMARY="GNU Unifont"
+HOMEPAGE="http://unifoundry.com/unifont.html"
+DOWNLOADS="http://unifoundry.com/${MY_PNV}.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+
+WORK=${WORKBASE}
+
+src_install() {
+    insinto /usr/$(get_libdir)/X11/fonts/${FONT}
+    doins ${MY_PNV}
+    fix_fonts
+}
