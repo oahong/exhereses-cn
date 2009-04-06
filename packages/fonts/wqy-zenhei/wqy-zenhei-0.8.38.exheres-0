@@ -3,7 +3,7 @@
 # Based in part upon 'wqy-zenhei-0.6.26.ebuild' from Gentoo which is
 #    Copyright 1999-2008 Gentoo Foundation
 
-FONT="TTF"
+FONT=${PN%%-*}
 require xfont multilib
 
 SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
@@ -21,7 +21,7 @@ WORK=${WORKBASE}/${PN}
 src_install() {
     emagicdocs
 
-    insinto /usr/$(get_libdir)/X11/fonts/TTF/
+    insinto /usr/$(get_libdir)/X11/fonts/${FONT}
     doins *.ttc
     insinto /etc/fonts/conf.avail
     doins "44-wqy-zenhei.conf" \

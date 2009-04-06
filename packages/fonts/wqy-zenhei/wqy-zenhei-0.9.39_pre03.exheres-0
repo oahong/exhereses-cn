@@ -3,7 +3,7 @@
 # Based in part upon 'wqy-zenhei-0.6.26.ebuild' from Gentoo which is
 #    Copyright 1999-2008 Gentoo Foundation
 
-FONT="TTF"
+FONT=${PN%%-*}
 require xfont multilib
 
 SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
@@ -21,7 +21,7 @@ WORK=${WORKBASE}/${PN}
 src_install() {
     emagicdocs
 
-    insinto /usr/$(get_libdir)/X11/fonts/TTF/
+    insinto /usr/$(get_libdir)/X11/fonts/${FONT}
     doins *.ttc
     insinto /etc/fonts/conf.avail
     doins "44-wqy-zenhei.conf" \
@@ -41,7 +41,7 @@ pkg_postinst() {
     elog "eclectic fontconfig enable 66-wqy-zenhei-sharp.conf"
     elog
     elog "Starting from 0.8.38, wqy-zenhei also has an embedded 13px bitmap font,"
-    elog "to completely disable it when embedded bitmap fonts is used, run:"
+    elog "to completely disable it when embedded bitmap fonts is actived, run:"
     elog "eclectic fontconfig enable 66-wqy-zenhei-sharp-no13px.conf"
     elog
 }
