@@ -12,8 +12,10 @@ MYOPTIONS="debug"
 
 DEPENDENCIES="
     build+run:
-        >=x11-libs/gtk+-2.6.0
-        >=app-text/poppler-0.5.0[cairo][glib]
+        dev-libs/glib
+        x11-libs/pango
+        >=x11-libs/gtk+-2.4.0
+        >=app-text/poppler-0.5.4[cairo][glib]
     build:
         dev-util/pkg-config
     "
