@@ -13,7 +13,6 @@ DEPENDENCIES="
         dev-util/pkg-config
         sys-libs/ncurses
     build+run:
-        sys-libs/glibc
         media-libs/fontconfig
         media-libs/freetype
     post,suggested:
