@@ -14,8 +14,7 @@ word\", \"Fuzzy query\", etc. Stardict Version3.0 has developed a lot of new
 functions, such as Full-text translation, Net Dict.
 "
 HOMEPAGE="http://stardict.sourceforge.net"
-DOWNLOADS="mirror://sourceforge/stardict/${PNV}.tar.bz2
-mirror://sourceforge/stardict/QQWry.Dat.bz2"
+DOWNLOADS="mirror://sourceforge/stardict/${PNV}.tar.bz2 mirror://sourceforge/stardict/QQWry.Dat.bz2"
 
 LICENCES="GPL-3"
 SLOT="0"
@@ -36,12 +35,13 @@ DEPENDENCIES="
         spell? ( app-spell/enchant )
         >=sys-libs/zlib-1.1.4
         >=x11-libs/gtk+-2.12
+        x11-libs/libX11
     build:
         >=dev-util/intltool-0.22
         dev-util/pkg-config
 "
 
-REMOTE_IDS="sourceforge:stardict freshmeat:stardict"
+REMOTE_IDS="sourceforge:stardict freshmeat:StarDict"
 UPSTREAM_CHANGELOG="http://stardict.sourceforge.net/ChangeLog"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
@@ -64,4 +64,12 @@ src_install() {
     doins "${WORKBASE}"/QQWry.Dat
 
     keepdir /usr/share/${PN}/{dic,treedict}
+}
+
+pkg_postinst() {
+    einfo
+    elog "Get your own dictoinaries from ${HOMEPAGE}/Dictionaries.php"
+    elog "To install these tarball dictionaries, do this:"
+    elog "tar xvf foo.tar.bz2 -C /usr/share/stardict/dic"
+    einfo
 }
