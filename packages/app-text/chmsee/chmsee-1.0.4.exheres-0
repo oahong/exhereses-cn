@@ -25,6 +25,8 @@ DEPENDENCIES="
         dev-libs/xulrunner
         media-libs/chmlib
         dev-libs/libgcrypt
+        >=x11-libs/gtk+-2.8
+        >=gnome-platform/libglade-2.4
     build:
         nls? ( sys-devel/gettext )
         >=dev-util/intltool-0.37
