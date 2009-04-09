@@ -1,3 +1,0 @@
-# x86 binary blob(s), only works on x86.
-net-im/linuxqq
-#net-im/linux-fetion
