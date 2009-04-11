@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="http://apvlv.googlecode.com/svn"
-require scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.7 ] ]
+require toolchain-funcs scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.7 ] ]
 
 SUMMARY="a PDF viewer which behaves like vim"
 HOMEPAGE="http://apvlv.googlecode.com"
@@ -30,5 +30,5 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 )
 
 src_configure() {
-    LD="/usr/bin/ld" default
+    LD="$(tc-getLD)" default
 }
