@@ -1,19 +1,20 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+SCM_REPOSITORY="http://apvlv.googlecode.com/svn"
+require scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.7 ] ]
+
 SUMMARY="a PDF viewer which behaves like vim"
 HOMEPAGE="http://apvlv.googlecode.com"
-DOWNLOADS="http://apvlv.googlecode.com/files/${PNV}.tar.gz"
+#DOWNLOADS="http://apvlv.googlecode.com/files/${PNV}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS=""
 MYOPTIONS="debug"
 
 DEPENDENCIES="
     build+run:
-        dev-libs/glib
-        x11-libs/pango
         >=x11-libs/gtk+-2.4.0
         >=app-text/poppler-0.5.4[cairo][glib]
     build:
@@ -27,3 +28,7 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --with-docdir=/usr/share/doc/"${PNV}"
 )
+
+src_configure() {
+    LD="/usr/bin/ld" default
+}
