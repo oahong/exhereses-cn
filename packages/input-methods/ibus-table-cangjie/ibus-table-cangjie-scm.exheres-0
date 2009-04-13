@@ -3,9 +3,8 @@
 
 require ibus-tables
 
-SLOT="0"
 PLATFORMS=""
 MYOPTIONS+="cangjie3 [[ description = [ Generate CangJie3 Engine ] ]]"
 
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( cangjie3 )
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-cangjie5 )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( cangjie3 )

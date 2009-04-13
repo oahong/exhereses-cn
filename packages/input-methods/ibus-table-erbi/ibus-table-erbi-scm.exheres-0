@@ -3,7 +3,5 @@
 
 require ibus-tables
 
-SLOT="0"
 PLATFORMS=""
-
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-erbi-qs )
