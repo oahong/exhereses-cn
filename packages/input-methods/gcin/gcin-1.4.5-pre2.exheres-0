@@ -22,5 +22,6 @@ src_configure() {
     econf \
         $(optionq anthy && echo --use_anthy=Y ) \
         $(optionq qt4 && echo --qt4_im=Y ) \
+        $(optionq nls && echo --use_i18n=Y ) \
         --qt3_im=N
 }

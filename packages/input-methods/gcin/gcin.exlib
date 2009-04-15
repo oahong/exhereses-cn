@@ -20,12 +20,13 @@ DOWNLOADS="${DOWNLOADS:-http://cle.linux.org.tw/gcin/download/${PNV}.tar.bz2}
     http://oahong.googlepages.com/nobopomofo.tar.gz
     ${HOMEPAGE}/attachment/wiki/GcinTablesXcin02/gcin-filter-nobopomofo?format=raw -> gcin-filter-nobopomofo"
 
-LICENCES="LGPL-2.1 qt4? ( || ( QPL-1.0 GPL-2 ) ) HOBA-LICENSE"
+LICENCES="LGPL-2.1 qt4? ( || ( QPL-1.0 GPL-2 ) ) HOBA"
 SLOT="0"
 MYOPTIONS="
+    nls
     anthy [[ description = [ Enable support for anthy based input method ] ]]
-    sound [[ description = [ Enable Chinese Text to Speech reading support via media-sound/verbis-tools ] ]]
-    qt4 [[ description = [ Enable Qt4 IM Module support ] ]]"
+    qt4 [[ description = [ Enable Qt4 IM Module support ] ]]
+    sound [[ description = [ Enable Chinese Text to Speech reading support via media-sound/verbis-tools ] ]]"
 
 # TODO: QT3 support
 DEPENDENCIES="
@@ -35,6 +36,7 @@ DEPENDENCIES="
         qt4? ( x11-libs/qt:4 )
     build:
         dev-util/pkg-config
+        nls? ( sys-devel/gettext )
     run:
         sound? ( media-sound/vorbis-tools[ogg123(+)] )"
 
