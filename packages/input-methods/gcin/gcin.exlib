@@ -1,5 +1,7 @@
-# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'gcin-1.4.5_pre2-r1.ebuild' from Gentoo Taiwan (GOT), which is:
+#    Copyright 1999-2009 Gentoo Foundation
 
 export_exlib_phases src_install pkg_postinst pkg_postrm
 
@@ -14,9 +16,11 @@ keyboard layout. It is often straightforward for users to append other input tab
 originally included in the release package, or tables used by other IMs such as scim."
 HOMEPAGE="http://cle.linux.org.tw/trac/wiki"
 DOWNLOADS="${DOWNLOADS:-http://cle.linux.org.tw/gcin/download/${PNV}.tar.bz2}
-    sound? ( http://cle.linux.org.tw/gcin/download/ogg.tgz )"
+    sound? ( http://cle.linux.org.tw/gcin/download/ogg.tgz )
+    http://oahong.googlepages.com/nobopomofo.tar.gz
+    ${HOMEPAGE}/attachment/wiki/GcinTablesXcin02/gcin-filter-nobopomofo?format=raw -> gcin-filter-nobopomofo"
 
-LICENCES="LGPL-2.1 qt4? ( || ( QPL-1.0 GPL-2 ) )"
+LICENCES="LGPL-2.1 qt4? ( || ( QPL-1.0 GPL-2 ) ) HOBA-LICENSE"
 SLOT="0"
 MYOPTIONS="
     anthy [[ description = [ Enable support for anthy based input method ] ]]
@@ -44,11 +48,23 @@ http://cle.linux.org.tw/trac/wiki/GcinFAQ [[ lang = zh_TW ]]"
 
 gcin_src_install() {
     default
+
+    # http://cle.linux.org.tw/trac/wiki/GcinGirlForNoBopomofo
+    exeinto /usr/share/${PN}/filters
+    doexe "${FETCHEDDIR}"/gcin-filter-nobopomofo
+    insinto /usr/share/pixmaps/${PN}
+    doins "${WORKBASE}"/{SS1135_ST,SS1208_DT}.jpg
+
+    # http://cle.linux.org.tw/trac/wiki/EnGcinTextToSpeech
     if option sound ; then
-        einfo "Installing ogg files. Be patient, this might take several minutes"
+        einfo "Installing Chinese speech databases. Be patient, this might take several minutes"
         insinto /usr/share/${PN}
         doins -r "${WORKBASE}"/ogg
     fi
+
+    hereenvd 95gcin-filter << EOF
+GCIN_OUTPUT_FILTER="/usr/share/${PN}/filters/gcin-filter-nobopomofo"
+EOF
 }
 
 gcin_pkg_postinst() {
