@@ -1,0 +1,26 @@
+# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require gcin toolchain-funcs
+
+MY_PNV=${PN}-${PV/-/.}
+DOWNLOADS="http://cle.linux.org.tw/gcin/download/${MY_PNV}.tar.bz2"
+
+PLATFORMS="~x86"
+
+WORK=${WORKBASE}/${MY_PNV}
+
+MAKEOPTS="${MAKEOPTS} -j1"
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/${PNV%-pre*}.diff
+)
+DEFAULT_SRC_COMPILE_PARAMS=(
+    CC="$(tc-getCC)"
+)
+
+src_configure() {
+    econf \
+        $(optionq anthy && echo --use_anthy=Y ) \
+        $(optionq qt4 && echo --qt4_im=Y ) \
+        --qt3_im=N
+}
