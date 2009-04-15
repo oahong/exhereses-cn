@@ -1,0 +1,15 @@
+Sources: oahong@gmail.com
+Upstream: NO
+Reason: Fix desktop entry.
+diff -urN gcin-1.4.5.pre2.orig/menu/gcin-setup.desktop gcin-1.4.5.pre2/menu/gcin-setup.desktop
+--- gcin-1.4.5.pre2.orig/menu/gcin-setup.desktop	2008-06-26 11:50:26.000000000 +0800
++++ gcin-1.4.5.pre2/menu/gcin-setup.desktop	2009-04-15 20:06:20.000000000 +0800
+@@ -8,7 +8,7 @@
+ Comment[zh_CN]= gcin 设置工具
+ Comment[zh_TW]= gcin 設定工具
+ Exec=gcin-setup
+-Icon=gcin.png
++Icon=gcin
+ Terminal=false
+ Type=Application
+ StartupNotify=true

@@ -1,7 +1,7 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-export_exlib_phases pkg_postinst pkg_postrm
+export_exlib_phases src_install pkg_postinst pkg_postrm
 
 SUMMARY="Gtk Chinese INput application in X"
 DESCRIPTIONS="
@@ -13,12 +13,14 @@ A GUI interface is used for gcin settings such as your favorite Chinese input ta
 keyboard layout. It is often straightforward for users to append other input tables not
 originally included in the release package, or tables used by other IMs such as scim."
 HOMEPAGE="http://cle.linux.org.tw/trac/wiki"
-DOWNLOADS="http://cle.linux.org.tw/gcin/download/${PNV}.tar.bz2"
+DOWNLOADS="${DOWNLOADS:-http://cle.linux.org.tw/gcin/download/${PNV}.tar.bz2}
+    sound? ( http://cle.linux.org.tw/gcin/download/ogg.tgz )"
 
 LICENCES="LGPL-2.1 qt4? ( || ( QPL-1.0 GPL-2 ) )"
 SLOT="0"
 MYOPTIONS="
     anthy [[ description = [ Enable support for anthy based input method ] ]]
+    sound [[ description = [ Enable Chinese Text to Speech reading support via media-sound/verbis-tools ] ]]
     qt4 [[ description = [ Enable Qt4 IM Module support ] ]]"
 
 # TODO: QT3 support
@@ -28,7 +30,9 @@ DEPENDENCIES="
         anthy? ( cjk/anthy )
         qt4? ( x11-libs/qt:4 )
     build:
-        dev-util/pkg-config"
+        dev-util/pkg-config
+    run:
+        sound? ( media-sound/vorbis-tools[ogg123(+)] )"
 
 REMOTE_IDS="freshmeat:gcin"
 BUGS_TO="oahong@gmail.com http://hyperrate.com/dir.php?eid=67"
@@ -37,6 +41,15 @@ UPSTREAM_DOCUMENTATION="
 http://hyperrate.com/files/67/67-OtyYdca5ST/README.html [[ lang = zh_TW ]]
 http://cle.linux.org.tw/trac/wiki/GcinUsage [[ lang = zh_TW ]]
 http://cle.linux.org.tw/trac/wiki/GcinFAQ [[ lang = zh_TW ]]"
+
+gcin_src_install() {
+    default
+    if option sound ; then
+        einfo "Installing ogg files. Be patient, this might take several minutes"
+        insinto /usr/share/${PN}
+        doins -r "${WORKBASE}"/ogg
+    fi
+}
 
 gcin_pkg_postinst() {
     gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
