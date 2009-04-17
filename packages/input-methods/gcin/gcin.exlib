@@ -25,8 +25,8 @@ SLOT="0"
 MYOPTIONS="
     nls
     anthy [[ description = [ Enable support for anthy based input method ] ]]
-    qt4 [[ description = [ Enable Qt4 IM Module support ] ]]
-    sound [[ description = [ Enable Chinese Text to Speech reading support via media-sound/verbis-tools ] ]]"
+    qt4 [[ description = [ Enable support for Qt4 immodule ] ]]
+    sound [[ description = [ Enable support for Chinese Text to Speech reading via media-sound/verbis-tools ] ]]"
 
 # TODO: QT3 support
 DEPENDENCIES="
