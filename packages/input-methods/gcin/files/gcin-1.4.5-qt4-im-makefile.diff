@@ -1,0 +1,39 @@
+Source: partialy based on gcin-1.4.4 patch from debian
+Upstream: No
+Reason: fix qt path and libdirs.
+--- gcin-1.4.5.pre4.orig/qt4-im/Makefile	2009-01-27 19:42:40.000000000 +0800
++++ gcin-1.4.5.pre4/qt4-im/Makefile	2009-04-18 19:28:19.000000000 +0800
+@@ -1,20 +1,16 @@
+ include ../config.mak
+ QT=qt4
+-QTIM=$(QT)/plugins/lib/inputmethods
++QTIM=$(QT)/plugins/inputmethods
+ IMMODULES=$(libdir)/$(QTIM)
+-ifeq ($(LIB), lib64)
+-	IMMODULES_LOCAL=/usr/$(LIB)/qt4/plugins/lib64/inputmethods
+-else
+-	IMMODULES_LOCAL=/usr/$(LIB)/$(QTIM)
+-endif
+-QTINC=/usr/lib/$(QT)/include
++IMMODULES_LOCAL=$(DESTDIR)/usr/local/$(IMMODULES)
++QTINC=/usr/include/$(QT)
+ 
+ INCS=-I../im-client -I$(QTINC) -I/usr/include/X11 -I$(QTINC)/QtGui -I$(QTINC)/QtCore
+ CXXFLAGS=$(OPTFLAGS) $(INCS) -Wall -D_REENTRANT -fPIC  -DQT4 -DQT_SHARED \
+ -DQT_IMMODULE -DPIC
+ OBJS= moc_gcin-qt.o gcin-qt.o im-gcin-qt.o gcin-imcontext-qt.o
+ .SUFFIXES:	.c .cpp .a .so .E .h
+-LDFLAGS=-L/usr/lib/$(QT)/$(LIB) -L/usr/X11R6/$(LIB) -L../im-client -lQtGui -lQtCore -lmng -ljpeg -lpng -lz \
++LDFLAGS=-L/usr/$(LIB)/$(QT) -L/usr/include/xorg -L../im-client -lQtGui -lQtCore -lmng -ljpeg -lpng -lz \
+ -lXrender -lXrandr  -lXft -lfontconfig -lgcin-im-client \
+ -lXext -lX11 -lm -lSM -lICE -ldl -lpthread
+ all:    im-gcin.so
+@@ -23,7 +19,7 @@
+ 	$(CXX) -E $(CFLAGS) $(INCS) $< > $@
+ 
+ moc_gcin-qt.cpp:	gcin-qt.h
+-	/usr/lib/$(QT)/bin/moc $< -o moc_gcin-qt.cpp
++	/usr/bin/moc $< -o moc_gcin-qt.cpp
+ 
+ im-gcin.so: $(OBJS)
+ 	export LD_RUN_PATH=$(gcinlibdir) ;\
