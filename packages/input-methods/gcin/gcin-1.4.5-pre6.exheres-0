@@ -12,8 +12,7 @@ WORK=${WORKBASE}/${MY_PNV}
 MAKEOPTS="${MAKEOPTS} -j1"
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
 DEFAULT_SRC_COMPILE_PARAMS=(
-    CC="$(tc-getCC)"
-    OPTFLAGS=""
+    CC="$(tc-getCC)" OPTFLAGS=""
 )
 
 src_configure() {
