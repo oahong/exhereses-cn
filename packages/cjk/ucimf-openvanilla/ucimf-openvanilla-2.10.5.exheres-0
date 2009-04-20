@@ -12,7 +12,10 @@ MYOPTIONS="debug"
 
 DEPENDENCIES="
     build+run:
-        input-methods/libucimf"
+        input-methods/libucimf
+    post,recommended:
+        input-methods/openvanilla-modules
+            [[ description = [ To use various openvanilla input method modules ] ]]"
 
 BUGS_TO="ucimf@googlegroups.com"
 REMOTE_IDS="sourceforge:ucimf"
