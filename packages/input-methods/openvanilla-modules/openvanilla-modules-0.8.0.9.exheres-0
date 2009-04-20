@@ -5,7 +5,7 @@
 
 MY_PNV=${PN}-$(ever replace 3 '_')
 MY_LINGUAS="ja ko th vi zh_CN zh_HK zh_TW"
-SUMMARY="Input methods modules and tables for OpenVanilla Input Method Framework"
+SUMMARY="Input method modules and tables for OpenVanilla Input Method Framework"
 HOMEPAGE="http://openvanilla.org http://ucimf.googlecode.com"
 DOWNLOADS="http://ucimf.googlecode.com/files/${MY_PNV}.tar.gz"
 
@@ -24,16 +24,13 @@ DEPENDENCIES="
 WORK=${WORKBASE}/${MY_PNV}
 
 src_configure() {
-    option linguas:ja && myoptions+="--with-jp_JP "
-    option linguas:ko && myoptions+="--with-ko_KR "
-    option linguas:th && myoptions+="--with-th_TH "
-    option linguas:vi && myoptions+="--with-vi_VN "
-    option linguas:zh_CN && myoptions+="--with-zh_CN "
-    option linguas:zh_HK && myoptions+="--with-zh_HK "
-    option linguas:zh_TW && \
-        myoptions+="--with-zh_TW --with-zh_TW_hakka --with-zh_TW_taigi "
-
     econf \
-        ${myoptions} \
+        $(optionq linguas:ja && echo '--with-jp_JP' ) \
+        $(optionq linguas:ko && echo '--with-ko_KR' ) \
+        $(optionq linguas:th && echo '--with-th_TH' ) \
+        $(optionq linguas:vi && echo '--with-vi_VN' ) \
+        $(optionq linguas:zh_CN && echo '--with-zh_CN' ) \
+        $(optionq linguas:zh_HK && echo '--with-zh_HK' ) \
+        $(optionq linguas:zh_TW && echo --with-zh_TW{,_hakka,_taigi} ) \
         --without-asia
 }
