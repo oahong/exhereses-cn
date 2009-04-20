@@ -17,14 +17,13 @@ MYOPTIONS="debug"
 
 DEPENDENCIES="
     build+run:
-        sys-libs/zlib
         media-libs/freetype:2
         group/utmp
+    run:
+        sys-apps/dialog
     post,recommended:
         cjk/ucimf-openvanilla
-            [[ description = [ To get openvanilla support for ucimf ] ]]
-        input-methods/openvanilla-modules
-            [[ description = [ To use various openvanilla input method modules ] ]]"
+            [[ description = [ To get openvanilla support for ucimf ] ]]"
 
 BUGS_TO="ucimf@googlegroups.com"
 REMOTE_IDS="sourceforge:ucimf"
