@@ -5,7 +5,6 @@ SCM_REPOSITORY="http://libfetion-gui.googlecode.com/svn"
 SCM_SUBPATH="qt4_src"
 require scm-svn linux-fetion
 
-DOWNLOADS=""
 PLATFORMS=""
 
 src_install() {

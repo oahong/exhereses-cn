@@ -1,8 +1,10 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+MY_PNV=${PN/-/_}_${PV}
 require linux-fetion
 
+DOWNLOADS="http://libfetion-gui.googlecode.com/files/${MY_PNV}.tar.gz"
 PLATFORMS="~amd64 ~x86"
 
-WORK=${WORKBASE}/${PN/-/_}_${PV}
+WORK=${WORKBASE}/${MY_PNV}

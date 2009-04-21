@@ -9,10 +9,10 @@ export_exlib_phases src_prepare src_install
 
 SUMMARY="a QT4 IM client using Fetion Protocol"
 HOMEPAGE="http://www.libfetion.cn"
-DOWNLOADS="http://libfetion-gui.googlecode.com/files/${PNV}.tar.gz"
 
 SLOT="0"
-LICENCES="GPL-2"
+# Not sure about libfetion's license.
+LICENCES="GPL-2 fixme"
 MYOPTIONS="doc platform: amd64"
 
 DEPENDENCIES="
