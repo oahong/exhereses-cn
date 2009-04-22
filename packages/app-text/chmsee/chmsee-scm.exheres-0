@@ -1,13 +1,11 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require common-metadata flag-o-matic
+SCM_REPOSITORY="git://github.com/lidaobing/chmsee.git"
+require common-metadata flag-o-matic scm-git cmake
 
-MY_PNV=${PNV/_/-}
-DOWNLOADS="${HOMEPAGE}/files/${MY_PNV}.tar.gz"
-
-PLATFORMS="~x86"
-MYOPTIONS="nls"
+PLATFORMS=""
+MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
@@ -19,13 +17,10 @@ DEPENDENCIES="
         >=x11-libs/gtk+-2.8:2
         >=gnome-platform/libglade-2.4
     build:
-        nls? ( sys-devel/gettext )
+        sys-devel/gettext
         >=dev-util/intltool-0.37
         dev-util/pkg-config"
 
-WORK=${WORKBASE}/${MY_PNV}
-
-append-cppflags '-I/usr/include/nspr'
-
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls )
-DEFAULT_SRC_CONFIGURE_PARAMS=( '--with-gecko=libxul' )
+pkg_setup() {
+    append-flags '-I/usr/include/nspr'
+}
