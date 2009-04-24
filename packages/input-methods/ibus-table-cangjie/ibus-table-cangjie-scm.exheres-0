@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-tables
+require ibus-table
 
 # CangJie5, CaneJie3, Quick5, Quick3 tables are released under Public Domain
 # and their icons are released under GPLv2+ originally devired from scim-tables-chinese package.
