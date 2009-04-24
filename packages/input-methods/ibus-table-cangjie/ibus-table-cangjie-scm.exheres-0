@@ -3,8 +3,15 @@
 
 require ibus-tables
 
+# CangJie5, CaneJie3, Quick5, Quick3 tables are released under Public Domain
+# and their icons are released under GPLv2+ originally devired from scim-tables-chinese package.
+LICENCES="public-domain GPL-2"
 PLATFORMS=""
-MYOPTIONS+="cangjie3 [[ description = [ Generate CangJie3 Engine ] ]]"
+MYOPTIONS+="
+    cangjie3 [[ description = [ Generate CangJie3 Engine ] ]]
+    quick3 [[ description = [ Generate Quick3 Engine ] ]]
+    quick5 [[ description = [ Generate Quick5 Engine ] ]]
+"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-cangjie5 )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( cangjie3 )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( cangjie3 quick3 quick5 )
