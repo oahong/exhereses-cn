@@ -4,6 +4,12 @@
 SCM_REPOSITORY="git://github.com/acevery/${PN}.git"
 require ibus-engine
 
+DESCRIPTION="
+IBus-Table is the IM Engine framework for table-based input methods,
+such as ZhengMa, WuBi, ErBi, CangJie and so on.
+The aim of IBus-Table is to make the users of table-based input methods
+can enjoy the typing on Linux environment.
+"
 PLATFORMS=""
 LICENCES="LGPL-2.1"
 
