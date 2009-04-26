@@ -5,12 +5,26 @@ SUMMARY="a fast FrameBuffer based TERMinal emulator for linux"
 DESCRIPTION="
 FbTerm is a fast terminal emulator for Linux that uses the frame buffer.
 It is mostly as fast as the Linux kernel's terminal when accelerated scrolling
-is enabled on the frame buffer device. It allows you to select fonts with
-fontconfig, auto-detect and convert text encoding with support for double width
-scripts like Chinese and Japanese etc, dynamically create and destroy up to 10
-windows, record scroll-back history for every window, and copy/paste selected
-text between windows with mouse the when the gpm server is running.
+is enabled on the frame buffer device.
+Features included:
+* select font with fontconfig and draw text with freetype2, same as Qt/Gtk+ based GUI apps
+* dynamicly create/destroy up to 10 windows initially running default shell
+* record scrollback history for every window
+* auto-detect text encoding with current locale, support double width scripts like Chinese, Japanese etc
+* switch between configurable additional text encodings with hot keys on the fly
+* copy/past selected text between windows with mouse when gpm server is running
+* change the orientation of screen display, a.k.a. screen rotation
+* lightweight input method framework with client-server architecture
+* background image for eye candy
 "
+#    * allows you to select fonts with fontconfig, auto-detect and convert text encoding
+#    with support for double width scripts like Chinese and Japanese etc,
+#dynamically create and destroy up to 10 windows, record scroll-back history for every
+#window, copy/paste selected text between windows with mouse the when the gpm server is running,
+#change the orientation of screen display (a.k.a. screen rotation).
+#Recently version of fbterm also adds background picture support for eye candy and
+#a lightweight input method framework with client-server architecture.
+
 HOMEPAGE="http://fbterm.googlecode.com"
 DOWNLOADS="http://fbterm.googlecode.com/files/${PNV}.tar.gz"
 
