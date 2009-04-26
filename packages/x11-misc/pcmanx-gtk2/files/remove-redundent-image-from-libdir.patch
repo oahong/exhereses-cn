@@ -1,0 +1,15 @@
+Source: Based on debian patch: http://patch-tracking.debian.net/patch/series/view/pcmanx-gtk2/0.3.8-3/remove_image_file_in_usr_lib.dpatch
+Reason: Images should be in /usr/share/pixmaps
+Upstream: No
+diff -urN pcmanx-gtk2-0.3.8.orig/plugin/data/pcmanx.html pcmanx-gtk2-0.3.8/plugin/data/pcmanx.html
+--- pcmanx-gtk2-0.3.8.orig/plugin/data/pcmanx.html	2008-08-10 15:06:29.000000000 +0800
++++ pcmanx-gtk2-0.3.8/plugin/data/pcmanx.html	2009-04-26 16:29:57.000000000 +0800
+@@ -2,7 +2,7 @@
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=big5" />
+ <title>PCMan</title>
+-<link rel="shortcut icon" href="pcmanx.png"  type="image/png">
++<link rel="shortcut icon" href="file:///usr/share/pixmaps/pcmanx.png"  type="image/png">
+ </head>
+ <script language="javascript">
+ function autoConnect(){

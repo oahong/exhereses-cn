@@ -21,7 +21,7 @@ MYOPTIONS="
     ipv6
     libnotify
     nls
-    nsplugin
+    nsplugin [[ description = [ Adds telnet:// protocol support to your Mozilla based browser ] ]]
     x86_cpu_features: mmx"
 
 DEPENDENCIES="
@@ -53,6 +53,7 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 )
 
 src_prepare() {
+    expatch "${FILES}/"remove-redundent-image-from-libdir.patch
     expatch -p0 "${FILES}"/${PNV}-gcc-4.3-compatibility.patch
     sed -i \
         -e 's:\(Icon=\).*:\1pcmanx:' \
@@ -63,12 +64,13 @@ src_install() {
     default
 
     if option nsplugin ; then
-        libdir="${IMAGE}/usr/$(get_libdir)"
-        mv "${libdir}"/xulrunner{-devel/bin,} || die
+        # xulrunner-devel/bin is a symbolic link to `/usr/lib/xulrunner'
+        mv "${IMAGE}"/usr/$(get_libdir)/xulrunner{-devel/bin,} || die "failed to rename directory"
+        rm "${IMAGE}"/usr/$(get_libdir)/xulrunner/components/pcmanx.png || die "failed to remove image from libdir"
 
         dodir /usr/$(get_libdir)/nsbrowser/plugins
-        ln -s ../../xulrunner/plugins/pcmanx-plugin.so \
-            "${libdir}"/nsbrowser/plugins/pcmanx-plugin.so || die "failed to create symlinks"
+        dosym ../../xulrunner/plugins/pcmanx-plugin.so \
+            /usr/$(get_libdir)/nsbrowser/plugins/pcmanx-plugin.so
     fi
     find "${IMAGE}" -type d -empty -delete || die "failed to rm empty directories"
 }
