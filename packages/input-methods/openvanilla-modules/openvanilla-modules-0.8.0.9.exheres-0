@@ -1,6 +1,6 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'openvanilla-modules-0.8.0.5.ebuild' from Gentoo Taiwan Overlay, which is:
+# Based in part upon 'openvanilla-modules-0.8.0.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
 MY_PNV=${PN}-$(ever replace 3 '_')
@@ -33,4 +33,9 @@ src_configure() {
         $(optionq linguas:zh_HK && echo '--with-zh_HK' ) \
         $(optionq linguas:zh_TW && echo --with-zh_TW{,_hakka,_taigi} ) \
         --without-asia
+}
+
+src_install() {
+    default
+    find "${IMAGE}" -type d -empty -delete || die "failed to rm empty directories"
 }
