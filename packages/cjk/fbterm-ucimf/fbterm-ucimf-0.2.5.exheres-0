@@ -14,7 +14,7 @@ MYOPTIONS="debug"
 DEPENDENCIES="
     build+run:
         input-methods/libucimf
-        media-libs/fontconfig"
+    "
 
 BUGS_TO="ucimf@googlegroups.com"
 REMOTE_IDS="sourceforge:ucimf"
