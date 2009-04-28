@@ -25,7 +25,9 @@ DEPENDENCIES="
 
 WORK=${WORKBASE}/${MY_PNV}
 
-append-cppflags '-I/usr/include/nspr'
-
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls )
-DEFAULT_SRC_CONFIGURE_PARAMS=( '--with-gecko=libxul' )
+src_configure() {
+    append-cppflags '-I/usr/include/nspr'
+    econf \
+        $(option_enable nls ) \
+        --with-gecko=libxul
+}

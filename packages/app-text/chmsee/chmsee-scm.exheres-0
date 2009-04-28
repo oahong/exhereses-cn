@@ -19,7 +19,8 @@ DEPENDENCIES="
     build:
         sys-devel/gettext
         >=dev-util/intltool-0.37
-        dev-util/pkg-config"
+        dev-util/pkg-config
+"
 
 pkg_setup() {
     append-flags '-I/usr/include/nspr'
