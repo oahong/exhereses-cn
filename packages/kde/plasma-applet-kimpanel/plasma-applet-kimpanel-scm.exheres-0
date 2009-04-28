@@ -20,7 +20,7 @@ DEPENDENCIES="
     build+run:
         x11-libs/libX11
         x11-libs/libXrender
-        kde/kdelibs:4
+        kde/kdebase-workspace:4
 "
 
 # TODO: scim/ibus/fcitx support
