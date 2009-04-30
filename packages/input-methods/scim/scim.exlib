@@ -51,7 +51,7 @@ scim_src_install() {
 }
 
 scim_pkg_postinst() {
-    einfo "Read the following link to learn how to configure ${PN}:"
+    einfo "Read *it*:"
     einfo "http://tinyurl.com/25djma"
 
     [[ -x /usr/bin/gtk-query-immodules-2.0 ]] && gtk-query-immodules-2.0 > \
