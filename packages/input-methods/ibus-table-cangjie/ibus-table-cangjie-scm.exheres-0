@@ -8,10 +8,12 @@ require ibus-table
 LICENCES="public-domain GPL-2"
 PLATFORMS=""
 MYOPTIONS+="
-    cangjie3 [[ description = [ Generate CangJie3 Engine ] ]]
-    quick3 [[ description = [ Generate Quick3 Engine ] ]]
-    quick5 [[ description = [ Generate Quick5 Engine ] ]]
+    (
+        cangjie3 [[ description = [ Generate CangJie3 code table for ibus-table platform ] ]]
+        cangjie5 [[ description = [ Generate CangJie5 code table for ibus-table platform ] ]]
+        quick3 [[ description = [ Generate Quick3 code table for ibus-table platform ] ]]
+        quick5 [[ description = [ Generate Quick5 code table for ibus-table platform ] ]]
+    ) [[ number-selected = at-least-one ]]
 "
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-cangjie5 )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( cangjie3 quick3 quick5 )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( cangjie3 cangjie5 quick3 quick5 )
