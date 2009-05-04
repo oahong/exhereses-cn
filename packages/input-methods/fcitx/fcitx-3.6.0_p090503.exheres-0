@@ -3,8 +3,8 @@
 
 require fcitx
 
-MY_PNV=${PNV/_p/-}
-DOWNLOADS="http://gentoo-china-overlay.googlecode.com/files/${MY_PNV}.tar.gz"
+MY_PNV=${PNV/_p/-svn-}
+DOWNLOADS="http://gentoo-china-overlay.googlecode.com/svn/distfiles/${MY_PNV}.tar.gz"
 PLATFORMS="~x86"
 
 WORK=${WORKBASE}/${MY_PNV}
