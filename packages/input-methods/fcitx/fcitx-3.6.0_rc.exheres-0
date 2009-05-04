@@ -1,9 +1,0 @@
-# Copyright 2008 Hong Hao <oahong@gmail.com>
-# Distributed under the terms of the GNU General Public License v2
-
-require fcitx autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ none ]  ]
-
-DOWNLOADS="http://fcitx.googlecode.com/files/${PNV/_/-}.tar.bz2"
-PLATFORMS="~x86 ~amd64"
-
-WORK="${WORKBASE}/${PNV/_/-}"

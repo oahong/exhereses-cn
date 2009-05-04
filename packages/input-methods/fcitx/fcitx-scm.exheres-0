@@ -1,6 +1,26 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require fcitx
+SCM_REPOSITORY="http://fcitx.googlecode.com/svn"
+require scm-svn fcitx autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ none ]  ]
 
+DOWNLOADS="listed-only:http://gentoo-china-overlay.googlecode.com/svn/distfiles/zhengma.tbz2"
 PLATFORMS=""
+
+src_unpack() {
+    scm_src_unpack
+    unpack ${ARCHIVES}
+}
+
+src_prepare() {
+    mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt || die "failed to rename zhengma.txt"
+    expatch -p0 "${FILES}"/${PN}-zhengma.patch
+
+    sed -i \
+        -e "#AM_INIT#s#\(\([[:digit:]]\.*\)\+[-_]*\)[[:alnum:]]*#\1SVN-$(date +%y%m%d)#" \
+        configure.in || die "failed to fix version number"
+    sed -i \
+        -e "s#http://www\.fcitx\.org#${HOMEPAGE}#" \
+        src/InputWindow.c || die "failed to fix homepage"
+    eautoreconf
+}

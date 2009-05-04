@@ -3,20 +3,14 @@
 # Based in part upon 'fcitx-3.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
-# stolen from xorg.exlib
-if ever at_least scm; then
-    SCM_REPOSITORY="http://fcitx.googlecode.com/svn"
-    require scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ none ]  ]
-    DOWNLOADS=""
-else
-    DOWNLOADS="${DOWNLOADS}:-"http://fcitx.googlecode.com/files/${PNV}.tar.bz2"}"
-fi
+export_exlib_phases src_install pkg_postinst
 
 SUMMARY="Free Chinese Input Toy for X"
 DESCRIPTION="Fcitx(Free Chinese Input Toy of X) is a collection of Simplified
 Chinese input methods for Linux. It supports WuBi, Pinyin, Erbi and QuWei input
 methods."
 HOMEPAGE="http://fcitx.googlecode.com"
+DOWNLOADS="${DOWNLOADS}:-"http://fcitx.googlecode.com/files/${PNV}.tar.bz2"}"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -36,23 +30,24 @@ BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-xft )
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( doc/cjkvinput.txt doc/pinyin.txt )
 
-src_install() {
+fcitx_src_install() {
     default
     ebegin "Removing empty directories"
         rm -rf "${IMAGE}"/usr/share/${PN}/{xpm,doc}
     eend $? || die "failed to remove empty directories"
 }
 
-pkg_postinst() {
+fcitx_pkg_postinst() {
     einfo
     einfo "You should export the following variables to use fcitx"
     einfo " export XMODIFIERS=\"@im=fcitx\""
     einfo " export XIM=fcitx"
     einfo " export XIM_PROGRAM=fcitx"
     einfo
-    einfo "If you want to use WuBi or ErBi"
+    einfo "If you want to use WuBi, ErBi or Zhengma"
     einfo " cp /usr/share/fcitx/data/wbx.mb ~/.fcitx"
     einfo " cp /usr/share/fcitx/data/erbi.mb ~/.fcitx"
+    einfo " cp /usr/share/fcitx/data/zhengma.mb ~/.fcitx"
     einfo " cp /usr/share/fcitx/data/tables.conf ~/.fcitx"
     einfo
 }
