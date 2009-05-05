@@ -1,19 +1,13 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-MY_PNV=${PN}-${PV/-/.}
-DOWNLOADS="http://www.csie.nctu.edu.tw/~cp76/gcin/download/${MY_PNV}.tar.bz2"
 require gcin toolchain-funcs
 
 PLATFORMS="~x86"
 
-WORK=${WORKBASE}/${MY_PNV}
-
-MAKEOPTS="${MAKEOPTS} -j1"
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
-DEFAULT_SRC_COMPILE_PARAMS=(
-    CC="$(tc-getCC)" OPTFLAGS=""
-)
+DEFAULT_SRC_COMPILE_PARAMS=( CC="$(tc-getCC)" OPTFLAGS="" )
+MAKEOPTS="${MAKEOPTS} -j1"
 
 src_configure() {
     econf \
