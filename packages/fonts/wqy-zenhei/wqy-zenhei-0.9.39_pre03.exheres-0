@@ -28,20 +28,3 @@ src_install() {
         "66-wqy-zenhei-sharp.conf" "66-wqy-zenhei-sharp-no13px.conf"
     fix_fonts
 }
-
-pkg_postinst() {
-    xfont_pkg_postinst
-    elog
-    elog "This font has three fontconfig configuration files."
-    elog
-    elog "To activate preferred rendering, run:"
-    elog "eclectic fontconfig enable 44-wqy-zenhei.conf"
-    elog
-    elog "To make the font only use embedded bitmap fonts when available, run:"
-    elog "eclectic fontconfig enable 66-wqy-zenhei-sharp.conf"
-    elog
-    elog "Starting from 0.8.38, wqy-zenhei also has an embedded 13px bitmap font,"
-    elog "to completely disable it when embedded bitmap fonts is actived, run:"
-    elog "eclectic fontconfig enable 66-wqy-zenhei-sharp-no13px.conf"
-    elog
-}
