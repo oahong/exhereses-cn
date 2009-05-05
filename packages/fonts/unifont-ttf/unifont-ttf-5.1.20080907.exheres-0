@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Purpose License v2
 
 require multilib xfont
-FONT=${PN}
+FONT=${PN%-ttf}
 
-MY_PNV=${PNV}.ttf
+MY_PNV=${PNV/-ttf}.ttf
 SUMMARY="GNU Unifont"
 HOMEPAGE="http://unifoundry.com/unifont.html"
 DOWNLOADS="http://unifoundry.com/${MY_PNV}.gz"
