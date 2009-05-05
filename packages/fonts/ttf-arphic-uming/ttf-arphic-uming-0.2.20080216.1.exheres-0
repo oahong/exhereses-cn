@@ -1,0 +1,32 @@
+# Copyright 2009 Hong Hao  <oahong@gmail.com>
+# Distributed under the terms of the GNU General Purpose License v2
+
+FONT=CJKUnifonts
+require multilib xfont
+
+SUMMARY="CJK Unicode font Ming style"
+HOMEPAGE="http://freedesktop.org/wiki/Software/CJKUnifonts"
+DOWNLOADS="mirror://debian/pool/main/t/${PN}/${PN}_${PV}.orig.tar.gz "
+
+LICENCES="ARPHICPL"
+SLOT="0"
+PLATFORMS="~x86"
+
+WORK=${WORKBASE}
+UPSTREAM_CHANGELOG="http://people.ubuntu.com/~arne/cjk-unifonts/uming/FONTLOG"
+DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
+    CONTRIBUTERS
+    FONTLOG
+    KNOWN_ISSUES
+)
+
+src_install() {
+    emagicdocs
+    insinto /usr/$(get_libdir)/X11/fonts/${FONT}
+    doins *.ttc
+
+    insinto /etc/fonts/conf.avail
+    doins *.conf
+
+    fix_fonts
+}
