@@ -1,0 +1,35 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PNV=${PN}-${PV/-/.}
+DOWNLOADS="http://www.csie.nctu.edu.tw/~cp76/gcin/download/${MY_PNV}.tar.bz2"
+require gcin toolchain-funcs
+
+PLATFORMS="~x86"
+
+WORK=${WORKBASE}/${MY_PNV}
+
+MAKEOPTS="${MAKEOPTS} -j1"
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/gcin-1.4.5-configure.diff
+    "${FILES}"/gcin-1.4.5-Makefile.diff
+    "${FILES}"/gcin-1.4.5-qt4-im-makefile.diff
+    "${FILES}"/gcin-1.4.5-fix-desktop-entry.diff
+    "${FILES}"/gcin-as-needed.diff
+)
+DEFAULT_SRC_COMPILE_PARAMS=(
+    CC="$(tc-getCC)" OPTFLAGS=""
+)
+
+src_prepare() {
+    echo "${PVR}" > ${WORK}/VERSION.gcin || die "fix version number failed"
+    default
+}
+
+src_configure() {
+    econf \
+        $(optionq anthy && echo --use_anthy=Y ) \
+        $(optionq qt4 && echo --qt4_im=Y ) \
+        $(optionq nls && echo --use_i18n=Y ) \
+        --qt3_im=N
+}
