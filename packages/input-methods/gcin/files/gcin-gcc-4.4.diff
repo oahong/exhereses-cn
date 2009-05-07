@@ -1,0 +1,9 @@
+--- gcin-1.4.6.pre3/qt4-im/gcin-imcontext-qt.cpp.orig	2009-05-07 13:44:16.549635892 +0800
++++ gcin-1.4.6.pre3/qt4-im/gcin-imcontext-qt.cpp	2009-05-07 13:42:58.683885871 +0800
+@@ -1,5 +1,6 @@
+ #include "gcin-imcontext-qt.h"
+ #include "gcin-common-qt.h"
++#include <stdio.h>
+ #include <X11/Xlib.h>
+ #include <X11/keysym.h>
+ #include <X11/Xutil.h>
