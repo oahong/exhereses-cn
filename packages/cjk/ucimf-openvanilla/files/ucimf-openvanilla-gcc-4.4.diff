@@ -1,0 +1,15 @@
+Source: http://code.google.com/p/ucimf/source/detail?r=376
+Upstream: http://code.google.com/p/ucimf/source/detail?r=376
+Reason: Fix compilation problem due to more headers cleans up in gcc-4.4
+Index: ucimf-openvanilla/openvanilla.cpp
+===================================================================
+--- ucimf-openvanilla/openvanilla.cpp	(版本 375)
++++ ucimf-openvanilla/openvanilla.cpp	(工作副本)
+@@ -24,6 +24,7 @@
+ #include <dirent.h>
+ #include <locale.h>
+ #include <stdlib.h>
++#include <stdio.h>
+ #include <string.h>
+ #include <fcntl.h>
+ #include "debug.h"
