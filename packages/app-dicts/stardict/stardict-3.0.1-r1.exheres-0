@@ -57,6 +57,7 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gnome gnome-support' spell )
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/stardict-3.0.1-transparent_trayicon.patch
     "${FILES}"/stardict-3.0.1-gcc43.patch
+    "${FILES}"/stardict-gcc-4.4.patch
 )
 
 src_configure() {

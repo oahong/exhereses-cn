@@ -1,0 +1,23 @@
+Source: Hong Hao <oahong@gmail.com>
+Upstream: No
+Reason: Fix missing headers
+--- stardict-3.0.1/src/lib/data.cpp.orig	2009-05-08 15:36:45.554554384 +0800
++++ stardict-3.0.1/src/lib/data.cpp	2009-05-08 15:37:20.241535596 +0800
+@@ -27,6 +27,7 @@
+ #include "data.hpp"
+ #include "getuint32.h"
+ #include <cstring>
++#include <stdio.h>
+ 
+ DictBase::DictBase()
+ {
+--- stardict-3.0.1/src/lib/stardict_client.cpp.orig	2009-05-08 15:45:02.820295077 +0800
++++ stardict-3.0.1/src/lib/stardict_client.cpp	2009-05-08 15:45:31.722300280 +0800
+@@ -28,6 +28,7 @@
+ #include "sockets.hpp"
+ #include "md5.h"
+ #include "getuint32.h"
++#include <stdio.h>
+ 
+ #include "stardict_client.hpp"
+ 
