@@ -43,6 +43,7 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 
 src_prepare() {
+    expatch -p3 "${FILES}"/${PN}-gcc-4.4.diff
     cp "${FETCHEDDIR}"/{pydict_sc.bin,lm_sc.t3g}.le data || die "failed to copy data files"
 
     $(type -P glib-gettextize) --force --copy || die "failed to run glib-gettextlize"
