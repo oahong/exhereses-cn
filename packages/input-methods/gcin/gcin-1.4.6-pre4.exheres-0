@@ -13,9 +13,7 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/gcin-1.4.5-configure.diff
     "${FILES}"/gcin-1.4.5-Makefile.diff
     "${FILES}"/gcin-1.4.5-qt4-im-makefile.diff
-    "${FILES}"/gcin-1.4.5-fix-desktop-entry.diff
     "${FILES}"/gcin-as-needed.diff
-    "${FILES}"/gcin-gcc-4.4.diff
 )
 DEFAULT_SRC_COMPILE_PARAMS=( CC="$(tc-getCC)" OPTFLAGS="" )
 MAKEOPTS="${MAKEOPTS} -j1"
