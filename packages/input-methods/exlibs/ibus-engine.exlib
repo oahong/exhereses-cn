@@ -4,34 +4,38 @@
 #    Copyright 1999-2009 Gentoo Foundation
 
 if ever at_least scm ; then
-    SCM_REPOSITORY="${SCM_REPOSITORY:-git://github.com/phuang/${PN}.git}"
+    SCM_REPOSITORY="${SCM_REPOSITORY:=git://github.com/phuang/${PN}.git}"
     require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
     DOWNLOADS=""
-    EXTDEPENDS="
+    EXTRADEPENDS="
             dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
             >=sys-devel/gettext-0.16.1
     "
 else
-    DOWNLOADS="${DOWNLOADS:-"${HOMEPAGE}/files/${PNV}.tar.gz"}"
-    EXTDEPENDS="
+    DOWNLOADS="${DOWNLOADS:="${HOMEPAGE}/files/${PNV}.tar.gz"}"
+    EXTRADEPENDS="
             nls? ( >=sys-devel/gettext-0.16.1 )"
 fi
 
-export_exlib_phases src_prepare pkg_postinst pkg_postrm
+export_exlib_phases src_prepare
 
-NEED_PYTHON=2.5:=
-require python
+myexparam python_required
+if [[ $(exparam python_required) == "YES" ]] ; then
+    NEED_PYTHON=2.5:=
+    require python
+    export_exlib_phases src_prepare  pkg_postinst pkg_postrm
+fi
 
-SUMMARY="${SUMMARY:-"The ${PN/ibus-} engine(s) for IBus Framework"}"
+SUMMARY="${SUMMARY:-"The ${PN/ibus-} engine for IBus Framework"}"
 HOMEPAGE="http://ibus.googlecode.com"
 
 LICENCES="${LICENSE:-"GPL-2"}"
 SLOT="0"
 MYOPTIONS="nls"
 
-DEPENDENCIES+="
+DEPENDENCIES="
     build:
-        ${EXTDEPENDS}
+        ${EXTRADEPENDS}
         dev-util/pkg-config
     run:
         >=input-methods/ibus-1.1
@@ -49,8 +53,10 @@ ibus-engine_src_prepare() {
     fi
 
     # disable python byte compiling
-    rm py-compile
-    ln -s "$(type -P true)" py-compile
+    if [[ -f py-compile ]] ; then
+        rm py-compile || die "failed to rm py-compile"
+        ln -s "$(type -P true)" py-compile || die "failed to create fake py-compile script"
+    fi
 }
 
 ibus-engine_pkg_postinst() {

@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="git://github.com/acevery/${PN}.git"
-require ibus-engine
+require ibus-engine [ python_required=YES ]
 
 DESCRIPTION="
 IBus-Table is the IM Engine framework for table-based input methods,
@@ -15,7 +15,7 @@ LICENCES="LGPL-2.1"
 
 DEPENDENCIES+="
     build+run:
-        dev-lang/python[sqlite] [[ description = [ To convert various code tables ] ]]
+        dev-lang/python[sqlite] [[ note = [ To convert various code tables ] ]]
     post,suggested:
         input-methods/ibus-table-cangjie
         input-methods/ibus-table-erbi
