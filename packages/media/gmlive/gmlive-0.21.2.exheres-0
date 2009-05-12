@@ -18,15 +18,14 @@ MYOPTIONS="
     totem [[ description = [ Enable totem plugin support ] ]]
     nls"
 
-#media-plugins/gst-plugins-libmms
-#[[ description = [ Required for Microsoft Media Server (MMS) Protocol support ]
+# TODO:
+# totem needs mms support?
 DEPENDENCIES="
     build+run:
         gnome-bindings/gtkmm
         gnome-bindings/libglademm
         totem? (
-            >=gnome-desktop/totem-2.20
-            >=dev-lang/python-2.4:=
+            >=gnome-desktop/totem-2.20[python]
         )
     build:
         dev-util/intltool
@@ -43,6 +42,6 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'totem plugin' nls )
 
 src_prepare() {
     sed -i \
-        -e 's:channel.sopcast.com:channel.sopcast.cn:' \
+        -e 's:channel\.sopcast\.com:channel\.sopcast\.cn:' \
         src/MainWindow.cpp || die "sed failed"
 }
