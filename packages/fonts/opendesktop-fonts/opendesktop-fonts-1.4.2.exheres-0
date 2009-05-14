@@ -10,7 +10,7 @@ DOWNLOADS="mirror://gentoo/${PNV}.tar.gz"
 
 LICENCES="ARPHICPL"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
 FONT_CONFIG=(
     '69-odofonts.conf'

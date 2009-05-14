@@ -10,7 +10,7 @@ DOWNLOADS="mirror://debian/pool/main/t/${PN}/${PN}_${PV}.orig.tar.gz "
 
 LICENCES="ARPHICPL"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
 WORK=${WORKBASE}
 UPSTREAM_CHANGELOG="http://people.ubuntu.com/~arne/cjk-unifonts/uming/FONTLOG"
