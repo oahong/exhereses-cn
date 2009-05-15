@@ -32,8 +32,8 @@ DEFAULT_SRC_INSTALL_EXTRA_DOCS=( doc/cjkvinput.txt doc/pinyin.txt )
 
 fcitx_src_install() {
     default
-    ebegin "Removing empty directories"
-        rm -rf "${IMAGE}"/usr/share/${PN}/{xpm,doc}
+    ebegin "Removing unversoned documents"
+        rm -rf "${IMAGE}"/usr/share/${PN}/doc
     eend $? || die "failed to remove empty directories"
 }
 

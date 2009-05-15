@@ -14,7 +14,7 @@ src_unpack() {
 
 src_prepare() {
     mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt || die "failed to rename zhengma.txt"
-    expatch -p0 "${FILES}"/${PN}-zhengma.patch
+    expatch "${FILES}"/${PN}-add-zhengma-remove-crap.patch
 
     sed -i \
         -e "#AM_INIT#s#\(\([[:digit:]]\.*\)\+[-_]*\)[[:alnum:]]*#\1SVN-$(date +%y%m%d)#" \
