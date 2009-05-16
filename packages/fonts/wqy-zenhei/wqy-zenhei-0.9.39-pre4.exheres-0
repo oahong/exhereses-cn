@@ -8,7 +8,7 @@ require xfont multilib
 
 SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
 HOMEPAGE="http://wqy.sourceforge.net/cgi-bin/enindex.cgi?ZenHei(en)"
-DOWNLOADS="mirror://sourceforge/wqy/${PNV/_pre03/-March}.tar.bz2 -> ${PNV}.tar.bz2"
+DOWNLOADS="mirror://sourceforge/wqy/${PNV/pre4/April}.tar.bz2"
 
 LICENCES="GPL-2"
 SLOT="0"
