@@ -5,10 +5,9 @@
 
 require qmake4
 
-SUMMARY="International dictionary written using Qt4"
+SUMMARY="International dictionary written in Qt4"
 DESCRIPTION="
-QStarDict is a dictionary program written using Qt4.
-The user interface is similar to StarDict.
+Qstardict's user interface is similar to StarDict.
 Main features:
     * Full support of StarDict dictionaries
     * Working in system tray
@@ -30,11 +29,12 @@ DEPENDENCIES="
         x11-libs/libX11
         x11-libs/qt:4[X][dbus?]
         >=dev-libs/glib-2.0
-    build:
-        dev-util/pkg-config"
+"
 
 REMOTE_IDS="sourceforge:qstardict"
 UPSTREAM_CHANGELOG="http://qstardict.ylsoftware.com/changelog.php"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-gcc-4.4.patch )
 
 src_configure() {
     ! option dbus && myoptions+=" NO_DBUS=1"
