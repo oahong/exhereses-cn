@@ -1,0 +1,27 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
+
+SUMMARY="A commandline Version of Ruijie authentication client"
+HOMEPAGE="http://ruijieclient.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/ruijieclient-0.1.tar.gz"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/libpcap
+        net-libs/libnet
+        dev-libs/openssl
+        dev-libs/libxml2
+"
+
+BUGS_TO="oahong@gmail.com"
+UPSTREAM_DOCUMENTATIONS="
+http://code.google.com/p/ruijieclient/wiki/InstallAndConfigure"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-as-needed.patch )
