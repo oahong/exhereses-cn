@@ -21,7 +21,7 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
-UPSTREAM_DOCUMENTATIONS="
+UPSTREAM_DOCUMENTATION="
 http://code.google.com/p/ruijieclient/wiki/InstallAndConfigure"
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-as-needed.patch )
