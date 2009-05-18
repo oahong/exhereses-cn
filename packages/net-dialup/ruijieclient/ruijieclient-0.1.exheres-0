@@ -25,3 +25,10 @@ UPSTREAM_DOCUMENTATION="
 http://code.google.com/p/ruijieclient/wiki/InstallAndConfigure"
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-as-needed.patch )
+
+src_install() {
+    default
+    rm -rf "${IMAGE}"/usr/share/doc/${PN} || die "failed to remove redundant document"
+    insinto /etc
+    doins "${FILES}"/ruijie.conf
+}
