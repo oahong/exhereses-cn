@@ -27,7 +27,7 @@ DEPENDENCIES="
     "
 BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-xft )
+DEFAULT_SRC_CONFIGURE_PARAMS=( '--enable-xft' '--enable-tray' )
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( doc/cjkvinput.txt doc/pinyin.txt )
 
 fcitx_src_install() {
