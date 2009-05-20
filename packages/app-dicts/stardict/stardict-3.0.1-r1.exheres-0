@@ -23,20 +23,20 @@ MYOPTIONS="gnome spell" # gucharmap
 DEPENDENCIES="
     build+run:
         gnome? (
-            >=gnome-platform/libbonobo-2.2.0
-            >=gnome-platform/libgnome-2.2.0
-            >=gnome-platform/libgnomeui-2.2.0
-            >=gnome-platform/GConf-2
-            >=gnome-platform/ORBit2-2.6
+            gnome-platform/libbonobo[>=2.2.0]
+            gnome-platform/libgnome[>=2.2.0]
+            gnome-platform/libgnomeui[>=2.2.0]
+            gnome-platform/GConf
+            gnome-platform/ORBit2[>=2.6]
             app-text/scrollkeeper-dtd
             app-text/rarian
         )
         dev-cpp/libsigc++:2
         spell? ( app-spell/enchant )
-        >=x11-libs/gtk+-2.12
+        x11-libs/gtk+[>=2.12]
         x11-libs/libX11
     build:
-        >=dev-util/intltool-0.22
+        dev-util/intltool[>=0.22]
         dev-util/pkg-config
 "
 # FIXME:

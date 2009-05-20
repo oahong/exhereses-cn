@@ -1,6 +1,6 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'linux-fetion-0.8.1.ebuild' from Gentoo China Overlay, which is:
+# Based in part upon 'linux-fetion-0.8.1.ebuild', which is:
 #     Copyright 1999-2008 Gentoo Foundation
 
 require qmake4
@@ -30,7 +30,9 @@ linux-fetion_src_prepare() {
             ${PN}.pro || die "sed failed"
     fi
     sed -i \
-        -e 's:;Network:;Network;:' misc/LibFetion.desktop || die "failed to fix desktop entry"
+        -e 's/;Network/&;/' misc/LibFetion.desktop || die "failed to fix desktop entry"
+
+    rm -rf $(find "${WORK}" -name .svn) || die "failed to remove .svn directories"
 }
 
 linux-fetion_src_install() {

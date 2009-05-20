@@ -23,8 +23,8 @@ MYOPTIONS="
 DEPENDENCIES="
     build+run:
         x11-libs/libXt
-        >=dev-lang/python-2.5:=[sqlite]
-        >=gnome-bindings/pygtk-2.10.1
+        dev-lang/python:=[>=2.5][sqlite]
+        gnome-bindings/pygtk[>=2.10.1]
         input-methods/scim
     build:
         dev-util/pkg-config

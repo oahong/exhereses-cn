@@ -13,7 +13,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-libs/glib
-        >=net-im/pidgin-2.3.1[ssl]
+        net-im/pidgin[>=2.3.1][ssl]
     build:
         dev-util/pkg-config
 "

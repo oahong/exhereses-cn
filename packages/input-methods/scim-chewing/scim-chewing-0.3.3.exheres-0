@@ -12,8 +12,8 @@ MYOPTIONS="debug"
 
 DEPENDENCIES="
     build+run:
-        >=input-methods/scim-1.0
-        >=cjk/libchewing-0.3.2
+        input-methods/scim[>=1.0]
+        cjk/libchewing[>=0.3.2]
     build:
         sys-devel/gettext
         dev-util/pkg-config

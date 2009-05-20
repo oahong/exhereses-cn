@@ -15,7 +15,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        >=dev-lang/python-2.5:=[sqlite]
+        dev-lang/python:=[>=2.5][sqlite]
         input-methods/scim-python[xingma]
         "
 

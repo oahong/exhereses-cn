@@ -34,17 +34,17 @@ DEPENDENCIES="
         x11-libs/libX11
         sys-apps/dbus
         dev-libs/dbus-glib
-        >=dev-libs/glib-2.18
+        dev-libs/glib[>=2.18]
         qt4? ( x11-libs/qt:4[dbus] )
-        >=gnome-platform/GConf-2.12
+        gnome-platform/GConf[>=2.12]
     build:
         dev-util/intltool
         dev-util/pkg-config
     run:
         app-text/iso-codes
         gnome-desktop/librsvg [[ description = [ to display svg icons ] ]]
-        >=gnome-bindings/pygtk-2.12.1
-        >=dev-python/dbus-python-0.83.0
+        gnome-bindings/pygtk[>=2.12.1]
+        dev-python/dbus-python[>=0.83.0]
         dev-python/pyxdg
         x11-apps/notification-daemon
     post,suggested:

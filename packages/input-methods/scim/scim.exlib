@@ -16,17 +16,17 @@ SLOT="0"
 MYOPTIONS="debug doc nls"
 
 DEPENDENCIES="
-    build:
-        dev-util/pkg-config
-        >=dev-util/intltool-0.33
-        nls? ( sys-devel/gettext )
     build+run:
         dev-lang/perl
         dev-libs/atk
         x11-libs/libX11
-        >=x11-libs/gtk+-2.4
-        >=x11-libs/pango-1.1
-    "
+        x11-libs/gtk+[>=2.4]
+        x11-libs/pango[>=1.1]
+     build:
+        dev-util/pkg-config
+        dev-util/intltool[>=0.33]
+        nls? ( sys-devel/gettext )
+   "
 
 REMOTE_IDS="sourceforge:scim"
 UPSTREAM_DOCUMENTATOIN="

@@ -9,5 +9,6 @@ PLATFORMS=""
 
 src_install() {
     linux-fetion_src_install
-    rm -rf $(find "${IMAGE}" -name .svn) || die "failed to remove .svn directories"
+    insinto /usr/share/libfetion
+    doins -r skin1 faces_image
 }

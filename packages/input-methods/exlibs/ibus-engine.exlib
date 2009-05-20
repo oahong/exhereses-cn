@@ -9,12 +9,12 @@ if ever at_least scm ; then
     DOWNLOADS=""
     EXTRADEPENDS="
             dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
-            >=sys-devel/gettext-0.16.1
+            sys-devel/gettext[>=0.16.1]
     "
 else
     DOWNLOADS="${DOWNLOADS:="${HOMEPAGE}/files/${PNV}.tar.gz"}"
     EXTRADEPENDS="
-            nls? ( >=sys-devel/gettext-0.16.1 )"
+            nls? ( sys-devel/gettext[>=0.16.1] )"
 fi
 
 export_exlib_phases src_prepare
@@ -38,7 +38,7 @@ DEPENDENCIES="
         ${EXTRADEPENDS}
         dev-util/pkg-config
     run:
-        >=input-methods/ibus-1.1
+        input-methods/ibus[>=1.1]
     "
 
 BUGS_TO="http://code.google.com/p/ibus/issues/list oahong@gmail.com"

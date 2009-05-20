@@ -23,7 +23,7 @@ DEPENDENCIES="
         x11-libs/libXrandr
         x11-libs/libXinerama
         media-libs/imlib2
-        >=dev-libs/glib-2.0
+        dev-libs/glib:2
     build:
         dev-util/pkg-config
 "

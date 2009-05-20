@@ -10,8 +10,8 @@ PLATFORMS=""
 DEPENDENCIES+="
     build:
         dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
-        >=sys-devel/gettext-0.16.1
-        >=dev-doc/gtk-doc-1.9
+        sys-devel/gettext[>=0.16.1]
+        dev-doc/gtk-doc[>=1.9]
 "
 
 src_prepare() {

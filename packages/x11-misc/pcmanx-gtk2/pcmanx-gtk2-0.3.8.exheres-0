@@ -26,8 +26,8 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build+run:
-        >=dev-libs/glib-2.4
-        >=x11-libs/gtk+-2.4
+        dev-libs/glib[>=2.4]
+        x11-libs/gtk+[>=2.4]
         media-libs/freetype:2
         x11-libs/libXft
         libnotify? ( x11-libs/libnotify )
