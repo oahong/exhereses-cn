@@ -41,6 +41,7 @@ BUGS_TO="xihels@gmail.com oahong@gmail.com"
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'totem plugin' nls )
 
 src_prepare() {
+    echo "data/gmlive.desktop.in" >> po/POTFILES.in || die
     sed -i \
         -e 's:channel\.sopcast\.com:channel\.sopcast\.cn:' \
         src/MainWindow.cpp || die "sed failed"
