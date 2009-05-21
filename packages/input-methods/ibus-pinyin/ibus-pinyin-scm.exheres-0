@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ python_required=YES ]
+require ibus-engine [ python_required=yes ]
 
 PINYIN_DB="pinyin-database-0.1.10.6.tar.bz2"
 SUMMARY="Chinese PinYin IMEngine for IBus Framework"

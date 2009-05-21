@@ -19,10 +19,9 @@ fi
 
 export_exlib_phases src_prepare
 
-myexparam python_required
-if [[ $(exparam python_required) == "YES" ]] ; then
-    NEED_PYTHON=2.5:=
-    require python
+myexparam python_required=no
+if [[ "$(exparam python_required)" == "yes" ]] ; then
+    require python [ python_dep=2.5 ]
     export_exlib_phases src_prepare  pkg_postinst pkg_postrm
 fi
 

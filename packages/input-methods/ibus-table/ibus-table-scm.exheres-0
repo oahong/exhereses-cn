@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="git://github.com/acevery/${PN}.git"
-require ibus-engine [ python_required=YES ]
+require ibus-engine [ python_required=yes ]
 
 DESCRIPTION="
 IBus-Table is the IM Engine framework for table-based input methods,

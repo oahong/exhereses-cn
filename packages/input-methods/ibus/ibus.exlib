@@ -3,8 +3,7 @@
 # Based in part upon 'ibus-1.1.0.20090211.ebuild' from Gentoo, which is:
 #    Copyright 1999-2009 Gentoo Foundation
 
-NEED_PYTHON=2.5:=
-require python
+require python [ python_dep=2.5 ]
 
 export_exlib_phases src_prepare src_install pkg_postinst pkg_postrm
 
