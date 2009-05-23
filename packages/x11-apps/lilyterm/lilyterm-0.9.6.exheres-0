@@ -1,0 +1,35 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
+
+SUMMARY="A light and easy to use libvte based X Terminal Emulator"
+HOMEPAGE="http://lilyterm.luna.com.tw"
+DOWNLOADS="${HOMEPAGE}/lilyterm-0.9.6.tar.gz"
+
+LICENCES="BSD-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="nls"
+
+DEPENDENCIES="
+    build+run:
+        x11-libs/gtk+:2[>=2.10]
+        dev-libs/glib:2[>=2.14]
+        dev-libs/vte[>=0.13]
+    build:
+        dev-perl/XML-Parser
+        dev-util/intltool
+        nls? ( sys-devel/gettext )
+"
+
+BUGS_TO="oahong@gmail.com"
+
+src_prepare() {
+    sed -i \
+        -e '/examplesdir/s/\$(PACKAGE)/&-\$(VERSION)/' \
+        ${WORK}/data/Makefile.am || die "sed failed"
+
+    intltoolize --automake --copy --force || die "failed to run intltoolize"
+    autotools_src_prepare
+}
