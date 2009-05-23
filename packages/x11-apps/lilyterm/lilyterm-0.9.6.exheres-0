@@ -24,6 +24,11 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="sourceforge:lilyterm"
+UPSTREAM_CHANGELOG="${HOMEPAGE}/ChangeLog"
+UPSTREAM_DOCUMENTATION="
+${HOMEPAGE}/tips.html [[ lang = zh_TW ]]
+${HOMEPAGE}/rcfile.html [[ lang = zh_TW ]]"
 
 src_prepare() {
     sed -i \
