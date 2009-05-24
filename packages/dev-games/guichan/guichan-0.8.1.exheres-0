@@ -1,0 +1,31 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="A portable C++ GUI library designed for games using Allegro, HGE, OpenGL, OpenLayer and/or SDL"
+HOMEPAGE="http://guichan.sourceforge.net"
+DOWNLOADS="http://guichan.googlecode.com/files/${PNV}.tar.gz"
+
+LICENCES="BSD"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="opengl sdl allegro"
+
+DEPENDENCIES="
+    build+run:
+        allegro? ( dev-games/allegro )
+        opengl? ( x11-dri/mesa )
+        sdl? (
+            media-libs/SDL
+            media-libs/SDL_image
+        )
+"
+
+REMOTE_IDS="sourceforge:guichan"
+UPSTREAM_CHANGELOG="http://guichan.sourceforge.net/wiki/index.php/Change_log"
+
+DEFAULT_SRC_CONFIGURE_ENABLE_OPTIONS=(
+    allegro
+    opengl
+    'sdl sdl'
+    'sdl sdlimage'
+)
