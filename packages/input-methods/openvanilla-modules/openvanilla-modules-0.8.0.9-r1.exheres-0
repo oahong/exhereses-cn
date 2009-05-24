@@ -9,7 +9,7 @@ SUMMARY="Input method modules and tables for OpenVanilla Input Method Framework"
 HOMEPAGE="http://openvanilla.org http://ucimf.googlecode.com"
 DOWNLOADS="http://ucimf.googlecode.com/files/${MY_PNV}.tar.gz"
 
-LICENCES="BSD"
+LICENCES="BSD-3"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS="
