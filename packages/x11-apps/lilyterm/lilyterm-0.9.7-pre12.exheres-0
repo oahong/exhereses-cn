@@ -5,7 +5,7 @@ require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
 SUMMARY="A light and easy to use libvte based X Terminal Emulator"
 HOMEPAGE="http://lilyterm.luna.com.tw"
-DOWNLOADS="${HOMEPAGE}/lilyterm-0.9.6.tar.gz"
+DOWNLOADS="http://debian.luna.com.tw/debian/${PN}_$(ever replace 3 '~')-1.tar.gz"
 
 LICENCES="BSD-2"
 SLOT="0"
@@ -23,6 +23,8 @@ DEPENDENCIES="
         nls? ( sys-devel/gettext )
 "
 
+WORK=${WORKBASE}/${PNV/-pre*}
+
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:lilyterm"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/ChangeLog"
@@ -32,7 +34,7 @@ ${HOMEPAGE}/rcfile.html [[ lang = zh_TW ]]"
 
 src_prepare() {
     sed -i \
-        -e '/examplesdir/s/\$(PACKAGE)/&-\$(VERSION)/' \
+        -e '/examplesdir/s/\$(PACKAGE)/&-\${PV}/' \
         ${WORK}/data/Makefile.am || die "sed failed"
 
     intltoolize --automake --copy --force || die "failed to run intltoolize"
