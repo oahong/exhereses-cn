@@ -5,7 +5,7 @@ SUMMARY="A portable C++ GUI library designed for games using Allegro, HGE, OpenG
 HOMEPAGE="http://guichan.sourceforge.net"
 DOWNLOADS="http://guichan.googlecode.com/files/${PNV}.tar.gz"
 
-LICENCES="BSD"
+LICENCES="BSD-3"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS="opengl sdl allegro"
