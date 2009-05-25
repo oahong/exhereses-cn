@@ -4,9 +4,10 @@
 SCM_REPOSITORY="git://gitorious.org/tmw/mainline.git"
 require multilib cmake scm-git
 
+TMUSIC="tmwmusic-0.2"
 SUMMARY="The Mana World"
 HOMEPAGE="http://www.tmw.org"
-DOWNLOADS=""
+DOWNLOADS="mirror://sourceforge/themanaworld/${TMUSIC}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -34,17 +35,28 @@ DEPENDENCIES="
     "
 #    run:
 #        >=fonts/wqy-zenhei-0.8.38
-#CMAKE_SRC_CONFIGURE_OPTION=(
-#    'tmw TMWSERV_SUPPORT'
-#)
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=( opengl )
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( nls )
+
+src_unpack() {
+    scm_src_unpack
+    unpack ${ARCHIVES}
+}
+
+src_prepare() {
+    sed -i \
+        -e '/Exec/s/tmw/&-ea/' \
+        tmw.desktop || die "failed to fix desktop entry"
+}
 
 src_install() {
     cmake_src_install
 
-    fontdir="/usr/share/tmw/data/fonts"
+    datadir="/usr/share/${PN}/data"
+    insinto ${datadir}/..
+    doins -r "${WORKBASE}"/${TMUSIC}/data
+
     rm -f "${IMAGE}"/${fontdir}/dejavusans/*.ttf || die
-    dosym /usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans.ttf ${fontdir}/dejavusans.ttf
-    dosym /usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans-Bold.ttf ${fontdir}/dejavusans-bold.ttf
+    dosym /usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans.ttf ${datadir}/fonts/dejavusans.ttf
+    dosym /usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans-Bold.ttf ${datadir}/fonts/dejavusans-bold.ttf
 }
