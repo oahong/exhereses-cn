@@ -1,0 +1,32 @@
+--- physfs-2.0.0/CMakeLists.txt.orig	2009-05-25 22:15:47.220337452 +0800
++++ physfs-2.0.0/CMakeLists.txt	2009-05-25 22:15:34.349587565 +0800
+@@ -339,12 +339,15 @@
+         ARCHIVE DESTINATION lib)
+ INSTALL(FILES physfs.h DESTINATION include)
+ 
+-FIND_PACKAGE(Doxygen)
+-IF(DOXYGEN_FOUND)
+-    ADD_CUSTOM_TARGET(docs ${DOXYGEN_EXECUTABLE} COMMENT "Building documentation")
+-ELSE(DOXYGEN_FOUND)
+-    MESSAGE(STATUS "Doxygen not found. You won't be able to build documentation.")
+-ENDIF(DOXYGEN_FOUND)
++OPTION(PHYSFS_BUILD_DOCS "Building Documentation." FALSE)
++IF(PHYSFS_BUILD_DOCS)
++    FIND_PACKAGE(Doxygen)
++    IF(DOXYGEN_FOUND)
++        ADD_CUSTOM_TARGET(docs ${DOXYGEN_EXECUTABLE} COMMENT "Building documentation")
++    ELSE(DOXYGEN_FOUND)
++        MESSAGE(STATUS "Doxygen not found. You won't be able to build documentation.")
++    ENDIF(DOXYGEN_FOUND)
++ENDIF(PHYSFS_BUILD_DOCS)    
+ 
+ IF(UNIX)
+     ADD_CUSTOM_TARGET(dist ./extras/makedist.sh ${PHYSFS_VERSION} COMMENT "Building source tarball")
+@@ -370,6 +373,7 @@
+ MESSAGE_BOOL_OPTION("Thread safety" PHYSFS_HAVE_THREAD_SUPPORT)
+ MESSAGE_BOOL_OPTION("Build own zlib" PHYSFS_INTERNAL_ZLIB)
+ MESSAGE_BOOL_OPTION("Build static library" PHYSFS_BUILD_STATIC)
++MESSAGE_BOOL_OPTION("Build documentation" PHYSFS_BUILD_DOCS)
+ MESSAGE_BOOL_OPTION("Build shared library" PHYSFS_BUILD_SHARED)
+ MESSAGE_BOOL_OPTION("Build wxWidgets test program" PHYSFS_BUILD_WX_TEST)
+ MESSAGE_BOOL_OPTION("Build stdio test program" PHYSFS_BUILD_TEST)
