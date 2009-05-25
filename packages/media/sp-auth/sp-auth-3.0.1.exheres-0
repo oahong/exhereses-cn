@@ -26,7 +26,8 @@ src_install() {
     exeinto /opt/${PN}
     doexe sp-sc-auth
     insinto /opt/${PN}
-    doins ../usr/lib/libstdc++.so.5
+    doins ../usr/lib/libstdc++.so.5.0.1
+    dosym /opt/${PN}/libstdc++.so{.5.0.1,.5}
     dodoc Readme
 
     herebin sp-sc-auth << EOF
