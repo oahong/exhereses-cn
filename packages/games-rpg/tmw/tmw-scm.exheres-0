@@ -1,0 +1,50 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://gitorious.org/tmw/mainline.git"
+require multilib cmake scm-git
+
+SUMMARY="The Mana World"
+HOMEPAGE="http://www.tmw.org"
+DOWNLOADS=""
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS=""
+MYOPTIONS="opengl nls tmw"
+
+#TODO: tmw-sound support
+DEPENDENCIES="
+    build+run:
+        net-misc/curl
+        dev-libs/libxml2
+        dev-games/guichan[opengl?]
+        dev-games/physfs
+        net-libs/enet
+        media-libs/SDL_net
+        media-libs/SDL
+        media-libs/SDL_image
+        media-libs/SDL_ttf
+        media-libs/SDL_mixer[ogg]
+        media-libs/libpng
+    build:
+        nls? ( sys-devel/gettext )
+    run:
+        fonts/dejavu
+    "
+#    run:
+#        >=fonts/wqy-zenhei-0.8.38
+#CMAKE_SRC_CONFIGURE_OPTION=(
+#    'tmw TMWSERV_SUPPORT'
+#)
+CMAKE_SRC_CONFIGURE_OPTION_WITHS=( opengl )
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( nls )
+
+src_install() {
+    cmake_src_install
+
+    fontdir="/usr/share/tmw/data/fonts"
+    rm -f "${IMAGE}"/${fontdir}/dejavusans/*.ttf || die
+    dosym /usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans.ttf ${fontdir}/dejavusans.ttf
+    dosym /usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans-Bold.ttf ${fontdir}/dejavusans-bold.ttf
+}
