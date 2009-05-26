@@ -6,9 +6,9 @@ require xfont multilib
 
 SUMMARY="Micro Hei is a new Sans Serif CJK font derived from Google \"Droid Sans Fallback\""
 HOMEPAGE="http://wenq.org/index.cgi?Fontopia(cn)#fontid=droid&stage=2"
-DOWNLOADS="http://oahong.googlepages.com/${PNV}.tar.gz"
+DOWNLOADS="mirror://sourceforge/wqy/wqy-microhei-0.2.0-beta.tar.gz"
 
-LICENCES="GPL-2"
+LICENCES="GPL-3 Apache-2.0"
 SLOT="0"
 PLATFORMS="~x86"
 
@@ -17,6 +17,6 @@ WORK=${WORKBASE}/${PN}
 src_install() {
     emagicdocs
     insinto /usr/$(get_libdir)/X11/fonts/${FONT}
-    doins ${PN}.ttf
+    doins ${PN}.ttc
     fix_fonts
 }
