@@ -4,14 +4,16 @@
 FONT=${PN%%-*}
 require xfont multilib
 
-SUMMARY="Micro Hei is a new Sans Serif CJK font derived from Google \"Droid Sans Fallback\""
-HOMEPAGE="http://wenq.org/index.cgi?Fontopia(cn)#fontid=droid&stage=2"
+SUMMARY="Sans-Serif style high quality CJK outline font derived from \"Droid Sans Fallback\""
+HOMEPAGE="http://wenq.org/enindex.cgi?action=browse&id=MicroHei(en)"
 DOWNLOADS="mirror://sourceforge/wqy/wqy-microhei-0.2.0-beta.tar.gz"
 
-LICENCES="GPL-3 Apache-2.0"
+LICENCES="|| ( GPL-3 Apache-2.0 )"
 SLOT="0"
 PLATFORMS="~x86"
 
+UPSTREAM_CHANGELOG="http://wenq.org/enindex.cgi?MicroHei_BigBang_ChangeLog"
+UPSTREAM_RELEASE_NOTES="http://wenq.org/enindex.cgi?MicroHei_BigBang_README"
 WORK=${WORKBASE}/${PN}
 
 src_install() {
