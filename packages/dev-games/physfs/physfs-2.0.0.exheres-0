@@ -7,14 +7,14 @@ SUMMARY="a portable, flexible file i/o abstraction library for video games"
 HOMEPAGE="http://icculus.org/physfs"
 DOWNLOADS="${HOMEPAGE}/downloads/${PNV}.tar.gz"
 
-LICENCES="zlib"
+LICENCES="as-is LGPL-2.1 [[ description = [ for its internal copy of lzma ] ]]"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS="doc"
 
 DEPENDENCIES="
     build:
-       doc? ( app-doc/doxygen )
+        doc? ( app-doc/doxygen )
     build+run:
         sys-libs/zlib
 "
@@ -29,7 +29,21 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
 )
 CMAKE_SRC_CONFIGURE_OPTIONS=( 'doc PHYSFS_BUILD_DOCS' )
 
-#FIXME:
 pkg_setup() {
     append-flags "-fno-strict-aliasing"
+}
+
+src_compile() {
+    cmake_src_compile
+    if option doc ; then
+        doxygen || die "doxygen failed"
+    fi
+}
+
+src_install() {
+    cmake_src_install
+    if option doc ; then
+        docinto html
+        dodoc "${WORK}"/docs/html/*
+    fi
 }
