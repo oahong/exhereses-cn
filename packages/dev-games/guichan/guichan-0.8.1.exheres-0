@@ -12,7 +12,7 @@ MYOPTIONS="opengl sdl allegro"
 
 DEPENDENCIES="
     build+run:
-        allegro? ( dev-games/allegro )
+        allegro? ( media-libs/allegro )
         opengl? ( x11-dri/mesa )
         sdl? (
             media-libs/SDL
