@@ -1,0 +1,54 @@
+Source: written by oahong
+Upstream: No.
+Reason: fix QT_IM_DIR and icon path
+--- gcin-1.4.6.pre8/configure.orig	2009-05-29 20:31:34.138723068 +0800
++++ gcin-1.4.6.pre8/configure	2009-05-29 20:31:22.893957286 +0800
+@@ -145,9 +145,9 @@
+ fi
+ 
+ QT_IM='N'
+-QT_IM_DIR=/usr/lib/qt3/plugins/lib/inputmethods
++QT_IM_DIR=/usr/$LIB/qt3/plugins/inputmethods
+ echo "testing if you have qt3 support"
+-if [ -d  $QT_IM_DIR ]; then
++if [ -d  $QT_IM_DIR ] && [[ $qt3_im = "Y" ]]; then
+   QT_IM='Y'
+ fi
+ 
+@@ -164,7 +164,7 @@
+ 
+ 
+ QT4_IM='N'
+-QT4_IM_DIR=/usr/lib/qt4/plugins/lib/inputmethods
++QT4_IM_DIR=/usr/$LIB/qt4/plugins/inputmethods
+ echo "testing if you have qt4 support"
+ if [ -d  $QT4_IM_DIR ]; then
+   QT4_IM='Y'
+@@ -214,10 +214,10 @@
+ fi
+ 
+ 
+-OPTFLAGS="-g"
+-if [ $prefix = /usr ]; then
+-  OPTFLAGS="-O"
+-fi
++OPTFLAGS=""
++#if [ $prefix = /usr ]; then
++#  OPTFLAGS="-O"
++#fi
+ 
+ 
+ echo "CC=gcc" > config.mak
+@@ -244,9 +244,9 @@
+ echo "OPTFLAGS=$OPTFLAGS" >> config.mak
+ echo "DOC_DIR=\$(datadir_r)/doc/gcin-$GCIN_VERSION" >> config.mak
+ echo "DOC_DIR_i=\$(datadir)/doc/gcin-$GCIN_VERSION" >> config.mak
+-echo "GCIN_ICON_DIR=\$(datadir_r)/icons/gcin" >> config.mak
+-echo "SYS_ICON_DIR=\$(datadir_r)/icons" >> config.mak
+-echo "GCIN_ICON_DIR_i=\$(datadir)/icons/gcin" >> config.mak
++echo "GCIN_ICON_DIR=\$(datadir_r)/pixmaps/gcin" >> config.mak
++echo "SYS_ICON_DIR=\$(datadir_r)/pixmaps" >> config.mak
++echo "GCIN_ICON_DIR_i=\$(datadir)/pixmaps/gcin" >> config.mak
+ echo "GCIN_BIN_DIR=\$(bindir_r)" >> config.mak
+ echo "FREEBSD=$FREEBSD" >> config.mak
+ echo "QT_IM=$QT_IM" >> config.mak
