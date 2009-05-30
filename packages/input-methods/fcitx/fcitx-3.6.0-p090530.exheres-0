@@ -4,7 +4,7 @@
 require fcitx
 
 MY_PNV=${PNV/p/}
-DOWNLOADS="http://gentoo-china-overlay.googlecode.com/files/${MY_PNV}.tar.gz"
+DOWNLOADS="listed-only: http://exherbo-cn.googlecode.com/files/${MY_PNV}.tar.gz"
 PLATFORMS="~x86"
 
 WORK=${WORKBASE}/${MY_PNV}
