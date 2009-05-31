@@ -1,14 +1,27 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'fvwm-2.5.26.ebuild', which is
+#    Copyright 1999-2009 Gentoo Foundation
+# $Header: /var/cvsroot/gentoo-x86/x11-wm/fvwm/fvwm-2.5.26.ebuild,v 1.2 2009/01/09 15:06:36 remi Exp $
 
+require flag-o-matic
+
+FVWMICONS="fvwm_icons-20070101"
 SUMMARY="F? Virtual Window Manager"
 HOMEPAGE="http://www.fvwm.org"
-DOWNLOADS="listed-only: ftp://ftp.fvwm.org/pub/fvwm/version-$(ever major)/${PNV}.tar.bz2"
+DOWNLOADS="listed-only: (
+    ftp://ftp.fvwm.org/pub/fvwm/version-$(ever major)/${PNV}.tar.bz2
+    extra? (
+        ${HOMEPAGE}/generated/icon_download/${FVWMICONS}.tar.bz2
+        ${HOMEPAGE}/generated/sounds_download/fvwm_sounds.tgz
+    )
+)"
 
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="bidi doc nls stroke svg xinerama"
+MYOPTIONS="bidi doc nls stroke svg xinerama
+    extra [[ description = [ Install extra fvwm mini icons and sound files ] ]]"
 
 DEPENDENCIES="
     build+run:
@@ -34,26 +47,29 @@ DEPENDENCIES="
         media-libs/libpng[>=1.0.4]
         bidi? ( dev-libs/fribidi[>=0.10.4] )
         stroke? ( dev-libs/libstroke[>=0.5.1] )
-        dev-lang/perl[>=5.004]
     build:
         x11-proto/xproto
         x11-proto/renderproto
         x11-proto/xextproto
         nls? ( sys-devel/gettext )
         doc? (
+            dev-lang/perl[>=5.004]
             dev-libs/libxslt
         )
         dev-util/pkg-config"
 
-BUGS_TO="oahong@gmail.com http://www.fvwm.org/cgi-bin/fvwm-bug"
+BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freshmeat:FVWM"
 UPSTREAM_RELEASE_NOTES="http://www.fvwm.org/news/#2.5.27"
 
+IMAGEPATH="/usr/share/icons/fvwm:/usr/share/pixmaps:/usr/include/X11/bitmaps"
 DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --disable-gtk   # disable gtk-1/gnome support
+    --disable-perllib
+    --without-gnome
     --without-rplay-library
-    --disable-gtk   # no gtk-1 support
     --enable-command-log
-    --enable-debug-msgs
+    --with-imagepath="${IMAGEPATH}"
 )
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
@@ -62,11 +78,25 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'stroke stroke-library' )
 
+src_configure() {
+    filter-ldflags '-Wl,--as-needed'
+    export FVWM_BUGADDR="${BUGS_TO}"
+    default
+}
+
 src_install() {
     default
+    if option extra ; then
+        insinto /usr/share/icons/${PN}
+        doins "${WORKBASE}"/${FVWMICONS}/*
+        insinto /usr/share/sounds/${PN}
+        doins "${WORKBASE}"/*.au
+    fi
+
     if ! option doc ; then
         rm -rf "${IMAGE}"/usr/share/doc/${PN} || die "rm empty dirs failed"
     fi
+    find "${IMAGE}" -name '*FvwmGtkDebug*' -name '*perllib*' -delete || die "rm craps failed"
 
     insinto /etc/X11/Sessions
     hereins fvwm << EOF
