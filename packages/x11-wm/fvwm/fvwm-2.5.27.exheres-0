@@ -8,13 +8,13 @@ DOWNLOADS="listed-only: ftp://ftp.fvwm.org/pub/fvwm/version-$(ever major)/${PNV}
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="bidi doc nls svg xinerama"
+MYOPTIONS="bidi doc nls stroke svg xinerama"
 
 DEPENDENCIES="
     build+run:
-        x11-libs/libX11
         x11-libs/libSM
         x11-libs/libICE
+        x11-libs/libX11
         x11-libs/libXext
         xinerama? (
             x11-libs/libXinerama
@@ -26,12 +26,14 @@ DEPENDENCIES="
             x11-libs/cairo[svg?]
         )
         x11-libs/libXpm[>=3.4]
+        x11-libs/libXcursor
+        x11-libs/libXrender
         x11-libs/libXft
         media-libs/freetype:2[>=2.0.6]
         media-libs/fontconfig[>=1.0.1]
         media-libs/libpng[>=1.0.4]
-        x11-libs/libXrender
         bidi? ( dev-libs/fribidi[>=0.10.4] )
+        stroke? ( dev-libs/libstroke[>=0.5.1] )
         dev-lang/perl[>=5.004]
     build:
         x11-proto/xproto
@@ -39,7 +41,6 @@ DEPENDENCIES="
         x11-proto/xextproto
         nls? ( sys-devel/gettext )
         doc? (
-            sys-apps/sed
             dev-libs/libxslt
         )
         dev-util/pkg-config"
@@ -49,8 +50,7 @@ REMOTE_IDS="freshmeat:FVWM"
 UPSTREAM_RELEASE_NOTES="http://www.fvwm.org/news/#2.5.27"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-    --disable-rplay # missing deps for those two
-    --disable-stroke
+    --without-rplay-library
     --disable-gtk   # no gtk-1 support
     --enable-command-log
     --enable-debug-msgs
@@ -60,11 +60,12 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'doc htmldoc' 'doc mandoc' 'svg rsvg'
     xinerama nls bidi
 )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'stroke stroke-library' )
 
 src_install() {
     default
     if ! option doc ; then
-        rm -rf "${IMAGE}"/usr/share/doc/${PN} || die "rm failed"
+        rm -rf "${IMAGE}"/usr/share/doc/${PN} || die "rm empty dirs failed"
     fi
 
     insinto /etc/X11/Sessions
