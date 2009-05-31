@@ -1,14 +1,13 @@
-
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
 
 SUMMARY="F? Virtual Window Manager"
-DESCRIPTION="
-"
 HOMEPAGE="http://www.fvwm.org"
-DOWNLOADS="ftp://ftp.fvwm.org/pub/fvwm/version-$(ever major)/${PNV}.tar.bz2"
+DOWNLOADS="listed-only: ftp://ftp.fvwm.org/pub/fvwm/version-$(ever major)/${PNV}.tar.bz2"
 
-LICENCES=""
+LICENCES="GPL-2"
 SLOT="0"
-PLATFORMS=""
+PLATFORMS="~x86"
 MYOPTIONS="bidi doc nls svg xinerama"
 
 DEPENDENCIES="
@@ -19,7 +18,8 @@ DEPENDENCIES="
         x11-libs/libXext
         xinerama? (
             x11-libs/libXinerama
-            build: x11-proto/xineramaproto
+            build:
+                x11-proto/xineramaproto
         )
         svg? (
             gnome-desktop/librsvg[>=2.13.92]
@@ -44,19 +44,21 @@ DEPENDENCIES="
         )
         dev-util/pkg-config"
 
-BUGS_TO="oahong@gmail.com"
+BUGS_TO="oahong@gmail.com http://www.fvwm.org/cgi-bin/fvwm-bug"
+REMOTE_IDS="freshmeat:FVWM"
+UPSTREAM_RELEASE_NOTES="http://www.fvwm.org/news/#2.5.27"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-    --disable-rplay
+    --disable-rplay # missing deps for those two
     --disable-stroke
-    --disable-gtk # no gtk-1 support
+    --disable-gtk   # no gtk-1 support
     --enable-command-log
     --enable-debug-msgs
 )
-# GDK_IMLIB
-DEFAULT_SRC_CONFIGURE_OPTIONS_ENABLES=(
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'doc htmldoc' 'doc mandoc' 'svg rsvg'
-    xinerama nls xft bidi
+    xinerama nls bidi
 )
 
 src_install() {
