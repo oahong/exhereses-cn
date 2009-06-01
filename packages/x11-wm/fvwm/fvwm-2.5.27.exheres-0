@@ -21,7 +21,7 @@ LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS="bidi doc nls stroke svg xinerama
-    extra [[ description = [ Install extra fvwm mini icons and sound files ] ]]"
+    extra [[ description = [ Install extra mini icons and sound files ] ]]"
 
 DEPENDENCIES="
     build+run:
@@ -96,7 +96,9 @@ src_install() {
     if ! option doc ; then
         rm -rf "${IMAGE}"/usr/share/doc/${PN} || die "rm empty dirs failed"
     fi
-    find "${IMAGE}" -name '*FvwmGtkDebug*' -name '*perllib*' -delete || die "rm craps failed"
+    find "${IMAGE}" -name '*FvwmGtkDebug*' -delete , \
+        -name '*perllib*' -delete , -name '*convert-2.6*' -delete \
+        || die "rm craps failed"
 
     insinto /etc/X11/Sessions
     hereins fvwm << EOF
