@@ -94,11 +94,11 @@ src_install() {
     fi
 
     if ! option doc ; then
-        rm -rf "${IMAGE}"/usr/share/doc/${PN} || die "rm empty dirs failed"
+        rm -rf "${IMAGE}"/usr/share/doc/${PN} || die "failed to rm empty dirs"
     fi
     find "${IMAGE}" -name '*FvwmGtkDebug*' -delete , \
         -name '*perllib*' -delete , -name '*convert-2.6*' -delete \
-        || die "rm craps failed"
+        || die "failed to rm unwanted files"
 
     insinto /etc/X11/Sessions
     hereins fvwm << EOF
