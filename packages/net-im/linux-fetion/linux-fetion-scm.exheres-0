@@ -10,5 +10,5 @@ PLATFORMS=""
 src_install() {
     linux-fetion_src_install
     insinto /usr/share/libfetion
-    doins -r skin1 faces_image
+    doins -r faces_image
 }
