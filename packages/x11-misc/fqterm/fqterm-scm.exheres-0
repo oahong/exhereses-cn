@@ -4,7 +4,7 @@
 SCM_REPOSITORY="http://fqterm.googlecode.com/svn"
 require fqterm scm-svn
 
-DOWNLOADS="${HOMEPAGE}/files/QQWry.zip"
+DOWNLOADS="${HOMEPAGE}/files/QQWry.Dat.zip"
 PLATFORMS=""
 
 DEPENDENCIES+="
