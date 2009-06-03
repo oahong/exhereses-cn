@@ -60,7 +60,8 @@ DEPENDENCIES="
 
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freshmeat:FVWM"
-UPSTREAM_RELEASE_NOTES="http://www.fvwm.org/news/#2.5.27"
+UPSTREAM_RELEASE_NOTES="${HOMEPAGE}/news/#2.5.27"
+UPSTREAM_DOCUMENTATION="${HOMEPAGE}/documentation/faq"
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-menu-syntax.patch )
 
