@@ -1,9 +1,0 @@
-# Copyright 2008 Hong Hao <oahong@gmail.com>
-# Distributed under the terms of the GNU General Public License v2
-
-require fqterm
-
-DOWNLOADS="http://fqterm.googlecode.com/files/${PNV}-src-r569.zip"
-
-PLATFORMS="~x86"
-WORK=${WORKBASE}/${PN}

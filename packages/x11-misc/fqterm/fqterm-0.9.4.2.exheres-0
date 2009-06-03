@@ -1,0 +1,9 @@
+# Copyright 2008,2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require fqterm
+
+DOWNLOADS+="http://fqterm.googlecode.com/files/${PN}_$(ever replace_all '_')_r770.zip"
+
+PLATFORMS="~x86"
+WORK=${WORKBASE}/${PN/term}
