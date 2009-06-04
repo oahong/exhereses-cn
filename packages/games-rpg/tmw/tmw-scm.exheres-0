@@ -5,7 +5,12 @@ SCM_REPOSITORY="git://gitorious.org/tmw/mainline.git"
 require multilib cmake scm-git
 
 TMUSIC="tmwmusic-0.2"
-SUMMARY="The Mana World"
+SUMMARY="A free open source 2D MMORPG in development"
+DESCRIPTION="The Mana World (TMW) is a great online role-playing
+game based upon the Seiken Densetsu serie.
+It has its own universe, and its own character management system,
+which will give you the opportunity to play in a 2D heroic-fantasy
+world forever."
 HOMEPAGE="http://www.tmw.org"
 DOWNLOADS="mirror://sourceforge/themanaworld/${TMUSIC}.tar.gz"
 
