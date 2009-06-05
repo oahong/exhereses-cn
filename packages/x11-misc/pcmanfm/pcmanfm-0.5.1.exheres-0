@@ -35,7 +35,8 @@ DEPENDENCIES="
         nls? ( sys-devel/gettext )
         dev-util/pkg-config
     build+run:
-        x11-libs/gtk+[>=2.12]
+        dev-libs/glib:2
+        x11-libs/gtk+:2[>=2.12]
         x11-libs/startup-notification
         app-admin/gamin
         hal? (
