@@ -14,16 +14,56 @@ DOWNLOADS=""
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS=""
+MYOPTIONS="ibus scim fcitx"
 
 DEPENDENCIES="
     build+run:
-        x11-libs/libX11
-        x11-libs/libXrender
         kde/kdebase-workspace:4
+    run:
+        scim? ( input-methods/scim )
+        fcitx? ( input-methods/fcitx[dbus] )
 "
 
-# TODO: scim/ibus/fcitx support
+pkg_setup() {
+    if option ibus ; then
+        require python
+    fi
+}
+
+# TODO: fcitx support
 src_prepare() {
-    mv "${WORK}"/backend/CMakeLists.txt{,orig}  || die
+    if ! option scim ; then
+        mv "${WORK}"/backend/CMakeLists.txt{,orig}  || die
+    fi
+}
+
+src_install() {
+    cmake_src_install
+    if option ibus ; then
+        insinto /usr/share/ibus/ui/gtk
+        doins backend/ibus/qtpanel.xml
+        # must be executable.
+        exeinto /usr/share/ibus/ui/gtk
+        newexe backend/ibus/panel.py qtpanel.py
+    fi
+}
+
+pkg_postinst() {
+    if option scim ; then
+        elog "edit your scim's global config file /etc/scim/global"
+        elog "change this line:"
+        elog "/DefaultPanelProgram = scim-panel-gtk"
+        elog "into:"
+        elog "/DefaultPanelProgram = scim-panel-dbus"
+    fi
+    if option ibus ; then
+        python_mod_optimize /usr/share/ibus/ui/gtk
+        elog "To use ibus with kimpanel, start ibus daemon using this way:"
+        elog "ibus-daemon --panel=/usr/share/ibus/ui/gtk/qtpanel.py -xr"
+    fi
+
+}
+
+pkg_postins() {
+    option ibus && python_mod_cleanup /usr/share/ibus/ui/gtk
 }
