@@ -1,6 +1,6 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'qstardict-0.13.1.ebuild' from Gentoo Taiwan Overlay, which is:
+# Based in part upon 'qstardict-0.13.1.ebuild' from Gentoo Taiwan, which is:
 #     Copyright 1999-2009 Gentoo Foundation
 
 require qmake4
@@ -29,6 +29,8 @@ DEPENDENCIES="
         x11-libs/libX11
         x11-libs/qt:4[X][dbus?]
         dev-libs/glib:2[>=2.0]
+    post,suggested:
+        kde/plasma-applet-qstardict
 "
 
 REMOTE_IDS="sourceforge:qstardict"
