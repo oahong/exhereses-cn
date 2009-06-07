@@ -4,7 +4,7 @@
 #     Copyright 1999-2009 Gentoo Foundation
 
 SCM_REPOSITORY="http://tint2.googlecode.com/svn"
-require scm-svn toolchain-funcs
+require scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
 SUMMARY="A lighweight panel and taskbar for openbox3"
 HOMEPAGE="http://tint2.googlecode.com"
@@ -13,16 +13,17 @@ DOWNLOADS=""
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS=""
+MYOPTIONS="
+    doc
+    examples [[ description = [ Install additional ${PN}rc examples ] ]]"
 
 DEPENDENCIES="
     build+run:
         x11-libs/cairo
         x11-libs/pango
         x11-libs/libX11
-        x11-libs/libXrandr
         x11-libs/libXinerama
-        media-libs/imlib2[png]
+        media-libs/imlib2
         dev-libs/glib:2
     build:
         x11-proto/xproto
@@ -30,21 +31,12 @@ DEPENDENCIES="
         dev-util/pkg-config
 "
 
-DEFAULT_SRC_COMPILE_PARAMS=(
-    CC="$(tc-getCC)"
-    LDFLAGS="${LDFLAGS}"
-    CFLAGS="${CFLAGS}"
-)
+DEFAULT_SRC_CONFIGURE_ENABLES=( examples doc )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --docdir=/usr/share/doc/${PNV} )
 
 src_prepare() {
-    mv src/* .
-    sed -i \
-        -e 's/^\(install: install-\)\(strip\)$/\1no\2/' \
-        -e 's/\.\./\./g' \
-        Makefile || die "failed sed Makefile"
+    ./autogen.sh
 }
-
-src_install() {
-    default
-    dodoc tintrc0[2-7] doc/tint2*
-}
+#DEFAULT_SRC_COMPILE_PARAMS=(
+#    CC="$(tc-getCC)" LDFLAGS="${LDFLAGS}" CFLAGS="${CFLAGS}"
+#)
