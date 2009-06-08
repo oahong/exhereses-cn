@@ -3,12 +3,9 @@
 # Based in part upon 'tint2-9999.ebuild', which is:
 #     Copyright 1999-2009 Gentoo Foundation
 
-SCM_REPOSITORY="http://tint2.googlecode.com/svn"
-require scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
-
 SUMMARY="A lighweight panel and taskbar for openbox3"
 HOMEPAGE="http://tint2.googlecode.com"
-DOWNLOADS=""
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -31,12 +28,5 @@ DEPENDENCIES="
         dev-util/pkg-config
 "
 
-DEFAULT_SRC_CONFIGURE_ENABLES=( examples doc )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( examples doc )
 DEFAULT_SRC_CONFIGURE_PARAMS=( --docdir=/usr/share/doc/${PNV} )
-
-src_prepare() {
-    ./autogen.sh
-}
-#DEFAULT_SRC_COMPILE_PARAMS=(
-#    CC="$(tc-getCC)" LDFLAGS="${LDFLAGS}" CFLAGS="${CFLAGS}"
-#)
