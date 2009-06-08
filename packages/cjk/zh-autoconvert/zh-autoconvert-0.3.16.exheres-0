@@ -1,0 +1,41 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+DEBIAN_UPSTREAM_PV=${PV}.orig
+require debian-upstream toolchain-funcs
+
+SUMMARY="Chinese HZ/GB/BIG5/UNI/UTF7/UTF8 encodings auto-converter"
+DESCRIPTION="
+AutoConvert is an intelligent Chinese Encoding converter.
+It uses builtin functions to judge the type of the input file's
+Chinese Encoding (such as GB/Big5/HZ), then converts the input
+file to any type of Chinese Encoding you want.
+You can use autoconvert to handle incoming mail, automatically
+converting messages to the Chinese Encoding you want. 
+It can alse handle Unicode/UTF7/UTF8 now.
+
+Author: Yu Guanghui <ygh@debian.org>
+"
+HOMEPAGE="http://packages.debian.org/en/sid/zh-autoconvert"
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="" #TODO: xchat support.
+
+DEPENDENCIES=""
+
+WORK=${WORKBASE}/${PNV#zh-}
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-includes.patch )
+DEFAULT_SRC_COMPILE_PARAMS=(
+    CC=$(tc-getCC) CFLAGS="${CFLAGS} -Iinclude -I../include" LDFLAGS=${LDFLAGS}
+)
+
+src_prepare() {
+    sed -i -e '/xchat-plugins/d' Makefile || die "sed failed"
+}
+
+src_install() {
+    dodir /usr/{bin,lib,include}
+    default
+}
