@@ -1,0 +1,25 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Collections of Quotes from Chinese literature"
+HOMEPAGE="http://chinese-fortune.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/fortune-mod-zh-1.2.2.tar.bz2"
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="gnome"
+
+DEPENDENCIES="
+    run:
+        cjk/zh-autoconvert
+        games-misc/fortune-mod
+        gnome? ( gnome-desktop/zenity )
+"
+
+BUGS_TO="oahong@gmail.com"
+
+src_install() {
+    default
+    ! option gnome && rm ${IMAGE}/usr/bin/gfortune-zh
+}
