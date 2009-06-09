@@ -22,12 +22,10 @@ DEPENDENCIES="
 UPSTREAM_CHANGELOG="${HOMEPAGE}/downloads/CHANGELOG"
 UPSTREAM_REALEASE_NOTES="http://icculus.org/pipermail/physfs/2009-March/000697.html"
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-doc-option.patch )
 CMAKE_SRC_CONFIGURE_PARAMS=(
     -DPHYSFS_BUILD_TEST:BOOL=FALSE
     -DPHYSFS_BUILD_WX_TEST:BOOL=FALSE
 )
-CMAKE_SRC_CONFIGURE_OPTIONS=( 'doc PHYSFS_BUILD_DOCS' )
 
 pkg_setup() {
     append-flags "-fno-strict-aliasing"
