@@ -15,7 +15,7 @@ It not only provides full featured and user friendly input method interface,
 but also may help developers to develop input method easily.
 "
 HOMEPAGE="http://ibus.googlecode.com"
-DOWNLOADS="http://ibus.googlecode.com/files/${PNV}.tar.gz"
+DOWNLOADS="listed-only: http://ibus.googlecode.com/files/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
