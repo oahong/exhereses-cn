@@ -10,10 +10,15 @@ SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
 
-# stolen from app-antivirus/clamav
 DEPENDENCIES="
     build:
         dev-util/pkg-config
-        build_options:recommended_tests? (
-            dev-libs/check  [[ description = [ Necessary to run the testsuite ] ]] )
-    "
+"
+
+src_test() {
+    if has_version dev-libs/check ; then
+        default
+    else
+        ewarn "${PN} needs \"dev-libs/check\" to performan tests."
+    fi
+}
