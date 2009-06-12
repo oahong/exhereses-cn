@@ -1,0 +1,35 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require xfce [ xfce_version="4.6.1" ]
+
+SUMMARY="volume control application for the Xfce"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="debug"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/glib:2[>=2.12.0]
+        x11-libs/gtk+:2[>=2.10.0]
+        xfce-base/libxfce4util[>=4.6.0]
+        xfce-base/libxfcegui4[>=4.6.0]
+        xfce-base/xfce4-panel[>=4.6.0]
+        xfce-base/xfconf[>=4.6.0]
+        media-plugins/gst-plugins-base:0.10[>=0.10.14][gstreamer_plugins:alsa]
+"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
+
+pkg_postinst() {
+    ebegin "Updating Gtk icon cache"
+        gtk-update-icon-cache -f -t /usr/share/xfce4-mixer/icons/hicolor 2> /dev/null
+    eend $? || die "failed to update icon cache"
+}
+
+pkg_postrm() {
+    ebegin "Updating Gtk icon cache"
+        gtk-update-icon-cache -f -t /usr/share/xfce4-mixer/icons/hicolor 2> /dev/null
+    eend $? || die "failed to update icon cache"
+}
