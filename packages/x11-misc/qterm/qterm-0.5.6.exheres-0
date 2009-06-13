@@ -1,0 +1,59 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake
+
+SUMMARY="BBS client for X Window"
+DESCRIPTION="
+QTerm serves as a replacement of telnet, and provide many features useful
+when you are browsing a BBS site, such as mouse support, article download,
+anti-idle, etc.
+It has a address book where you can store your favorite site addresses and
+the ability to convert between GB and BIG5.
+"
+HOMEPAGE="http://www.qterm.org"
+DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.bz2"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="
+    dbus
+    debug
+    phonon [[ description = [ Enable support for the Phonon, KDE4's multimedia API, for sound ] ]]
+    ssl"
+
+DEPENDENCIES="
+    build:
+    build+run:
+        ssl? ( dev-libs/openssl )
+        x11-libs/qt:4[dbus?][ssl?]
+        phonon? (
+            || (
+                x11-libs/qt:4[phonon]
+                kde/kdebase-runtime:4
+            )
+        )
+    suggested:
+        kde/kdeutils:4[kde_parts:kwallet]
+"
+
+BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="sourceforge:qterm"
+
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
+    'dbus DBUS' 'phonon PHONON' 'ssl SSH'
+    'debug DEBUG' 'debug SCRIPT_DEBUGGER'
+)
+# haven't figured out why it fails
+CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_TEST:BOOL=FALSE )
+
+DEFAULT_SRC_INSTALL_EXTRA_DOCS=( script.txt )
+
+src_prepare() {
+    # to make CMAKE_SRC_CONFIGURE_* work
+    sed -i \
+        -e 's/QTERM_ENABLE/ENABLE/g' \
+        src/CMakeLists.txt || die "failed to sed CMakeLists.txt"
+    expatch "${FILES}"/${PNV}-QVariant-to-string.patch
+}
