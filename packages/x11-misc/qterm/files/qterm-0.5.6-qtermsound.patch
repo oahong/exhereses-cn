@@ -1,0 +1,11 @@
+--- qterm-0.5.6/src/qtermsound.cpp.orig	2009-06-14 16:06:18.715812346 +0800
++++ qterm-0.5.6/src/qtermsound.cpp	2009-06-14 15:58:57.278563060 +0800
+@@ -4,7 +4,7 @@
+ #include <QtGui/QMessageBox>
+ 
+ #ifdef PHONON_ENABLED
+-#include <Phonon/MediaObject>
++#include <phonon/MediaObject>
+ #endif // PHONON_ENABLED
+ 
+ namespace QTerm
