@@ -1,20 +1,46 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_REPOSITORY="http://fcitx.googlecode.com/svn"
+# http://www.exherbo.org/docs/scm.html#multiple_repositories
 require scm-svn fcitx autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ none ]  ]
+SCM_REPOSITORY="http://fcitx.googlecode.com/svn"
+FCITX_DBUS_BRANCH="dbus"
 
 DOWNLOADS="listed-only:http://gentoo-china-overlay.googlecode.com/svn/distfiles/zhengma.tbz2"
 PLATFORMS=""
+MYOPTIONS="dbus [[ description = [ Enable Dbus support for kde/plasma-applet-kimpanel ] ]]"
+
+DEPENDENCIES+="
+    build+run:
+        dbus? ( sys-apps/dbus[>=0.2] )
+"
+
+pkg_setup() {
+    if option dbus ; then
+        ewarn "dbus option is set, ${PN} can only work with kimpanel now."
+        scm_set_var BRANCH ${FCITX_DBUS_BRANCH}
+    fi
+    scm_finalise
+}
 
 src_unpack() {
     scm_src_unpack
     unpack ${ARCHIVES}
 }
 
+src_configure() {
+    if option dbus ; then
+        econf --enable-dbus --enable-xft
+    else
+        fcitx_src_configure
+    fi
+}
+
 src_prepare() {
     mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt || die "failed to rename zhengma.txt"
-    expatch "${FILES}"/${PN}-add-zhengma-remove-crap.patch
+    if ! option dbus ; then
+        expatch "${FILES}"/${PN}-add-zhengma-remove-crap.patch
+    fi
 
     sed -i \
         -e "#AM_INIT#s#\(\([[:digit:]]\.*\)\+[-_]*\)[[:alnum:]]*#\1SVN-$(date +%y%m%d)#" \

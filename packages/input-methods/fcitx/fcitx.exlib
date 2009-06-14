@@ -3,7 +3,7 @@
 # Based in part upon 'fcitx-3.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
-export_exlib_phases src_install pkg_postinst
+export_exlib_phases src_configure src_install pkg_postinst
 
 SUMMARY="Free Chinese Input Toy for X"
 DESCRIPTION="Fcitx(Free Chinese Input Toy of X) is a collection of Simplified
@@ -35,6 +35,10 @@ fcitx_src_install() {
     ebegin "Removing unversoned documents"
         rm -rf "${IMAGE}"/usr/share/${PN}/doc
     eend $? || die "failed to remove empty directories"
+}
+
+fcitx_src_configure() {
+    default
 }
 
 fcitx_pkg_postinst() {
