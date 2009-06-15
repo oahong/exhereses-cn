@@ -20,7 +20,7 @@ DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.bz2"
 
 LICENCES="GPL-2"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="nls dbus"
 
 #FIXME:

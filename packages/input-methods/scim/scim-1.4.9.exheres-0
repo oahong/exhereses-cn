@@ -3,7 +3,7 @@
 
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ] scim
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
 

@@ -3,7 +3,7 @@
 
 require ibus
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
 DEPENDENCIES+="
 build:
