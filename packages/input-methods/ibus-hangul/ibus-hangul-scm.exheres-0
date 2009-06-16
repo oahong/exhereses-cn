@@ -1,0 +1,11 @@
+# Copyright 2009 Hong Hao
+# Distributed under the terms of the GNU General Public License v2
+
+require ibus-engine
+
+PLATFORMS="~x86"
+
+DEPENDENCIES+="
+    build+run:
+        cjk/libhangul
+"
