@@ -3,22 +3,6 @@
 # Based in part upon 'ibus-table-9999.ebuild' from Gentoo China Overlay, which is:
 #    Copyright 1999-2009 Gentoo Foundation
 
-if ever at_least scm ; then
-    SCM_REPOSITORY="${SCM_REPOSITORY:=git://github.com/phuang/${PN}.git}"
-    require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
-    DOWNLOADS=""
-    DEPENDENCIES="
-        build:
-            dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
-            sys-devel/gettext[>=0.16.1]
-    "
-else
-    DOWNLOADS="${DOWNLOADS:="${HOMEPAGE}/files/${PNV}.tar.gz"}"
-    DEPENDENCIES="
-        build:
-            nls? ( sys-devel/gettext[>=0.16.1] )"
-fi
-
 export_exlib_phases src_prepare
 
 myexparam need_python=true
@@ -26,13 +10,27 @@ myexparam need_pymodule=
 if [[ $(exparam need_python) == true ]] ; then
     require python [ python_dep=2.5 ]
     export_exlib_phases src_prepare  pkg_postinst pkg_postrm
-    [[ -n $(exparam need_pymodule) ]] && DEPENDENCIES+="
+    [[ -n $(exparam need_pymodule) ]] && DEPENDENCIES="
     build+run:
         dev-lang/python[$(exparam need_pymodule)] [[ note = [ To convert various code tables ] ]]"
 fi
 
 SUMMARY="${SUMMARY:-"The ${PN/ibus-} engine for IBus Framework"}"
 HOMEPAGE="http://ibus.googlecode.com"
+if ever at_least scm ; then
+    SCM_REPOSITORY="${SCM_REPOSITORY:=git://github.com/phuang/${PN}.git}"
+    require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
+    DOWNLOADS=""
+    DEPENDENCIES+="
+        build:
+            dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
+            sys-devel/gettext[>=0.16.1]"
+else
+    DOWNLOADS="${DOWNLOADS:="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"}"
+    DEPENDENCIES+="
+        build:
+            nls? ( sys-devel/gettext[>=0.16.1] )"
+fi
 
 LICENCES="${LICENSE:-GPL-2}"
 SLOT="0"
