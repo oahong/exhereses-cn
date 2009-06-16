@@ -15,6 +15,7 @@ DEPENDENCIES+="
 "
 
 src_prepare() {
+    echo "setup/enginetreeview.py" >> po/POTFILES.in
     autopoint || die "autopoint failed"
     intltoolize --copy --force || "intltoolize failed"
     gtkdocize --copy || die "gtkdocize failed"

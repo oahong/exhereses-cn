@@ -7,7 +7,7 @@ require python [ python_dep=2.5 ]
 
 export_exlib_phases src_prepare src_install pkg_postinst pkg_postrm
 
-MY_LINGUAS="zh_CN zh_TW" # ja kr
+MY_LINGUAS="zh_CN ja" #zh_TW kr
 SUMMARY="Intelligent Input Bus for Linux / Unix"
 DESCRIPTION="
 Intelligent Input Bus (ibus) is a next generation input framework for Linux OS.
@@ -51,9 +51,9 @@ DEPENDENCIES="
             input-methods/ibus-pinyin
             input-methods/ibus-table
         )
-        linguas:zh_TW? ( input-methods/ibus-chewing )
+        linguas:ja? ( input-methods/ibus-anthy )
 "
-#linguas:ja? ( input-methods/ibus-anthy )
+#linguas:zh_TW? ( input-methods/ibus-chewing )
 #linguas:kr? ( input-methods/ibus-hangul )
 
 BUGS_TO="${HOMEPAGE}/issues/list"

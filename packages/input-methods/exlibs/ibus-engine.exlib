@@ -7,34 +7,39 @@ if ever at_least scm ; then
     SCM_REPOSITORY="${SCM_REPOSITORY:=git://github.com/phuang/${PN}.git}"
     require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
     DOWNLOADS=""
-    EXTRADEPENDS="
+    DEPENDENCIES="
+        build:
             dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
             sys-devel/gettext[>=0.16.1]
     "
 else
     DOWNLOADS="${DOWNLOADS:="${HOMEPAGE}/files/${PNV}.tar.gz"}"
-    EXTRADEPENDS="
+    DEPENDENCIES="
+        build:
             nls? ( sys-devel/gettext[>=0.16.1] )"
 fi
 
 export_exlib_phases src_prepare
 
-myexparam python_required=no
-if [[ "$(exparam python_required)" == "yes" ]] ; then
+myexparam need_python=true
+myexparam need_pymodule=
+if [[ $(exparam need_python) == true ]] ; then
     require python [ python_dep=2.5 ]
     export_exlib_phases src_prepare  pkg_postinst pkg_postrm
+    [[ -n $(exparam need_pymodule) ]] && DEPENDENCIES+="
+    build+run:
+        dev-lang/python[$(exparam need_pymodule)] [[ note = [ To convert various code tables ] ]]"
 fi
 
 SUMMARY="${SUMMARY:-"The ${PN/ibus-} engine for IBus Framework"}"
 HOMEPAGE="http://ibus.googlecode.com"
 
-LICENCES="${LICENSE:-"GPL-2"}"
+LICENCES="${LICENSE:-GPL-2}"
 SLOT="0"
 MYOPTIONS="nls"
 
-DEPENDENCIES="
+DEPENDENCIES+="
     build:
-        ${EXTRADEPENDS}
         dev-util/pkg-config
     run:
         input-methods/ibus[>=1.1]

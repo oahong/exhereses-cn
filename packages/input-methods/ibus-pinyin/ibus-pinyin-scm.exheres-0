@@ -1,18 +1,13 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ python_required=yes ]
+require ibus-engine [ need_pymodule=sqlite ]
 
 PINYIN_DB="pinyin-database-0.1.10.6.tar.bz2"
 SUMMARY="Chinese PinYin IMEngine for IBus Framework"
 DOWNLOADS="${HOMEPAGE}/files/${PINYIN_DB}"
 
 PLATFORMS="~x86"
-
-DEPENDENCIES+="
-    build+run:
-        dev-lang/python[sqlite] [[ note = [ To convert pinyin code table ] ]]
-    "
 
 src_prepare() {
     ibus-engine_src_prepare
