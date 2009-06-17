@@ -4,7 +4,7 @@
 FONT=${PN%%-*}
 require xfont multilib
 
-SUMMARY="Sans-Serif style high quality CJK outline font derived from \"Droid Sans Fallback\""
+SUMMARY="A high quality sans-serif style cjk outline font derived from \"Droid Sans Fallback\""
 HOMEPAGE="http://wenq.org/enindex.cgi?action=browse&id=MicroHei(en)"
 DOWNLOADS="mirror://sourceforge/wqy/wqy-microhei-0.2.0-beta.tar.gz"
 
