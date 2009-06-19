@@ -39,8 +39,8 @@ DEPENDENCIES="
     "
 #    run:
 #        >=fonts/wqy-zenhei-0.8.38
-CMAKE_SRC_CONFIGURE_OPTION_WITHS=( opengl )
-CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( nls )
+CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 'opengl OPENGL' )
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'nls NLS' )
 
 src_unpack() {
     scm_src_unpack
