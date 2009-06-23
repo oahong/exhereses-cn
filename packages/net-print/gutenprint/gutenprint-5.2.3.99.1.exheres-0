@@ -1,0 +1,77 @@
+
+
+require multilib
+
+SUMMARY="High quality drivers for Canon, Epson, Lexmark, Sony, Olympus, and PCL printers"
+DESCRIPTION="
+Gutenprint, formerly named Gimp-Print, is a suite of printer drivers
+that may be used with most common UNIX and Linux print spooling systems,
+including CUPS, lpr, LPRng, or others.
+These drivers provide high quality printing for UNIX
+(including Macintosh OS X 10.2, 10.3, and 10.4) and Linux systems that
+in many cases equal or exceed proprietary vendor-supplied drivers in quality and functionality,
+and can be used for demanding printing tasks requiring flexibility and high quality.
+This software package includes an enhanced Print plugin for the GIMP that replaces
+the plugin packaged with the GIMP, and Ghostscript and CUPS drivers,
+as well as Foomatic data supporting the Ghostscript driver.
+"
+HOMEPAGE="http://gimp-print.sourceforge.net"
+DOWNLOADS="mirror://sourceforge/gimp-print/${PNV}.tar.bz2"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="debug
+    gimp [[ description = [ Build GIMP 2.x Print plugin ] ]]
+    gtk [[ description = [ Build Gutenprint GTK+-2.0 user interface library ] ]]
+    samples [[ description = [ Install sample images ] ]]"
+
+RESTRICT="test"
+
+DEPENDENCIES="
+    build:
+        media-gfx/ImageMagick [[ note = [ convert ] ]]
+        dev-util/pkg-config
+        sys-devel/gettext
+    build+run:
+        dev-libs/glib
+        dev-lang/perl:*
+        net-print/cups[>=1.2]
+        app-text/ghostscript
+        sys-libs/readline
+        sys-libs/ncurses
+        gtk? ( x11-libs/gtk+:2 )
+        gimp? (
+            x11-libs/gtk+:2
+            media-gfx/gimp[>=2.4]
+        )
+"
+
+BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="sourceforge:gimp-print freshmeat:Gutenprint"
+UPSTREAM_RELEASE_NOTES="
+http://sourceforge.net/project/shownotes.php?release_id=630990&group_id=1537"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --without-foomatic --with-{ghostscript,readline}
+    --enable-cups-{level3-ppds,1_2-enhancements}
+    --enable-{test,testpattern,escputil}
+    --enable-{nls,maintainer-mode}
+    --disable-cups-ppds #
+    --disable-rpath
+)
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
+    'gimp gimp2' 'gimp gimp2-as-gutenprint'
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug samples 'gtk libgutenprintui2' )
+
+src_test_expensive() {
+    emake check
+}
+
+src_install() {
+    default
+#    keepdir /usr/$(get_libdir)/gutenprint/5.2/modules
+    mv "${IMAGE}"/usr/share/{${PN}/doc/*,doc/${PNV}} || die
+    find "${IMAGE}" -type d -empty -delete || die
+}
