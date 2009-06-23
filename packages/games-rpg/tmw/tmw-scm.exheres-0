@@ -2,43 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="git://gitorious.org/tmw/mainline.git"
-require multilib cmake scm-git
+require common-metadata cmake scm-git
 
-TMUSIC="tmwmusic-0.2"
-SUMMARY="A free open source 2D MMORPG in development"
-DESCRIPTION="The Mana World (TMW) is a great online role-playing
-game based upon the Seiken Densetsu serie.
-It has its own universe, and its own character management system,
-which will give you the opportunity to play in a 2D heroic-fantasy
-world forever."
-HOMEPAGE="http://www.tmw.org"
-DOWNLOADS="mirror://sourceforge/themanaworld/${TMUSIC}.tar.gz"
+PLATFORMS="~x86"
 
-LICENCES="GPL-2"
-SLOT="0"
-PLATFORMS=""
-MYOPTIONS="opengl nls"
-
-DEPENDENCIES="
+DEPENDENCIES+="
     build+run:
-        net-misc/curl
-        dev-libs/libxml2
-        dev-games/guichan[opengl?]
-        dev-games/physfs
-        net-libs/enet
-        media-libs/SDL_net
-        media-libs/SDL
-        media-libs/SDL_image
-        media-libs/SDL_ttf
-        media-libs/SDL_mixer[ogg]
-        media-libs/libpng
-    build:
-        nls? ( sys-devel/gettext )
-    run:
-        fonts/dejavu
-    "
-#    run:
-#        >=fonts/wqy-zenhei-0.8.38
+        net-libs/enet [[ note = [ dependency for tmwserver client ] ]]
+"
+
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 'opengl OPENGL' )
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'nls NLS' )
 
@@ -55,12 +27,5 @@ src_prepare() {
 
 src_install() {
     cmake_src_install
-
-    datadir="/usr/share/${PN}/data"
-    insinto ${datadir}/..
-    doins -r "${WORKBASE}"/${TMUSIC}/data
-
-    rm -f "${IMAGE}"/${fontdir}/dejavusans/*.ttf || die
-    dosym /usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans.ttf ${datadir}/fonts/dejavusans.ttf
-    dosym /usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans-Bold.ttf ${datadir}/fonts/dejavusans-bold.ttf
+    tmw_src_install
 }

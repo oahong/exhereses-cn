@@ -1,0 +1,24 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require common-metadata
+
+DOWNLOADS+="mirror://sourceforge/themanaworld/${PNV}.tar.gz"
+
+PLATFORMS="~x86"
+
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( opengl )
+#FIXME: nls does nothing on my exherbo system.
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls )
+DEFAULT_SRC_CONFIGURE_PARAMS=( "--with-server=eathena" )
+
+#src_prepare() {
+#    sed -i \
+#        -e 's/#zh_CN/zh_CN/' \
+#        po/LINGUAS || die "failed to enable Chinese translation"
+#}
+
+src_install() {
+    default
+    tmw_src_install
+}

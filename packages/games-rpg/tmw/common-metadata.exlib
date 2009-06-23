@@ -1,0 +1,48 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require multilib
+
+export_exlib_phases src_install
+
+TMUSIC="tmwmusic-0.2"
+SUMMARY="A free open source 2D MMORPG in development"
+DESCRIPTION="The Mana World (TMW) is a great online role-playing
+game based upon the Seiken Densetsu serie.
+It has its own universe, and its own character management system,
+which will give you the opportunity to play in a 2D heroic-fantasy
+world forever."
+HOMEPAGE="http://www.tmw.org"
+DOWNLOADS="mirror://sourceforge/themanaworld/${TMUSIC}.tar.gz "
+
+LICENCES="GPL-2"
+SLOT="0"
+MYOPTIONS="opengl nls"
+
+DEPENDENCIES="
+    build+run:
+        net-misc/curl
+        dev-libs/libxml2
+        dev-games/guichan[opengl?]
+        dev-games/physfs
+        media-libs/SDL_net
+        media-libs/SDL
+        media-libs/SDL_image
+        media-libs/SDL_ttf
+        media-libs/SDL_mixer[ogg]
+        media-libs/libpng
+    build:
+        nls? ( sys-devel/gettext )
+    run:
+        fonts/dejavu
+    "
+
+tmw_src_install() {
+    datadir="/usr/share/${PN}/data"
+    insinto ${datadir}/..
+    doins -r "${WORKBASE}"/${TMUSIC}/data
+
+    rm -f "${IMAGE}"/${fontdir}/dejavusans/*.ttf || die
+    dosym /usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans.ttf ${datadir}/fonts/dejavusans.ttf
+    dosym /usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans-Bold.ttf ${datadir}/fonts/dejavusans-bold.ttf
+}
