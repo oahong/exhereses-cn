@@ -1,0 +1,32 @@
+
+
+SUMMARY="Chinese man pages"
+HOMEPAGE="http://manpages-zh.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
+
+LICENCES="GFDL-1.2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="
+    linguas:
+        zh_CN
+        zh_TW
+"
+
+DEPENDENCIES="
+    build:
+        sys-apps/man-db
+    build+run:
+        linguas:zh_TW? (
+            dev-lang/perl:*
+            cjk/zh-autoconvert
+        )
+"
+
+BUGS_TO="oahong@gmail.com"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-utf8 )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    'linguas:zh_CN zhcn' 'linguas:zh_TW zhtw'
+)
+
