@@ -1,4 +1,5 @@
-
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
 
 SUMMARY="Chinese man pages"
 HOMEPAGE="http://manpages-zh.googlecode.com"
