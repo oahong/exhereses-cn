@@ -1,7 +1,6 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_REPOSITORY="git://github.com/acevery/${PN}.git"
 require common-metadata
 
 PLATFORMS="~x86"

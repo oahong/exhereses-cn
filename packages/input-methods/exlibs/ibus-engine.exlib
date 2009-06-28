@@ -3,8 +3,6 @@
 # Based in part upon 'ibus-table-9999.ebuild' from Gentoo China Overlay, which is:
 #    Copyright 1999-2009 Gentoo Foundation
 
-export_exlib_phases src_prepare
-
 myexparam need_python=true
 myexparam need_pymodule=
 if [[ $(exparam need_python) == true ]] ; then
@@ -31,6 +29,8 @@ else
         build:
             nls? ( sys-devel/gettext[>=0.16.1] )"
 fi
+
+export_exlib_phases src_prepare
 
 LICENCES="${LICENSE:-GPL-2}"
 SLOT="0"
