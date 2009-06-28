@@ -1,0 +1,33 @@
+# Copyright 2008, 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require toolchain-funcs
+
+SUMMARY="binchunker for Unix"
+DESCRIPTION="
+This package contains a UNIX/C rewrite of the BinChunker program.
+BinChunker converts a CD image in a .bin/.cue format (sometimes .raw/.cue)
+into a set of .iso and .cdr/.wav tracks.  The .bin/.cue format is used by
+some non-UNIX CD-writing software, but is not supported on most other
+CD-writing programs.
+"
+HOMEPAGE="http://he.fi/bchunk"
+DOWNLOADS="${HOMEPAGE}/bchunk-1.2.0.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+UPSTREAM_CHANGELOG="${HOMEPAGE}/ChangeLog"
+
+DEFAULT_SRC_COMPILE_PARAMS=(
+    CC=$(tc-getCC) LD=$(tc-getCC) CFLAGS=${CFLAGS}
+)
+
+src_install() {
+    dobin ${PN}
+    doman ${PN}.1
+}
