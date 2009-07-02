@@ -60,7 +60,7 @@ DEPENDENCIES="
 
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freshmeat:FVWM"
-UPSTREAM_RELEASE_NOTES="${HOMEPAGE}/news/#2.5.27"
+UPSTREAM_RELEASE_NOTES="${HOMEPAGE}/news/#${PV}"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/documentation/faq"
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-menu-syntax.patch )
@@ -96,11 +96,11 @@ src_install() {
         doins "${WORKBASE}"/*.au
     fi
 
-    if ! option doc ; then
-        rm -rf "${IMAGE}"/usr/share/doc/${PN} || die "failed to rm empty dirs"
-    fi
-    find "${IMAGE}" -name '*FvwmGtkDebug*' -delete , \
-        -name '*perllib*' -delete , -name '*convert-2.6*' -delete \
+    find "${IMAGE}" \
+        -type d -empty -delete ,\
+        -name '*perllib*' -delete ,\
+        -name '*convert-2.6*' -delete ,\
+        -name '*FvwmGtkDebug*' -delete \
         || die "failed to rm unwanted files"
 
     insinto /etc/X11/Sessions
