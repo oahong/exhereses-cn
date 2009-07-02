@@ -12,7 +12,7 @@ game based upon the Seiken Densetsu serie.
 It has its own universe, and its own character management system,
 which will give you the opportunity to play in a 2D heroic-fantasy
 world forever."
-HOMEPAGE="http://www.tmw.org"
+HOMEPAGE="http://themanaworld.org"
 DOWNLOADS="mirror://sourceforge/themanaworld/${TMUSIC}.tar.gz "
 
 LICENCES="GPL-2"
