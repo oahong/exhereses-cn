@@ -1,0 +1,63 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="3D realtime strategy game on a future Earth"
+DESCRIPTION="
+In Warzone 2100 you command the forces of \"The Project\" in a battle to rebuild
+the world after mankind has almost been destroyed by nuclear missiles.
+The game offers campaign, tutorial, multi-player and single-player skirmish modes.
+An extensive tech tree with over 400 different technologies, combined with the unit design system,
+allows for a wide variety of possible units and tactics.
+Warzone 2100 was created by Pumpkin Studios, published by Eidos Interactive and is currently developed by
+the Warzone 2100 Resurrection Project.
+Featuring:
+* 400+ Technologies to research
+* 2,000+ different units to design
+* 3 Large campaign maps to conquer
+* 24 Fast play mission maps for extra action
+* Intelligence Display sets objectives dynamically
+* Interactive message system
+* Fast Play Interface graphically Based
+* Quick Screen Navigation
+* Fast Find System for units & structures
+* Set Factories to constant production
+* Automatically send each factory's units to where you want them
+* Cross-Platform internet/intranet multiplayer with up to 8 players
+* Challenging Computer-AI
+"
+HOMEPAGE="http://wz2100.net"
+DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.bz2"
+
+LICENCES="GPL-2"
+SLOT="0"
+MYOPTIONS="sound"
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+        dev-lang/perl[>=5.10]
+        dev-util/pkg-config[>=0.9]
+    build+run:
+        media-libs/quesoglc
+        media-libs/SDL[>=1.2]
+        media-libs/libpng[>=1.2]
+        media-libs/libtheora[>=0.1]
+        sound? (
+            media-libs/openal
+            media-libs/libvorbis
+        )
+        dev-libs/popt
+        dev-games/physfs
+        dev-db/sqlite:3[>=3.6.10]
+"
+
+REMOTE_IDS="sourceforge:warzone2100 freshmeat:Warzone 2100"
+UPSTREAM_DOCUMENTATION="http://guide.wz2100.net"
+UPSTREAM_CHANGELOG="http://forums.wz2100.net/viewtopic.php?t=3203"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --with-distributor=Exherbo
+    --with-applicationdir=/usr/share/applications
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( sound )
+
