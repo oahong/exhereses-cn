@@ -15,11 +15,11 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build+run:
-        x11-libs/cairo
+        x11-libs/cairo[X]
         x11-libs/pango
         x11-libs/libX11
         x11-libs/libXinerama
-        media-libs/imlib2
+        media-libs/imlib2[X]
         dev-libs/glib:2
     build:
         x11-proto/xproto
