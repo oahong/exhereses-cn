@@ -30,7 +30,7 @@ Featuring:
 HOMEPAGE="http://wz2100.net"
 DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.bz2"
 
-LICENCES="GPL-2 public-domain CCPL-Attribution-ShareAlike-[2-3].0"
+LICENCES="GPL-2 public-domain CCPL-Attribution-ShareAlike-2.0 CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
 MYOPTIONS="sound"
 
