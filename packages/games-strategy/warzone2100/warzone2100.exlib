@@ -63,8 +63,9 @@ UPSTREAM_DOCUMENTATION="http://guide.wz2100.net"
 UPSTREAM_CHANGELOG="http://forums.wz2100.net/viewtopic.php?t=3203"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-    --with-distributor="Exherbo"
-    --with-applicationdir="/usr/share/applications"
+    --with-distributor=Exherbo
+    --docdir=/usr/share/doc/${PNV}
+    --with-applicationdir=/usr/share/applications
 )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( sound )
 
