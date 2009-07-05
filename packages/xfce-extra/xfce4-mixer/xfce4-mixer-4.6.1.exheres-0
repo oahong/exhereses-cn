@@ -22,14 +22,8 @@ DEPENDENCIES="
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 
-pkg_postinst() {
-    ebegin "Updating Gtk icon cache"
-        gtk-update-icon-cache -f -t /usr/share/xfce4-mixer/icons/hicolor 2> /dev/null
-    eend $?
-}
-
-pkg_postrm() {
-    ebegin "Updating Gtk icon cache"
-        gtk-update-icon-cache -f -t /usr/share/xfce4-mixer/icons/hicolor 2> /dev/null
-    eend $?
+src_install() {
+    default
+    mv "${IMAGE}"/usr/share/{xfce4-mixer/,}icons || die "move icons failed"
+    rmdir "${IMAGE}"/usr/share/${PN} || die "rmdir failed"
 }
