@@ -38,7 +38,7 @@ linux-fetion_src_prepare() {
 linux-fetion_src_install() {
     insinto /usr/share/libfetion
     doins fetion_utf8_CN.qm
-    doins -r skins sound
+    doins -r skins sound faces_image
 
     insinto /usr/share/pixmaps
     doins misc/fetion.png

@@ -5,10 +5,4 @@ SCM_REPOSITORY="http://libfetion-gui.googlecode.com/svn"
 SCM_SUBPATH="qt4_src"
 require scm-svn linux-fetion
 
-PLATFORMS=""
-
-src_install() {
-    linux-fetion_src_install
-    insinto /usr/share/libfetion
-    doins -r faces_image
-}
+PLATFORMS="~x86"
