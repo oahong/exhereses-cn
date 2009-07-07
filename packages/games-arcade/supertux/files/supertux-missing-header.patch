@@ -1,0 +1,30 @@
+--- supertux-scm/src/random_generator.cpp.orig	2009-07-08 00:13:25.633250763 +0800
++++ supertux-scm/src/random_generator.cpp	2009-07-08 00:13:56.547250907 +0800
+@@ -36,6 +36,7 @@
+ #include <config.h>
+ 
+ 
++#include <stdio.h>
+ #include <stdexcept>
+ #include <time.h>
+ #include <cassert>
+--- supertux-scm/src/lisp/lexer.cpp.orig	2009-07-08 00:21:50.258260463 +0800
++++ supertux-scm/src/lisp/lexer.cpp	2009-07-08 00:23:20.492263874 +0800
+@@ -20,6 +20,7 @@
+ 
+ #include <sstream>
+ #include <cstring>
++#include <stdio.h>
+ #include <stdexcept>
+ #include <iostream>
+ 
+--- supertux-scm/src/lisp/lisp.cpp.orig	2009-07-08 00:28:37.775513778 +0800
++++ supertux-scm/src/lisp/lisp.cpp	2009-07-08 00:28:57.735250827 +0800
+@@ -19,6 +19,7 @@
+ 
+ #include <config.h>
+ 
++#include <stdio.h>
+ #include "lisp.hpp"
+ 
+ namespace lisp

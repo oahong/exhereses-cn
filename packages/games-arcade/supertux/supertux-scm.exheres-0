@@ -17,7 +17,7 @@ SUMMARY="A classic 2D jump'n run game similar to the original Super Mario games 
 HOMEPAGE="http://supertux.lethargik.org"
 DOWNLOADS=""
 
-LICENCES=""
+LICENCES="GPL"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS="opengl"
@@ -32,16 +32,18 @@ DEPENDENCIES="
         media-libs/SDL_image
         media-libs/libvorbis
         media-libs/openal
-        net-misc/curl
+        net-misc/curl [[ note=[ Add-on Manager ] ]]
+        opengl? ( x11-dri/mesa )
 "
 
-REMOTE_IDS="freshmeat:SuperTux"
 BUGS_TO="oahong@gmail.com ${HOMEPAGE}/bugs/my_view_page.php"
+REMOTE_IDS="freshmeat:SuperTux"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki/User_Manual ${HOMEPAGE}/wiki/SuperTux_FAQ"
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/${PN}-missing-header.patch
     "${FILES}"/${PN}-fixinstallation.patch
+    "${FILES}"/${PN}-no-opengl.patch
 )
 CMAKE_SRC_CONFIGURE_PARAMS=( -DDEBUG:bool=OFF -DWERROR:bool=OFF )
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'opengl OPENGL' )

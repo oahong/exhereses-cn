@@ -1,0 +1,22 @@
+--- supertux-scm/CMakeLists.txt.orig	2009-07-08 00:53:57.420250931 +0800
++++ supertux-scm/CMakeLists.txt	2009-07-08 00:56:34.427251365 +0800
+@@ -64,7 +64,7 @@
+ 	APPDATADIR
+ )
+ OPTION(ENABLE_BINRELOC "Enable autopackage's BINRELOC features" OFF)
+-SET(APPDATADIR "${CMAKE_INSTALL_PREFIX}/share/games/supertux2")
++SET(APPDATADIR "${CMAKE_INSTALL_PREFIX}/share/supertux2")
+ 
+ ## Check endianess
+ 
+@@ -390,8 +390,8 @@
+ 
+ ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+ 
+-  SET(INSTALL_SUBDIR_BIN "games/")
+-  SET(INSTALL_SUBDIR_SHARE "share/games/supertux2/")
++  SET(INSTALL_SUBDIR_BIN "bin/")
++  SET(INSTALL_SUBDIR_SHARE "share/supertux2/")
+   SET(INSTALL_SUBDIR_DOC "share/doc/supertux2/")
+ 
+   INSTALL(FILES ${SUPERTUX_SOURCE_DIR}/supertux2.desktop DESTINATION "share/applications")
