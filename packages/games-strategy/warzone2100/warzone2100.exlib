@@ -35,7 +35,6 @@ SLOT="0"
 MYOPTIONS="debug sound"
 
 # http://developer.wz2100.net/wiki/CompileGuide
-# dejavu is runtime dependency?
 DEPENDENCIES="
     build:
         sys-devel/gettext
