@@ -1,0 +1,53 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_SUBPATH="supertux"
+SCM_REPOSITORY="http://supertux.lethargik.org/svn/supertux"
+
+SCM_tinygettext_REPOSITORY="http://tinygettext.googlecode.com/svn"
+SCM_tinygettext_TAG="tinygettext-supertux"
+SCM_tinygettext_SUBPATH="src"
+SCM_tinygettext_UNPACK_TO="${WORKBASE}/${PNV}/src/tinygettext"
+SCM_SECONDARY_REPOSITORIES="tinygettext"
+
+SCM_SVN_EXTERNALS="src/tinygettext:"
+require scm-svn cmake
+
+SUMMARY="A classic 2D jump'n run game similar to the original Super Mario games "
+HOMEPAGE="http://supertux.lethargik.org"
+DOWNLOADS=""
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="opengl"
+
+#http://supertux.lethargik.org/wiki/Building_SuperTux#Getting_the_source_from_SVN
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+    build+run:
+        dev-games/physfs
+        media-libs/SDL
+        media-libs/SDL_image
+        media-libs/libvorbis
+        media-libs/openal
+        net-misc/curl
+"
+
+REMOTE_IDS="freshmeat:SuperTux"
+BUGS_TO="oahong@gmail.com ${HOMEPAGE}/bugs/my_view_page.php"
+UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki/User_Manual ${HOMEPAGE}/wiki/SuperTux_FAQ"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/${PN}-missing-header.patch
+    "${FILES}"/${PN}-fixinstallation.patch
+)
+CMAKE_SRC_CONFIGURE_PARAMS=( -DDEBUG:bool=OFF -DWERROR:bool=OFF )
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'opengl OPENGL' )
+
+src_install() {
+    cmake_src_install
+    dodoc WHATSNEW.txt
+    rm -rf "${IMAGE}"/usr/share/doc/supertux2 || die "failed to remove unversioned doc"
+}
