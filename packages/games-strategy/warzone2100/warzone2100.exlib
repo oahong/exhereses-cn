@@ -32,7 +32,7 @@ DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.bz2"
 
 LICENCES="GPL-2 public-domain CCPL-Attribution-ShareAlike-2.0 CCPL-Attribution-ShareAlike-3.0"
 SLOT="0"
-MYOPTIONS="sound"
+MYOPTIONS="debug sound"
 
 # http://developer.wz2100.net/wiki/CompileGuide
 # dejavu is runtime dependency?
@@ -54,7 +54,7 @@ DEPENDENCIES="
         dev-libs/popt
         dev-games/physfs
         dev-db/sqlite:3[>=3.6.10]
-    post,recommended:
+    run:
         fonts/dejavu
 "
 
@@ -67,7 +67,8 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
     --docdir=/usr/share/doc/${PNV}
     --with-applicationdir=/usr/share/applications
 )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( sound )
+# http://forums.wz2100.net/viewtopic.php?f=4&t=3126
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( sound 'debug debug relaxed' )
 
 warzone2100_pkg_postinst() {
     elog "To play video intro download video file from http://guide.wz2100.net/files/sequences.wz"
