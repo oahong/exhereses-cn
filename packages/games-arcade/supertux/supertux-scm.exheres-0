@@ -32,7 +32,7 @@ DEPENDENCIES="
         media-libs/SDL_image
         media-libs/libvorbis
         media-libs/openal
-        net-misc/curl [[ note=[ Add-on Manager ] ]]
+        net-misc/curl [[ note = [ Add-on Manager ] ]]
         opengl? ( x11-dri/mesa )
 "
 
