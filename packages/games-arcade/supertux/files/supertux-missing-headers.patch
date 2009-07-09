@@ -28,3 +28,13 @@
  #include "lisp.hpp"
  
  namespace lisp
+--- supertux-scm/tools/miniswig/create_wrapper.cpp.orig	2009-07-09 16:10:34.949975520 +0800
++++ supertux-scm/tools/miniswig/create_wrapper.cpp	2009-07-09 16:11:13.882963046 +0800
+@@ -1,6 +1,7 @@
+ #include <config.h>
+ 
+ #include "tree.hpp"
++#include <stdio.h>
+ #include <iostream>
+ #include <sstream>
+ #include <stdexcept>
