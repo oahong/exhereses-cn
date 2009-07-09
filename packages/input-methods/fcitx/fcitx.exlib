@@ -3,42 +3,50 @@
 # Based in part upon 'fcitx-3.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
-export_exlib_phases src_configure src_install pkg_postinst
+export_exlib_phases src_prepare src_configure src_install pkg_postinst
 
 SUMMARY="Free Chinese Input Toy for X"
 DESCRIPTION="Fcitx(Free Chinese Input Toy of X) is a collection of Simplified
 Chinese input methods for Linux. It supports WuBi, Pinyin, Erbi and QuWei input
 methods."
 HOMEPAGE="http://fcitx.googlecode.com"
-DOWNLOADS="${DOWNLOADS}:-"http://fcitx.googlecode.com/files/${PNV}.tar.bz2"}"
+DOWNLOADS="listed-only:http://gentoo-china-overlay.googlecode.com/svn/distfiles/zhengma.tbz2"
+#http://fcitx.googlecode.com/files/${PNV}.tar.bz2
 
 LICENCES="GPL-2"
 SLOT="0"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    build+run:
-        x11-libs/libX11
-        x11-libs/libXrender
-        x11-libs/libXt
-        x11-libs/libXft
     build:
         dev-util/pkg-config
-    "
+    build+run:
+        x11-libs/libXpm
+        x11-libs/libX11
+        x11-libs/libXft
+    post,suggested:
+        fonts/wqy-zenhei
+"
+
 BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--enable-xft' '--enable-tray' )
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( doc/cjkvinput.txt doc/pinyin.txt )
+
+fcitx_src_prepare() {
+    mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt || die "failed to rename zhengma.txt"
+    expatch "${FILES}"/${PN}-add-zhengma-remove-crap.patch
+}
+
+fcitx_src_configure() {
+    default
+}
 
 fcitx_src_install() {
     default
     ebegin "Removing unversoned documents"
         rm -rf "${IMAGE}"/usr/share/${PN}/doc
     eend $? || die "failed to remove empty directories"
-}
-
-fcitx_src_configure() {
-    default
 }
 
 fcitx_pkg_postinst() {
