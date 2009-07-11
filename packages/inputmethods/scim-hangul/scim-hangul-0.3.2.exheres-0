@@ -13,7 +13,7 @@ MYOPTIONS="debug " #FIXME:skim support
 DEPENDENCIES="
     build+run:
         cjk/libhangul
-        input-methods/scim
+        inputmethods/scim
         sys-devel/gettext
     build:
         dev-util/pkg-config

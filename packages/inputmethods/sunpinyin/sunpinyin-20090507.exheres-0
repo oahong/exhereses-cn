@@ -29,7 +29,7 @@ DEPENDENCIES="
         sys-libs/glibc
         x11-libs/gtk+
         dev-util/intltool
-        input-methods/scim[>=1.4]
+        inputmethods/scim[>=1.4]
     build:
         dev-util/pkg-config
         sys-devel/gettext"

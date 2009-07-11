@@ -13,7 +13,7 @@ MYOPTIONS="debug"
 
 DEPENDENCIES="
     build+run:
-        input-methods/libucimf
+        inputmethods/libucimf
     "
 
 BUGS_TO="ucimf@googlegroups.com"

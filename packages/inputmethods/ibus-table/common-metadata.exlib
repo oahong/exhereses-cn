@@ -13,10 +13,10 @@ LICENCES="LGPL-2.1"
 
 DEPENDENCIES+="
     post,suggested:
-        input-methods/ibus-table-cangjie
-        input-methods/ibus-table-erbi
-        input-methods/ibus-table-wubi
-        input-methods/ibus-table-zhengma
+        inputmethods/ibus-table-cangjie
+        inputmethods/ibus-table-erbi
+        inputmethods/ibus-table-wubi
+        inputmethods/ibus-table-zhengma
 "
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-additional )

@@ -40,7 +40,7 @@ DEPENDENCIES+="
     build:
         dev-util/pkg-config
     run:
-        input-methods/ibus[>=1.1]
+        inputmethods/ibus[>=1.1]
     "
 
 BUGS_TO="http://code.google.com/p/ibus/issues/list oahong@gmail.com"

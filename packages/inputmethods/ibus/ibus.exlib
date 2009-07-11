@@ -48,13 +48,13 @@ DEPENDENCIES="
         x11-apps/notification-daemon
     post,suggested:
         linguas:zh_CN? (
-            input-methods/ibus-pinyin
-            input-methods/ibus-table
+            inputmethods/ibus-pinyin
+            inputmethods/ibus-table
         )
-        linguas:ja? ( input-methods/ibus-anthy )
-        linguas:ko? ( input-methods/ibus-hangul )
+        linguas:ja? ( inputmethods/ibus-anthy )
+        linguas:ko? ( inputmethods/ibus-hangul )
 "
-#linguas:zh_TW? ( input-methods/ibus-chewing )
+#linguas:zh_TW? ( inputmethods/ibus-chewing )
 
 BUGS_TO="${HOMEPAGE}/issues/list"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"

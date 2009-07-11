@@ -20,8 +20,8 @@ DEPENDENCIES="
     build+run:
         kde/kdebase-workspace:4
     run:
-        scim? ( input-methods/scim )
-        fcitx? ( input-methods/fcitx[dbus] )
+        scim? ( inputmethods/scim )
+        fcitx? ( inputmethods/fcitx[dbus] )
 "
 
 pkg_setup() {
