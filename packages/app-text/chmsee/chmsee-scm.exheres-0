@@ -1,6 +1,8 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require common-metadata
+SCM_REPOSITORY="git://github.com/lidaobing/chmsee.git"
+require common-metadata scm-git
 
-PLATFORMS=""
+DOWNLOADS=""
+PLATFORMS="~x86"

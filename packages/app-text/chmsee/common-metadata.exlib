@@ -3,15 +3,6 @@
 
 export_exlib_phases pkg_setup
 
-if ever at_least scm ; then
-    SCM_REPOSITORY="git://github.com/lidaobing/chmsee.git"
-    require scm-git
-
-    DOWNLOADS=""
-else
-    DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
-fi
-
 require flag-o-matic cmake
 
 SUMMARY="HTML Help viewer for Unix/Linux"
@@ -21,6 +12,7 @@ Because of using gecko as the HTML rendering engine, it can
 support rich features of modern HTML page, such as CSS and JavaScript.
 "
 HOMEPAGE="https://chmsee.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -30,7 +22,7 @@ DEPENDENCIES="
     build+run:
         dev-libs/glib:2[>=2.8]
         dev-libs/libxml2
-        dev-libs/xulrunner
+        dev-libs/xulrunner[>=1.9&<=1.9.0.999]
         media-libs/chmlib
         dev-libs/libgcrypt
         x11-libs/gtk+:2[>=2.8]
