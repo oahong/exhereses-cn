@@ -1,18 +1,17 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'linux-fetion-0.8.1.ebuild', which is:
+# Based in part upon 'linux-fetion-0.8.1.ebuild' from Gentoo China Overlay, which is:
 #     Copyright 1999-2008 Gentoo Foundation
 
 require qmake4
 
 export_exlib_phases src_prepare src_install
 
-SUMMARY="a QT4 IM client using Fetion Protocol"
+SUMMARY="A QT4 IM client using China Mobile(TM) Fetion Protocol"
 HOMEPAGE="http://www.libfetion.cn"
 
 SLOT="0"
-# Not sure about libfetion's license.
-LICENCES="GPL-2 fixme"
+LICENCES="as-is"
 MYOPTIONS="doc platform: amd64"
 
 DEPENDENCIES="
@@ -31,8 +30,7 @@ linux-fetion_src_prepare() {
     fi
     sed -i \
         -e 's/;Network/&;/' misc/LibFetion.desktop || die "failed to fix desktop entry"
-
-    rm -rf $(find "${WORK}" -name .svn) || die "failed to remove .svn directories"
+    find "${WORK}" -name ".svn" | xargs rm -rf
 }
 
 linux-fetion_src_install() {
