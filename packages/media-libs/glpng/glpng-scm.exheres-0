@@ -1,0 +1,22 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://repo.or.cz/glpng.git"
+require scm-git cmake
+
+SUMMARY="PNG loader for OpenGL"
+HOMEPAGE="http://www.wyatt100.freeserve.co.uk/download.htm"
+DOWNLOADS=""
+
+LICENCES="as-is"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+         media-libs/libpng
+         sys-libs/zlib
+         x11-dri/mesa
+"
+
