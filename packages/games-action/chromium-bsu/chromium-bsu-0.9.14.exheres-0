@@ -26,6 +26,7 @@ DEPENDENCIES="
         )
         !sdl? (
             media-libs/openal
+            x11-dri/freeglut
             media-libs/freealut
         )
         media-libs/glpng
@@ -43,3 +44,6 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     '!sdl glut' '!sdl openal'
 )
 
+src_prepare() {
+    AT_M4DIR="m4" autotools_src_prepare
+}
