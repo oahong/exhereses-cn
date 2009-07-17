@@ -10,7 +10,8 @@ else
     DOWNLOADS="http://ibus.googlecode.com/files/${PNV}.tar.gz"
 fi
 
-SUMMARY="${PN##*-} code table for ibus-table framework"
+MY_TN=${PN##*-}
+SUMMARY="${MY_TN^} code table for ibus-table framework"
 HOMEPAGE="http://ibus.googlecode.com"
 
 LICENCES="GPL-3"

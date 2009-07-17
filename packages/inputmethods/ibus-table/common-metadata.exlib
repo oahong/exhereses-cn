@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ need_pymodule=sqlite ]
+require ibus-engine [ need_pysqlite=true ]
 
 DESCRIPTION="
 IBus-Table is the IM Engine framework for table-based input methods,

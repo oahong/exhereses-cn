@@ -3,17 +3,20 @@
 # Based in part upon 'ibus-table-9999.ebuild' from Gentoo China Overlay, which is:
 #    Copyright 1999-2009 Gentoo Foundation
 
-myexparam need_python=true
-myexparam need_pymodule=
-if [[ $(exparam need_python) == true ]] ; then
+myexparam -b python_dep=true
+myexparam -b need_pysqlite=false
+
+if exparam -b python_dep ; then
     require python [ python_dep=2.5 ]
     export_exlib_phases src_prepare  pkg_postinst pkg_postrm
-    [[ -n $(exparam need_pymodule) ]] && DEPENDENCIES="
-    build+run:
-        dev-lang/python[$(exparam need_pymodule)] [[ note = [ To convert various code tables ] ]]"
 fi
 
-SUMMARY="${SUMMARY:-"The ${PN/ibus-} engine for IBus Framework"}"
+exparam -b need_pysqlite && DEPENDENCIES="
+    build+run:
+        dev-lang/python[sqlite] [[ note = [ for sqlite code tables ] ]]
+"
+
+SUMMARY="${SUMMARY:-"The ${PN#*-} engine for IBus Framework"}"
 HOMEPAGE="http://ibus.googlecode.com"
 if ever at_least scm ; then
     SCM_REPOSITORY="${SCM_REPOSITORY:=git://github.com/phuang/${PN}.git}"
