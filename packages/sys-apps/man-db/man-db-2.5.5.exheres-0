@@ -22,7 +22,6 @@ DEPENDENCIES="
     build:
         sys-devel/gettext
     build+run:
-        user/man
         berkdb? ( sys-libs/db )
         !berkdb? ( sys-libs/gdbm )
         !sys-apps/man
