@@ -24,11 +24,11 @@ DEPENDENCIES="
         ssl? ( dev-libs/openssl )
         x11-libs/qt:4[dbus?][ssl?]
         || (
-            x11-libs/qt:4[phonon]
+            x11-libs/qt:4[phonon][>=4.5]
             kde/kdebase-runtime:4
         )
     suggested:
-        kde/kdeutils:4[kde_parts:kwallet]
+        dbus? ( kde/kdeutils:4[kde_parts:kwallet] )
 "
 
 BUGS_TO="oahong@gmail.com"
@@ -39,16 +39,14 @@ CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
     'debug DEBUG' 'debug SCRIPT_DEBUGGER'
 )
 CMAKE_SRC_CONFIGURE_PARAMS=(
-    -DENABLE_TEST:BOOL=FALSE -DENABLE_PHONON:BOOL=TRUE
+    -DENABLE_TEST:BOOL=TRUE
+    -DENABLE_PHONON:BOOL=TRUE
+    -DENABLE_SCRIPT:BOOL=TRUE
 )
 
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( script.txt )
 
-src_prepare() {
-    # to make CMAKE_SRC_CONFIGURE_* work
-    sed -i \
-        -e 's/QTERM_ENABLE/ENABLE/g' \
-        src/CMakeLists.txt || die "failed to sed CMakeLists.txt"
+#src_prepare() {
 #    expatch "${FILES}"/${PNV}-QVariant-to-string.patch
-    expatch "${FILES}"/${PNV}-qtermsound.patch
-}
+#    expatch "${FILES}"/${PNV}-qtermsound.patch
+#}
