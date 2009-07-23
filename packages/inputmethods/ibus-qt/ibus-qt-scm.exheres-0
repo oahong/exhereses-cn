@@ -15,7 +15,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        inputmethods/ibus
+        sys-apps/dbus
         x11-libs/qt:4[dbus]
 "
 
