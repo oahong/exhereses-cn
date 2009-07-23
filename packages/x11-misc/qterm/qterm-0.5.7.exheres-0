@@ -23,10 +23,7 @@ DEPENDENCIES="
     build+run:
         ssl? ( dev-libs/openssl )
         x11-libs/qt:4[dbus?][ssl?]
-        || (
-            x11-libs/qt:4[phonon][>=4.5]
-            kde/kdebase-runtime:4
-        )
+        x11-libs/qt:4[phonon][>=4.5]
     suggested:
         dbus? ( kde/kdeutils:4[kde_parts:kwallet] )
 "
@@ -46,7 +43,3 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
 
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( script.txt )
 
-#src_prepare() {
-#    expatch "${FILES}"/${PNV}-QVariant-to-string.patch
-#    expatch "${FILES}"/${PNV}-qtermsound.patch
-#}
