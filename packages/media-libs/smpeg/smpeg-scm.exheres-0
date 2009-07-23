@@ -1,0 +1,38 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="svn://svn.icculus.org/smpeg"
+require scm-svn autotools [ supported_autoconf=[ 2.1 ] supported_automake=[ 1.10 ] ]
+
+SUMMARY="SDL MPEG Player Library"
+HOMEPAGE="http://icculus.org/smpeg"
+DOWNLOADS=""
+
+LICENCES="LGPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="
+    x86_cpu_features: mmx"
+#    gtk-player [[ description = [ Build a GTk sample SMPEG player ] ]]
+#    opengl-player [[ description = [ Build an OpenGL sample SMPEG player ] ]]
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+    build+run:
+        media-libs/SDL[>=1.2.0]
+"
+#        opengl-player? ( x11-dri/mesa )
+#        gtk-player? ( x11-libs/gtk+:2 )
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(  --disable-{opengl,gtk}-player )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'x86_cpu_features:mmx mmx' )
+
+src_prepare() {
+    ./autogen.sh
+}
+
+src_install() {
+    default
+    rm -f "${IMAGE}"//usr/share/man/man1/gtv.1 || die "failed to rm gtv.1"
+}
