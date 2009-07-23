@@ -22,10 +22,10 @@ SLOT="0"
 MYOPTIONS="
     doc
     nls
+    qt4
     linguas:
         ${MY_LINGUAS}
 "
-#qt4
 
 DEPENDENCIES="
     build:
@@ -44,6 +44,8 @@ DEPENDENCIES="
         sys-apps/dbus
         x11-libs/gtk+:2
         x11-libs/libX11
+    post,run:
+	qt4? ( inputmethods/ibus-qt )
     post,recommended:
         gnome-desktop/librsvg [[ description = [ required to display svg icons ] ]]
     post,suggested:

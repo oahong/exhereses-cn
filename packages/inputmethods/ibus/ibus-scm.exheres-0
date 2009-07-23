@@ -4,7 +4,6 @@
 SCM_REPOSITORY="git://github.com/phuang/ibus.git"
 require ibus scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
-MYOPTIONS+="qt4"
 DOWNLOADS=""
 PLATFORMS=""
 
@@ -13,8 +12,6 @@ DEPENDENCIES+="
         dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
         sys-devel/gettext[>=0.16.1]
         dev-doc/gtk-doc[>=1.9]
-    post,run:
-        inputmethods/ibus-qt
 "
 
 src_prepare() {
