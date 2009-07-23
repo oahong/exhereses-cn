@@ -1,0 +1,21 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://github.com/phuang/ibus-qt.git"
+require cmake scm-git
+
+SUMMARY="Experimental Qt4 immodule for IBus framework"
+HOMEPAGE="http://ibus.googlecode.com"
+DOWNLOADS=""
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        inputmethods/ibus
+        x11-libs/qt:4[dbus]
+"
+
