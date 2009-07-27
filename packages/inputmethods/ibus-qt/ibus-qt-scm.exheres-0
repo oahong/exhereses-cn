@@ -8,7 +8,7 @@ SUMMARY="Experimental Qt4 immodule for IBus framework"
 HOMEPAGE="http://ibus.googlecode.com"
 DOWNLOADS=""
 
-LICENCES="LGPL-2.1"
+LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
