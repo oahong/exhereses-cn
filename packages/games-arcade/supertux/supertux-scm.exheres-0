@@ -40,7 +40,6 @@ REMOTE_IDS="freshmeat:SuperTux"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki/User_Manual ${HOMEPAGE}/wiki/SuperTux_FAQ"
 
 DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/${PN}-missing-headers.patch
     "${FILES}"/${PN}-fixinstallation.patch
     "${FILES}"/${PN}-no-opengl.patch
 )
