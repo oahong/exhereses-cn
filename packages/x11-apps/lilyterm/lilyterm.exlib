@@ -5,22 +5,22 @@ require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
 export_exlib_phases src_prepare
 
-SUMMARY="A lightweight and easy to use libvte based X Terminal Emulator"
+SUMMARY="A lightweight and easy-to-use terminal emulator"
 HOMEPAGE="http://lilyterm.luna.com.tw"
-DOWNLOADS="http://debian.luna.com.tw/debian/${PN}_$(ever replace 3 '~')-1.tar.gz"
+DOWNLOADS="${HOMEPAGE}/${PN}-$(ever replace 3 '~').tar.gz"
 
 LICENCES="BSD-2"
 SLOT="0"
-MYOPTIONS="nls"
+MYOPTIONS=""
 
 DEPENDENCIES="
-    build+run:
-        x11-libs/gtk+:2[>=2.10]
-        dev-libs/glib:2[>=2.14]
-        dev-libs/vte[>=0.13]
     build:
         dev-util/intltool
-        nls? ( sys-devel/gettext )
+        sys-devel/gettext
+    build+run:
+        dev-libs/glib:2[>=2.14]
+        dev-libs/vte[>=0.13]
+        x11-libs/gtk+:2[>=2.10]
 "
 
 WORK=${WORKBASE}/${PNV/-pre*}
@@ -29,8 +29,7 @@ BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:lilyterm"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/ChangeLog"
 UPSTREAM_DOCUMENTATION="
-${HOMEPAGE}/tips.html [[ lang = zh_TW ]]
-${HOMEPAGE}/rcfile.html [[ lang = zh_TW ]]"
+${HOMEPAGE}/documentation.html [[ lang = zh_TW ]]"
 
 lilyterm_src_prepare() {
     sed -i \
