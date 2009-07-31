@@ -7,17 +7,17 @@ DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="" # sqlite
 
 DEPENDENCIES="
     build:
     build+run:
-        x11-dri/mesa
         dev-libs/fribidi
         media-libs/glew
         media-libs/freetype:2
         media-libs/fontconfig
+        x11-dri/mesa
 "
 #upcomming sqlite support:
 #sqlite? ( dev-db/sqlite:3 )
@@ -29,3 +29,4 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
     --with-{glew,fribidi}
     --enable-executables
 )
+
