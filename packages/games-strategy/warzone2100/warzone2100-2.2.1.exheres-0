@@ -3,4 +3,5 @@
 
 require warzone2100
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
+
