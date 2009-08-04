@@ -5,9 +5,10 @@ require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
 export_exlib_phases src_prepare
 
+MY_PNV=${PN}-$(ever replace 3 '~')
 SUMMARY="A lightweight and easy-to-use terminal emulator"
 HOMEPAGE="http://lilyterm.luna.com.tw"
-DOWNLOADS="${HOMEPAGE}/${PN}-$(ever replace 3 '~').tar.gz"
+DOWNLOADS="${HOMEPAGE}/${MY_PNV}.tar.gz"
 
 LICENCES="BSD-2"
 SLOT="0"
@@ -16,6 +17,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         dev-util/intltool
+        dev-util/pkg-config
         sys-devel/gettext
     build+run:
         dev-libs/glib:2[>=2.14]
@@ -23,7 +25,7 @@ DEPENDENCIES="
         x11-libs/gtk+:2[>=2.10]
 "
 
-WORK=${WORKBASE}/${PNV/-pre*}
+WORK=${WORKBASE}/${MY_PNV}
 
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:lilyterm"
@@ -35,7 +37,5 @@ lilyterm_src_prepare() {
     sed -i \
         -e '/examplesdir/s/\$(PACKAGE)/&-\${PV}/' \
         ${WORK}/data/Makefile.am || die "sed failed"
-
-    intltoolize --automake --copy --force || die "failed to run intltoolize"
-    autotools_src_prepare
+    ./autogen.sh || die "autogen.sh failed"
 }
