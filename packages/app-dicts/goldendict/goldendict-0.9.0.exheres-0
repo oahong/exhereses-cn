@@ -1,0 +1,54 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require qmake4 [ no_qt_dependency=true ]
+
+MY_PNV=${PNV}-src-x11
+SUMMARY="A feature-rich dictionary lookup program"
+HOMEPAGE="http://goldendict.berlios.de"
+DOWNLOADS="
+    mirror://sourceforge/${PN}/${MY_PNV}.tar.bz2
+    mirror://berlios/${PN}/${PNV}.tar.bz2
+"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        x11-proto/xproto
+        x11-proto/recordproto
+    build+run:
+        app-spell/hunspell
+        media-libs/libogg
+        media-libs/libvorbis
+        x11-libs/libX11
+        x11-libs/qt:4[webkit]
+"
+
+BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="sourceforge:GoldenDict freshmeat:GoldenDict"
+UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.php"
+
+WORK=${WORKBASE}/${MY_PNV%-x11}
+
+DEFAULT_SRC_PREPARE_PATCHES=("${FILES}"/${PNV}-stdint.patch )
+
+#TODO:
+# Better morphologies ?
+src_configure() {
+    PREFIX=/usr eqmake4
+}
+
+src_install() {
+    default
+    rm -rf "${IMAGE}"/usr/share/{doc,app-install} || die "failed to remove cruft"
+}
+
+pkg_postinst() {
+    elog "You need some thirdparty dictionary files to use ${PN}."
+    elog "See the following link for more information:"
+    elog "${HOMEPAGE}/dictionaries.php"
+}

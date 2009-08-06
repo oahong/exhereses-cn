@@ -1,0 +1,27 @@
+--- goldendict-0.9.0-src/chunkedstorage.cc.origin	2009-08-06 09:37:53.509960984 +0800
++++ goldendict-0.9.0-src/chunkedstorage.cc	2009-08-06 09:39:14.610961363 +0800
+@@ -5,13 +5,6 @@
+ #include <zlib.h>
+ #include <string.h>
+ 
+-#ifdef _MSC_VER
+-#include <stdint_msvc.h>
+-#else
+-#include <stdint.h>
+-#endif
+-
+-
+ namespace ChunkedStorage {
+ 
+ enum
+--- goldendict-0.9.0-src/chunkedstorage.hh.origin	2009-08-06 09:39:24.122218625 +0800
++++ goldendict-0.9.0-src/chunkedstorage.hh	2009-08-06 09:39:44.264960561 +0800
+@@ -11,6 +11,8 @@
+ 
+ #ifdef _MSC_VER
+ #include <stdint_msvc.h>
++#else
++#include <stdint.h>
+ #endif
+ 
+ /// A chunked compression storage. We use this for articles' bodies. The idea
