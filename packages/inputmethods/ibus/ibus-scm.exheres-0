@@ -7,7 +7,7 @@ require ibus scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[
 DOWNLOADS=""
 PLATFORMS=""
 
-DEPENDENCIES+="
+DEPENDENCIES="
     build:
         dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
         sys-devel/gettext[>=0.16.1]
@@ -15,7 +15,6 @@ DEPENDENCIES+="
 "
 
 src_prepare() {
-    echo "setup/enginetreeview.py" >> po/POTFILES.in
     autopoint || die "autopoint failed"
     intltoolize --copy --force || "intltoolize failed"
     gtkdocize --copy || die "gtkdocize failed"

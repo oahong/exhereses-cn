@@ -21,7 +21,6 @@ LICENCES="LGPL-2.1"
 SLOT="0"
 MYOPTIONS="
     doc
-    nls
     qt4
     linguas:
         ${MY_LINGUAS}
@@ -45,7 +44,7 @@ DEPENDENCIES="
         x11-libs/gtk+:2
         x11-libs/libX11
     post,run:
-	qt4? ( inputmethods/ibus-qt )
+    qt4? ( inputmethods/ibus-qt )
     post,recommended:
         gnome-desktop/librsvg [[ description = [ required to display svg icons ] ]]
     post,suggested:
@@ -57,12 +56,10 @@ DEPENDENCIES="
         linguas:ko? ( inputmethods/ibus-hangul )
         linguas:zh_TW? ( inputmethods/ibus-chewing )
 "
-#        qt4? ( x11-libs/qt:4[dbus] )
 
 BUGS_TO="${HOMEPAGE}/issues/list"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
-#'qt4 qt4-immodule'
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls 'doc gtk-doc' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'doc gtk-doc' )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--disable-iso-codes-check'
     '--disable-dbus-python-check'

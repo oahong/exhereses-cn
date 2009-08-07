@@ -5,8 +5,8 @@ require ibus
 
 PLATFORMS="~amd64 ~x86"
 
-DEPENDENCIES+="
+DEPENDENCIES="
 build:
-    nls? ( sys-devel/gettext[>=0.16.1] )
+    sys-devel/gettext[>=0.16.1]
     doc? ( dev-doc/gtk-doc[>=1.9] )
 "
