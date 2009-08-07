@@ -8,7 +8,7 @@ SUMMARY="A feature-rich dictionary lookup program"
 HOMEPAGE="http://goldendict.berlios.de"
 DOWNLOADS="
     mirror://sourceforge/${PN}/${MY_PNV}.tar.bz2
-    mirror://berlios/${PN}/${PNV}.tar.bz2
+    mirror://berlios/${PN}/${MY_PNV}.tar.bz2
 "
 
 LICENCES="GPL-3"
@@ -26,6 +26,8 @@ DEPENDENCIES="
         media-libs/libvorbis
         x11-libs/libX11
         x11-libs/qt:4[webkit]
+    post,suggested:
+        x11-server/xorg-server[record] [[ description = [ required for hotkeys monitoring mechanism ] ]]
 "
 
 BUGS_TO="oahong@gmail.com"
