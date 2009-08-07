@@ -30,6 +30,7 @@ DEPENDENCIES="
     build:
         dev-util/intltool
         dev-util/pkg-config
+        sys-devel/gettext[>=0.16.1]
     run:
         app-text/iso-codes
         dev-python/dbus-python[>=0.83.0]
@@ -44,16 +45,16 @@ DEPENDENCIES="
         x11-libs/gtk+:2
         x11-libs/libX11
     post,run:
-    qt4? ( inputmethods/ibus-qt )
+        qt4? ( inputmethods/ibus-qt )
     post,recommended:
         gnome-desktop/librsvg [[ description = [ required to display svg icons ] ]]
     post,suggested:
         linguas:ja? ( inputmethods/ibus-anthy )
+        linguas:ko? ( inputmethods/ibus-hangul )
         linguas:zh_CN? (
             inputmethods/ibus-pinyin
             inputmethods/ibus-table
         )
-        linguas:ko? ( inputmethods/ibus-hangul )
         linguas:zh_TW? ( inputmethods/ibus-chewing )
 "
 
