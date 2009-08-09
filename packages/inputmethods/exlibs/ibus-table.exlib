@@ -35,3 +35,4 @@ if [[ "${PN%extraphrase}" == ${PN} ]] ; then
 fi
 
 BUGS_TO="${HOMEPAGE}/issues/list"
+

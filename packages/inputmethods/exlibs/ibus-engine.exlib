@@ -11,45 +11,40 @@ if exparam -b python_dep ; then
     export_exlib_phases src_prepare  pkg_postinst pkg_postrm
 fi
 
-exparam -b need_pysqlite && DEPENDENCIES="
-    build+run:
-        dev-lang/python[sqlite] [[ note = [ for sqlite code tables ] ]]
-"
-
 SUMMARY="${SUMMARY:-"The ${PN#*-} engine for IBus Framework"}"
 HOMEPAGE="http://ibus.googlecode.com"
 if ever at_least scm ; then
     SCM_REPOSITORY="${SCM_REPOSITORY:=git://github.com/phuang/${PN}.git}"
     require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
     DOWNLOADS=""
-    DEPENDENCIES+="
+    DEPENDENCIES="
         build:
-            dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
-            sys-devel/gettext[>=0.16.1]"
+            dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]"
 else
     DOWNLOADS="${DOWNLOADS:="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"}"
-    DEPENDENCIES+="
-        build:
-            nls? ( sys-devel/gettext[>=0.16.1] )"
 fi
 
 export_exlib_phases src_prepare
 
 LICENCES="${LICENSE:-GPL-2}"
 SLOT="0"
-MYOPTIONS="nls"
+MYOPTIONS=""
 
 DEPENDENCIES+="
     build:
         dev-util/pkg-config
+        sys-devel/gettext[>=0.16.1]
     run:
         inputmethods/ibus[>=1.1]
     "
 
+exparam -b need_pysqlite && DEPENDENCIES+="
+    build+run:
+        dev-lang/python[sqlite] [[ note = [ for sqlite code tables ] ]]
+"
+
 BUGS_TO="http://code.google.com/p/ibus/issues/list oahong@gmail.com"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/w/list"
-
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls )
 
 ibus-engine_src_prepare() {
     if ever at_least scm ; then
