@@ -1,10 +1,10 @@
 # Copyright 2008 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-MY_P=${PNV/pidgin-}
+MY_PNV=${PNV/pidgin-}
 SUMMARY="Fetion protocol plugin for libpurple"
 HOMEPAGE="http://github.com/gradetwo/fetion"
-DOWNLOADS="http://www.logvinov.ru/files/dist/fetion/${MY_P}.tar.bz2"
+DOWNLOADS="http://www.logvinov.ru/files/dist/fetion/${MY_PNV}.tar.bz2"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -21,8 +21,9 @@ DEPENDENCIES="
 BUGS_TO="gradetwo@gmail.com oahong@gmail.com"
 REMOTE_IDS="sourceforge:fetion"
 
-WORK=${WORKBASE}/${MY_P}
+WORK=${WORKBASE}/${MY_PNV}
 
+DEFAULT_SRC_CONFIGURE_PARAMS=( --docdir=/usr/share/doc/${PNV} )
 #DEFAULT_SRC_INSTALL_EXTRA_SUBDIRS=( DOC )
 #DEFAULT_SRC_INSTALL_EXTRA_DOCS=( API CHAT FILES LOGIN SKELETON )
 

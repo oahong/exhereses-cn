@@ -3,4 +3,7 @@
 
 require pidgin-fetion
 
-PLATFORMS="~amd64 ~x86"
+DOWNLOADS="http://exherbo-cn.googlecode.com/files/${MY_PNV}.tar.bz2"
+
+PLATFORMS="~x86"
+
