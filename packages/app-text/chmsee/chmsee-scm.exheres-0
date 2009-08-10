@@ -5,4 +5,6 @@ SCM_REPOSITORY="git://github.com/lidaobing/chmsee.git"
 require common-metadata scm-git
 
 DOWNLOADS=""
+
 PLATFORMS="~x86"
+

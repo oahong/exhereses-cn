@@ -1,9 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-export_exlib_phases pkg_setup
-
-require flag-o-matic cmake
+require cmake
 
 SUMMARY="HTML Help viewer for Unix/Linux"
 DESCRIPTION="ChmSee is an HTML Help viewer for Unix/Linux.
@@ -21,12 +19,13 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-libs/glib:2[>=2.8]
-        dev-libs/libxml2
-        dev-libs/xulrunner[>=1.9.1]
-        media-libs/chmlib
         dev-libs/libgcrypt
-        x11-libs/gtk+:2[>=2.8]
+        dev-libs/libxml2
+        dev-libs/nspr
+        dev-libs/xulrunner[>=1.9.1]
         gnome-platform/libglade:2[>=2.4]
+        media-libs/chmlib
+        x11-libs/gtk+:2[>=2.8]
     build:
         sys-devel/gettext
         dev-util/intltool[>=0.37]
@@ -35,7 +34,5 @@ DEPENDENCIES="
 REMOTE_IDS="freshmeat:ChmSee"
 BUGS_TO="http://code.google.com/p/chmsee/issues/list oahong@gmail.com"
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-libxul-embedding-unsatable-minver.patch )
-common-metadata_pkg_setup() {
-    append-flags '-I/usr/include/nspr'
-}
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-nspr.patch )
+

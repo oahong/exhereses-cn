@@ -1,0 +1,14 @@
+Source:
+Upstream: No
+Reason: strange problem, this patch seems to be only required by exherbo.
+--- chmsee-scm/CMakeLists.txt~	2009-08-10 22:24:40.542290487 +0800
++++ chmsee-scm/CMakeLists.txt	2009-08-10 22:42:57.230293046 +0800
+@@ -3,7 +3,7 @@
+ set(PACKAGE_VERSION "1.0.7" )
+ find_package(PkgConfig)
+ 
+-pkg_check_modules (CHMSEE REQUIRED gthread-2.0 glib-2.0 libxml-2.0 gtk+-2.0 libglade-2.0)
++pkg_check_modules (CHMSEE REQUIRED gthread-2.0 glib-2.0 libxml-2.0 gtk+-2.0 libglade-2.0 nspr)
+ pkg_search_module(XULRUNNER REQUIRED libxul-embedding-unstable>=1.9 xulrunner-gtkmozembed>=1.8)
+ set(CHMSEE_INCLUDE_DIRS ${CHMSEE_INCLUDE_DIRS} ${XULRUNNER_INCLUDE_DIRS})
+ set(CHMSEE_CFLAGS_OTHER ${CHMSEE_CFLAGS_OTHER} ${XULRUNNER_CFLAGS_OTHER} -Wall)

@@ -4,3 +4,7 @@
 require common-metadata
 
 PLATFORMS="~x86"
+
+#DEFAULT_SRC_PREPARE_PATCHES+=( "${FILES}"/${PN}-libxul-embedding-unsatable-minver.patch )
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-libxul-minver.patch )
+
