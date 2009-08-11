@@ -57,10 +57,10 @@ REMOTE_IDS="freshmeat:FVWM"
 UPSTREAM_RELEASE_NOTES="${HOMEPAGE}/news/#${PV}"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/documentation/faq"
 
+IMAGEPATH="/usr/share/icons/fvwm:/usr/share/pixmaps:/usr/include/X11/bitmaps"
+
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-menu-syntax.patch )
 
-IMAGEPATH="
-/usr/share/icons/fvwm:/usr/share/pixmaps:/usr/include/X11/bitmaps"
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-gtk   # disable gtk-1/gnome support
     --disable-perllib
@@ -76,10 +76,9 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'stroke stroke-library' )
 
-src_configure() {
+pkg_setup() {
     filter-ldflags '-Wl,--as-needed'
     export FVWM_BUGADDR="${BUGS_TO}"
-    default
 }
 
 src_install() {
