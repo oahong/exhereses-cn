@@ -1,0 +1,30 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require xfce-extras
+
+SUMMARY="Calendar application for Xfce"
+HOMEPAGE="http://www.kolumbus.fi/~w408237/orage"
+DOWNLOADS="${HOMEPAGE}/${PNV}.tar.bz2"
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~86"
+MYOPTIONS="db dbus libnotify"
+
+DEPENDENCIES="
+    build+run:
+        db? ( sys-libs/db[>=4.0] )
+        dbus? ( dev-libs/dbus-glib[>=0.34] )
+        x11-libs/gtk+:2[>=2.10.0]
+        libnotify? ( x11-libs/libnotify )
+        xfce-base/libxfcegui4[>=4.6.0]
+        xfce-base/xfce4-panel[>=4.6.0]
+"
+# orage uses its internal libical which has many fixes, so
+# no need dep on office-libs/libical
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-archive --disable-libxfce4mcs )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'db bdb4' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( dbus libnotify )
+
