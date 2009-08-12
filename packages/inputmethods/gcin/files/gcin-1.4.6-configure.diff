@@ -24,21 +24,6 @@ Reason: fix QT_IM_DIR and icon path
  echo "testing if you have qt4 support"
  if [ -d  $QT4_IM_DIR ]; then
    QT4_IM='Y'
-@@ -214,10 +214,10 @@
- fi
- 
- 
--OPTFLAGS="-g"
--if [ $prefix = /usr ]; then
--  OPTFLAGS="-O"
--fi
-+OPTFLAGS=""
-+#if [ $prefix = /usr ]; then
-+#  OPTFLAGS="-O"
-+#fi
- 
- 
- echo "CC=gcc" > config.mak
 @@ -244,9 +244,9 @@
  echo "OPTFLAGS=$OPTFLAGS" >> config.mak
  echo "DOC_DIR=\$(datadir_r)/doc/gcin-$GCIN_VERSION" >> config.mak
