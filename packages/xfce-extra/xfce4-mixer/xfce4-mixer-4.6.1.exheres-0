@@ -3,7 +3,7 @@
 
 require xfce [ xfce_version="4.6.1" ]
 
-SUMMARY="volume control application for the Xfce"
+SUMMARY="Volume controler for Xfce"
 
 SLOT="0"
 PLATFORMS="~x86"
@@ -22,8 +22,8 @@ DEPENDENCIES="
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 
-src_install() {
-    default
-    mv "${IMAGE}"/usr/share/{xfce4-mixer/,}icons || die "move icons failed"
-    rmdir "${IMAGE}"/usr/share/${PN} || die "rmdir failed"
-}
+#src_install() {
+#    default
+#    mv "${IMAGE}"/usr/share/{xfce4-mixer/,}icons || die "move icons failed"
+#    rmdir "${IMAGE}"/usr/share/${PN} || die "rmdir failed"
+#}
