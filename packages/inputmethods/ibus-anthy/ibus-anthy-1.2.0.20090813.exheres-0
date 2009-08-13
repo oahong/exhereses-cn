@@ -1,11 +1,11 @@
-# Copyright 2009 Hong Hao
+# Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require ibus-engine
 
 PLATFORMS="~x86"
 
-DEPENDENCIES+="
+DEPENDENCIES="
     build:
         dev-lang/swig
     build+run:
