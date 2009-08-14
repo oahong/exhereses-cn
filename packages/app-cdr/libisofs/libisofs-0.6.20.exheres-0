@@ -1,0 +1,33 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="An open-source library to create ISO-9660 filesystem"
+DESCRIPTION="
+libisofs is a library to create an ISO-9660 filesystem, and supports extensions
+like RockRidge or Joliet. It is also a full featured ISO-9660 editor, allowing 
+you to modify an ISO image or multisession disc, including file addition and 
+removal, change of file names and attributes, etc
+
+libisofs supports the extension AAIP which allows to store ACLs and xattr in
+ISO-9660 filesystems.
+If linked with zlib then it supports zisofs compression which is transparently
+uncompressed by some Linux kernels. It is possible to have data file content
+compressed to gzip format or to have it filtered by an external process.
+"
+HOMEPAGE="http://libburnia-project.org"
+DOWNLOADS="http://files.libburnia-project.org/releases/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
+    doc/susp_aaip_2_0.txt
+    doc/susp_aaip_isofs_names.txt
+    doc/Tutorial
+    doc/zisofs_format.txt
+)
+

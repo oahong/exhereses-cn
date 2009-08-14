@@ -1,0 +1,46 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require xfce-extras
+
+SUMMARY="An easy to use burning software for the xfce desktop environment "
+DESCRIPTION="
+Xfburn is a simple CD/DVD burning tool based on libburnia libraries.
+It can blank CD/DVD(-RW)s, burn and create iso images, audio CDs,
+as well as burn personal compositions of data to either CD or DVD.
+It Is stable, and under ongoing development."
+DOWNLOADS="http://archive.xfce.org/src/apps/${PN}/$(ever range 1-2)/${PNV}.tar.bz2"
+
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="debug dbus hal
+    gstreamer [[ description = [ GStreamer support for burning audio CD ] ]]
+    thunar [[ description = [ Use of Thunar's VFS layer to show mime type and icons in file browser ] ]]"
+
+# FIXME: gst-plugin-* mess.
+DEPENDENCIES="
+    build+run:
+        app-cdr/libburn[>=0.4.2]
+        app-cdr/libisofs[>=0.6.2]
+        dbus? ( dev-libs/dbus-glib[>=0.34] )
+        dev-libs/glib:2[>=2.6.0]
+        gstreamer? ( media-plugins/gst-plugins-base[>=0.10.2] )
+        hal? ( sys-apps/hal[>=0.5.7] )
+        thunar? ( xfce-base/thunar )
+        x11-libs/gtk+:2[>=2.10.0]
+        xfce-base/exo[>=0.3.0][hal?]
+        xfce-base/libxfcegui4[>=4.4.0]
+    post,recommended:
+        gstreamer? (
+            media-plugins/gst-plugins-base[gstreamer_plugins:ogg][gstreamer_plugins:vorbis]
+            media-plugins/gst-plugins-good[gstreamer_plugins:flac]
+            media-plugins/gst-plugins-ugly[gstreamer_plugins:mpeg2dec]
+        )
+"
+
+BUGS_TO="oahong@gmail.com"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    debug dbus hal 'thunar thunar-vfs' gstreamer
+)
+
