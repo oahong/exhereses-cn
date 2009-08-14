@@ -3,7 +3,7 @@
 
 require xfce-extras
 
-SUMMARY="An easy to use burning software for the xfce desktop environment "
+SUMMARY="An easy to use CD/DVD burning software for the xfce desktop environment"
 DESCRIPTION="
 Xfburn is a simple CD/DVD burning tool based on libburnia libraries.
 It can blank CD/DVD(-RW)s, burn and create iso images, audio CDs,
@@ -13,34 +13,33 @@ DOWNLOADS="http://archive.xfce.org/src/apps/${PN}/$(ever range 1-2)/${PNV}.tar.b
 
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="debug dbus hal
-    gstreamer [[ description = [ GStreamer support for burning audio CD ] ]]
-    thunar [[ description = [ Use of Thunar's VFS layer to show mime type and icons in file browser ] ]]"
+MYOPTIONS="debug dbus"
 
 # FIXME: gst-plugin-* mess.
 DEPENDENCIES="
     build+run:
-        app-cdr/libburn[>=0.4.2]
+        app-cdr/libburn[>=0.5.6] [[ note = [ upstream recommended version in README ] ]]
         app-cdr/libisofs[>=0.6.2]
         dbus? ( dev-libs/dbus-glib[>=0.34] )
         dev-libs/glib:2[>=2.6.0]
-        gstreamer? ( media-plugins/gst-plugins-base[>=0.10.2] )
-        hal? ( sys-apps/hal[>=0.5.7] )
-        thunar? ( xfce-base/thunar )
+        media-plugins/gst-plugins-base[>=0.10.2]
+        sys-apps/hal[>=0.5.7]
+            [[ note = [ required for notification of disc eject/insert and also for automatic disc unmounting ] ]]
         x11-libs/gtk+:2[>=2.10.0]
-        xfce-base/exo[>=0.3.0][hal?]
+        xfce-base/exo[>=0.3.0][hal]
         xfce-base/libxfcegui4[>=4.4.0]
-    post,recommended:
-        gstreamer? (
+        xfce-base/thunar
+            [[ note = [ required for drag and drop from other applications, icons and automatic disc unmounting ] ]]
+    post,suggested:
+        (
             media-plugins/gst-plugins-base[gstreamer_plugins:ogg][gstreamer_plugins:vorbis]
             media-plugins/gst-plugins-good[gstreamer_plugins:flac]
             media-plugins/gst-plugins-ugly[gstreamer_plugins:mpeg2dec]
-        )
+        ) [[ description = [ required for burning audio CDs from compressed music files, such as mp3, flac, ogg etc. ] ]]
 "
 
 BUGS_TO="oahong@gmail.com"
 
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    debug dbus hal 'thunar thunar-vfs' gstreamer
-)
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{hal,gstreamer,thunar-vfs} )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug dbus )
 
