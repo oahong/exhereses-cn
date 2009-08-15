@@ -1,0 +1,18 @@
+Source: oahong@gmail.com
+Upstream: no
+Reason: Remove redundant menu entry
+--- goldendict-0.9.0-src/redist/goldendict.desktop~	2009-08-15 20:04:36.717385720 +0800
++++ goldendict-0.9.0-src/redist/goldendict.desktop	2009-08-15 20:06:42.836386249 +0800
+@@ -1,10 +1,10 @@
+ [Desktop Entry]
+ Type=Application
+ Terminal=false
+-Categories=Office;Dictionary;Education;Qt;Applications
++Categories=Utility;Dictionary;Qt;
+ Name=GoldenDict
+ GenericName=Multiformat Dictionary
+ Comment=GoldenDict
+ Encoding=UTF-8
+-Icon=/usr/share/pixmaps/goldendict.png
++Icon=goldendict
+ Exec=goldendict

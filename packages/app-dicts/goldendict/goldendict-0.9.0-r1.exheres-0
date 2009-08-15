@@ -36,7 +36,10 @@ UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.php"
 
 WORK=${WORKBASE}/${MY_PNV%-x11}
 
-DEFAULT_SRC_PREPARE_PATCHES=("${FILES}"/${PNV}-stdint.patch )
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/${PNV}-stdint.patch
+    "${FILES}"/${PNV}-desktop-entry.patch
+)
 
 #TODO:
 # Better morphologies ?
@@ -50,7 +53,7 @@ src_install() {
 }
 
 pkg_postinst() {
-    elog "You need some thirdparty dictionary files to use ${PN}."
+    elog "${PN} requires some thirdparty dictionary files."
     elog "See the following link for more information:"
     elog "${HOMEPAGE}/dictionaries.php"
 }
