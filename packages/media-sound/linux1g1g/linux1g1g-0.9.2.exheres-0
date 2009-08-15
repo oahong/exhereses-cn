@@ -3,7 +3,7 @@
 
 require qmake4 [ no_qt_dependency=true ]
 
-DESCRIPTION="Desktop music player for 1g1g.com"
+SUMMARY="Desktop music player for 1g1g.com"
 HOMEPAGE="https://sites.google.com/site/linux1g1g"
 DOWNLOADS="${HOMEPAGE}/home/${PN}-$(ever replace 2 -)-src.tar.bz2?attredirects=0 -> ${PNV}.tar.bz2"
 
