@@ -5,7 +5,9 @@ require xfce-extras
 
 SUMMARY="Weather information plugin for the Xfce4 panel"
 HOMEPAGE="http://goodies.xfce.org"
-DOWNLOADS="${HOMEPAGE}/releases/${PN}/${PNV}.tar.bz2"
+DOWNLOADS="http://archive.xfce.org/src/panel-plugins/${PN}/$(ever range 1-2)/${PNV}.tar.bz2"
+#${HOMEPAGE}/releases/${PN}/${PNV}.tar.bz2"
+#http://archive.xfce.org/src/panel-plugins/xfce4-weather-plugin/0.7/xfce4-weather-plugin-0.7.2.tar.bz2
 
 LICENCES="GPL-2"
 SLOT="0"
