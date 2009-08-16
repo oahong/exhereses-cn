@@ -31,11 +31,3 @@ src_configure() {
         $(! option qt4 && echo '--qt4_im=N' ) \
         --use_i18n=Y --qt3_im=N --use_tsin=Y
 }
-
-src_install() {
-    gcin_src_install
-    hereenvd 95gcin << EOF
-#workaround for im-client.so symbol not found.
-LDPATH="/usr/$(get_libdir)/gcin"
-EOF
-}

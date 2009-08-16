@@ -49,6 +49,8 @@ http://hyperrate.com/files/67/67-OtyYdca5ST/README.html [[ lang = zh_TW ]]
 http://cle.linux.org.tw/trac/wiki/GcinUsage [[ lang = zh_TW ]]
 http://cle.linux.org.tw/trac/wiki/GcinFAQ [[ lang = zh_TW ]]"
 
+DEFAULT_SRC_INSTALL_EXCLUDE=( about.{c,cpp,o} )
+
 WORK=${WORKBASE}/${MY_PNV}
 
 gcin_src_install() {
