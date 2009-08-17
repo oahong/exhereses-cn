@@ -9,7 +9,7 @@ FCITX_DBUS_BRANCH="dbus"
 PLATFORMS=""
 MYOPTIONS="kimpanel [[ description = [ Enable support for kde/plasma-applet-kimpanel ] ]]"
 
-DEPENDENCIES+="
+DEPENDENCIES="
     build+run:
         kimpanel? ( sys-apps/dbus[>=0.2] )
 "
@@ -28,21 +28,26 @@ src_unpack() {
     unpack ${ARCHIVES}
 }
 
+src_prepare() {
+    mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt || die "failed to rename zhengma.txt"
+    expatch "${FILES}"/${PN}-add-zhengma-remove-crap.patch "${FILES}"/${PN}-docdir.patch
+
+    ! option kimpanel && (
+    sed -i \
+        -e "/AM_INIT/s#\(\([[:digit:]]\.*\)\+[-_]\)[[:alnum:]]*#\1SVN-$(date +%y%m%d)#" \
+        configure.in || die "failed to fix version number"
+    sed -i \
+        -e "s#http://www\.fcitx\.org#${HOMEPAGE}#" \
+        src/InputWindow.c || die "failed to fix homepage" )
+    eautoreconf
+
+}
+
+
 src_configure() {
     if option kimpanel ; then
         econf --enable-dbus --enable-xft
     else
         fcitx_src_configure
     fi
-}
-
-src_prepare() {
-    ! option kimpanel && fcitx_src_prepare
-    sed -i \
-        -e "/AM_INIT/s#\(\([[:digit:]]\.*\)\+[-_]\)[[:alnum:]]*#\1SVN-$(date +%y%m%d)#" \
-        configure.in || die "failed to fix version number"
-    sed -i \
-        -e "s#http://www\.fcitx\.org#${HOMEPAGE}#" \
-        src/InputWindow.c || die "failed to fix homepage"
-    eautoreconf
 }

@@ -4,13 +4,14 @@
 require fcitx
 
 MY_PNV=${PNV/p/}
-DOWNLOADS+=" listed-only: http://www.fcitx.org/download/${MY_PNV}.tar.bz2"
+DOWNLOADS+=" listed-only: http://exherbo-cn.googlecode.com/files/${MY_PNV}.tar.gz"
 PLATFORMS="~x86"
 
-DEPENDENCIES+="
+DEPENDENCIES="
     build+run:
         x11-libs/libXrender
         x11-libs/libXt
 "
 
 WORK=${WORKBASE}/${MY_PNV}
+

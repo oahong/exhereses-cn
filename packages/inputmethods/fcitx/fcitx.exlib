@@ -3,7 +3,7 @@
 # Based in part upon 'fcitx-3.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
-export_exlib_phases src_prepare src_configure src_install pkg_postinst
+export_exlib_phases src_configure pkg_postinst
 
 SUMMARY="Free Chinese Input Toy for X"
 DESCRIPTION="Fcitx(Free Chinese Input Toy of X) is a collection of Simplified
@@ -31,22 +31,9 @@ DEPENDENCIES="
 BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--enable-xft' '--enable-tray' )
-DEFAULT_SRC_INSTALL_EXTRA_DOCS=( doc/cjkvinput.txt doc/pinyin.txt )
-
-fcitx_src_prepare() {
-    mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt || die "failed to rename zhengma.txt"
-    expatch "${FILES}"/${PN}-add-zhengma-remove-crap.patch
-}
 
 fcitx_src_configure() {
     default
-}
-
-fcitx_src_install() {
-    default
-    ebegin "Removing unversoned documents"
-        rm -rf "${IMAGE}"/usr/share/${PN}/doc
-    eend $? || die "failed to remove empty directories"
 }
 
 fcitx_pkg_postinst() {
