@@ -17,6 +17,9 @@ SLOT="0"
 MYOPTIONS=""
 
 DEPENDENCIES="
+    build:
+        dev-util/intltool[>=0.37]
+        sys-devel/gettext
     build+run:
         dev-libs/glib:2[>=2.8]
         dev-libs/libgcrypt
@@ -26,13 +29,8 @@ DEPENDENCIES="
         gnome-platform/libglade:2[>=2.4]
         media-libs/chmlib
         x11-libs/gtk+:2[>=2.8]
-    build:
-        sys-devel/gettext
-        dev-util/intltool[>=0.37]
 "
 
 REMOTE_IDS="freshmeat:ChmSee"
 BUGS_TO="http://code.google.com/p/chmsee/issues/list oahong@gmail.com"
-
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-nspr.patch )
 

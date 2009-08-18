@@ -1,10 +1,12 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require common-metadata
+require common-metadata flag-o-matic
 
 PLATFORMS="~x86"
 
-#DEFAULT_SRC_PREPARE_PATCHES+=( "${FILES}"/${PN}-libxul-embedding-unsatable-minver.patch )
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-libxul-minver.patch )
 
+pkg_setup() {
+    append-flags '-I/usr/include/nspr'
+}
