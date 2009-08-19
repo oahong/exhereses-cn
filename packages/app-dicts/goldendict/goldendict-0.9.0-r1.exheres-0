@@ -28,6 +28,7 @@ DEPENDENCIES="
         x11-libs/qt:4[webkit]
     post,suggested:
         x11-server/xorg-server[record] [[ description = [ required for hotkeys monitoring mechanism ] ]]
+        media-sound/WyabdcRealPeopleTTS
 "
 
 BUGS_TO="oahong@gmail.com"
