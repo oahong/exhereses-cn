@@ -1,0 +1,14 @@
+Source: http://sourceforge.net/tracker/index.php?func=detail&aid=2780370&group_id=43722&atid=437209
+Upstream: yes ^^^
+Reason: fix compilation with gcc 4.4
+--- src/bookfile.cpp.orig	2009-04-24 12:31:47.000000000 +0200
++++ src/bookfile.cpp	2009-04-24 12:42:19.000000000 +0200
+@@ -92,7 +92,7 @@
+ {
+ 	gchar tmp, *tmp1, *tmp2;
+ 
+-	tmp1 = strstr (str1, str2);
++	tmp1 = (gchar *) strstr (str1, str2);
+ 	if (!tmp1)
+ 		return NULL;
+ 	else

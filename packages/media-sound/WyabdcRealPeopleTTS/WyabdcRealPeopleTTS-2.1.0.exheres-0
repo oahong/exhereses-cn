@@ -1,0 +1,21 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Wave sound files for stardict and reciteword"
+HOMEPAGE="http://stardict.sourceforge.net"
+DOWNLOADS="mirror://sourceforge/stardict/${PN}.tar.bz2"
+
+LICENCES="FIXME"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+WORK=${WORKBASE}
+
+src_install() {
+    # install is far toooooo slow
+    dodir /usr/share
+    mv ${PN} "${IMAGE}"/usr/share || die "mv failed"
+}
