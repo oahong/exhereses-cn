@@ -3,7 +3,7 @@
 
 require cmake
 
-SUMMARY="Experimental Qt4 immodule for IBus framework"
+SUMMARY="Experimental Qt4 library for IBus framework"
 HOMEPAGE="http://ibus.googlecode.com"
 DOWNLOADS=""
 
@@ -13,6 +13,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
+        dev-libs/icu
         sys-apps/dbus
         x11-libs/qt:4[dbus]
 "
