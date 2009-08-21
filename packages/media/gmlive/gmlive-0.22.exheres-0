@@ -4,38 +4,31 @@
 SUMMARY="live video for linux"
 DESCRIPTION="
 GMLive is a universal streaming media player for Linux. It supports various
-types of P2P broadcasting video streaming such as mms, sopcast and nslive.
+types of P2P broadcasting video streaming such as mms, sopcast and pplive.
 GMLive uses Mplayer/Totem as its backend to provide a convenient and efficient
 way to watch video streaming Online.
 "
 HOMEPAGE="http://gmlive.googlecode.com"
 DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.bz2"
-#http://gmlive.googlecode.com/files/gmlive-0.22-beta.tar.bz2
 
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS="totem [[ description = [ Enable totem plugin support ] ]]"
 
-# TODO:
-# totem needs mms support?
+# TODO: totem needs mms support?
 DEPENDENCIES="
-    build+run:
-        gnome-bindings/gtkmm
-        gnome-bindings/libglademm
-        totem? (
-            gnome-desktop/totem[>=2.20][python]
-        )
     build:
         dev-util/intltool
         sys-devel/gettext
-    run:
-        media/sp-auth [[ description = [ Required for sopcast support ] ]]
+    build+run:
+        dev-libs/libxml2[>=2.6.0]
+        gnome-bindings/gtkmm[>=2.6.0]
+        totem? ( gnome-desktop/totem[>=2.20][python] )
     post,suggested:
         media/mplayer
 "
 
-WORK=${WORK%-beta}
 BUGS_TO="xihels@gmail.com oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'totem plugin' )
@@ -46,4 +39,9 @@ src_prepare() {
         -e 's:channel\.sopcast\.com:channel\.sopcast\.cn:' \
         src/MainWindow.cpp || die "sed failed"
     expatch "${FILES}"/${PNV}-totem-plugin.patch
+}
+
+pkg_postinst() {
+    einfo "sopcast and pplive binary blobs can be downloaded from:"
+    einfo "${HOMEPAGE}/files/gmlive-extra.tar.gz"
 }
