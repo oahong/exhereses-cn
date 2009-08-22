@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-#SCM_REPOSITORY="git://chromium-bsu.git.sourceforge.net/gitroot/chromium-bsu"
+#SCM_REPOSITORY="git://chromium-bsu.git.sourceforge.net/gitroot/chromium-bsu/chromium-bsu"
 require multilib autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
 SUMMARY="Chromium B.S.U. is a fast paced, arcade-style, top-scrolling space shooter"
