@@ -8,7 +8,7 @@ export_exlib_phases src_prepare
 MY_PNV=${PN}-$(ever replace 3 '~')
 SUMMARY="A lightweight and easy-to-use terminal emulator"
 HOMEPAGE="http://lilyterm.luna.com.tw"
-DOWNLOADS="${HOMEPAGE}/${MY_PNV}.tar.gz"
+DOWNLOADS="${HOMEPAGE}/file/${MY_PNV}.tar.gz"
 
 LICENCES="BSD-2"
 SLOT="0"
