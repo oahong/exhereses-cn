@@ -15,9 +15,10 @@ As a feature-rich IM, SunPinyin provides two input style: classic
 input style and instant input style."
 HOMEPAGE="http://www.opensolaris.org/os/project/input-method"
 # filename extension: le -> little endian data files | be -> big endian data files
-DOWNLOADS="http://oahong.googlepages.com/${PNV}.tar.bz2
+DOWNLOADS="listed-only: (
+    http://exherbo-cn.googlecode.com/files/${PNV}.tar.bz2
     http://src.opensolaris.org/source/raw/nv-g11n/inputmethod/${PN}/ime/data/lm_sc.t3g.le
-    http://src.opensolaris.org/source/raw/nv-g11n/inputmethod/${PN}/ime/data/pydict_sc.bin.le"
+    http://src.opensolaris.org/source/raw/nv-g11n/inputmethod/${PN}/ime/data/pydict_sc.bin.le )"
 
 LICENCES="|| ( CDDL LGPL-2.1 )"
 SLOT="0"
@@ -26,12 +27,10 @@ MYOPTIONS="debug"
 
 DEPENDENCIES="
     build+run:
-        sys-libs/glibc
-        x11-libs/gtk+
-        dev-util/intltool
         inputmethods/scim[>=1.4]
     build:
         dev-util/pkg-config
+        dev-util/intltool
         sys-devel/gettext"
 
 WORK=${WORK}/${PN}/ime
@@ -39,16 +38,12 @@ WORK=${WORK}/${PN}/ime
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     '--enable-scim'
     '--disable-cle'
+    '--disable-gtkstandalone'
 )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 
 src_prepare() {
-    expatch -p3 "${FILES}"/${PN}-gcc-4.4.diff
     cp "${FETCHEDDIR}"/{pydict_sc.bin,lm_sc.t3g}.le data || die "failed to copy data files"
-
-    $(type -P glib-gettextize) --force --copy || die "failed to run glib-gettextlize"
-    sed -i \
-        -e 's/^DISTFILES = ChangeLog /DISTFILES = /' po/Makefile.in.in \
-        || die "failed to fix po/Makefile.in.in"
-    autotools_src_prepare
+    ./autogen.sh --do-not-run-configure || die "autogen.sh failed"
 }
+
