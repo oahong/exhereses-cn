@@ -1,36 +1,33 @@
-# Copyright (c) 2008 Hong Hao <oahong@gmail.com>
+# Copyright (c) 2008, 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 # Based in part upon 'scim-pinyin/scim-pinyin-0.5.91-r2.ebuild", which is:
 #     Copyright 1999-2008 Gentoo Foundation
 
-SUMMARY="Smart Pinyin IMEngine for Smart Common Input Method platform"
+SUMMARY="Smart Pinyin IMEngine for Smart Common Input Method platform (SCIM)"
 DESCRIPTION="This package provides smart pinyin IM engine for SCIM. It includes
 the plugin modules and the data files. With this module you can use the smart
 pinyin input method for Chinese.
 "
-HOMEPAGE="www.scim-im.org"
+HOMEPAGE="http://www.scim-im.org"
 DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="debug nls" #FIXME:skim(kde3) support
+MYOPTIONS="debug" #NOTE: kde3 is unsupported
 
-# TODO: Fix depends.
-# http://packages.debian.org/lenny/scim-pinyin
 DEPENDENCIES="
     build+run:
-        x11-libs/libXt
-        inputmethods/scim
-        nls? ( sys-devel/gettext )
+        inputmethods/scim[debug?]
     build:
+        sys-devel/gettext
         dev-util/pkg-config
-    "
-DEFAULT_SRC_CONFIGURATION_ENABLES=( debug nls )
-DEFAULT_SRC_CONFIGURATION_PARAMS=(
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-skim-support
     --disable-tools
-    --disable-rpath
 )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/${PNV}-gcc43.patch" )
