@@ -3,12 +3,12 @@
 # Based in part upon 'wqy-zenhei-0.6.26.ebuild' from Gentoo which is
 #    Copyright 1999-2008 Gentoo Foundation
 
-FONT=${PN%%-*}
+FONT=${PN%%-}
 require xfont multilib
 
 SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
 HOMEPAGE="http://wqy.sourceforge.net/cgi-bin/enindex.cgi?ZenHei(en)"
-DOWNLOADS="mirror://sourceforge/wqy/${PNV}-1.tar.gz"
+DOWNLOADS=""
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -16,7 +16,19 @@ PLATFORMS="~amd64 ~x86"
 
 UPSTREAM_RELEASE_NOTES="http://wenq.org/index.cgi?ZenHei_Pangu_README"
 UPSTREAM_CHANGELOG="http://wenq.org/index.cgi?ZenHei_Pangu_ChangeLog"
+
 WORK=${WORKBASE}/${PN}
+
+src_fetch_extra() {
+    #        http://localhost/~oahong/${PNV}.tar.gz \
+    wget -O "${FETCHEDDIR}"/${PNV}.tar.gz \
+        http://fundawang.lcuc.org.cn/wqy/${PN}-nightly_build.tar.gz \
+        || die "failed to fetch package"
+}
+
+src_unpack() {
+    unpack ${PNV}.tar.gz
+}
 
 src_install() {
     emagicdocs
@@ -24,7 +36,6 @@ src_install() {
     insinto /usr/$(get_libdir)/X11/fonts/${FONT}
     doins *.ttc
     insinto /etc/fonts/conf.avail
-    doins "44-wqy-zenhei.conf" \
-        "66-wqy-zenhei-sharp.conf" "66-wqy-zenhei-sharp-no13px.conf"
+    doins *.conf
     fix_fonts
 }

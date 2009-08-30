@@ -3,7 +3,7 @@
 # Based in part upon 'wqy-zenhei-0.6.26.ebuild' from Gentoo which is
 #    Copyright 1999-2008 Gentoo Foundation
 
-FONT=${PN%%-*}
+FONT=${PN%%-}
 require xfont multilib
 
 SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
