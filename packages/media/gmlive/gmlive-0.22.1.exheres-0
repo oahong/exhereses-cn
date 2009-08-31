@@ -38,10 +38,10 @@ src_prepare() {
     sed -i \
         -e 's:channel\.sopcast\.com:channel\.sopcast\.cn:' \
         src/MainWindow.cpp || die "sed failed"
-    expatch "${FILES}"/${PNV}-totem-plugin.patch
+    expatch "${FILES}"/${PN}-totem-plugin.patch
 }
 
 pkg_postinst() {
     einfo "sopcast and pplive binary blobs can be downloaded from:"
-    einfo "${HOMEPAGE}/files/gmlive-extra.tar.gz"
+    einfo "${HOMEPAGE}/files/gmlive-extra-0.2.tar.gz"
 }
