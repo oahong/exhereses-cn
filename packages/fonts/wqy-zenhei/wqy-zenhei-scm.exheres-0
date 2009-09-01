@@ -14,15 +14,13 @@ LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 
-UPSTREAM_RELEASE_NOTES="http://wenq.org/index.cgi?ZenHei_Pangu_README"
-UPSTREAM_CHANGELOG="http://wenq.org/index.cgi?ZenHei_Pangu_ChangeLog"
-
 WORK=${WORKBASE}/${PN}
+DEFAULT_SRC_INSTALL_EXTRA_DOCS=( "WQY_ZENHEI_NIGHTLY_BUILD" )
 
 src_fetch_extra() {
     #        http://localhost/~oahong/${PNV}.tar.gz \
     wget -O "${FETCHEDDIR}"/${PNV}.tar.gz \
-        http://fundawang.lcuc.org.cn/wqy/${PN}-nightly_build.tar.gz \
+        http://wenq.org/daily/zenhei/ \
         || die "failed to fetch package"
 }
 
@@ -39,3 +37,4 @@ src_install() {
     doins *.conf
     fix_fonts
 }
+
