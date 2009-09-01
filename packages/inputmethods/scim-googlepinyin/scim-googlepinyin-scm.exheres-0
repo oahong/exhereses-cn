@@ -1,0 +1,38 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://github.com/tchaikov/scim-googlepinyin.git"
+require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
+
+SUMMARY="An SCIM port of android Google Pinyin IME"
+DESCRIPTION="
+scim-googlepinyin tries to bring the open source Google pinyin IME
+for Android to GNU/Linux and customize it to fit the need on regular desktop
+instead of on mobile device by following Google Pinyin on Windows.
+This port is still under development. And it needs more testing and bug fixing for sure.
+"
+HOMEPAGE="http://scim-googlepinyin.googlecode.com"
+DOWNLOADS=""
+
+LICENCES="Apache-2.0"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        sys-devel/gettext
+    build+run:
+        x11-libs/libX11
+        inputmethods/scim[>=1.4.0]
+"
+
+BUGS_TO="oahong@gmail.com"
+
+src_prepare() {
+    # automake requires README
+    mv README{.rst,} || die "failed to create README"
+    autotools_src_prepare
+}
+
