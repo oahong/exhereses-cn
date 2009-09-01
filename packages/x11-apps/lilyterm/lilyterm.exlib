@@ -10,7 +10,7 @@ SUMMARY="A lightweight and easy-to-use terminal emulator"
 HOMEPAGE="http://lilyterm.luna.com.tw"
 DOWNLOADS="${HOMEPAGE}/file/${MY_PNV}.tar.gz"
 
-LICENCES="BSD-2"
+LICENCES="GPL-3"
 SLOT="0"
 MYOPTIONS=""
 
@@ -29,9 +29,8 @@ WORK=${WORKBASE}/${MY_PNV}
 
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:lilyterm"
-UPSTREAM_CHANGELOG="${HOMEPAGE}/ChangeLog"
-UPSTREAM_DOCUMENTATION="
-${HOMEPAGE}/documentation.html [[ lang = zh_TW ]]"
+UPSTREAM_CHANGELOG="${HOMEPAGE}/en/changelog.html"
+UPSTREAM_DOCUMENTATION="${HOMEPAGE}/en/document.html"
 
 lilyterm_src_prepare() {
     sed -i \
@@ -39,3 +38,4 @@ lilyterm_src_prepare() {
         ${WORK}/data/Makefile.am || die "sed failed"
     ./autogen.sh || die "autogen.sh failed"
 }
+
