@@ -22,17 +22,17 @@ DEPENDENCIES="
         dev-db/sqlite[>=3]"
 
 WORK=${WORKBASE}/${MY_PNV}
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-gcc-4.4.diff )
+#DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-gcc-4.4.diff )
 
 src_configure() {
     econf \
-        $(optionq linguas:ja && echo '--with-jp_JP' ) \
-        $(optionq linguas:ko && echo '--with-ko_KR' ) \
-        $(optionq linguas:th && echo '--with-th_TH' ) \
-        $(optionq linguas:vi && echo '--with-vi_VN' ) \
-        $(optionq linguas:zh_CN && echo '--with-zh_CN' ) \
-        $(optionq linguas:zh_HK && echo '--with-zh_HK' ) \
-        $(optionq linguas:zh_TW && echo --with-zh_TW{,_hakka,_taigi} ) \
+        $(option linguas:ja && echo '--with-jp_JP' ) \
+        $(option linguas:ko && echo '--with-ko_KR' ) \
+        $(option linguas:th && echo '--with-th_TH' ) \
+        $(option linguas:vi && echo '--with-vi_VN' ) \
+        $(option linguas:zh_CN && echo '--with-zh_CN' ) \
+        $(option linguas:zh_HK && echo '--with-zh_HK' ) \
+        $(option linguas:zh_TW && echo "--with-zh_TW{,_hakka,_taigi}" ) \
         --without-asia
 }
 
@@ -40,3 +40,4 @@ src_install() {
     default
     find "${IMAGE}" -type d -empty -delete || die "failed to rm empty directories"
 }
+
