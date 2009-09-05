@@ -1,0 +1,39 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://anongit.freedesktop.org/~jinghua/libppswrapper"
+require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+
+SUMMARY="A libpps wrapper"
+HOMEPAGE="http://cgit.freedesktop.org/~jinghua"
+DOWNLOADS=""
+
+LICENCES="FIXME"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+# FIXME: depends on libpps
+DEPENDENCIES="
+    build:
+        dev-util/intltool[>=0.40.0]
+        dev-util/pkg-config
+        sys-devel/gettext
+"
+
+BUGS_TO="oahong@gmail.com"
+DEFAULT_SRC_INSTALL_EXCLUDE=( ChangeLog )
+
+src_prepare() {
+    NOCONFIGURE="1" ./autogen.sh || die "autogen.sh failed with code $?"
+}
+
+src_install() {
+    default
+    insinto /etc
+    hereins ppscdn_config.ini <<EOF
+[Directory]
+RootPath=/tmp/pps/
+EOF
+}
+
