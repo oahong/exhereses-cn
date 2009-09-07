@@ -1,0 +1,24 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PNV=${PN/-port}-$(ever range 1-2)-u$(ever range 3)-b$(ever range 4)
+SUMMARY="Monkey's Audio Codec(APE) non-win32 Port"
+HOMEPAGE="http://supermmx.org/linux/mac"
+DOWNLOADS="http://supermmx.org/resources/linux/mac/${MY_PNV}.tar.gz"
+
+LICENCES="FIXME [[ description = [ mac-port has severe license problems ] ]]"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="x86_cpu_features: mmx"
+
+DEPENDENCIES="
+    build:
+        x86_cpu_features:mmx? ( dev-lang/yasm )
+"
+
+BUGS_TO="oahong@gmail.com"
+WORK=${WORKBASE}/${MY_PNV}
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-Fix-compilation-with-gcc-4.3.patch )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'x86_cpu_features:mmx assembly' )
+
