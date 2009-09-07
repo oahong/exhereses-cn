@@ -2,7 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="https://aqualung.svn.sourceforge.net/svnroot/aqualung"
-require scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
+require freedesktop-desktop scm-svn
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 
 SUMMARY="Music player for GNU/Linux"
 DESCRIPTION="
@@ -20,7 +21,11 @@ DOWNLOADS=""
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="cdda cddb ffmpeg jack ladspa lua mac modplug musepack pulseaudio wavpack"
+MYOPTIONS="cddb jack ladspa modplug musepack pulseaudio wavpack
+    cdda [[ description = [ Enable Compact Disk Digital Audio (Standard Audio CD) support ] ]]
+    lua [[ description = [ Enable Lua (programmable title formatting) support ] ]]
+    mac [[ description = [ Enable support for Monkey's Audio Codec (APE) ] ]]
+    ffmpeg [[ description = [ Enable support for FFmpeg's lavc decoder ] ]]"
 #speex ifp doc
 
 DEPENDENCIES="
@@ -28,14 +33,14 @@ DEPENDENCIES="
         dev-util/pkg-config
         sys-devel/gettext
     build+run:
-        cdda? ( media-libs/libcdio[>=0.76] )
+        cdda? ( dev-libs/libcdio[>=0.76] )
         cddb? ( media-libs/libcddb[>=1.2.1] )
         dev-libs/libxml2
         ffmpeg? ( media/ffmpeg )
         jack? ( media-sound/jack-audio-connection-kit )
         ladspa? ( media-libs/liblrdf[>=0.4.0] )
         lua? ( dev-lang/lua[>=5.1] )
-        mac? ( media-libs/mac )
+        mac? ( media-libs/mac-port )
         media-libs/flac[>=1.1.3]
         media-libs/libmad
         media-libs/libsamplerate
@@ -81,5 +86,9 @@ src_compile() {
 
 src_install() {
     default
+    # menu entry taken from arch AUR
+    insinto /usr/share/applications
+    doins "${FILES}"/${PN}.desktop
     rm -rf "${IMAGE}"/usr/share/${PN}/doc || die "failed to rm cruft"
 }
+
