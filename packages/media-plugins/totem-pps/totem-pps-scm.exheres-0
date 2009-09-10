@@ -16,7 +16,7 @@ MYOPTIONS=""
 # FIXME: rdep: gnome-python[gnome][gconf]?
 DEPENDENCIES="
     build:
-        dev-util/intltool[>=0.40.0]
+        dev-util/intltool[>=0.37.0]
         sys-devel/gettext
     build+run:
         gnome-desktop/totem[python]
@@ -26,8 +26,4 @@ DEPENDENCIES="
 BUGS_TO="oahong@gmail.com"
 
 DEFAULT_SRC_INSTALL_EXCLUDE=( ChangeLog )
-
-src_prepare() {
-    NOCONFIGURE=1 ./autogen.sh || die "autogen.sh failed with code $?"
-}
 

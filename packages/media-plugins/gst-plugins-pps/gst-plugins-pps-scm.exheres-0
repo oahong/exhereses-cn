@@ -13,11 +13,10 @@ SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
 
+#FIXME: depends on libpps?
 DEPENDENCIES="
     build:
-        dev-util/intltool[>=0.40.0]
         dev-util/pkg-config
-        sys-devel/gettext
     build+run:
         media-libs/gstreamer:0.10
         media-libs/libppswrapper
@@ -32,6 +31,6 @@ DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-wrapper )
 DEFAULT_SRC_INSTALL_EXCLUDE=( ChangeLog )
 
 src_prepare() {
-    NOCONFIGURE="sunmoon1997" ./autogen.sh || die "autogen.sh failed with code $?"
+    AT_M4DIR="m4" eautoreconf
 }
 

@@ -14,18 +14,16 @@ PLATFORMS="~x86"
 MYOPTIONS=""
 
 # FIXME: depends on libpps
-DEPENDENCIES="
-    build:
-        dev-util/intltool[>=0.40.0]
-        dev-util/pkg-config
-        sys-devel/gettext
-"
+DEPENDENCIES=""
 
 BUGS_TO="oahong@gmail.com"
 DEFAULT_SRC_INSTALL_EXCLUDE=( ChangeLog )
 
 src_prepare() {
-    NOCONFIGURE="1" ./autogen.sh || die "autogen.sh failed with code $?"
+    sed -e '/po\/Makefile/d' \
+        -e '65,72 d' \
+        -i configure.ac || die
+    AT_M4DIR="m4" eautoreconf
 }
 
 src_install() {
