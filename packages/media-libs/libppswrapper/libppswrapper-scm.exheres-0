@@ -20,9 +20,6 @@ BUGS_TO="oahong@gmail.com"
 DEFAULT_SRC_INSTALL_EXCLUDE=( ChangeLog )
 
 src_prepare() {
-    sed -e '/po\/Makefile/d' \
-        -e '65,72 d' \
-        -i configure.ac || die
     AT_M4DIR="m4" eautoreconf
 }
 
