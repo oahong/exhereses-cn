@@ -5,7 +5,3 @@ require lilyterm
 
 PLATFORMS="~x86"
 
-src_prepare() {
-    lilyterm_src_prepare
-    echo "src/profile.c" >> po/POTFILES.in || die "echo failed"
-}
