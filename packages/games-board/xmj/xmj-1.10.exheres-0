@@ -1,0 +1,40 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require toolchain-funcs
+
+MY_PNV=${PNV/x}-src
+SUMMARY="Mah-Jong for Linux, Unix, MacOS and Windows"
+DESCRIPTION="
+These programs allow the user of a Unix (or Windows) computer to play
+Mah-Jong, in the Chinese Classical style, against other users (locally
+or over the Internet), against programmed players, or both.
+"
+HOMEPAGE="http://mahjong.julianbradfield.org"
+DOWNLOADS="${HOMEPAGE}/Source/${MY_PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        dev-lang/perl
+    build+run:
+        x11-libs/gtk+:2
+        dev-libs/glib:2
+"
+
+BUGS_TO="oahong@gmail.com"
+UPSTREAM_DOCUMENTATION="${HOMEPAGE}/use.txt ${HOMEPAGE}/rules.txt"
+WORK=${WORKBASE}/${MY_PNV}
+
+DEFAULT_SRC_COMPILE_PARAMS=(
+    DESTDIR=/usr CC=$(tc-getCC) CCLINK=$(tc-getCC)
+    EXTRA_CFLAGS=${CFLAGS} EXTRA_LDOPTIONS=${LDFLAGS}
+)
+
+DEFAULT_SRC_INSTALL_PARAMS=( DESTDIR="${IMAGE}"/usr )
+
