@@ -8,7 +8,7 @@ SUMMARY="PPStream plugin for gstreamer"
 HOMEPAGE="http://cgit.freedesktop.org/~jinghua"
 DOWNLOADS=""
 
-LICENCES="FIXME"
+LICENCES="LGPL-2"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
@@ -27,7 +27,6 @@ DEPENDENCIES="
 
 BUGS_TO="oahong@gmail.com"
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-wrapper )
 DEFAULT_SRC_INSTALL_EXCLUDE=( ChangeLog )
 
 src_prepare() {
