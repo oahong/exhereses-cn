@@ -1,0 +1,47 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+
+SUMMARY="SuperTuxKart is a Free 3D kart racing game"
+HOMEPAGE="http://supertuxkart.sourceforge.net"
+DOWNLOADS="mirror://sourceforge/${PN}/${PNV}-src.tar.bz2"
+
+##### missing some licenses #####
+#* GPL-3
+#Creative-Commons-Attribution
+#Creative-Commons-BY-SA
+#Creative-Commons-Sampling+
+#FreeArt License
+#SoundSnap license
+#* Public Domain
+#Image*After terms
+LICENCES="GPL-3 public-domain FIXME"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+# XXX: enet for a network multiplayer feature which is still under development
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+        net-libs/enet
+    build+run:
+        dev-games/plib[>=1.8.4]
+        media-libs/SDL
+        media-libs/libvorbis
+        media-libs/openal
+        x11-dri/freeglut
+        x11-dri/mesa
+"
+
+BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="sourceforge:supertuxkart freshmeat:SuperTuxKart"
+UPSTREAM_DOCUMENTATION="${HOMEPAGE}/FAQ"
+
+src_prepare() {
+    rm -rf src/enet || die "failed to remove internal enet source tree"
+    expatch "${FILES}"/${PNV}{,-desktop-entry}.patch
+    AT_M4DIR="m4" eautoreconf
+}
+
