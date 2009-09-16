@@ -1,0 +1,31 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="A suite of portable game libraries"
+DESCRIPTION="
+PLIB includes sound effects, music, a complete 3D engine, font rendering, a simple Windowing library,
+a game scripting language, a GUI, networking, 3D math library and a collection of handy utility functions.
+All are 100% portable across nearly all modern computing platforms. What's more, it's all available on line
+- and completely free. Each library component is fairly independent of the others
+"
+HOMEPAGE="http://plib.sourceforge.net"
+DOWNLOADS="${HOMEPAGE}/dist/${PNV}.tar.gz"
+
+LICENCES="LGPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        x11-proto/xproto
+    build+run:
+        x11-dri/mesa
+        x11-libs/libX11
+        x11-libs/libXmu
+        x11-libs/libXi
+"
+
+BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="freshmeat:PLIB sourceforge:plib"
+
