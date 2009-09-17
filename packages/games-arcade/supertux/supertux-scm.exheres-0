@@ -16,7 +16,7 @@ SUMMARY="A classic 2D jump'n run game similar to the original Super Mario games 
 HOMEPAGE="http://supertux.lethargik.org"
 DOWNLOADS=""
 
-LICENCES="GPL"
+LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS="opengl"
@@ -40,8 +40,8 @@ REMOTE_IDS="freshmeat:SuperTux"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki/User_Manual ${HOMEPAGE}/wiki/SuperTux_FAQ"
 
 DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/${PN}-fixinstallation.patch
     "${FILES}"/${PN}-no-opengl.patch
+    -p0 "${FILES}"/${PN}-fixinstallation.patch
 )
 CMAKE_SRC_CONFIGURE_PARAMS=( -DDEBUG:bool=OFF -DWERROR:bool=OFF )
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'opengl OPENGL' )
@@ -51,3 +51,4 @@ src_install() {
     dodoc WHATSNEW.txt
     rm -rf "${IMAGE}"/usr/share/doc/supertux2 || die "failed to remove unversioned doc"
 }
+
