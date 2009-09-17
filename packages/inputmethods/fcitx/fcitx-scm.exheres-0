@@ -1,57 +1,22 @@
 # Copyright 2008, 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-# http://www.exherbo.org/docs/scm.html#multiple_repositories
-require scm-svn fcitx autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ none ]  ]
 SCM_REPOSITORY="http://fcitx.googlecode.com/svn"
-FCITX_DBUS_BRANCH="dbus"
+require scm-svn fcitx autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ none ]  ]
 
-PLATFORMS=""
-MYOPTIONS="kimpanel [[ description = [ Enable support for kde/plasma-applet-kimpanel ] ]]"
-
-DEPENDENCIES="
-    build+run:
-        kimpanel? ( sys-apps/dbus[>=0.2] )
-"
+PLATFORMS="~x86"
 
 DEFAULT_SRC_CONFIGURE_PARAMS+=( --disable-log )
 
-pkg_setup() {
-    if option kimpanel ; then
-        ewarn "kimpanel option is set!!!"
-        scm_set_var BRANCH ${FCITX_DBUS_BRANCH}
-        SCM_CHECKOUT_TO="fcitx-dbus"
-    fi
-}
-
-scm_finalise
-
 src_unpack() {
     scm_src_unpack
-    unpack ${ARCHIVES}
+    default
 }
 
 src_prepare() {
     mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt || die "failed to rename zhengma.txt"
-    expatch "${FILES}"/${PN}-add-zhengma-remove-crap.patch "${FILES}"/${PN}-docdir.patch
+    expatch -p0 "${FILES}"/${PN}-add-zhengma-support-fix-makefiles.patch \
+        "${FILES}"/${PN}-tables-conf.patch
 
-    ! option kimpanel && (
-    sed -i \
-        -e "/AM_INIT/s#\(\([[:digit:]]\.*\)\+[-_]\)[[:alnum:]]*#\1SVN-$(date +%y%m%d)#" \
-        configure.in || die "failed to fix version number"
-    sed -i \
-        -e "s#http://www\.fcitx\.org#${HOMEPAGE}#" \
-        src/InputWindow.c || die "failed to fix homepage" )
-    eautoreconf
-
+    autotools_src_prepare
 }
-
-
-src_configure() {
-    if option kimpanel ; then
-        econf --enable-dbus --enable-xft
-    else
-        fcitx_src_configure
-    fi
-}
-
