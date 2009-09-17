@@ -1,32 +1,36 @@
-# Copyright 2009 Hong Hao
+# Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'ibus-table-9999.ebuild' from Gentoo China Overlay, which is:
-#    Copyright 1999-2009 Gentoo Foundation
 
 myexparam -b python_dep=true
 myexparam -b need_pysqlite=false
 
-if exparam -b python_dep ; then
-    require python [ python_dep=2.5 ]
-    export_exlib_phases src_prepare  pkg_postinst pkg_postrm
-fi
-
-SUMMARY="${SUMMARY:-"The ${PN#*-} engine for IBus Framework"}"
+SUMMARY="The ${PN#*-} engine for IBus Framework"
 HOMEPAGE="http://ibus.googlecode.com"
 if ever at_least scm ; then
-    SCM_REPOSITORY="${SCM_REPOSITORY:=git://github.com/phuang/${PN}.git}"
-    require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
+    SCM_REPOSITORY="${SCM_REPOSITORY:-git://github.com/phuang/${PN}.git}"
+    require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
     DOWNLOADS=""
-    DEPENDENCIES="
+
+    DEPENDENCIES+="
         build:
             dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]"
 else
-    DOWNLOADS="${DOWNLOADS:="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"}"
+    DOWNLOADS="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"
 fi
 
 export_exlib_phases src_prepare
 
-LICENCES="${LICENSE:-GPL-2}"
+if exparam -b python_dep ; then
+    require python [ python_dep=2.5 ]
+    export_exlib_phases pkg_postinst pkg_postrm
+
+    exparam -b need_pysqlite && DEPENDENCIES="
+        build+run:
+            dev-lang/python[sqlite] [[ note = [ for sqlite code tables ] ]]
+    "
+fi
+
+LICENCES="GPL-2"
 SLOT="0"
 MYOPTIONS=""
 
@@ -34,13 +38,8 @@ DEPENDENCIES+="
     build:
         dev-util/pkg-config
         sys-devel/gettext[>=0.16.1]
-    run:
-        inputmethods/ibus[>=1.1]
-    "
-
-exparam -b need_pysqlite && DEPENDENCIES+="
     build+run:
-        dev-lang/python[sqlite] [[ note = [ for sqlite code tables ] ]]
+        inputmethods/ibus[>=1.1]
 "
 
 BUGS_TO="http://code.google.com/p/ibus/issues/list oahong@gmail.com"
@@ -52,10 +51,8 @@ ibus-engine_src_prepare() {
         AT_M4DIR="m4" autotools_src_prepare
     fi
 
-    # disable python byte compiling
     if [[ -f py-compile ]] ; then
-        rm py-compile || die "failed to rm py-compile"
-        ln -s "$(type -P true)" py-compile || die "failed to create fake py-compile script"
+        echo "#! /usr/bin/python" > py-compile
     fi
 }
 
@@ -66,3 +63,4 @@ ibus-engine_pkg_postinst() {
 ibus-engine_pkg_postrm() {
     python_mod_cleanup /usr/share/${PN}
 }
+
