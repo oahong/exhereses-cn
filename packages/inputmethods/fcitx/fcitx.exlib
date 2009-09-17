@@ -11,7 +11,6 @@ Chinese input methods for Linux. It supports WuBi, Pinyin, Erbi and QuWei input
 methods."
 HOMEPAGE="http://fcitx.googlecode.com"
 DOWNLOADS="listed-only:http://gentoo-china-overlay.googlecode.com/svn/distfiles/zhengma.tbz2"
-#http://fcitx.googlecode.com/files/${PNV}.tar.bz2
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -22,14 +21,10 @@ DEPENDENCIES="
         dev-util/pkg-config
         x11-proto/xproto
     build+run:
-        media-libs/fontconfig
-        media-libs/freetype
         x11-libs/libX11
         x11-libs/libXext
         x11-libs/libXft
         x11-libs/libXpm
-        x11-libs/libXrender
-        x11-libs/libXt
         x11-libs/libXtst
     post,suggested:
         fonts/wqy-zenhei
@@ -57,3 +52,4 @@ fcitx_pkg_postinst() {
     einfo " cp /usr/share/fcitx/data/tables.conf ~/.fcitx"
     einfo
 }
+
