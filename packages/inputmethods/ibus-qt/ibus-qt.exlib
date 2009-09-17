@@ -19,3 +19,4 @@ DEPENDENCIES="
         sys-apps/dbus[>=1.2]
         x11-libs/qt:4[dbus][>=4.5]
 "
+
