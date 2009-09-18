@@ -1,0 +1,74 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="ssh://anon@hg.opensolaris.org/hg/nv-g11n/inputmethod"
+SCM_CHECKOUT_TO="inputmethod"
+
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ] scm-hg
+
+MY_PNV=${PNV/pre}
+SUMMARY="A SLM based Chinese PinYin input method engine"
+DESCRIPTION="
+SunPinyin is an SLM (Statistical Language Model) based input method
+engine (IME) developed by Sun Asian G11N Center. Currently, it
+supports IIIMF (Internet/Intranet Input Method Framework), SCIM
+(Smart Common Input Method), BeCJK and IBus.
+As a feature-rich IM, SunPinyin provides two input style: classic
+input style and instant input style."
+HOMEPAGE="http://www.opensolaris.org/os/project/input-method"
+DOWNLOADS=""
+
+LICENCES="CDDL LGPL-2.1"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="debug doc ( ibus scim ) [[
+    number-selected = at-least-one
+    description = [ Only ibus wrapper works ]
+]]"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        sys-devel/gettext
+        doc? ( dev-lang/perl )
+    build+run:
+        !inputmethods/sunpinyin
+        dev-db/sqlite:3
+        ibus? (
+            dev-lang/python:=[>=2.5]
+            inputmethods/ibus[>=1.2.0]
+        )
+        scim? ( inputmethods/scim[>=1.4] )
+        x11-libs/libX11
+"
+
+WORK=${WORK}/${PN}
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --disable-{cle,gtkstandalone}
+    --disable-{bestandalone,becjk-module}
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'doc documents' ibus scim )
+
+pkg_setup() {
+    option ibus && require python [ python_dep=2.5 ]
+}
+
+src_prepare() {
+    # file extension: le -> little endian data files | be -> big endian data files
+    ( cp ../sunpinyin/ime/data/lm_sc.t3g.le data && \
+        cp ../sunpinyin/ime/data/pydict_sc.bin.le data/pydict_sc.bin ) \
+        || die "failed to preparing pinyin database"
+    ./autogen.sh --do-not-run-configure || die "autogen.sh failed"
+
+     echo "#! /bin/bash" > py-compile
+}
+
+pkg_postinst() {
+    option ibus && python_mod_optimize /usr/share/ibus-sunpinyin/setup
+}
+
+pkg_postrm() {
+    option ibus && python_mod_cleanup /usr/share/ibus-sunpinyin/setup
+}
+
