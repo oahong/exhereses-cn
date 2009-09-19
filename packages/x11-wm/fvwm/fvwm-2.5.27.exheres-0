@@ -97,9 +97,24 @@ src_install() {
         -name '*FvwmGtkDebug*' -delete \
         || die "failed to rm unwanted files"
 
-    insinto /etc/X11/Sessions
-    hereins fvwm << EOF
-#!/bin/sh
-exec fvwm
+    insinto /usr/share/xsessions
+    hereins fvwm.desktop <<EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name=Fvwm
+Comment=Fvwm
+Exec=fvwm2
+Terminal=False
+TryExec=fvwm2
+Type=Application
+
+[Window Manager]
+SessionManaged=true
 EOF
+    insinto /etc/X11/Sessions
+    hereins fvwm <<EOF
+/usr/bin/fvwm2
+EOF
+    fperm 755 /etc/X11/sessions/fvwm
 }
+
