@@ -21,7 +21,11 @@ DOWNLOADS=""
 LICENCES="CDDL LGPL-2.1"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="debug doc ( ibus scim ) [[
+MYOPTIONS="debug doc
+    (
+        ibus [[ description = [ Enable support for ibus Platform ] ]]
+        scim [[ description = [ Enable support for scim Platform ] ]]
+    ) [[
     number-selected = at-least-one
     description = [ Only ibus wrapper works ]
 ]]"
@@ -30,16 +34,15 @@ DEPENDENCIES="
     build:
         dev-util/pkg-config
         sys-devel/gettext
+        dev-libs/glib:2 [[ note = [ glib-gettextize ] ]]
         doc? ( dev-lang/perl )
     build+run:
-        !inputmethods/sunpinyin
         dev-db/sqlite:3
         ibus? (
             dev-lang/python:=[>=2.5]
             inputmethods/ibus[>=1.2.0]
         )
         scim? ( inputmethods/scim[>=1.4] )
-        x11-libs/libX11
 "
 
 WORK=${WORK}/${PN}
@@ -51,17 +54,14 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'doc documents' ibus scim )
 
 pkg_setup() {
-    option ibus && require python [ python_dep=2.5 ]
+    option ibus && require python [ has_lib=false ]
 }
 
 src_prepare() {
     # file extension: le -> little endian data files | be -> big endian data files
-    ( cp ../sunpinyin/ime/data/lm_sc.t3g.le data && \
-        cp ../sunpinyin/ime/data/pydict_sc.bin.le data/pydict_sc.bin ) \
-        || die "failed to preparing pinyin database"
+    cp ../sunpinyin/ime/data/lm_sc.t3g.le data || die "failed to preparing pinyin database"
     ./autogen.sh --do-not-run-configure || die "autogen.sh failed"
-
-     echo "#! /bin/bash" > py-compile
+    echo "#! /bin/bash" > py-compile
 }
 
 pkg_postinst() {
