@@ -24,8 +24,6 @@ DEPENDENCIES="
         dev-libs/glib:2[>=2.8]
         dev-libs/libgcrypt
         dev-libs/libxml2
-        dev-libs/nspr
-        dev-libs/xulrunner[>=1.9.1]
         gnome-platform/libglade:2[>=2.4]
         media-libs/chmlib
         x11-libs/gtk+:2[>=2.8]

@@ -5,8 +5,9 @@ require common-metadata flag-o-matic
 
 PLATFORMS="~x86"
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-libxul-minver.patch )
+DEPENDENCIES="
+    build+run:
+        dev-libs/nspr
+        dev-libs/xulrunner[>=1.8|>=1.9.1]
+"
 
-pkg_setup() {
-    append-flags '-I/usr/include/nspr'
-}
