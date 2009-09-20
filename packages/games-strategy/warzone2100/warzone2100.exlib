@@ -45,7 +45,7 @@ DEPENDENCIES="
         media-libs/SDL[>=1.2]
         media-libs/SDL_net[>=1.2]
         media-libs/libpng[>=1.2]
-        media-libs/libtheora[>=0.1]
+        media-libs/libtheora[>=1.0]
         media-libs/openal
         media-libs/libvorbis
         dev-libs/popt
