@@ -5,7 +5,7 @@ require cmake
 
 export_exlib_phases src_install
 
-SUMMARY="a modern terminal emulator for Linux"
+SUMMARY="A modern terminal emulator for Linux"
 DESCRIPTION="
 FQTerm is a cross-platform terminal emulator program which supports
 telnet/ssh1/ssh2 protocols and can process ANSI control sequences. It
@@ -23,8 +23,6 @@ DEPENDENCIES="
         dev-libs/openssl
         x11-libs/qt:4[X][qt3support][ssl]
         sys-sound/alsa-lib
-    build:
-        app-arch/unzip
 "
 
 fqterm_src_install() {

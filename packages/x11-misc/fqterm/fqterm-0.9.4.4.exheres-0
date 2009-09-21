@@ -3,7 +3,8 @@
 
 require fqterm
 
-DOWNLOADS+="http://fqterm.googlecode.com/files/${PN}_$(ever replace_all '_')_r770.zip"
-
+DOWNLOADS+="http://fqterm.googlecode.com/files/${PNV}.tar.gz"
 PLATFORMS="~x86"
-WORK=${WORKBASE}/${PN/term}
+
+WORK=${WORKBASE}/${PN}
+
