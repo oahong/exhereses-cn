@@ -3,13 +3,17 @@
 
 require ibus-engine [ need_pysqlite=true ]
 
-PINYIN_DB="pinyin-database-0.1.10.6.tar.bz2"
+PYDB_VER="1.3.0"
+PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
 SUMMARY="Chinese PinYin IMEngine for IBus Framework"
 DOWNLOADS="${HOMEPAGE}/files/${PINYIN_DB}"
 
 PLATFORMS="~x86"
 
 src_prepare() {
+    sed -e "s/DBVER = .*/DBVER = ${PYDB_VER}/" \
+        -i engine/Makefile.am || die "failed to fix Makefile.am"
     ibus-engine_src_prepare
-    cp ${FETCHEDDIR}/${PINYIN_DB} engine || die "failed to copy pinyin database"
+    cp ${FETCHEDDIR}/${PYDB} engine || die "failed to copy pinyin database"
 }
+
