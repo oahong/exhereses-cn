@@ -6,7 +6,7 @@ require scm-svn fcitx autotools [ supported_autoconf=[ 2.5 ] supported_automake=
 
 PLATFORMS="~x86"
 
-DEFAULT_SRC_CONFIGURE_PARAMS+=( --disable-log )
+DEFAULT_SRC_CONFIGURE_PARAMS+=( --enable-log )
 
 src_unpack() {
     scm_src_unpack

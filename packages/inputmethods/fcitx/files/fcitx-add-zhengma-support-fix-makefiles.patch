@@ -2,14 +2,12 @@ Index: src/Makefile.am
 ===================================================================
 --- src/Makefile.am	(版本 250)
 +++ src/Makefile.am	(工作副本)
-@@ -1,6 +1,6 @@
+@@ -1,4 +1,3 @@
  DEFS = -DPKGDATADIR=\"$(pkgdatadir)\"
  
 -INCLUDES = -I. -I$(top_srcdir)/lib -I$(top_srcdir)/xpm
-+AM_CPPFLAGS = -I. -I$(top_srcdir)/lib -I$(top_srcdir)/xpm
- AM_CFLAGS = -O2 -fno-strength-reduce
- 
- 
+-AM_CFLAGS = -O2 -fno-strength-reduce
++AM_CPPFLAGS = -I. -I$(top_srcdir)/lib -I$(top_srcdir)/xpm 
 Index: tools/Makefile.am
 ===================================================================
 --- tools/Makefile.am	(版本 250)
@@ -51,9 +49,9 @@ Index: doc/Makefile.am
 +EXTRA_DIST = fcitx_trunk.doxyfile
 Index: data/Makefile.am
 ===================================================================
---- data/Makefile.am	(版本 250)
+--- data/Makefile.am	(版本 254)
 +++ data/Makefile.am	(工作副本)
-@@ -1,13 +1,12 @@
+@@ -1,13 +1,13 @@
  tabledir = $(pkgdatadir)/data
 -table_DATA = cj.mb erbi.mb punc.mb pybase.mb pyphrase.mb pySym.mb sp.dat \
 -	     wbx.mb wanfeng.mb wbpy.mb qxm.mb zrm.mb db.mb \
@@ -61,19 +59,21 @@ Index: data/Makefile.am
 -             pyPhrase.org qxm.txt zrm.txt erbi.txt wbpy.txt gbkpy.org db.txt \
 -             wanfeng.txt cj.txt wbx.txt
 -EXTRA_DIST = $(table_DATA)
++mb_extra = punc.mb pySym.mb sp.dat tables.conf vk.conf gbks2t.tab config AutoEng.dat
++mb_data = cj.mb erbi.mb wanfeng.mb wbpy.mb qxm.mb db.mb wbx.mb zrm.mb zhengma.mb \
++		pybase.mb pyphrase.mb
 +table_DATA = $(mb_data) $(mb_extra)
 +table_SOURCE = pyPhrase.org qxm.txt zrm.txt erbi.txt wbpy.txt gbkpy.org db.txt \
 +             wanfeng.txt cj.txt wbx.txt zhengma.txt
 +EXTRA_DIST = $(table_SOURCE) $(mb_extra)
 +DISTCLEANFILES = $(mb_data) $(py_data)
  
-+mb_extra = punc.mb pySym.mb sp.dat tables.conf vk.conf gbks2t.tab config AutoEng.dat
- mb_data = cj.mb erbi.mb wanfeng.mb wbpy.mb qxm.mb db.mb wbx.mb zrm.mb
+-mb_data = cj.mb erbi.mb wanfeng.mb wbpy.mb qxm.mb db.mb wbx.mb zrm.mb
 -
  %.mb: %.txt
  	../tools/txt2mb $< $@
  
-@@ -21,4 +20,3 @@
+@@ -21,4 +21,3 @@
  all: tools $(mb_data) $(py_data)
  	rm -f pyERROR
  	rm -f pyPhrase.ok
