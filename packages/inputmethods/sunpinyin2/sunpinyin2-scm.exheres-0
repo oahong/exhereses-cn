@@ -18,7 +18,7 @@ input style and instant input style."
 HOMEPAGE="http://www.opensolaris.org/os/project/input-method"
 DOWNLOADS=""
 
-LICENCES="||( CDDL LGPL-2.1 )"
+LICENCES="|| ( CDDL LGPL-2.1 )"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS="debug doc
