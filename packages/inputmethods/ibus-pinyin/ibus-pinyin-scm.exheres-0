@@ -1,19 +1,18 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ need_pysqlite=true ]
+SCM_BRANCH="1.2.99"
+require ibus-engine
 
-PYDB_VER="1.3.0"
+PYDB_VER="1.2.99"
 PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
 SUMMARY="Chinese PinYin IMEngine for IBus Framework"
-DOWNLOADS="${HOMEPAGE}/files/${PINYIN_DB}"
+DOWNLOADS="${HOMEPAGE}/files/${PYDB}"
 
 PLATFORMS="~x86"
 
 src_prepare() {
-    sed -e "s/DBVER = .*/DBVER = ${PYDB_VER}/" \
-        -i engine/Makefile.am || die "failed to fix Makefile.am"
     ibus-engine_src_prepare
-    cp ${FETCHEDDIR}/${PYDB} engine || die "failed to copy pinyin database"
+    cp ${FETCHEDDIR}/${PYDB} data || die "failed to copy pinyin database"
 }
 
