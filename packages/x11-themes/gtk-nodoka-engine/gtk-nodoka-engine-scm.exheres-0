@@ -1,0 +1,28 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://git.fedorahosted.org/nodoka"
+SCM_CHECKOUT_TO="nodoka"
+require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+
+SUMMARY="Nodoka GTK+ Engine"
+HOMEPAGE="https://fedoraproject.org/wiki/Artwork/NodokaTheme"
+DOWNLOADS=""
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+    build+run:
+        x11-libs/gtk+:2[>=2.10.0]
+"
+
+BUGS_TO="oahong@gmail.com"
+WORK=${WORK}/${PN}
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-animation )
+
