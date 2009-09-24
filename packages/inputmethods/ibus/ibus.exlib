@@ -28,7 +28,7 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        dev-util/intltool
+        dev-util/intltool[>=0.40.0]
         dev-util/pkg-config
         sys-devel/gettext[>=0.16.1]
     run:
@@ -43,7 +43,6 @@ DEPENDENCIES="
         gnome-platform/GConf[>=2.12]
         sys-apps/dbus
         x11-libs/gtk+:2
-        x11-libs/libX11
     post,run:
         qt4? ( inputmethods/ibus-qt )
     post,recommended:
@@ -53,6 +52,7 @@ DEPENDENCIES="
         linguas:ko? ( inputmethods/ibus-hangul )
         linguas:zh_CN? (
             inputmethods/ibus-pinyin
+            inputmethods/sunpinyin2[ibus]
             inputmethods/ibus-table
         )
         linguas:zh_TW? ( inputmethods/ibus-chewing )
@@ -74,8 +74,7 @@ ibus_src_prepare() {
 
 ibus_src_install() {
     default
-    keepdir /usr/share/${PN}/engine
-    rmdir "${IMAGE}"/usr/share/${PN}/icons || die "failed to rm empty icons dir"
+    rmdir "${IMAGE}"/usr/share/${PN}/{engine,icons} || die "failed to rm empty dirs"
 }
 
 ibus_pkg_postinst() {
