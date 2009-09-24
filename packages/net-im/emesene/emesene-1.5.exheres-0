@@ -3,7 +3,7 @@
 
 require python [ python_dep=2.5 ]
 
-SUMMARY="An IM for the WLM(TM) network"
+SUMMARY="A multiplattform MSN messenger client written in Python and PyGTK"
 HOMEPAGE="http://www.emesene.org"
 DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.gz"
 
@@ -18,28 +18,33 @@ DEPENDENCIES="
     post,suggested:
         dev-lang/python[sqlite]
         dev-python/dbus-python
-        dev-python/gtkspell-python
-        dev-python/python-notify
-        dev-python/sexy-python
+        dev-python/gnome-python-extras
+        dev-python/notify-python
+        gnome-bindings/sexy-python
+        media-libs/libmimic
 "
-# post,suggeted:
-# libmimic?
 
+# FIXME: use distutils_src_install? fix setup.py?
 src_install() {
-    insinto /usr/share/applications
-    doins misc/emesene.desktop
+    insinto /usr/share/locale
+    doins -r po/*
     insinto /usr/share/pixmaps
-    doins misc/emesene.png
+    doins misc/${PN}.png
+    insinto /usr/share/applications
+    doins misc/${PN}.desktop
 
-    rm build libmimic misc -rf || die "failed to remove unwanted files"
+    doman misc/${PN}.1
+
+    rm build libmimic po misc $(find . -name *~) -rf || die "failed to remove unwanted files"
     local subdir=$(for i in *; do if [[ -d $i ]] ; then ls -d $i; fi; done | xargs)
 
     insinto /usr/share/${PN}
-    doins *.py ${PN}
+    doins *.py
     doins -r ${subdir}
+    newins ${PN} ${PN}.py
 
-    # stolen from gentoo-china overlay
-    echo -e '#!/bin/bash \n python /usr/share/emesene/emesene' > emesene
+    #stolen from gentoo-china overlay
+    echo -e '#!/bin/bash \n python /usr/share/emesene/emesene.py' > emesene
     dobin emesene
 }
 
