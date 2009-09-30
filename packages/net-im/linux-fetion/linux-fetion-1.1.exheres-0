@@ -10,3 +10,4 @@ PLATFORMS="~amd64 ~x86"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/VersionInfo%5CV${PV}.txt [[ lang = zh_CN  ]]"
 
 WORK=${WORKBASE}/${MY_PNV}
+
