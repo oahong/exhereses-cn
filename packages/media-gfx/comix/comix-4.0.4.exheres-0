@@ -1,0 +1,55 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require freedesktop-desktop gnome-2 python [ python_dep=2.4 ]
+
+SUMMARY="GTK Comic Book Viewer"
+DESCRIPTION="
+Comix is a user-friendly, customizable image viewer. It is specifically designed to handle
+comic books, but also serves as a generic viewer. It reads images in ZIP, RAR or tar archives
+(also gzip or bzip2 compressed) as well as plain image files. It is written in Python and
+uses GTK+ through the PyGTK bindings.
+"
+HOMEPAGE="http://comix.sourceforge.net"
+DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    run:
+        dev-python/Imaging[>=1.1.5]
+        gnome-bindings/pygtk[>=2.12]
+    post,suggested:
+        app-arch/unrar
+        app-arch/unzip
+        dev-lang/python[sqlite]
+"
+
+BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="sourceforge:comix"
+UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.html"
+
+src_install() {
+# TODO: remove no-mime option when install comix?
+#    addfilter /root/.gconf
+#    export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL="1"
+    dodir /usr
+    python_version
+    python${PYVER} install.py --no-mime --dir="${IMAGE}"/usr install || die "failed to install ${PN}"
+}
+
+pkg_postinst() {
+    freedesktop-desktop_pkg_postinst
+    gnome_exlib_update_icon_cache
+    python_mod_optimize /usr/share/${PN}/src
+}
+
+pkg_postrm() {
+    freedesktop-desktop_pkg_postrm
+    gnome_exlib_update_icon_cache
+    python_mod_cleanup /usr/share/${PN}/src
+}
+
