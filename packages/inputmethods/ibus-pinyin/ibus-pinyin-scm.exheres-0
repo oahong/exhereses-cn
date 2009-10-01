@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_BRANCH="1.2.99"
+#SCM_BRANCH="1.2.99"
 require ibus-engine
 
 PYDB_VER="1.2.99"
