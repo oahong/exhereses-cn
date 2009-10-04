@@ -5,9 +5,14 @@ SCM_REPOSITORY="http://fqterm.googlecode.com/svn"
 require fqterm scm-svn
 
 PLATFORMS=""
+DEPENDENCIES="
+    build+run:
+        dev-lang/python:=[>=2.5]
+"
 
 src_unpack() {
     # unpack QQWry.zip
     default
     scm_src_unpack
 }
+
