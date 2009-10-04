@@ -24,7 +24,7 @@ PLATFORMS="~x86"
 MYOPTIONS="debug doc
     (
         ibus [[ description = [ Enable support for ibus Platform ] ]]
-        scim [[ description = [ Enable support for scim Platform ] ]]
+        scim [[ description = [ Enable support for scim Platform (not ready) ] ]]
     ) [[
     number-selected = at-least-one
     description = [ Only ibus wrapper works ]
