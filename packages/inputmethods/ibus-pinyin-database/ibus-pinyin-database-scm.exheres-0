@@ -1,0 +1,34 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://github.com/phuang/ibus-pinyin-database.git"
+require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+
+PY_DBVER=1.2.99
+PINYIN_DB=pinyin-database-${PY_DBVER}.tar.bz2
+SUMMARY="The Chinese Pinyin database for IBus Pinyin input method"
+HOMEPAGE="http://ibus.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/${PINYIN_DB}"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-db/sqlite
+"
+
+BUGS_TO="oahong@gmail.com"
+
+src_prepare() {
+    cp ${FETCHEDDIR}/${PINYIN_DB} data || die "failed to prepare ${PINYIN_DB}"
+    AT_M4DIR="m4" eautoreconf
+}
+
+src_install() {
+    default
+    rm "${IMAGE}"/usr/share/${PN}/db/COPYING || die "failed to remove redundant file"
+}
+
