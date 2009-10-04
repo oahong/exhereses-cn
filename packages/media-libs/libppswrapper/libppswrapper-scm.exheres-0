@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="git://anongit.freedesktop.org/~jinghua/libppswrapper"
-require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+require flag-o-matic scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 
 SUMMARY="A libpps wrapper"
 HOMEPAGE="http://cgit.freedesktop.org/~jinghua"
@@ -20,6 +20,7 @@ BUGS_TO="oahong@gmail.com"
 DEFAULT_SRC_INSTALL_EXCLUDE=( ChangeLog )
 
 src_prepare() {
+    filter-ldflags '-Wl,--as-needed'
     AT_M4DIR="m4" eautoreconf
 }
 
