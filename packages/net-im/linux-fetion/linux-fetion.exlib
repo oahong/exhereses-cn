@@ -1,4 +1,4 @@
-# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Copyright 2008, 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 # Based in part upon 'linux-fetion-0.8.1.ebuild' from Gentoo China Overlay, which is:
 #     Copyright 1999-2008 Gentoo Foundation
@@ -24,13 +24,12 @@ DEPENDENCIES="
 linux-fetion_src_prepare() {
     if option platform:amd64 ; then
         sed -i \
-            -e "/libfetion.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" \
+            -e "/libfetion.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a"    \
             -e "/libfetion_32.a/c    LIBS +=  -lcurl ./libs/libfetion_64.a" \
             ${PN}.pro || die "sed failed"
     fi
     sed -i \
         -e 's/;Network/&;/' misc/LibFetion.desktop || die "failed to fix desktop entry"
-    find "${WORK}" -name ".svn" | xargs rm -rf
 }
 
 linux-fetion_src_install() {
@@ -46,7 +45,8 @@ linux-fetion_src_install() {
     dobin ${PN}
 
     if option doc ; then
-        insinto /usr/share/doc/${PNV}
-        doins APIDocs/html/*
+        docinto API
+        dodoc APIDocs/html/*
     fi
 }
+
