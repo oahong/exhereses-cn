@@ -13,7 +13,7 @@ PLATFORMS="~x86"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    build+run:
+    run:
         gnome-bindings/pygtk
     post,suggested:
         dev-lang/python[sqlite]
@@ -24,8 +24,26 @@ DEPENDENCIES="
         media-libs/libmimic
 "
 
+src_prepare() {
+    find . -name *~ -delete || die "failed to remove stray backup files"
+}
+
 # FIXME: use distutils_src_install? fix setup.py?
 src_install() {
+    local subdir=(
+        abstract conversation_themes emesenelib
+        plugins_base smilies sound_themes themes
+    )
+
+    insinto /usr/share/${PN}
+    doins *.py
+    doins -r ${subdir[@]}
+    newins ${PN} ${PN}.py
+
+    #stolen from gentoo-china overlay
+    echo -e '#!/bin/bash \n python /usr/share/emesene/emesene.py' > emesene
+    dobin emesene
+
     insinto /usr/share/locale
     doins -r po/*
     insinto /usr/share/pixmaps
@@ -34,18 +52,6 @@ src_install() {
     doins misc/${PN}.desktop
 
     doman misc/${PN}.1
-
-    rm build libmimic po misc $(find . -name *~) -rf || die "failed to remove unwanted files"
-    local subdir=$(for i in *; do if [[ -d $i ]] ; then ls -d $i; fi; done | xargs)
-
-    insinto /usr/share/${PN}
-    doins *.py
-    doins -r ${subdir}
-    newins ${PN} ${PN}.py
-
-    #stolen from gentoo-china overlay
-    echo -e '#!/bin/bash \n python /usr/share/emesene/emesene.py' > emesene
-    dobin emesene
 }
 
 pkg_postinst() {
