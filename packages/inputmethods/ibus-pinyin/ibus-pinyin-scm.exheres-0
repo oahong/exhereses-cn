@@ -1,15 +1,18 @@
-# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ python_dep=false ]
+#SCM_BRANCH="1.2.99"
+require ibus-engine
 
+PYDB_VER="1.2.99"
+PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
 SUMMARY="Chinese PinYin IMEngine for IBus Framework"
+DOWNLOADS="${HOMEPAGE}/files/${PYDB}"
+
 PLATFORMS="~x86"
 
-DEPENDENCIES="
-    run:
-        inputmethods/ibus-pinyin-database
-"
-
-DEFAULT_SRC_CONFIGURE_PARAMS=( --disable-pinyin-database )
+src_prepare() {
+    ibus-engine_src_prepare
+    cp ${FETCHEDDIR}/${PYDB} data || die "failed to copy pinyin database"
+}
 
