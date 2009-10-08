@@ -3,7 +3,7 @@
 
 require tint2
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
 DEFAULT_SRC_CONFIGURE_PARAMS+=( --enable-doc )
 

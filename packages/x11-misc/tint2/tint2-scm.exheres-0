@@ -6,7 +6,7 @@ require tint2 scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=
 
 DOWNLOADS=""
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="tint2conf [[ description = [ empty code ] ]]"
 
 DEPENDENCIES+="
