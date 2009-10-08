@@ -1,18 +1,25 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-#SCM_BRANCH="1.2.99"
 require ibus-engine
 
 PYDB_VER="1.2.99"
 PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
+
 SUMMARY="Chinese PinYin IMEngine for IBus Framework"
 DOWNLOADS="${HOMEPAGE}/files/${PYDB}"
+MYOPTIONS="( android [[ description = [ Enable google android pinyin database support ] ]]
+    open-phrase [[ description = [ Enable open-phrase pinyin database support ] ]] )
+    [[ number-selected = at-least-one ]]"
 
 PLATFORMS="~x86"
 
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'android db-android' 'open-phrase db-open-phrase' )
+
 src_prepare() {
     ibus-engine_src_prepare
-    cp ${FETCHEDDIR}/${PYDB} data || die "failed to copy pinyin database"
+    if option open-phrase; then
+        cp ${FETCHEDDIR}/${PYDB} data/db/open-phrase || die "failed to copy openphrase database"
+    fi
 }
 
