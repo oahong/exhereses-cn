@@ -27,4 +27,25 @@ DEFAULT_SRC_COMPILE_PARAMS=(
     LIBDIR=\$\(PREFIX\)/$(get_libdir)
 )
 
-DEFAULT_SRC_INSTALL_PARAMS=( "${DEFAULT_SRC_COMPILE_PARAMS[@]}" )
+#DEFAULT_SRC_INSTALL_PARAMS=( "${DEFAULT_SRC_COMPILE_PARAMS[@]}" )
+
+src_install() {
+    emake install DESTDIR="${IMAGE}" ${DEFAULT_SRC_COMPILE_PARAMS[@]}
+
+    insinto /usr/share/pixmaps
+    doins icons/frozen-bubble-icon-48x48.png
+    insinto /usr/share/applications
+    hereins ${PN}.desktop <<EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name=Frozen-Bubble
+Comment=Bust a Move clone
+Exec=frozen-bubble
+Icon=frozen-bubble-icon-48x48
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Categories=Game;ArcadeGame;
+EOF
+}
+
