@@ -23,7 +23,7 @@ DEPENDENCIES="
         media-libs/gstreamer:0.10
         media-libs/libppswrapper
         media-plugins/gst-plugins-base:0.10
-    post,suggested:
+    suggestion:
         media-plugins/totem-pps
 "
 

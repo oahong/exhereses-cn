@@ -15,7 +15,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     run:
         gnome-bindings/pygtk
-    post,suggested:
+    suggestion:
         dev-lang/python[sqlite]
         dev-python/dbus-python
         dev-python/gnome-python-extras

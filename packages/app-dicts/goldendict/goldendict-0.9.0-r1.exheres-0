@@ -26,7 +26,7 @@ DEPENDENCIES="
         media-libs/libvorbis
         x11-libs/libX11
         x11-libs/qt:4[webkit]
-    post,suggested:
+    suggestion:
         x11-server/xorg-server[record] [[ description = [ required for hotkeys monitoring mechanism ] ]]
         media-sound/WyabdcRealPeopleTTS
 "

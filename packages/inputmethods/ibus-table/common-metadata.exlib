@@ -12,7 +12,7 @@ can enjoy the typing on Linux environment.
 LICENCES="LGPL-2.1"
 
 DEPENDENCIES+="
-    post,suggested:
+    suggestion:
         inputmethods/ibus-table-cangjie
         inputmethods/ibus-table-erbi
         inputmethods/ibus-table-wubi

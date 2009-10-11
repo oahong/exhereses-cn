@@ -26,7 +26,7 @@ DEPENDENCIES="
         x11-libs/libXft
         x11-libs/libXpm
         x11-libs/libXtst
-    post,suggested:
+    suggestion:
         fonts/wqy-zenhei
 "
 

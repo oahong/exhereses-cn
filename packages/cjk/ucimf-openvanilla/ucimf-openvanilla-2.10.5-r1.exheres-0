@@ -13,7 +13,7 @@ MYOPTIONS="debug"
 DEPENDENCIES="
     build+run:
         inputmethods/libucimf
-    post,recommended:
+    recommendation:
         inputmethods/openvanilla-modules
             [[ description = [ To use various openvanilla input method modules ] ]]"
 

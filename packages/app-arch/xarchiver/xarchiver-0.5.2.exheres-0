@@ -29,7 +29,7 @@ DEPENDENCIES="
         dev-libs/glib:2[>=2.10.0]
         x11-libs/gtk+:2[>=2.10.0]
         x11-libs/pango
-    post,suggested:
+    suggestion:
         app-arch/bzip2
         app-arch/dpkg
         app-arch/gzip
@@ -38,12 +38,12 @@ DEPENDENCIES="
         app-arch/unzip
         app-arch/xz
         app-arch/zip
-    post,run:
+    post:
         x11-apps/xdg-utils
 "
 # build+run:
 # x11-libs/pango ???
-# post+suggested:
+# suggestion:
 # app-arch/rpm
 # app-arch/arc
 # app-arch/lzop

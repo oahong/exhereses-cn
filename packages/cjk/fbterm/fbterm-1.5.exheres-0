@@ -15,7 +15,7 @@ DEPENDENCIES="
     build+run:
         media-libs/fontconfig
         media-libs/freetype
-    post,suggested:
+    suggestion:
         sys-libs/gpm [[ description = [ To enable feature:  copy/past selected text between windows with mouse ] ]]
         cjk/fbterm-ucimf [[ description = [ Required to input cjk characters using UCIMF ] ]]
 "

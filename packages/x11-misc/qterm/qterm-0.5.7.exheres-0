@@ -24,7 +24,7 @@ DEPENDENCIES="
         ssl? ( dev-libs/openssl )
         x11-libs/qt:4[dbus?][ssl?]
         x11-libs/qt:4[phonon][>=4.5]
-    suggested:
+    suggestion:
         dbus? ( kde/kdeutils:4[kde_parts:kwallet] )
 "
 

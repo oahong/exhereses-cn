@@ -43,11 +43,11 @@ DEPENDENCIES="
         gnome-platform/GConf[>=2.12]
         sys-apps/dbus
         x11-libs/gtk+:2
-    post,run:
+    post:
         qt4? ( inputmethods/ibus-qt )
-    post,recommended:
+    recommendation:
         gnome-desktop/librsvg [[ description = [ required to display svg icons ] ]]
-    post,suggested:
+    suggestion:
         linguas:ja? ( inputmethods/ibus-anthy )
         linguas:ko? ( inputmethods/ibus-hangul )
         linguas:zh_CN? (

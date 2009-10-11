@@ -25,7 +25,7 @@ DEPENDENCIES="
         dev-libs/libxml2[>=2.6.0]
         gnome-bindings/gtkmm[>=2.6.0]
         totem? ( gnome-desktop/totem[>=2.20][python] )
-    post,suggested:
+    suggestion:
         media/mplayer
 "
 

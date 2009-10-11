@@ -15,7 +15,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         x11-libs/qt[>=4.5.0][webkit]
-    post,run:
+    post:
         net-plugins/adobe-flash
 "
 # run: x11-apps/xbindkeys

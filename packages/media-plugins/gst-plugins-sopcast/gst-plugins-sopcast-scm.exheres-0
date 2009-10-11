@@ -19,7 +19,7 @@ DEPENDENCIES="
     build+run:
         media-libs/gstreamer:0.10
         media-plugins/gst-plugins-base:0.10
-    post,run:
+    post:
         media-plugins/totem-sopcast
 "
 

@@ -22,7 +22,7 @@ DEPENDENCIES="
     run:
         dev-python/Imaging[>=1.1.5]
         gnome-bindings/pygtk[>=2.12]
-    post,suggested:
+    suggestion:
         app-arch/unrar
         app-arch/unzip
         dev-lang/python[sqlite]

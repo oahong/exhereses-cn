@@ -39,7 +39,7 @@ DEPENDENCIES="
         x11-libs/libXrender
         x11-libs/libXtst
         x11-libs/libXinerama
-    post,suggested:
+    suggestion:
         x11-plugins/cairo-dock-plugins
 "
 

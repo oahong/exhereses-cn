@@ -38,7 +38,7 @@ DEPENDENCIES="
         spell? ( app-spell/enchant )
         x11-libs/gtk+[>=2.12]
         x11-libs/libX11
-    post,suggested:
+    suggestion:
         media-sound/WyabdcRealPeopleTTS
 "
 #FIXME: tests need X?

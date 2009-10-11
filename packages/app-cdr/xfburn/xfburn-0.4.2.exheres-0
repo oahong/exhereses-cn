@@ -28,7 +28,7 @@ DEPENDENCIES="
         xfce-base/exo[>=0.3.0][hal]
         xfce-base/libxfcegui4[>=4.4.0]
         xfce-base/Thunar
-    post,suggested:
+    suggestion:
         || (
             media-plugins/gst-ffmpeg
             (
