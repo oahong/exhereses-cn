@@ -1,0 +1,33 @@
+# Copyright 2009 Elias Pipping <elias@pipping.org>
+# Distributed under the terms of the GNU General Public License v2
+
+require perl-module [ module_author=DGOEHRIG ]
+
+SUMMARY="Perl bindings for SDL"
+LICENCES="LGPL-2"
+UPSTREAM_CHANGELOG="http://search.cpan.org/src/DGOEHRIG/${PNV}/CHANGELOG"
+BUGS_TO="oahong@gmail.com"
+
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+
+DEPENDENCIES="
+    build+run:
+        dev-perl/YAML
+        media-libs/SDL[>=1.2.6]
+        media-libs/SDL_image[>=1.2.2]
+        media-libs/SDL_gfx[>=2.0.3]
+        media-libs/SDL_mixer[>=1.2.5]
+        media-libs/SDL_net[>=1.2.4]
+        media-libs/SDL_ttf[>=2.0.5]
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-paths.patch )
+
+src_prepare() {
+    # Disable test that tries to access sound devices
+    mv t/mixerpm.{t,do_not_run} \
+        && sed -e \\:t/mixerpm.t:s/\.t/.do_not_run/ -i MANIFEST \
+        || die "failed to disable test"
+    default
+}
