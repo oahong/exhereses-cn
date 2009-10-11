@@ -10,7 +10,7 @@ DOWNLOADS=""
 
 LICENCES="LGPL-2"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     x86_cpu_features: mmx"
 #    gtk-player [[ description = [ Build a GTk sample SMPEG player ] ]]
