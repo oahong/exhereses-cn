@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require xfce-extras
+require xfce
 
 SUMMARY="A mail notification plugin for the xfce4 panel"
 HOMEPAGE="http://spuriousinterrupt.org/projects/mailwatch"

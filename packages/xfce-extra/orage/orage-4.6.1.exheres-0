@@ -1,13 +1,11 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require xfce-extras
+require xfce
 
 SUMMARY="Calendar application for Xfce"
 HOMEPAGE="http://www.kolumbus.fi/~w408237/orage"
-DOWNLOADS="${HOMEPAGE}/${PNV}.tar.bz2"
 
-LICENCES=""
 SLOT="0"
 PLATFORMS="~86"
 MYOPTIONS="db dbus libnotify"

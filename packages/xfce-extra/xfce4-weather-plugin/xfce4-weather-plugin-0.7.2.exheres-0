@@ -1,10 +1,10 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require xfce-extras
+require xfce
 
 SUMMARY="Weather information plugin for the Xfce4 panel"
-HOMEPAGE="http://goodies.xfce.org"
+HOMEPAGE="http://goodies.xfce.org/projects/panel-plugins/${PN}"
 DOWNLOADS="http://archive.xfce.org/src/panel-plugins/${PN}/$(ever range 1-2)/${PNV}.tar.bz2"
 #${HOMEPAGE}/releases/${PN}/${PNV}.tar.bz2"
 #http://archive.xfce.org/src/panel-plugins/xfce4-weather-plugin/0.7/xfce4-weather-plugin-0.7.2.tar.bz2
@@ -15,7 +15,6 @@ PLATFORMS="~x86"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    build:
     build+run:
         dev-libs/libxml2
         x11-libs/gtk+:2[>=2.6.0]
@@ -24,3 +23,4 @@ DEPENDENCIES="
         xfce-base/libxfcegui4[>=4.3.90.2]
         xfce-base/xfce4-panel[>=4.3.90.1]
 "
+
