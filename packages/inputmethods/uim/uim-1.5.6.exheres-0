@@ -50,7 +50,7 @@ src_prepare() {
     sed -i \
         -e '/uim_pixmapsdir/s#\(${PACKAGE_TARNAME}\)\/\(pixmaps\)#\2\/\1#' \
         configure.ac || die "sed failed"
-    ./autogen.sh
+    ./autogen.sh || die "failed to run autogen.sh"
 }
 
 src_configure() {
@@ -88,3 +88,4 @@ pkg_postinst() {
 pkg_postrm() {
     gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
 }
+

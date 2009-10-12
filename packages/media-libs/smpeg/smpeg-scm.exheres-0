@@ -29,10 +29,11 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(  --disable-{opengl,gtk}-player )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'x86_cpu_features:mmx mmx' )
 
 src_prepare() {
-    ./autogen.sh
+    ./autogen.sh || die "failed to run autogen.sh"
 }
 
 src_install() {
     default
     rm -f "${IMAGE}"//usr/share/man/man1/gtv.1 || die "failed to rm gtv.1"
 }
+
