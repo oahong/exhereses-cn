@@ -8,14 +8,15 @@ DOWNLOADS="mirror://sourceforge/sdcv/${PNV}.tar.bz2"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="nls"
+MYOPTIONS=""
 
 DEPENDENCIES="
-    build+run:
-        dev-libs/glib[>=2.6.1]
-        sys-libs/readline
     build:
-        nls? ( sys-devel/gettext )"
+        dev-util/pkg-config[>=0.9.0]
+        sys-devel/gettext
+    build+run:
+        dev-libs/glib:2[>=2.6.1]
+"
 
 REMOTE_IDS="sourceforge:sdcv freshmeat:sdcv"
 UPSTREAM_CHANGELOG="http://freshmeat.net/urls/4320fe4af832dfdf57ecb4fd8b3384d9"
@@ -27,9 +28,10 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/sdcv-0.4.2-missing-headers.patch
     -p0 "${FILES}"/sdcv-0.4.2-respect-HOME.patch
 )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( nls )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --hates=docdir )
 
 src_test() {
     mkdir -p "${HOME}"/.stardict || die
     default
 }
+
