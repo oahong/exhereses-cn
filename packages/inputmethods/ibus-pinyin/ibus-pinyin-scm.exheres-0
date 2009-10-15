@@ -13,11 +13,15 @@ MYOPTIONS="( android [[ description = [ Enable google android pinyin database su
     [[ number-selected = at-least-one ]]"
 
 PLATFORMS="~x86"
+DEPENDENCIES="
+    build:
+        gnome-base/gnome-common
+"
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'android db-android' 'open-phrase db-open-phrase' )
 
 src_prepare() {
-    ibus-engine_src_prepare
+    NOCONFIGURE=1 ./autogen.sh || die "failed to run autogen.sh"
     if option open-phrase; then
         cp ${FETCHEDDIR}/${PYDB} data/db/open-phrase || die "failed to copy openphrase database"
     fi
