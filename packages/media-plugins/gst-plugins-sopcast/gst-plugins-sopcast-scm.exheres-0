@@ -16,6 +16,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         dev-util/pkg-config
+        sys-devel/gettext
     build+run:
         media-libs/gstreamer:0.10
         media-plugins/gst-plugins-base:0.10
@@ -28,6 +29,6 @@ BUGS_TO="oahong@gmail.com"
 DEFAULT_SRC_INSTALL_EXCLUDE=( ChangeLog )
 
 src_prepare() {
-    AT_M4DIR="m4" eautoreconf
+    NOCONFIGURE=1 ./autogen.sh || die "failed to run autogen.sh"
 }
 
