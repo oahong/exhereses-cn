@@ -9,19 +9,18 @@ DOWNLOADS="mirror://sourceforge/${PN}/${PNV}-src.tar.bz2"
 
 ##### missing some licenses #####
 #* GPL-3
+#* Public Domain
 #Creative-Commons-Attribution
 #Creative-Commons-BY-SA
 #Creative-Commons-Sampling+
 #FreeArt License
 #SoundSnap license
-#* Public Domain
 #Image*After terms
 LICENCES="GPL-3 public-domain FIXME"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
 
-# XXX: enet for a network multiplayer feature which is still under development
 DEPENDENCIES="
     build:
         sys-devel/gettext
@@ -41,7 +40,7 @@ UPSTREAM_DOCUMENTATION="${HOMEPAGE}/FAQ"
 
 src_prepare() {
     rm -rf src/enet || die "failed to remove internal enet source tree"
-    expatch "${FILES}"/${PNV}{,-desktop-entry}.patch
+    expatch "${FILES}"/${PNV}{,-desktop-entry,-no-redundant-projectile}.patch
     AT_M4DIR="m4" eautoreconf
 }
 
