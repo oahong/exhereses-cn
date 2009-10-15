@@ -74,7 +74,7 @@ ibus_src_prepare() {
 
 ibus_src_install() {
     default
-    rmdir "${IMAGE}"/usr/share/${PN}/{engine,icons} || die "failed to rm empty dirs"
+    find "${IMAGE}" -type d -empty -delete || die "failed to rm empty dirs"
 }
 
 ibus_pkg_postinst() {
