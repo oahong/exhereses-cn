@@ -1,0 +1,33 @@
+Source: me@gmail.com
+Upstream: mail sent, no response.
+Reason: fix gcc 4.3+ compilation
+--- openvanilla-modules-0.8.0_12/SharedSource/OVCandidateList.cpp~	2009-10-13 20:33:28.036052112 +0800
++++ openvanilla-modules-0.8.0_12/SharedSource/OVCandidateList.cpp	2009-10-13 20:33:57.589051936 +0800
+@@ -30,6 +30,7 @@
+ 
+ #include "OVCandidateList.h"
+ #include "OVCIN.h"
++#include <stdio.h>
+ #include <iostream>
+ 
+ #ifdef __linux__
+--- openvanilla-modules-0.8.0_12/SharedSource/OVCINInfo.cpp~	2009-10-13 20:39:58.035301459 +0800
++++ openvanilla-modules-0.8.0_12/SharedSource/OVCINInfo.cpp	2009-10-13 20:41:19.812301609 +0800
+@@ -55,6 +55,7 @@
+ 	#include <windows.h> //FindFirstFile
+ #endif
+ #include "OVOSDef.h"
++#include <stdio.h>
+ 
+ const char *clExtension=NULL;
+ 
+--- openvanilla-modules-0.8.0_12/OVIMGeneric/OVIMGeneric.cpp~	2009-10-13 20:45:36.368301883 +0800
++++ openvanilla-modules-0.8.0_12/OVIMGeneric/OVIMGeneric.cpp	2009-10-13 20:46:36.113302224 +0800
+@@ -30,6 +30,7 @@
+ 
+ // #define OV_DEBUG
+ 
++#include <stdio.h>
+ #include "OVIMGeneric.h"
+ #include "CIN-Defaults.h"
+ 

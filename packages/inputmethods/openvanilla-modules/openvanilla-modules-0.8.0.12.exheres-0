@@ -19,10 +19,11 @@ linguas:
 
 DEPENDENCIES="
     build+run:
-        dev-db/sqlite[>=3]"
+        dev-db/sqlite[>=3]
+"
 
 WORK=${WORKBASE}/${MY_PNV}
-#DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-gcc-4.4.diff )
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-gcc-4.3.patch )
 
 src_configure() {
     econf \
