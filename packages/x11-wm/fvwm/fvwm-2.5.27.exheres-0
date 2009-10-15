@@ -21,7 +21,7 @@ LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS="bidi doc nls stroke svg xinerama
-    extra [[ description = [ Install extra mini icons and sound files ] ]]"
+    extra [[ description = [ Install optional mini icons and sound files ] ]]"
 
 DEPENDENCIES="
     build:
@@ -40,7 +40,7 @@ DEPENDENCIES="
         media-libs/libpng[>=1.0.4]
         stroke? ( dev-libs/libstroke[>=0.5.1] )
         svg? ( gnome-desktop/librsvg[>=2.13.92] )
-        x11-libs/cairo[svg?]
+        x11-libs/cairo[svg(+)?]
         x11-libs/libICE
         x11-libs/libSM
         x11-libs/libX11
