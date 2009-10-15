@@ -6,19 +6,19 @@ require gcin multilib toolchain-funcs
 
 PLATFORMS="~x86"
 
+EXJOBS=1
 WORK=${WORKBASE}/${MY_PNV}
 
 DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/gcin-1.4.6-configure.diff
-    "${FILES}"/gcin-1.4.5-Makefile.diff
-    "${FILES}"/gcin-1.4.5-qt4-im-makefile.diff
+    "${FILES}"/${PN}-1.4.6-configure.diff
+    "${FILES}"/${PN}-1.4.5-Makefile.diff
+    "${FILES}"/${PN}-1.4.5-qt4-im-makefile.diff
+    "${FILES}"/${PN}-gtk-immodule.patch
     # needs more patch from http://hyperrate.com/dir.php?eid=81
 )
 DEFAULT_SRC_COMPILE_PARAMS=(
-    CC=$(tc-getCC) CCLD=$(tc-getCC)
-    OPTFLAGS="${CFLAGS} ${LDFLAGS}"
+    CC=$(tc-getCC) CCLD=$(tc-getCC) OPTFLAGS="${CFLAGS} ${LDFLAGS}"
 )
-MAKEOPTS="${MAKEOPTS} -j1"
 
 src_prepare() {
     echo "${PVR}" > ${WORK}/VERSION.gcin || die "failed to fix version number"
@@ -27,7 +27,8 @@ src_prepare() {
 
 src_configure() {
     econf \
-        $(! option anthy && echo '--use_anthy=N' ) \
-        $(! option qt4 && echo '--qt4_im=N' ) \
-        --use_i18n=Y --qt3_im=N --use_tsin=Y
+        --use_i18n=Y --qt3_im=N --use_tsin=Y \
+        $(!option anthy && echo '--use_anthy=N' ) \
+        $(!option qt4 && echo '--qt4_im=N' )
 }
+

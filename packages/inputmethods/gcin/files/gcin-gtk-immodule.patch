@@ -1,0 +1,11 @@
+--- gcin-1.4.6.pre10/gtk-im/Makefile~	2009-10-15 21:47:43.396302927 +0800
++++ gcin-1.4.6.pre10/gtk-im/Makefile	2009-10-15 21:47:52.122302880 +0800
+@@ -1,7 +1,7 @@
+ include ../config.mak
+ 
+ OBJS = imgcin.o gtkimcontextgcin.o
+-GTK2IM=gtk-2.0/immodules
++GTK2IM=gtk-2.0/`pkg-config --variable=gtk_binary_version gtk+-2.0`/immodules
+ IMMODULES=$(libdir)/$(GTK2IM)
+ IMMODULES_LOCAL=/usr/$(LIB)/$(GTK2IM)
+ 
