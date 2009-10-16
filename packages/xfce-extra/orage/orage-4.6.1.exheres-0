@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require xfce
+require xfce [ module=apps ]
 
 SUMMARY="Calendar application for Xfce"
 HOMEPAGE="http://www.kolumbus.fi/~w408237/orage"
