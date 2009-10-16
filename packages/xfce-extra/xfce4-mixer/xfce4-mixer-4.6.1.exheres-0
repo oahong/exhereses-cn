@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require xfce [ xfce_version="4.6.1" ]
+require xfce [ module=apps ]
 
 SUMMARY="Volume controler for Xfce"
 
@@ -27,3 +27,4 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 #    mv "${IMAGE}"/usr/share/{xfce4-mixer/,}icons || die "move icons failed"
 #    rmdir "${IMAGE}"/usr/share/${PN} || die "rmdir failed"
 #}
+
