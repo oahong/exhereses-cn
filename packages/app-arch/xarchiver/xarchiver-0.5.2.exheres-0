@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require freedesktop-mime
+require freedesktop-desktop
 
 SUMMARY="A lightweight desktop independent archive manager built with the GTK+2 toolkit"
 DESCRIPTION="
@@ -34,6 +34,7 @@ DEPENDENCIES="
         app-arch/dpkg
         app-arch/gzip
         app-arch/p7zip
+        app-arch/rpm
         app-arch/unrar
         app-arch/unzip
         app-arch/xz
@@ -41,10 +42,7 @@ DEPENDENCIES="
     post:
         x11-apps/xdg-utils
 "
-# build+run:
-# x11-libs/pango ???
-# suggestion:
-# app-arch/rpm
+# FIXME: fix my suggestion deps:
 # app-arch/arc
 # app-arch/lzop
 
