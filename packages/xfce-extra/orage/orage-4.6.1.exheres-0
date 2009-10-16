@@ -7,7 +7,7 @@ SUMMARY="Calendar application for Xfce"
 HOMEPAGE="http://www.kolumbus.fi/~w408237/orage"
 
 SLOT="0"
-PLATFORMS="~86"
+PLATFORMS="~x86"
 MYOPTIONS="db dbus libnotify"
 
 DEPENDENCIES="
