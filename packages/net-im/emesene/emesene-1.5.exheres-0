@@ -36,7 +36,7 @@ src_install() {
     )
 
     insinto /usr/share/${PN}
-    doins *.py
+    doins *.py hotmlog.htm
     doins -r ${subdir[@]}
     newins ${PN} ${PN}.py
 
