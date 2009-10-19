@@ -1,22 +1,22 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+MY_TN=${PN##*-}
+SUMMARY="${MY_TN^} code table for ibus-table framework"
+HOMEPAGE="http://ibus.googlecode.com"
+DOWNLOADS="http://ibus.googlecode.com/files/${PNV}.tar.gz"
+
 if ever at_least scm ; then
     SCM_REPOSITORY="git://github.com/acevery/${PN}.git"
     require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ] scm-git
 
     DOWNLOADS=""
-else
-    DOWNLOADS="http://ibus.googlecode.com/files/${PNV}.tar.gz"
 fi
 
-MY_TN=${PN##*-}
-SUMMARY="${MY_TN^} code table for ibus-table framework"
-HOMEPAGE="http://ibus.googlecode.com"
+export_exlib_phases src_prepare
 
 LICENCES="GPL-3"
 SLOT="0"
-MYOPTIONS=""
 
 DEPENDENCIES="
     run:
@@ -28,11 +28,15 @@ DEPENDENCIES="
 
 if [[ "${PN%extraphrase}" == ${PN} ]] ; then
     MYOPTIONS="extra [[ description = [ Integrate extra Chinese phrases ] ]]"
-    DEPENDENCIES+="
-        build:
-            extra? ( inputmethods/ibus-table-extraphrase[>=0.1.2] )"
+    DEPENDENCIES+="extra? ( inputmethods/ibus-table-extraphrase[>=0.1.2] )"
     DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'extra extra-phrases' )
 fi
 
 BUGS_TO="${HOMEPAGE}/issues/list"
+
+src_prepare() {
+    sed -e '/AC_ARG_VAR/s#\[\[#\[#;s#\]\]#\]#' \
+        -i configure.ac || die "failed to fix configure.ac"
+    autotools_src_prepare
+}
 
