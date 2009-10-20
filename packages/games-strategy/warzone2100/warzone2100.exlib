@@ -60,8 +60,7 @@ UPSTREAM_DOCUMENTATION="http://guide.wz2100.net"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --enable-sound
-    --with-distributor=exherbo
-    --docdir=/usr/share/doc/${PNV}
+    --with-distributor=Exherbo
     --with-applicationdir=/usr/share/applications
 )
 # http://forums.wz2100.net/viewtopic.php?f=4&t=3126

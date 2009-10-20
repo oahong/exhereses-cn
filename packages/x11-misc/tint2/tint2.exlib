@@ -27,6 +27,5 @@ DEPENDENCIES="
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --enable-examples
-    --docdir=/usr/share/doc/${PNV}
 )
 
