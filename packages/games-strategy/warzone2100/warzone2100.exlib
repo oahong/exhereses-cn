@@ -3,15 +3,15 @@
 
 export_exlib_phases pkg_postinst
 
-SUMMARY="3D realtime strategy game on a future Earth"
+SUMMARY="A 3D realtime strategy game on the future Earth"
 DESCRIPTION="
 In Warzone 2100 you command the forces of \"The Project\" in a battle to rebuild
 the world after mankind has almost been destroyed by nuclear missiles.
 The game offers campaign, tutorial, multi-player and single-player skirmish modes.
 An extensive tech tree with over 400 different technologies, combined with the unit design system,
 allows for a wide variety of possible units and tactics.
-Warzone 2100 was created by Pumpkin Studios, published by Eidos Interactive and is currently developed by
-the Warzone 2100 Resurrection Project.
+Warzone 2100 was created by Pumpkin Studios, published by Eidos Interactive and is currently
+developed by the Warzone 2100 Resurrection Project.
 Featuring:
 * 400+ Technologies to research
 * 2,000+ different units to design
@@ -69,7 +69,9 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'debug debug relaxed' )
 warzone2100_pkg_postinst() {
     local dotwarzone=".warzone2100-$(ever range 1-2)"
 
-    elog "To play video intro, You must download video file from"
-    elog "http://guide.wz2100.net/files/sequences.wz"
-    elog "then put it into \$HOME/${dotwarzone/scm/trunk}"
+    elog "To play video intros in the game, You must download either"
+    elog "high or low quality video file from"
+    elog "http://wz2100.net/download"
+    elog "and put it into \$HOME/${dotwarzone/scm/trunk}"
 }
+

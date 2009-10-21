@@ -1,17 +1,14 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+#git://gitorious.org/warzone2100/mainline.git
 SCM_REPOSITORY="https://warzone2100.svn.sourceforge.net/svnroot/warzone2100"
-
 require warzone2100 scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
 DOWNLOADS=""
 PLATFORMS="~amd64 ~x86"
 
-# FIXME:
-RESTRICT="test"
-
 src_prepare() {
-    ./autogen.sh || die "./autogen.sh: returned exit status: $?"
+    edo ./autogen.sh
 }
 
