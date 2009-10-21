@@ -20,9 +20,10 @@ MYOPTIONS=""
 # FIXME:
 DEPENDENCIES="
     build+run:
+        dev-lang/python:=[>=2.5]
         dev-libs/openssl
-        x11-libs/qt:4[X][ssl]
         sys-sound/alsa-lib
+        x11-libs/qt:4[X][ssl]
 "
 
 DEFAULT_SRC_PREPARE_PATCHES=( -p0 "${FILES}"/${PN}-no-automagic.patch )
