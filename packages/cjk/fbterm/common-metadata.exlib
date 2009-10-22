@@ -1,4 +1,4 @@
-# Copyright 2008 Hong Hao <oahong@gmail.com>
+# Copyright 2008, 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 SUMMARY="a fast FrameBuffer based TERMinal emulator for linux"
@@ -17,16 +17,10 @@ Features included:
 * lightweight input method framework with client-server architecture
 * background image for eye candy
 "
-#    * allows you to select fonts with fontconfig, auto-detect and convert text encoding
-#    with support for double width scripts like Chinese and Japanese etc,
-#dynamically create and destroy up to 10 windows, record scroll-back history for every
-#window, copy/paste selected text between windows with mouse the when the gpm server is running,
-#change the orientation of screen display (a.k.a. screen rotation).
-#Recently version of fbterm also adds background picture support for eye candy and
-#a lightweight input method framework with client-server architecture.
 
 HOMEPAGE="http://fbterm.googlecode.com"
 DOWNLOADS="http://fbterm.googlecode.com/files/${PNV}.tar.gz"
 
 REMOTE_IDS="freshmeat:FbTerm"
 BUGS_TO="http://code.google.com/p/fbterm/issues/list"
+
