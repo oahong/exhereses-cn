@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="svn://svn.icculus.org/smpeg"
-require scm-svn autotools [ supported_autoconf=[ 2.1 ] supported_automake=[ 1.10 ] ]
+require scm-svn autotools [ supported_autoconf=[ 2.1 ] supported_automake=[ 1.11 ] ]
 
 SUMMARY="SDL MPEG Player Library"
 HOMEPAGE="http://icculus.org/smpeg"
@@ -12,28 +12,28 @@ LICENCES="LGPL-2"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
-    x86_cpu_features: mmx"
-#    gtk-player [[ description = [ Build a GTk sample SMPEG player ] ]]
-#    opengl-player [[ description = [ Build an OpenGL sample SMPEG player ] ]]
+    gtk-player [[ description = [ Build a GTk sample SMPEG player ] ]]
+    opengl-player [[ description = [ Build an OpenGL sample SMPEG player ] ]]
+    x86_cpu_features: mmx
+"
 
 DEPENDENCIES="
     build:
         dev-util/pkg-config
     build+run:
+        gtk-player? ( x11-libs/gtk+:2 )
         media-libs/SDL[>=1.2.0]
+        opengl-player? ( x11-dri/mesa )
 "
-#        opengl-player? ( x11-dri/mesa )
-#        gtk-player? ( x11-libs/gtk+:2 )
 
-DEFAULT_SRC_CONFIGURE_PARAMS=(  --disable-{opengl,gtk}-player )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'x86_cpu_features:mmx mmx' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( gtk-player opengl-player 'x86_cpu_features:mmx mmx' )
 
 src_prepare() {
-    ./autogen.sh || die "failed to run autogen.sh"
+    edo ./autogen.sh
 }
 
 src_install() {
     default
-    rm -f "${IMAGE}"//usr/share/man/man1/gtv.1 || die "failed to rm gtv.1"
+    !option gtk-player && edo rm -f "${IMAGE}"//usr/share/man/man1/gtv.1
 }
 
