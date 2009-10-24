@@ -46,7 +46,7 @@ DEPENDENCIES="
     post:
         qt4? ( inputmethods/ibus-qt )
     recommendation:
-        gnome-desktop/librsvg [[ description = [ required to display svg icons ] ]]
+        gnome-desktop/librsvg [[ note = [  to render svg icons ] ]]
     suggestion:
         linguas:ja? ( inputmethods/ibus-anthy )
         linguas:ko? ( inputmethods/ibus-hangul )
@@ -68,8 +68,7 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 
 ibus_src_prepare() {
     # disable pyc compiling
-    mv py-compile py-compile.orig
-    ln -s $(type -P true) py-compile
+    echo "#! /bin/true" > py-compile
 }
 
 ibus_src_install() {

@@ -5,17 +5,16 @@ SCM_REPOSITORY="git://github.com/phuang/ibus.git"
 require ibus scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 
 DOWNLOADS=""
-PLATFORMS=""
+PLATFORMS="~amd64 ~x86"
 
 DEPENDENCIES="
     build:
-        dev-scm/cvs [[ notes = [ autopoint needs cvs ] ]]
         dev-doc/gtk-doc[>=1.9]
         gnome-base/gnome-common
 "
 
 src_prepare() {
-    touch ChangeLog
+    edo touch ChangeLog
     NOCONFIGURE=1 ./autogen.sh || die "failed to run autogen.sh"
     ibus_src_prepare
 }
