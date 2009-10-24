@@ -1,11 +1,14 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine
+require ibus-engine [ maintainer=choehwanjin ]
 
 PLATFORMS="~x86"
 
-DEPENDENCIES+="
+DEPENDENCIES="
+    build:
+        dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
     build+run:
         cjk/libhangul
 "
+
