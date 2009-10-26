@@ -34,6 +34,6 @@ src_prepare() {
 
 src_install() {
     default
-    !option gtk-player && edo rm -f "${IMAGE}"//usr/share/man/man1/gtv.1
+    ! option gtk-player && edo rm -f "${IMAGE}"//usr/share/man/man1/gtv.1
 }
 
