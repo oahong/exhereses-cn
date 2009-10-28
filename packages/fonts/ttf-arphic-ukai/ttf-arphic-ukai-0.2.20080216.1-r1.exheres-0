@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Purpose License v2
 
 FONT=CJKUnifonts
-require multilib xfont
+require xfont
 
 SUMMARY="CJK Unicode font Kai style"
 HOMEPAGE="http://freedesktop.org/wiki/Software/CJKUnifonts"

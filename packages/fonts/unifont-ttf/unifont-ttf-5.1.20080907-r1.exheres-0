@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao  <oahong@gmail.com>
 # Distributed under the terms of the GNU General Purpose License v2
 
-require multilib xfont
+require xfont
 FONT=${PN%-ttf}
 
 MY_PNV=${PNV/-ttf}.ttf

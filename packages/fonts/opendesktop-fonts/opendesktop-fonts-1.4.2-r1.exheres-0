@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Purpose License v2
 
 FONT=${PN%-fonts}
-require multilib xfont
+require xfont
 
 SUMMARY="Chinese and Japanese TTF Fonts ( including ming and kai Face) donated by Arphic company"
 HOMEPAGE="http://www.opendesktop.org.tw"
