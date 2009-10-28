@@ -33,23 +33,20 @@ REMOTE_IDS="sourceforge:comix"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.html"
 
 src_install() {
-# TODO: remove no-mime option when install comix?
-#    addfilter /root/.gconf
-#    export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL="1"
     dodir /usr
     python_version
-    python${PYVER} install.py --no-mime --dir="${IMAGE}"/usr install || die "failed to install ${PN}"
+    edo python${PYVER} install.py --no-mime --dir="${IMAGE}"/usr install
 }
 
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
     gnome_exlib_update_icon_cache
-    python_mod_optimize /usr/share/${PN}/src
+    python_mod_optimize /usr/share/${PN}
 }
 
 pkg_postrm() {
     freedesktop-desktop_pkg_postrm
     gnome_exlib_update_icon_cache
-    python_mod_cleanup /usr/share/${PN}/src
+    python_mod_cleanup /usr/share/${PN}
 }
 
