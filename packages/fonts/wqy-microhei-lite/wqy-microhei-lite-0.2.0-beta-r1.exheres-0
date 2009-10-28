@@ -1,8 +1,8 @@
 # Copyright 2008,2009 Hong Hao  <oahong@gmail.com>
 # Distributed under the terms of the GNU General Purpose License v2
 
-FONT=${PN%-*}
-require xfont multilib
+FONT=${PN%%-*}
+require xfont
 
 SUMMARY="A high quality sans-serif style cjk outline font derived from \"Droid Sans Fallback\""
 HOMEPAGE="http://wenq.org/enindex.cgi?action=browse&id=MicroHei(en)"
@@ -27,3 +27,4 @@ src_install() {
     doins ${PN}.ttc
     fix_fonts
 }
+
