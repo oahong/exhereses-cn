@@ -4,7 +4,7 @@
 FONT=CJKUnifonts
 require multilib xfont
 
-SUMMARY="CJK Unicode font Ming style"
+SUMMARY="CJK Unicode font Kai style"
 HOMEPAGE="http://freedesktop.org/wiki/Software/CJKUnifonts"
 DOWNLOADS="mirror://debian/pool/main/t/${PN}/${PN}_${PV}.orig.tar.gz "
 
@@ -13,7 +13,7 @@ SLOT="0"
 PLATFORMS="~amd64 ~x86"
 
 WORK=${WORKBASE}
-UPSTREAM_CHANGELOG="http://people.ubuntu.com/~arne/cjk-unifonts/uming/FONTLOG"
+UPSTREAM_CHANGELOG="http://people.ubuntu.com/~arne/cjk-unifonts/ukai/FONTLOG"
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
     CONTRIBUTERS
     FONTLOG
@@ -22,7 +22,7 @@ DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
 
 src_install() {
     emagicdocs
-    insinto /usr/$(get_libdir)/X11/fonts/${FONT}
+    insinto /usr/share/fonts/X11/${FONT}
     doins *.ttc
 
     insinto /etc/fonts/conf.avail

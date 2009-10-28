@@ -18,7 +18,7 @@ WORK=${WORKBASE}/${PN}
 
 src_install() {
     emagicdocs
-    insinto /usr/$(get_libdir)/X11/fonts/${FONT}
+    insinto /usr/share/fonts/X11/${FONT}
     doins ${PN}.ttc
     fix_fonts
 }

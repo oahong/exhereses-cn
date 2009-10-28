@@ -21,7 +21,7 @@ FONT_CONFIG=(
 
 src_install() {
     emagicdocs
-    insinto /usr/$(get_libdir)/X11/fonts/${FONT}
+    insinto /usr/share/fonts/X11/${FONT}
     doins *.{ttf,ttc}
 
     insinto /etc/fonts/conf.avail

@@ -16,7 +16,7 @@ PLATFORMS="~amd64 ~x86"
 WORK=${WORKBASE}
 
 src_install() {
-    insinto /usr/$(get_libdir)/X11/fonts/${FONT}
+    insinto /usr/share/fonts/X11/${FONT}
     doins ${MY_PNV}
     fix_fonts
 }
