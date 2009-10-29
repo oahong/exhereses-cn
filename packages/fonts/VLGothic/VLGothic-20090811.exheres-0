@@ -10,7 +10,7 @@ DOWNLOADS="mirror://sourceforge.jp/${PN,,}/43074/${PNV}.tar.bz2"
 # FIXME:
 LICENCES="BSD-3 as-is"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS=""
 
 WORK=${WORKBASE}/${PN}

@@ -10,7 +10,7 @@ DOWNLOADS="mirror://sourceforge/wqy/${PNV}.tar.gz"
 
 LICENCES="|| ( GPL-3 Apache-2.0 )"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
 UPSTREAM_CHANGELOG="http://wenq.org/enindex.cgi?MicroHei_BigBang_ChangeLog"
 UPSTREAM_RELEASE_NOTES="http://wenq.org/enindex.cgi?MicroHei_BigBang_README"
