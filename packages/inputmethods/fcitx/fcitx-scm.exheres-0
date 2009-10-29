@@ -2,22 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="http://fcitx.googlecode.com/svn"
-require scm-svn fcitx autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ]  ]
+require scm-svn fcitx
 
 PLATFORMS="~x86"
-
-DEFAULT_SRC_CONFIGURE_PARAMS+=( --enable-log )
 
 src_unpack() {
     scm_src_unpack
     default
-}
-
-src_prepare() {
-    mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt || die "failed to rename zhengma.txt"
-    expatch -p0 "${FILES}"/${PN}-add-zhengma-support-fix-makefiles.patch \
-        "${FILES}"/${PN}-tables-conf.patch
-
-    autotools_src_prepare
 }
 

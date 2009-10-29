@@ -3,7 +3,8 @@
 # Based in part upon 'fcitx-3.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
-export_exlib_phases src_configure pkg_postinst
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 1.11 ]  ]
+export_exlib_phases src_prepare pkg_postinst
 
 SUMMARY="Free Chinese Input Toy for X"
 DESCRIPTION="Fcitx(Free Chinese Input Toy of X) is a collection of Simplified
@@ -14,7 +15,7 @@ DOWNLOADS="listed-only:http://gentoo-china-overlay.googlecode.com/svn/distfiles/
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS=""
+MYOPTIONS="debug"
 
 DEPENDENCIES="
     build:
@@ -26,30 +27,27 @@ DEPENDENCIES="
         x11-libs/libXft
         x11-libs/libXpm
         x11-libs/libXtst
-    suggestion:
+    recommendation:
         fonts/wqy-zenhei
 "
 
 BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( '--enable-xft' '--enable-tray' )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{xft,tray,recording} )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'debug log' )
+DEFAULT_SRC_PREPARE_PATCHES=( -p0 "${FILES}" )
 
-fcitx_src_configure() {
-    default
+fcitx_src_prepare() {
+    edo sed -e 's#AR PL ShanHeiSun Uni#WenQuanYi Zen Hei#' -i data/config
+
+    edo mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt
+    autotools_src_prepare
 }
 
 fcitx_pkg_postinst() {
-    einfo
-    einfo "You should export the following variables to use fcitx"
-    einfo " export XMODIFIERS=\"@im=fcitx\""
-    einfo " export XIM=fcitx"
-    einfo " export XIM_PROGRAM=fcitx"
-    einfo
-    einfo "If you want to use WuBi, ErBi or Zhengma"
-    einfo " cp /usr/share/fcitx/data/wbx.mb ~/.fcitx"
-    einfo " cp /usr/share/fcitx/data/erbi.mb ~/.fcitx"
-    einfo " cp /usr/share/fcitx/data/zhengma.mb ~/.fcitx"
-    einfo " cp /usr/share/fcitx/data/tables.conf ~/.fcitx"
-    einfo
+    elog "Make sure following env variable is set properly:"
+    elog "XMODIFIERS=\"@im=fcitx\""
+    elog "XIM=fcitx"
+    elog "XIM_PROGRAM=fcitx"
 }
 
