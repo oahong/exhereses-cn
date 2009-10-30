@@ -29,7 +29,6 @@ MYOPTIONS="
     qt4 [[ description = [ Enable support for Qt4 immodule ] ]]
     sound [[ description = [ Enable support for Chinese Text to Speech reading via media-sound/verbis-tools ] ]]"
 
-# TODO: QT3 support
 DEPENDENCIES="
     build:
         dev-util/pkg-config
@@ -57,6 +56,7 @@ WORK=${WORKBASE}/${MY_PNV}
 gcin_src_install() {
     default
     rm -rf "${IMAGE}"/usr/lib/menu || die "failed to rm useless debian menu entries."
+    rm -rf "${IMAGE}"/usr/share/control-center-2.0 || die "failed to remove old capplet cruft"
 
     # http://cle.linux.org.tw/trac/wiki/GcinGirlForNoBopomofo
     exeinto /usr/share/${PN}/filters

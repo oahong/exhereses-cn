@@ -9,16 +9,8 @@ PLATFORMS="~x86"
 EXJOBS=1
 WORK=${WORKBASE}/${MY_PNV}
 
-DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/${PN}-1.4.6-configure.diff
-    "${FILES}"/${PN}-1.4.5-Makefile.diff
-    "${FILES}"/${PN}-1.4.5-qt4-im-makefile.diff
-    "${FILES}"/${PN}-gtk-immodule.patch
-    # needs more patch from http://hyperrate.com/dir.php?eid=81
-)
-DEFAULT_SRC_COMPILE_PARAMS=(
-    CC=$(tc-getCC) CCLD=$(tc-getCC) OPTFLAGS="${CFLAGS} ${LDFLAGS}"
-)
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
+DEFAULT_SRC_COMPILE_PARAMS=( CC=$(tc-getCC) CCLD=$(tc-getCC) OPTFLAGS="${CFLAGS} ${LDFLAGS}" )
 
 src_prepare() {
     echo "${PVR}" > ${WORK}/VERSION.gcin || die "failed to fix version number"
