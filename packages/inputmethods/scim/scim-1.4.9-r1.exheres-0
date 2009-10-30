@@ -8,7 +8,6 @@ PLATFORMS="~amd64 ~x86"
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
 
 src_prepare() {
-    # FIXME:
     intltoolize --force --copy --automake || die "intltoolize failed"
     autotools_src_prepare
 }

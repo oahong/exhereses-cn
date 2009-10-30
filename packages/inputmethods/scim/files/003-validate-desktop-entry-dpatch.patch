@@ -22,7 +22,7 @@ diff -urNad scim-1.4.8~/extras/setup/scim-setup.desktop.in scim-1.4.8/extras/set
  _Comment=Setup utility for Smart Common Input Method platform
  Exec=scim-setup
 -Icon=scim-setup.png
-+Icon=/usr/share/pixmaps/scim-setup.png
++Icon=scim-setup
  Terminal=false
  Type=Application
  StartupNotify=true

@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-export_exlib_phases src_configure src_install pkg_postinst pkg_postrm
+export_exlib_phases src_install pkg_postinst pkg_postrm
 
 SUMMARY="Smart Common Input Method platform"
 DESCRIPTION="SCIM is an input method (IM) platform which provides not only
@@ -13,34 +13,30 @@ DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
-MYOPTIONS="debug doc nls"
+MYOPTIONS="debug doc"
 
 DEPENDENCIES="
     build+run:
-        dev-lang/perl
-        dev-libs/atk
+        dev-libs/glib:2
+        x11-libs/gtk+:2[>=2.4.0]
         x11-libs/libX11
-        x11-libs/gtk+[>=2.4]
-        x11-libs/pango[>=1.1]
+        x11-libs/pango[>=1.1.0]
      build:
-        dev-util/pkg-config
         dev-util/intltool[>=0.33]
-        nls? ( sys-devel/gettext )
-   "
+        dev-util/pkg-config
+        sys-devel/gettext
+"
 
 REMOTE_IDS="sourceforge:scim"
-UPSTREAM_DOCUMENTATION="
-${HOMEPAGE}/wiki/documentation/installation_and_configuration/all/system_configuration"
+UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki/documentation/installation_and_configuration/all/system_configuration"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-        '--without-doxygen'
-        '--enable-ld-version-script'
+    --without-doxygen   # no need to regenerate api docs
+    --disable-tests     # disable useless test engine
+    --enable-ld-version-script
+    --enable-{gtk2-immodule,panel-gtk,setup-ui}
 )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug nls )
-
-scim_src_configure() {
-    default
-}
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 
 scim_src_install() {
     default
@@ -51,15 +47,10 @@ scim_src_install() {
 }
 
 scim_pkg_postinst() {
-    einfo "Read *it*:"
-    einfo "http://tinyurl.com/25djma"
-
-    [[ -x /usr/bin/gtk-query-immodules-2.0 ]] && gtk-query-immodules-2.0 > \
-    "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
 }
 
 scim_pkg_postrm() {
-    [[ -x /usr/bin/gtk-query-immodules-2.0 ]] && gtk-query-immodules-2.0 > \
-    "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
 }
 
