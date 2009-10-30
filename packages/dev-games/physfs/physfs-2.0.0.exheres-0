@@ -20,7 +20,7 @@ DEPENDENCIES="
 "
 
 UPSTREAM_CHANGELOG="${HOMEPAGE}/downloads/CHANGELOG"
-UPSTREAM_REALEASE_NOTES="http://icculus.org/pipermail/physfs/2009-March/000697.html"
+UPSTREAM_RELEASE_NOTES="http://icculus.org/pipermail/physfs/2009-March/000697.html"
 
 CMAKE_SRC_CONFIGURE_PARAMS=(
     -DPHYSFS_BUILD_TEST:BOOL=FALSE
