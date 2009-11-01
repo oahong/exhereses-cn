@@ -2,30 +2,27 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="git://gitorious.org/tmw/mainline.git"
+SCM_music_REPOSITORY="git://gitorious.org/tmw/music.git"
+SCM_SECONDARY_REPOSITORIES="music"
 require common-metadata cmake scm-git
 
 PLATFORMS="~x86"
 
-DEPENDENCIES+="
+DEPENDENCIES="
     build+run:
         net-libs/enet [[ note = [ dependency for tmwserver client ] ]]
 "
 
+CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_NLS:bool=true )
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 'opengl OPENGL' )
-CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'nls NLS' )
-
-src_unpack() {
-    scm_src_unpack
-    unpack ${ARCHIVES}
-}
 
 src_prepare() {
-    sed -i \
-        -e '/Exec/s/tmw/&-ea/' \
-        tmw.desktop || die "failed to fix desktop entry"
+    sed -e '/Exec/s/tmw/&-ea/' \
+        -i tmw.desktop || die "failed to fix desktop entry"
 }
 
 src_install() {
     cmake_src_install
-    tmw_src_install
+    common-metadata_src_install
 }
+
