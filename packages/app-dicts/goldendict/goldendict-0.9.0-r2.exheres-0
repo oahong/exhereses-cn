@@ -33,13 +33,14 @@ DEPENDENCIES="
 
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:GoldenDict freshmeat:GoldenDict"
-UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.php"
+UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.php#release$(ever delete_all)"
 
 WORK=${WORKBASE}/${MY_PNV%-x11}
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/${PNV}-stdint.patch
     "${FILES}"/${PNV}-desktop-entry.patch
+    -p2 "${FILES}"/${PNV}-fix-crash-with-qt-4.5.3.patch
 )
 
 #TODO:
@@ -58,3 +59,4 @@ pkg_postinst() {
     elog "See the following link for more information:"
     elog "${HOMEPAGE}/dictionaries.php"
 }
+

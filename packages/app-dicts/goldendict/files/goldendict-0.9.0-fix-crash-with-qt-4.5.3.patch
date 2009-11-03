@@ -1,0 +1,24 @@
+From: Konstantin Isakov <ikm@users.berlios.de>
+Date: Sat, 10 Oct 2009 17:37:48 +0000 (+0000)
+Subject: *! Fix crash with Qt >= 4.5.3 when browsing MediaWiki sites by deleting
+X-Git-Url: http://git.berlios.de/cgi-bin/gitweb.cgi?p=goldendict;a=commitdiff_plain;h=33038ef8c59d30fe9529ee79a8d1e0c7f20d66fb
+
+*! Fix crash with Qt >= 4.5.3 when browsing MediaWiki sites by deleting
+   network replies after they signal completion, not immediately during
+   that moment.
+---
+
+diff --git a/src/mediawiki.cc b/src/mediawiki.cc
+index 27bdf20..ca0ec0d 100644
+--- a/src/mediawiki.cc
++++ b/src/mediawiki.cc
+@@ -203,7 +203,8 @@ MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
+   url( url_ )
+ {
+   connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
+-           this, SLOT( requestFinished( QNetworkReply * ) ) );
++           this, SLOT( requestFinished( QNetworkReply * ) ),
++           Qt::QueuedConnection );
+   
+   addQuery(  mgr, str );
+ 
