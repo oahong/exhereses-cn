@@ -1,0 +1,17 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="ssh://anon@hg.opensolaris.org/hg/nv-g11n/inputmethod"
+SCM_CHECKOUT_TO="inputmethod"
+
+require sunpinyin autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ] scm-hg
+
+PLATFORMS="~x86"
+
+WORK=${WORK}/${PN}2
+
+src_prepare() {
+    ./autogen.sh --do-not-run-configure || die "autogen.sh failed"
+    sunpinyin_src_prepare
+}
+

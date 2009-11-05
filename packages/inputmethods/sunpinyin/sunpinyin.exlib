@@ -1,74 +1,58 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_REPOSITORY="ssh://anon@hg.opensolaris.org/hg/nv-g11n/inputmethod"
-SCM_CHECKOUT_TO="inputmethod"
+require python [ python_dep=2.5 ]
 
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ] scm-hg
+export_exlib_phases src_prepare pkg_postinst pkg_postrm
 
-MY_PNV=${PNV/pre}
 SUMMARY="A SLM based Chinese PinYin input method engine"
 DESCRIPTION="
 SunPinyin is an SLM (Statistical Language Model) based input method
-engine (IME) developed by Sun Asian G11N Center. Currently, it
-supports IIIMF (Internet/Intranet Input Method Framework), SCIM
-(Smart Common Input Method), BeCJK and IBus.
-As a feature-rich IM, SunPinyin provides two input style: classic
-input style and instant input style."
+engine. To model the Chinese language, it use a backoff bigram and
+trigram language model.
+
+Currently, SunPinyin 2.0 is available on IBus."
 HOMEPAGE="http://www.opensolaris.org/os/project/input-method"
-DOWNLOADS=""
 
 LICENCES="|| ( CDDL LGPL-2.1 )"
 SLOT="0"
-PLATFORMS="~x86"
-MYOPTIONS="debug doc
-    (
-        ibus [[ description = [ Enable support for ibus Platform ] ]]
-        scim [[ description = [ Enable support for scim Platform (not ready) ] ]]
-    ) [[
-    number-selected = at-least-one
-    description = [ Only ibus wrapper works ]
-]]"
+MYOPTIONS="debug"
 
 DEPENDENCIES="
     build:
+        dev-util/intltool[>=0.35.0]
         dev-util/pkg-config
         sys-devel/gettext
-        dev-libs/glib:2 [[ note = [ glib-gettextize ] ]]
-        doc? ( dev-lang/perl )
     build+run:
         dev-db/sqlite:3
-        ibus? (
-            dev-lang/python:=[>=2.5]
-            inputmethods/ibus[>=1.2.0]
-        )
-        scim? ( inputmethods/scim[>=1.4] )
+        inputmethods/ibus[>=1.2.0]
 "
-
-WORK=${WORK}/${PN}
+#MYOPTIONS="debug doc
+#    (
+#        ibus [[ description = [ Enable support for ibus Platform ] ]]
+#        scim [[ description = [ Enable support for scim Platform (not ready) ] ]]
+#    ) [[ number-selected = at-least-one ]]
+#"
+#        scim? ( inputmethods/scim[>=1.4] )
+#        doc? ( dev-lang/perl )
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --enable-ibus
+    --disable-{scim,documents}
     --disable-{cle,gtkstandalone}
     --disable-{bestandalone,becjk-module}
 )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'doc documents' ibus scim )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 
-pkg_setup() {
-    option ibus && require python [ has_lib=false ]
+sunpinyin_src_prepare() {
+    echo "#! /bin/true" > py-compile
 }
 
-src_prepare() {
-    # file extension: le -> little endian data files | be -> big endian data files
-    cp ../sunpinyin/ime/data/lm_sc.t3g.le data || die "failed to preparing pinyin database"
-    ./autogen.sh --do-not-run-configure || die "autogen.sh failed"
-    echo "#! /bin/bash" > py-compile
+sunpinyin_pkg_postinst() {
+    python_mod_optimize /usr/share/ibus-sunpinyin/setup
 }
 
-pkg_postinst() {
-    option ibus && python_mod_optimize /usr/share/ibus-sunpinyin/setup
-}
-
-pkg_postrm() {
-    option ibus && python_mod_cleanup /usr/share/ibus-sunpinyin/setup
+sunpinyin_pkg_postrm() {
+    python_mod_cleanup /usr/share/ibus-sunpinyin/setup
 }
 
