@@ -7,12 +7,15 @@ require tint2 scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=
 DOWNLOADS=""
 
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS="tint2conf [[ description = [ empty code ] ]]"
+MYOPTIONS="gtk [[ description = [ Build GTK+-2 theme switcher for ${PN} ] ]]"
 
 DEPENDENCIES+="
     build+run:
-        tint2conf? ( x11-libs/gtk+:2 )
+        gtk? (
+          x11-libs/gtk+:2
+          gnome-bindings/pygtk:2
+        )
 "
 
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( tint2conf )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'gtk tint2conf' )
 
