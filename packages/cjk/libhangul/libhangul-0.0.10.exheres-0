@@ -3,7 +3,7 @@
 
 SUMMARY="libhangul is a generalized and portable library for processing hangul"
 HOMEPAGE="http://kldp.net/projects/hangul"
-DOWNLOADS="http://kldp.net/frs/download.php/4943/${PNV}.tar.gz"
+DOWNLOADS="http://kldp.net/frs/download.php/5417/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
@@ -13,12 +13,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         dev-util/pkg-config
+    test:
+        dev-libs/check
 "
 
-src_test() {
-    if has_version dev-libs/check ; then
-        default
-    else
-        ewarn "${PN} needs \"dev-libs/check\" to performan tests."
-    fi
-}
