@@ -8,7 +8,7 @@ DOWNLOADS="http://guichan.googlecode.com/files/${PNV}.tar.gz"
 LICENCES="BSD-3"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="opengl sdl allegro"
+MYOPTIONS="opengl sdl allegro [[ description = [ Build the Allegro frontend ] ]]"
 
 DEPENDENCIES="
     build+run:
