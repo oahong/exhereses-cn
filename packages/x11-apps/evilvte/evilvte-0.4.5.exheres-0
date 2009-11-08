@@ -18,4 +18,6 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="freshmeat:evilvte"
+UPSTREAM_CHANGELOG="${HOMEPAGE}/Changelog"
 
