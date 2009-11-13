@@ -59,5 +59,13 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 src_install() {
     default
     dodoc doc/*.html
+
+    insinto /etc/X11/Sessions
+    hereins icewm-session <<EOF
+/usr/bin/icewm-session
+EOF
+    fperms a+x /etc/X11/Sessions/icewm-session
+    insinto /usr/share/xsessions/
+    doins lib/icewm-session.desktop
 }
 
