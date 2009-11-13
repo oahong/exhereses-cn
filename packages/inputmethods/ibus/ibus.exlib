@@ -52,7 +52,7 @@ DEPENDENCIES="
         linguas:ko? ( inputmethods/ibus-hangul )
         linguas:zh_CN? (
             inputmethods/ibus-pinyin
-            inputmethods/sunpinyin[ibus]
+            inputmethods/sunpinyin
             inputmethods/ibus-table
         )
         linguas:zh_TW? ( inputmethods/ibus-chewing )
