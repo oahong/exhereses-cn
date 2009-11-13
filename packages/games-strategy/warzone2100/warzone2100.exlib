@@ -50,7 +50,6 @@ DEPENDENCIES="
         media-libs/libvorbis
         dev-libs/popt
         dev-games/physfs
-        dev-db/sqlite:3[>=3.6.10]
     run:
         fonts/dejavu
 "
