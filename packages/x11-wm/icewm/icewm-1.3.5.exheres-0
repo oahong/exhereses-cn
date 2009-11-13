@@ -1,0 +1,54 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PNV=${PNV/-p/p}
+SUMMARY="icewm"
+HOMEPAGE="http://www.icewm.org"
+DOWNLOADS="mirror://sourceforge/${PN}/${MY_PNV}.tar.gz"
+
+LICENCES="FIXME"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="debug nls xinerama gnome"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        sys-devel/gettext
+        x11-proto/xextproto
+        x11-proto/xproto
+        xinerama? ( x11-proto/xineramaproto )
+    build+run:
+        media-libs/freetype:2
+        x11-libs/gtk+:=2
+        x11-libs/libICE
+        x11-libs/libSM
+        x11-libs/libX11
+        x11-libs/libXext
+        x11-libs/libXft
+        x11-libs/libXft
+        x11-libs/libXrandr
+        x11-libs/libXrender
+        gnome? (
+            gnome-desktop/gnome-desktop:2
+            gnome-platform/libgnomeui:2
+        )
+        xinerama? ( x11-libs/libXinerama )
+"
+
+BUGS_TO="oahong@gmail.com"
+
+WORK=${WORKBASE}/${MY_PNV}
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    #--disable-corefonts
+    --enable-{i18n,nls}
+    --enable-{sm,shape,shaped-decorations,gradients}
+    --enable-{xrandr,xfreetype}
+    --enable-{taskbar,winmenu}
+    --disable-menus-gnome1
+)
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    debug xinerama 'gnome menus-gnome2'
+)
+
