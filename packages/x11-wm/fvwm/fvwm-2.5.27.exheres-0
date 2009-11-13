@@ -115,6 +115,6 @@ EOF
     hereins fvwm <<EOF
 /usr/bin/fvwm2
 EOF
-    fperm 755 /etc/X11/sessions/fvwm
+    fperms 755 /etc/X11/sessions/fvwm
 }
 
