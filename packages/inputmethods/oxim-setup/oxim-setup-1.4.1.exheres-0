@@ -16,10 +16,12 @@ DEPENDENCIES="
         sys-devel/gettext
     build+run:
         dev-libs/glib:2
+        dev-libs/libxml2
         gnome-platform/libglade:2
         inputmethods/oxim[~${PV}]
         net-misc/curl[>=7.15]
         x11-libs/gtk+:2[>=2.2.0]
+        x11-libs/libX11
         x11-libs/libXft[>=2.0]
         x11-libs/libXpm[>=2.0.0]
 "
@@ -27,8 +29,13 @@ DEPENDENCIES="
 BUGS_TO="oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-    --enable-gtk-immodule --enable-setup-gtk
-    --disable-qt-immodule --disable-setup-qt3
-    --disable-setup-php --disable-setup-gambas
+    --enable-{gtk-immodule,setup-gtk}
+    --disable-{qt-immodule,setup-qt3}
+    --disable-setup-{php,gambas}
 )
+
+src_install() {
+    default
+    edo rm -rf "${IMAGE}"/usr/share/gettext
+}
 

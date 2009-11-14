@@ -1,16 +1,21 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+
 SUMMARY="Open X Input Method server"
 DESCRIPTION="
-"
+OXIM is a program that afford the service for Chinese input method.
+It is a improvment base on XCIN 2.5.3pre2. Beside containing advantage of XCIN,
+it add new nice graphic user interface and more function such that you could
+type chinese without care about what your choosen language in your system is."
 HOMEPAGE="http://opendesktop.org.tw/demopage/oxim"
 DOWNLOADS="ftp://ftp.opendesktop.org.tw/odp/OXIM/Source/${PNV}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="chewing"
+MYOPTIONS="chewing eeepc [[ description = [ Enable support for EeePC environment ] ]]"
 
 DEPENDENCIES="
     build:
@@ -24,17 +29,18 @@ DEPENDENCIES="
         x11-libs/libXtst[>=1.0.0]
         x11-libs/libXft[>=2.0]
         x11-libs/gtk+:2[>=2.2.0]
-        chewing? ( cjk/chewing[<0.3.0|>=0.3.0|>=0.3.2] )
+        chewing? ( cjk/chewing[<0.3.0|>=0.3.0] )
+    recommendation:
+        inputmethods/oxim-setup
 "
 
 BUGS_TO="oahong@gmail.com"
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-gtk-immoduledir.patch )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-    --enable-unicode-module --enable-gtk-immodule
-    --disable-qt-immodule
-    #--disable-eeepc
+    --enable-unicode-module --enable-gtk-immodule --disable-qt-immodule
 )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'chewing chewing-module' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'chewing chewing-module' 'eeepc EeePC' )
 
 pkg_postinst() {
     $(type -p gtk-query-immodules-2.0) > "${ROOT}"/etc/gtk-2.0/gtk.immodules
