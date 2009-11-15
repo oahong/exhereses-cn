@@ -23,11 +23,8 @@ DEPENDENCIES="
         cjk/fbterm-ucimf [[ NOTE = [ Required to input CJK characters via UCIMF ] ]]
 "
 
-#DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( gpm 'video_drivers:vesa vesa' )
-
-src_configure() {
-    nonfatal econf $(option_enable gpm) $(option_enable video_drivers:vesa vesa)
-}
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-configure-exit-1.patch )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( gpm 'video_drivers:vesa vesa' )
 
 src_install() {
     default
