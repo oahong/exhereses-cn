@@ -37,28 +37,31 @@ MYOPTIONS="debug"
 # http://developer.wz2100.net/wiki/CompileGuide
 DEPENDENCIES="
     build:
-        sys-devel/gettext
         dev-lang/perl[>=5.10]
         dev-util/pkg-config[>=0.9]
+        sys-devel/bison
+        sys-devel/flex
+        sys-devel/gettext[>=0.15]
     build+run:
-        media-libs/quesoglc
+        dev-games/physfs
+        dev-libs/popt
         media-libs/SDL[>=1.2]
-        media-libs/SDL_net[>=1.2]
         media-libs/libpng[>=1.2]
         media-libs/libtheora[>=1.0]
-        media-libs/openal
-        media-libs/libvorbis
-        dev-libs/popt
-        dev-games/physfs
+        media-libs/libvorbis[>=1.1]
+        media-libs/openal[>=0.0.8]
+        media-libs/quesoglc
+        x11-dri/mesa
     run:
         fonts/dejavu
 "
-
+#        media-libs/SDL_net[>=1.2]
 REMOTE_IDS="sourceforge:warzone2100 freshmeat:Warzone 2100"
 UPSTREAM_DOCUMENTATION="http://guide.wz2100.net"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --enable-sound
+    --with-icondir=/usr/share/pixmaps
     --with-distributor=Exherbo
     --with-applicationdir=/usr/share/applications
 )
