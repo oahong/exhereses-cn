@@ -1,0 +1,25 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+VIDEO="sequences.wz"
+require checksums [ sha1=[ ${VIDEO}=7ade8edd200afee3e4a675d1a5b739b32e574916 ] ]
+
+SUMMARY="High quality video file for Warzone2100"
+HOMEPAGE="http://wz2100.net"
+DOWNLOADS="http://www.il.fontys.nl/~giel/warzone/videos/latest/en/hi/${VIDEO}"
+
+LICENCES="GPLv2"
+SLOT="0"
+PLATFORMS="~x86"
+# TODO: Add option(s) to switch between hi/low quality videos? Idea is taken from debian
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+WORK=${WORKBASE}
+
+src_install() {
+    insinto /usr/share/warzone2100
+    doins "${FETCHEDDIR}"/${VIDEO}
+}
+
