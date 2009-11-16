@@ -1,8 +1,6 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-export_exlib_phases pkg_postinst
-
 SUMMARY="A 3D realtime strategy game on the future Earth"
 DESCRIPTION="
 In Warzone 2100 you command the forces of \"The Project\" in a battle to rebuild
@@ -42,6 +40,8 @@ DEPENDENCIES="
         sys-devel/bison
         sys-devel/flex
         sys-devel/gettext[>=0.15]
+    run:
+        fonts/dejavu
     build+run:
         dev-games/physfs
         dev-libs/popt
@@ -52,10 +52,10 @@ DEPENDENCIES="
         media-libs/openal[>=0.0.8]
         media-libs/quesoglc
         x11-dri/mesa
-    run:
-        fonts/dejavu
+    recommendation:
+        games-strategy/warzone2100-video
 "
-#        media-libs/SDL_net[>=1.2]
+
 REMOTE_IDS="sourceforge:warzone2100 freshmeat:Warzone 2100"
 UPSTREAM_DOCUMENTATION="http://guide.wz2100.net"
 
@@ -67,13 +67,4 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 )
 # http://forums.wz2100.net/viewtopic.php?f=4&t=3126
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'debug debug relaxed' )
-
-warzone2100_pkg_postinst() {
-    local dotwarzone=".warzone2100-$(ever range 1-2)"
-
-    elog "To play video intros in the game, You must download either"
-    elog "high or low quality video file from"
-    elog "http://wz2100.net/download"
-    elog "and put it into \$HOME/${dotwarzone/scm/trunk}"
-}
 
