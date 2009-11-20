@@ -1,20 +1,21 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require multilib autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
+require elisp-module multilib autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 
 SUMMARY="A multilingual input method library and environment"
 HOMEPAGE="http://uim.googlecode.com"
 DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.bz2"
 
-LICENCES="BSD-3 as-is [[ description = [ libgcroots ] ]]
-    LGPL-2.1 [[ description = [ icons ] ]]"
+LICENCES="BSD-3 MIT [[ description = [ libgcroots ] ]] LGPL-2.1 [[ description = [ icons ] ]]"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS="anthy debug emacs gnome libnotify qt4"
 
+#TODO: sigscheme/libsgcroots?
 DEPENDENCIES="
     build:
+        dev-lang/perl [[ note = [ autogen.sh use it ] ]]
         dev-util/intltool[>=0.36.3]
         dev-util/pkg-config
         sys-devel/gettext[>=0.17]
@@ -24,6 +25,7 @@ DEPENDENCIES="
         anthy? ( cjk/anthy[>=8622] )
         dev-libs/glib
         dev-libs/libedit
+        emacs? ( app-editors/emacs )
         gnome? (
             gnome-desktop/gnome-panel[>=2.14.0]
             gnome-platform/libgnomeui:2
@@ -44,48 +46,41 @@ REMOTE_IDS="freshmeat:uim"
 UPSTREAM_RELEASE_NOTES="${HOMEPAGE}/svn/tags/uim-1.5.6/RELNOTE"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/uim/wiki/UIMSystemConfiguration"
 
-DEFAULT_SRC_INSTALL_EXTRA_SUBDIRS=( fep )
+DEFAULT_SRC_INSTALL_EXTRA_SUBDIRS=( fep emacs xim )
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --disable-kde-applet --enable-pref
+    --with-gtk2 --with-libedit=/usr/$(get_libdir)
+    --without-qt --without-scim
+    --without-{canna,eb,mana,prime,sj3,wnn,m17nlib}
+)
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( anthy 'anthy anthy-utf8' 'qt4 qt4-immodule' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'anthy dict' debug emacs 'gnome gnome-applet' 'libnotify notify libnotify' )
 
 src_prepare() {
-    sed -i \
-        -e '/uim_pixmapsdir/s#\(${PACKAGE_TARNAME}\)\/\(pixmaps\)#\2\/\1#' \
-        configure.ac || die "sed failed"
-    ./autogen.sh || die "failed to run autogen.sh"
-}
-
-src_configure() {
-    #XXX:
-    # 1. disable obsolete qt3/kde3 support
-    # 2. scim support might be broken
-    econf \
-        --without-{canna,eb,mana,prime,wnn,sj3,m17nlib} \
-        --without-qt \
-        --disable-kde-applet \
-        --without-scim \
-        --with-gtk2 \
-        --with-libedit=/usr/$(get_libdir) \
-        $(option_with anthy) \
-        $(option_with anthy anthy-utf8) \
-        $(option anthy && echo --enable-dict) \
-        $(option_with qt4 qt4-immodule) \
-        $(option_enable debug) \
-        $(option_enable emacs) \
-        $(option_enable gnome gnome-applet) \
-        $(option_enable libnotify notify libnotify)
+    edo sed -i configure.ac \
+        -e '/uim_pixmapsdir/s#\(${PACKAGE_TARNAME}\)/\(pixmaps\)#\2/\1#'
+    edo ./autogen.sh
 }
 
 src_install() {
     default
-    dodoc doc/*
-    find "${IMAGE}" -type d -empty -delete || die "Couldn't rm empty dirs"
-    rm -f "${IMAGE}"/usr/share/doc/${PNV}/Makefile* || die "Couldn't rm unwanted file"
+    dodoc doc/[^M][^a]*
+
+    edo find "${IMAGE}" -type d -empty -delete
+
+    if option emacs ; then
+        elisp-compile "${IMAGE}"/${ELISP_SITE_LISP}/uim-el/*.el
+        elisp-install-site-file
+    fi
 }
 
 pkg_postinst() {
     gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    option emacs && elisp-module_pkg_postinst
 }
 
 pkg_postrm() {
     gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    option emacs && elisp-module_pkg_postinst
 }
 
