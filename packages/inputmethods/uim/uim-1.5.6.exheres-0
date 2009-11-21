@@ -1,7 +1,8 @@
-# Copyright 2009 Hong Hao
+# Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require elisp-module multilib autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+require multilib autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+require elisp-optional [ source_directory=emacs ]
 
 SUMMARY="A multilingual input method library and environment"
 HOMEPAGE="http://uim.googlecode.com"
@@ -10,7 +11,7 @@ DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.bz2"
 LICENCES="BSD-3 MIT [[ description = [ libgcroots ] ]] LGPL-2.1 [[ description = [ icons ] ]]"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="anthy debug emacs gnome libnotify qt4"
+MYOPTIONS="anthy debug gnome libnotify qt4"
 
 #TODO: sigscheme/libsgcroots?
 DEPENDENCIES="
@@ -25,7 +26,6 @@ DEPENDENCIES="
         anthy? ( cjk/anthy[>=8622] )
         dev-libs/glib
         dev-libs/libedit
-        emacs? ( app-editors/emacs )
         gnome? (
             gnome-desktop/gnome-panel[>=2.14.0]
             gnome-platform/libgnomeui:2
@@ -38,7 +38,7 @@ DEPENDENCIES="
         x11-libs/libXext
         x11-libs/libXft
     recommendation:
-        gnome-desktop/librsvg [[ note = [ to render svg icons ] ]]
+        gnome-desktop/librsvg
 "
 
 BUGS_TO="oahong@gmail.com"
@@ -62,25 +62,26 @@ src_prepare() {
     edo ./autogen.sh
 }
 
+src_compile() {
+    default
+    elisp-optional_src_compile
+}
+
 src_install() {
     default
-    dodoc doc/[^M][^a]*
+    dodoc doc/[^M][^a]* #ignore makefiles
 
     edo find "${IMAGE}" -type d -empty -delete
-
-    if option emacs ; then
-        elisp-compile "${IMAGE}"/${ELISP_SITE_LISP}/uim-el/*.el
-        elisp-install-site-file
-    fi
+    elisp-optional_src_install
 }
 
 pkg_postinst() {
-    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
-    option emacs && elisp-module_pkg_postinst
+    $(type -p gtk-query-immodules-2.0) > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    elisp-optional_pkg_postinst
 }
 
 pkg_postrm() {
-    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
-    option emacs && elisp-module_pkg_postinst
+    $(type -p gtk-query-immodules-2.0) > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    elisp-optional_pkg_postrm
 }
 
