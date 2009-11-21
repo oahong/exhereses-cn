@@ -3,7 +3,7 @@
 
 require sunpinyin
 
-DOWNLOADS="http://ibus-sunpinyin.googlecode.com/files/${PNV}.tar.gz"
+DOWNLOADS="http://ibus-sunpinyin.googlecode.com/files/ibus-${PNV}.tar.gz"
 PLATFORMS="~x86"
 
 WORK=${WORKBASE}/${PN}-$(ever range -2)
