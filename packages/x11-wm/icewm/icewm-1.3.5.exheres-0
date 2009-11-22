@@ -37,6 +37,8 @@ DEPENDENCIES="
             gnome-platform/libgnomeui:2
         )
         xinerama? ( x11-libs/libXinerama )
+    suggestion:
+        x11-themes/icewm-themes
 "
 
 BUGS_TO="oahong@gmail.com"
@@ -58,6 +60,9 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 
 src_install() {
     default
+
+    insinto /usr/share/man/man1
+    newins doc/${PN}.1.man ${PN}.1
     dodoc doc/*.html
 
     insinto /etc/X11/Sessions
@@ -65,7 +70,7 @@ src_install() {
 /usr/bin/icewm-session
 EOF
     fperms a+x /etc/X11/Sessions/icewm-session
-    insinto /usr/share/xsessions/
+    insinto /usr/share/xsessions
     doins lib/icewm-session.desktop
 }
 
