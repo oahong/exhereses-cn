@@ -3,8 +3,5 @@
 
 require ibus-table
 
-PLATFORMS=""
+PLATFORMS="~x86"
 
-DEFAULT_SRC_CONFIGURE_PARAMS=(
-    '--enable-wubi98'
-)

@@ -3,5 +3,5 @@
 
 require ibus-table
 
-PLATFORMS=""
-DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-erbi-qs )
+PLATFORMS="~x86"
+
