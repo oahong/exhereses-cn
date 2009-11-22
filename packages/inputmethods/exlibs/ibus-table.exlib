@@ -11,9 +11,8 @@ if ever at_least scm ; then
     require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ] scm-git
 
     DOWNLOADS=""
+    export_exlib_phases src_prepare
 fi
-
-export_exlib_phases src_prepare
 
 LICENCES="GPL-3"
 SLOT="0"
