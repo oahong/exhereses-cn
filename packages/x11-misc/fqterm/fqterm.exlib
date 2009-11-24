@@ -26,9 +26,8 @@ DEPENDENCIES="
         x11-libs/qt:4[X][ssl]
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( -p0 "${FILES}"/${PN}-no-automagic.patch )
-CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_ALSA:bool=ON -DENABLE_OSS:bool=OFF )
 DEFAULT_SRC_INSTALL_EXCLUDE=( README.txt )
+
 fqterm_src_install() {
     cmake_src_install
 
