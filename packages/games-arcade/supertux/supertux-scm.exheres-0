@@ -5,11 +5,10 @@ SCM_SUBPATH="supertux"
 SCM_REPOSITORY="http://supertux.lethargik.org/svn/supertux"
 
 SCM_tinygettext_REPOSITORY="http://tinygettext.googlecode.com/svn"
-SCM_tinygettext_TAG="tinygettext-supertux"
-SCM_tinygettext_SUBPATH="src"
+SCM_tinygettext_REVISION="179"
 SCM_SECONDARY_REPOSITORIES="tinygettext"
 
-SCM_SVN_EXTERNALS="src/tinygettext:tinygettext"
+SCM_SVN_EXTERNALS="external/tinygettext:tinygettext"
 require scm-svn cmake
 
 SUMMARY="A classic 2D jump'n run game similar to the original Super Mario games "
@@ -41,7 +40,7 @@ UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki/User_Manual ${HOMEPAGE}/wiki/SuperTux_F
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/${PN}-no-opengl.patch
-    -p0 "${FILES}"/${PN}-fixinstallation.patch
+    "${FILES}"/${PN}-fixinstallation.patch
 )
 CMAKE_SRC_CONFIGURE_PARAMS=( -DDEBUG:bool=OFF -DWERROR:bool=OFF )
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'opengl OPENGL' )
@@ -49,6 +48,6 @@ CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'opengl OPENGL' )
 src_install() {
     cmake_src_install
     dodoc WHATSNEW.txt
-    rm -rf "${IMAGE}"/usr/share/doc/supertux2 || die "failed to remove unversioned doc"
+    edo rm -rf "${IMAGE}"/usr/share/doc/supertux2
 }
 

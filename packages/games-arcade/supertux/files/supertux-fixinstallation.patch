@@ -1,16 +1,22 @@
-Source: me@gmail.com
-Upstream: no
-Reason: Install supertux executable in /usr/bin rather than /usr/games
-Index: CMakeLists.txt
-===================================================================
---- CMakeLists.txt	(版本 5930)
-+++ CMakeLists.txt	(工作副本)
-@@ -390,7 +390,7 @@
+--- supertux-scm/CMakeLists.txt~	2009-11-25 21:10:40.694681670 +0800
++++ supertux-scm/CMakeLists.txt	2009-11-25 21:12:17.074681565 +0800
+@@ -49,7 +49,7 @@
+ 
+ ## For autopackage
+ OPTION(ENABLE_BINRELOC "Enable autopackage's BINRELOC features" OFF)
+-SET(APPDATADIR "${CMAKE_INSTALL_PREFIX}/share/games/supertux2")
++SET(APPDATADIR "${CMAKE_INSTALL_PREFIX}/share/supertux2")
+ 
+ ## Check endianess
+ 
+@@ -363,8 +363,8 @@
  
  ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
  
 -  SET(INSTALL_SUBDIR_BIN "games/")
+-  SET(INSTALL_SUBDIR_SHARE "share/games/supertux2/")
 +  SET(INSTALL_SUBDIR_BIN "bin/")
-   SET(INSTALL_SUBDIR_SHARE "share/games/supertux2/")
++  SET(INSTALL_SUBDIR_SHARE "share/supertux2/")
    SET(INSTALL_SUBDIR_DOC "share/doc/supertux2/")
  
+   INSTALL(FILES ${SUPERTUX_SOURCE_DIR}/supertux2.desktop DESTINATION "share/applications")
