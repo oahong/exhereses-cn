@@ -4,8 +4,8 @@
 SUMMARY="An open-source library to create ISO-9660 filesystem"
 DESCRIPTION="
 libisofs is a library to create an ISO-9660 filesystem, and supports extensions
-like RockRidge or Joliet. It is also a full featured ISO-9660 editor, allowing 
-you to modify an ISO image or multisession disc, including file addition and 
+like RockRidge or Joliet. It is also a full featured ISO-9660 editor, allowing
+you to modify an ISO image or multisession disc, including file addition and
 removal, change of file names and attributes, etc
 
 libisofs supports the extension AAIP which allows to store ACLs and xattr in
@@ -22,8 +22,13 @@ SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
 
-DEPENDENCIES=""
+DEPENDENCIES="
+    build+run:
+        sys-apps/acl
+        sys-apps/attr
+"
 
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-libacl --enable-xattr --enable-zlib )
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=(
     doc/susp_aaip_2_0.txt
     doc/susp_aaip_isofs_names.txt
