@@ -1,7 +1,6 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-MY_PV=0.12.5.90-rc5
 require python [ has_lib=false ]
 
 SUMMARY="Gtk Absolute Jabber Instant Messenger"
@@ -12,11 +11,8 @@ LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
-#    spell
-#    dbus [[ description = [ Enable remote control ${PN} via DBus ] ]]
-#    idle [[ description = [ Enable idle module ] ]]"
 
-#FIXME: should I remove the bunche of suggestion deps?
+#FIXME: should I drop the bunche of suggestion deps completely?
 DEPENDENCIES="
     build:
         dev-util/pkg-config[>=0.19]
@@ -47,10 +43,8 @@ DEPENDENCIES="
 
 RESTRICT="test"
 BUGS_TO="oahong@gmail.com"
-WORK=${WORKBASE}/${PN}-${MY_PV}
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-trayicon )
-#DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( idle 'dbus remote' 'spell gtkspell' )
 
 src_prepare() {
     echo "#! /bin/true" > config/py-compile
