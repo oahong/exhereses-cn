@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="https://aqualung.svn.sourceforge.net/svnroot/aqualung"
-require scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+require freedesktop-desktop scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 
 SUMMARY="Music player for GNU/Linux"
 DESCRIPTION="
@@ -87,10 +87,10 @@ src_install() {
     default
     edo rm -rf "${IMAGE}"/usr/share/${PN}/doc
 
-    # http://patch-tracker.debian.org/patch/debianonly/view/aqualung/0.9~beta10-2.1
     insinto /usr/share/applications
     hereins ${PN}.desktop <<EOF
 [Desktop Entry]
+Encoding=UTF-8
 Name=${PN^}
 Comment=Gapless audio player
 Exec=${PN}
@@ -98,7 +98,8 @@ Icon=/usr/share/${PN}/icon_64.png
 Categories=GTK;AudioVideo;Audio;Player;
 Terminal=false
 Type=Application
-Encoding=UTF-8
+StartupNotify=true
+MimeType=audio/aac;audio/ac3;audio/basic;audio/mp4;audio/mpeg;audio/mpegurl;audio/vnd.rn-realaudio;audio/vorbis;audio/x-adpcm;audio/x-flac;audio/x-mp2;audio/x-mp3;audio/x-mpegurl;audio/x-ms-wma;audio/x-oggflac;audio/x-speex;audio/x-vorbis;audio/x-wav;
 EOF
 }
 
