@@ -22,8 +22,7 @@ MYOPTIONS="dbus debug ssl"
 DEPENDENCIES="
     build+run:
         ssl? ( dev-libs/openssl )
-        x11-libs/qt:4[dbus?][ssl?]
-        x11-libs/qt:4[phonon][>=4.5]
+        x11-libs/qt:4[dbus?][ssl?][qt3support][phonon][>=4.5]
     suggestion:
         dbus? ( kde/kdeutils:4[kde_parts:kwallet] )
 "
