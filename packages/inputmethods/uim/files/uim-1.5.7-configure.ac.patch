@@ -1,0 +1,14 @@
+Source: me#gmail.com
+Upstream: Not yet
+Reason: fix typo.
+--- uim-1.5.7/configure.ac.origin	2009-11-27 09:45:42.072681636 +0800
++++ uim-1.5.7/configure.ac	2009-11-27 09:45:56.883681152 +0800
+@@ -1259,7 +1259,7 @@
+             @<:@default=yes@:>@]),
+         enable_kde4_applet=$enableval,
+         enable_kde4_applet=yes)
+-case "$enable_kde_applet" in
++case "$enable_kde4_applet" in
+   no)
+     use_applet_kde4="no"
+     ;;
