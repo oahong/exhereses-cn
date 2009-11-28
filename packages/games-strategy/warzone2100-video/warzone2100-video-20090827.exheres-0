@@ -10,7 +10,7 @@ DOWNLOADS="http://www.il.fontys.nl/~giel/warzone/videos/latest/en/hi/${VIDEO}"
 
 LICENCES="GPLv2"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 # TODO: Add option(s) to switch between hi/low quality videos? Idea is taken from debian
 MYOPTIONS=""
 
