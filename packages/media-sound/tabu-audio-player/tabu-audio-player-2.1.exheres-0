@@ -1,7 +1,19 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+#http://github.com/kalmbach/tabu_audio_player
+#XXX: missing minetype in .desktop file
 SUMMARY="Simple gstreamer audio player with client-side decorations and playback controls drawn with cairo"
+DESCRIPTION="
+Tabu is a simple GTK+ audio player with client-side decorations drawn
+using Cairo.
+It uses it's own window decorations and play controls drawn with Cairo.
+Tabu is designed to be simple, it's main and only goal is to play music.
+
+Feature highlights:
+- Tabu uses GStreamer as it's backend
+- Tag extraction with TagLib library.
+- Fast and light-weight"
 HOMEPAGE="http://www.kalmbach.com.ar"
 DOWNLOADS="http://kalmbach.com.ar/download/${PNV}.tar.gz"
 
