@@ -1,0 +1,27 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Simple gstreamer audio player with client-side decorations and playback controls drawn with cairo"
+HOMEPAGE="http://www.kalmbach.com.ar"
+DOWNLOADS="http://kalmbach.com.ar/download/${PNV}.tar.gz"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="debug"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        sys-devel/gettext
+    build+run:
+        dev-libs/glib:2[>=2.8.0]
+        media-libs/gstreamer:0.10
+        media-libs/taglib[>=1.5]
+        x11-libs/gtk+:2[>=2.10.0]
+"
+
+BUGS_TO="oahong@gmail.com"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
+
