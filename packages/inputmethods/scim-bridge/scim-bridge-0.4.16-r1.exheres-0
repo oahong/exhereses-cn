@@ -4,10 +4,6 @@
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 
 SUMMARY="SCIM Bridge IM modules"
-DESCRIPTION="
-scim-bridge is yet another gtk-immodule for SCIM.It communicates with scim over sockets,
-and the DLL loaded by applications is written in pure C (for now).
-You can use this to avoid the problem caused by C++ ABI transition."
 HOMEPAGE="http://www.scim-im.org/projects/scim_bridge"
 DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
 
@@ -48,10 +44,12 @@ src_prepare() {
 src_install() {
     default
     if option doc ; then
-        dodoc doc/index.html
-        dodoc -r doc/{developer,user,tests}
+        pushd doc
+        dodoc index.html
+        dodoc -r {developer,user,tests}
         docinto api
-        dodoc doc/api/html/*
+        dodoc api/html/*
+        popd
     fi
 }
 
