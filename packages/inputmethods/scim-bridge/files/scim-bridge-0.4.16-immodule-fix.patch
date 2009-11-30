@@ -1,0 +1,121 @@
+Source: me@gmail.com
+Upstream: patch is ugly, so...
+Reason: Install immodules to a better place, make --enable-foo option work as expected
+--- scim-bridge-0.4.16.orig/client-gtk/Makefile.am	2009-01-18 00:46:31.000000000 +0800
++++ scim-bridge-0.4.16/client-gtk/Makefile.am	2009-11-29 23:48:22.719432957 +0800
+@@ -24,7 +24,7 @@
+ 
+ noinst_HEADERS = scim-bridge-client-gtk.h scim-bridge-client-imcontext-gtk.h  scim-bridge-client-key-event-utility-gtk.h
+ 
+-moduledir = @GTK_LIBDIR@/gtk-2.0/immodules
++moduledir = @GTK_LIBDIR@/gtk-2.0/@GTK_BINARY_VERSION@/immodules
+ 
+ module_LTLIBRARIES = im-scim-bridge.la
+ 
+--- scim-bridge-0.4.16.orig/client-qt/qt3/Makefile.am	2009-01-18 00:57:16.000000000 +0800
++++ scim-bridge-0.4.16/client-qt/qt3/Makefile.am	2009-11-29 23:49:23.677184206 +0800
+@@ -24,7 +24,7 @@
+ 
+ noinst_HEADERS = ../scim-bridge-client-qt.h ../scim-bridge-client-imcontext-qt.h  ../scim-bridge-client-key-event-utility-qt.h ../scim-bridge-client-common-qt.h
+ 
+-moduledir = @QT3_PREFIX@/plugins/inputmethods
++moduledir = @QT3_LIBDIR@/plugins/inputmethods
+ module_LTLIBRARIES = im-scim-bridge.la
+ 
+ im_scim_bridge_la_SOURCES = ../im-scim-bridge-qt.cpp \
+--- scim-bridge-0.4.16.orig/client-qt/qt4/Makefile.am	2009-01-18 00:57:40.000000000 +0800
++++ scim-bridge-0.4.16/client-qt/qt4/Makefile.am	2009-11-29 23:49:06.461476749 +0800
+@@ -24,7 +24,7 @@
+ 
+ noinst_HEADERS = ../scim-bridge-client-qt.h ../scim-bridge-client-imcontext-qt.h ../scim-bridge-client-key-event-utility-qt.h ../scim-bridge-client-common-qt.h
+ 
+-moduledir = @QT4_PREFIX@/plugins/inputmethods
++moduledir = @QT4_LIBDIR@/plugins/inputmethods
+ module_LTLIBRARIES = im-scim-bridge.la
+ 
+ im_scim_bridge_la_SOURCES = ../im-scim-bridge-qt.cpp \
+--- scim-bridge-0.4.16.orig/configure.ac	2009-04-18 21:50:18.000000000 +0800
++++ scim-bridge-0.4.16/configure.ac	2009-11-30 02:16:07.557197206 +0800
+@@ -80,7 +80,6 @@
+   AC_SUBST(GTK_LIBDIR)
+   AC_SUBST(GTK_VERSION)
+   AC_SUBST(GTK_BINARY_VERSION)
+-  enable_gtk2_immodule="yes";
+ fi
+ 
+ # Check if we should build scim-bridge-qt-immodule
+@@ -89,11 +88,14 @@
+ 			[SCIM_BRIDGE_HAS_QT3=no])
+ 
+ if test "$SCIM_BRIDGE_HAS_QT3" = "yes"; then
++  if test -z "$QT3_LIBDIR"; then
++    QT3_LIBDIR=`$PKG_CONFIG --variable=libdir qt-mt`
++  fi
+   if test -z "$QT3_PREFIX"; then
+     QT3_PREFIX=`$PKG_CONFIG --variable=prefix qt-mt`
+   fi
++  AC_SUBST(QT3_LIBDIR)
+   AC_SUBST(QT3_PREFIX)
+-  enable_qt3_immodule="yes";
+ fi
+ 
+ PKG_CHECK_MODULES(QT4, [QtGui >= 4.0, QtCore >= 4.0],
+@@ -101,40 +103,45 @@
+ 			[SCIM_BRIDGE_HAS_QT4=no])
+ 
+ if test "$SCIM_BRIDGE_HAS_QT4" = "yes"; then
++  if test -z "$QT4_LIBDIR"; then
++    QT4_LIBDIR=`$PKG_CONFIG --variable=libdir QtCore`
++  fi
+   if test -z "$QT4_PREFIX"; then
+     QT4_PREFIX=`$PKG_CONFIG --variable=prefix QtCore`
+   fi
++  AC_SUBST(QT4_LIBDIR)
+   AC_SUBST(QT4_PREFIX)
+-  enable_qt4_immodule="yes";
+ fi
+ 
+ ###########################################################
+ ##             Definiation of compile args.              ##
+ ###########################################################
+-AC_ARG_ENABLE(debug,
+-	      [AS_HELP_STRING([--enable-debug], [turn on debugging])], , 
+-              enable_debug=no)
++AC_ARG_ENABLE(debug, [AS_HELP_STRING([--enable-debug], [turn on debugging])], [enable_debug=$enableval], 
++              [enable_debug=no])
+ 
+ AC_ARG_ENABLE(tests,
+-	      [AS_HELP_STRING([--enable-tests], [build tests])], , 
+-       	      enable_tests=yes)
++	      [AS_HELP_STRING([--enable-tests], [build tests])], [enable_tests=$enableval]
++       	      [enable_tests=yes])
+ 
+ AC_ARG_ENABLE(documents,
+-	      [AS_HELP_STRING([--enable-documents], [build documents])], , 
+-       	      enable_documents=yes)
++	      [AS_HELP_STRING([--enable-documents], [build documents])], [enable_documents=$enableval],
++	      [enable_documents=no])
+ 
+ AC_ARG_ENABLE(agent,
+-	      [AS_HELP_STRING([--enable-agent], [build scim-bridge-agent])], , 
+-       	      enable_agent=yes)
++	      [AS_HELP_STRING([--enable-agent], [build scim-bridge-agent])], [enable_agent=$enableval], 
++       	      [enable_agent=yes])
+ 
+ AC_ARG_ENABLE(gtk2-immodule,
+-	      [AS_HELP_STRING([--enable-gtk2-immodule], [build GTK2 IM module])], , )
++	      [AS_HELP_STRING([--enable-gtk2-immodule], [build GTK2 IM module])], [enable_gtk2_immodule=$enableval],
++	      [enable_gtk2_immodule=yes])
+ 
+ AC_ARG_ENABLE(qt3-immodule,
+-	      [AS_HELP_STRING([--enable-qt3-immodule], [build Qt3 IM module])], , )
++	      [AS_HELP_STRING([--enable-qt3-immodule], [build Qt3 IM module])], [enable_qt3_immodule=$enableval],
++	      [enable_qt3_immodule=no])
+ 
+ AC_ARG_ENABLE(qt4-immodule,
+-	      [AS_HELP_STRING([--enable-qt4-immodule], [build Qt4 IM module])], , )
++	      [AS_HELP_STRING([--enable-qt4-immodule], [build Qt4 IM module])], [enable_qt4_immodule=$enableval],
++	      [enable_qt4_immodule=no])
+ 
+ if test "$enable_debug" = "yes"; then
+   AC_DEFINE(ENABLE_DEBUG,1,[Define this to enable the debug facility in libscim])
