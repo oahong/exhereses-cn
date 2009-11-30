@@ -44,7 +44,7 @@ DEPENDENCIES="
 RESTRICT="test"
 BUGS_TO="oahong@gmail.com"
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-trayicon )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-trayicon ) #--enable-site-packages
 
 src_prepare() {
     echo "#! /bin/true" > config/py-compile
