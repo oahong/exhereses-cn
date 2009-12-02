@@ -45,7 +45,7 @@ fcitx_src_prepare() {
 }
 
 fcitx_pkg_postinst() {
-    elog "Make sure following env variable is set properly:"
+    elog "Make suer the following env variables are set properly:"
     elog "XMODIFIERS=\"@im=fcitx\""
     elog "XIM=fcitx"
     elog "XIM_PROGRAM=fcitx"
