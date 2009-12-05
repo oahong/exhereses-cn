@@ -1,0 +1,14 @@
+Source: partialy based on gcin-1.4.4 patch from debian
+Upstream: No
+Reason: /usr/bin/moc
+--- gcin-1.4.5.pre4.orig/qt4-im/Makefile	2009-01-27 19:42:40.000000000 +0800
++++ gcin-1.4.5.pre4/qt4-im/Makefile	2009-04-18 19:28:19.000000000 +0800
+@@ -23,7 +19,7 @@
+ 	$(CXX) -E $(CFLAGS) $(INCS) $< > $@
+ 
+ moc_gcin-qt.cpp:	gcin-qt.h
+-	/usr/lib/$(QT)/bin/moc $< -o moc_gcin-qt.cpp
++	/usr/bin/moc $< -o moc_gcin-qt.cpp
+ 
+ im-gcin.so: $(OBJS)
+ 	export LD_RUN_PATH=$(gcinlibdir) ;\

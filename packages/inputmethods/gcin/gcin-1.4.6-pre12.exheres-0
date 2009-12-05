@@ -13,13 +13,15 @@ DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
 DEFAULT_SRC_COMPILE_PARAMS=( CC=$(tc-getCC) CCLD=$(tc-getCC) OPTFLAGS="${CFLAGS} ${LDFLAGS}" )
 
 src_prepare() {
-    echo "${PVR}" > ${WORK}/VERSION.gcin || die "failed to fix version number"
+    echo "${PVR}" > ${WORK}/VERSION.gcin
     default
 }
 
 src_configure() {
     econf \
-        --use_i18n=Y --use_tsin=Y --qt3_im=N \
+        --use_i18n=Y \
+        --use_tsin=Y \
+        --qt3_im=N \
         $(! option anthy && echo '--use_anthy=N' ) \
         $(! option qt4 && echo '--qt4_im=N' )
 }
