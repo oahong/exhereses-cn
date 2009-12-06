@@ -20,3 +20,7 @@ DEPENDENCIES="
         x11-libs/qt:4[dbus][>=4.5]
 "
 
+ibus-qt_src_prepare() {
+    default
+    edo sed -e '/add_subdirectory(test)/d' -i CMakeLists.txt
+}

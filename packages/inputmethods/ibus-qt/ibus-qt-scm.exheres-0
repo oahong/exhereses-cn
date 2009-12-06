@@ -6,6 +6,3 @@ require ibus-qt scm-git
 
 PLATFORMS="~x86"
 
-src_prepare() {
-    sed -e '/add_subdirectory(test)/d' -i CMakeLists.txt || die "failed to remove test engine"
-}
