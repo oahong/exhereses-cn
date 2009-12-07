@@ -3,7 +3,8 @@
 
 require sunpinyin
 
-DOWNLOADS="http://ibus-sunpinyin.googlecode.com/files/ibus-${PNV}.tar.gz"
+MY_PNV=${PN}-$(ever replace 2 "~hg")
+DOWNLOADS="http://ibus-sunpinyin.googlecode.com/files/${MY_PNV}.tar.gz"
 PLATFORMS="~x86"
 
 WORK=${WORKBASE}/${PN}-$(ever range -2)
