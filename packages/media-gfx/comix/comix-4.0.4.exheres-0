@@ -34,8 +34,7 @@ UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.html"
 
 src_install() {
     dodir /usr
-    python_version
-    edo python${PYVER} install.py --no-mime --dir="${IMAGE}"/usr install
+    edo python install.py --no-mime --dir="${IMAGE}"/usr install
 }
 
 pkg_postinst() {
