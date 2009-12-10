@@ -1,14 +1,15 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
-# Based in part upon 'man-db-2.5.5.ebuild' from Gentoo, which is:
+# Based in part upon 'man-db-2.5.6.ebuild' from Gentoo, which is:
 # Copyright 1999-2009 Gentoo Foundation
-# $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo-x86/sys-apps/man-db/man-db-2.5.5.ebuild,v 1.1 2009/04/05 18:38:55 vapier Exp $
+# $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo-x86/sys-apps/man-db/man-db-2.5.6.ebuild,v 1.2 2009/10/02 22:13:26 flameeyes Exp $
 
-SUMMARY="the on-line manual database"
+SUMMARY="The online manual database"
 DESCRIPTION="
-man-db is an implementation of the standard Unix documentation system accessed
-using the man command.
+man-db is an implementation of the standard Unix documentation system accessed using the man command.
 It uses a Berkeley DB database in place of the traditional flat-text whatis databases.
+man-db is used by several popular GNU/Linux distributions, including Debian, Ubuntu, and SuSE.
+It also compiles and runs on a number of proprietary Unix systems.
 "
 HOMEPAGE="http://man-db.nongnu.org"
 DOWNLOADS="mirror://savannah/${PN}/${PNV}.tar.gz"
@@ -16,28 +17,44 @@ DOWNLOADS="mirror://savannah/${PN}/${PNV}.tar.gz"
 LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="berkdb"
+MYOPTIONS="( gdbm berkdb ) [[ number-selected = exactly-one ]]"
 
 DEPENDENCIES="
     build:
         sys-devel/gettext
     build+run:
-        !berkdb? ( sys-libs/gdbm )
         !sys-apps/man
         berkdb? ( sys-libs/db )
+        !berkdb? ( sys-libs/gdbm )
         sys-apps/groff
 "
 
+BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="launchpad:man-db"
+
 src_configure() {
-    local mysections="1 1p 8 2 3 3p 4 5 6 7 9 0p tcl n l p o 1x 2x 3x 4x 5x 6x 7x 8x"
+    #Section L    math library functions
+    # http://en.wikipedia.org/wiki/Man_page#Manual_sections
+    local mysections="1 n l 8 3 2 5 4 9 6 7 0 0p 1p 3p"
     econf \
-        --enable-nls \
+        --enable-setuid=man \
+        --with-browser=/usr/bin/links \
         --with-sections="${mysections}" \
         --with-db=$(
-            if optionq berkdb ; then
-                echo db
-            else
-                echo gdbm
-            fi
-        )
+        if optionq berkdb ; then
+            echo db
+        else
+            echo gdbm
+        fi
+    )
 }
+
+src_install() {
+    default
+    dodoc docs/{HACKING,TODO}
+
+    dodir /var/cache/man
+    keepdir /var/cache/man
+    fowners man:man /var/cache/man
+}
+
