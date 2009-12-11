@@ -5,7 +5,7 @@ require xfont
 
 SUMMARY="Japanese TrueType fonts from the Vine Linux project"
 HOMEPAGE="http://dicey.org/vlgothic"
-DOWNLOADS="mirror://sourceforge.jp/${PN,,}/43074/${PNV}.tar.bz2"
+DOWNLOADS="mirror://sourceforge.jp/${PN,,}/44812/${PNV}.tar.bz2"
 
 # FIXME:
 LICENCES="BSD-3 as-is"
