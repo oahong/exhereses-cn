@@ -25,7 +25,7 @@ DEPENDENCIES="
     build+run:
         !sys-apps/man
         berkdb? ( sys-libs/db )
-        !berkdb? ( sys-libs/gdbm )
+        gdbm? ( sys-libs/gdbm )
         sys-apps/groff
 "
 
