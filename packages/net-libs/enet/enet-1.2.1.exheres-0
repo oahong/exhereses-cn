@@ -16,6 +16,5 @@ BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freshmeat:ENet"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/FAQ.html ${HOMEPAGE}/Tutorial.html"
 
-WORK=${WORKBASE}/${PN}
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--enable-crc32' )
 
