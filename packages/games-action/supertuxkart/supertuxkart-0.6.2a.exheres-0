@@ -18,7 +18,7 @@ DOWNLOADS="mirror://sourceforge/${PN}/${PNV}-src.tar.bz2"
 #Image*After terms
 LICENCES="GPL-3 public-domain FIXME"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS=""
 
 DEPENDENCIES="
