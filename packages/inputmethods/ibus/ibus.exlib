@@ -7,7 +7,7 @@ require python [ python_dep=2.5 ] gnome-2
 
 export_exlib_phases src_prepare src_install pkg_postinst pkg_postrm
 
-MY_LINGUAS=( ja ko zh_CN zh_TW )
+#MY_LINGUAS=( ja ko zh_CN zh_TW )
 SUMMARY="Intelligent Input Bus for Linux / Unix"
 DESCRIPTION="
 Intelligent Input Bus (ibus) is a next generation input framework for Linux OS.
@@ -19,12 +19,9 @@ DOWNLOADS="listed-only: http://ibus.googlecode.com/files/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
-MYOPTIONS="
-    doc
-    qt4
-    linguas:
-        ${MY_LINGUAS[@]}
-"
+MYOPTIONS="doc qt4"
+#    linguas:
+#        ${MY_LINGUAS[@]}
 
 DEPENDENCIES="
     build:
@@ -47,16 +44,16 @@ DEPENDENCIES="
         qt4? ( inputmethods/ibus-qt )
     recommendation:
         gnome-desktop/librsvg [[ note = [  to render svg icons ] ]]
-    suggestion:
-        linguas:ja? ( inputmethods/ibus-anthy )
-        linguas:ko? ( inputmethods/ibus-hangul )
-        linguas:zh_CN? (
-            inputmethods/ibus-pinyin
-            inputmethods/sunpinyin
-            inputmethods/ibus-table
-        )
-        linguas:zh_TW? ( inputmethods/ibus-chewing )
 "
+#    suggestion:
+#        linguas:ja? ( inputmethods/ibus-anthy )
+#        linguas:ko? ( inputmethods/ibus-hangul )
+#        linguas:zh_CN? (
+#            inputmethods/ibus-pinyin
+#            inputmethods/sunpinyin
+#            inputmethods/ibus-table
+#        )
+#        linguas:zh_TW? ( inputmethods/ibus-chewing )
 
 BUGS_TO="${HOMEPAGE}/issues/list"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
