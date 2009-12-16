@@ -8,5 +8,3 @@ DOWNLOADS="${HOMEPAGE}/files/${MY_PNV}.tar.gz"
 PLATFORMS="~x86"
 WORK=${WORKBASE}/${MY_PNV}
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-fix-display.patch )
-

@@ -12,15 +12,16 @@ SLOT="0"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    run:
-        inputmethods/ibus[>=1.2]
+    build:
+        app-doc/doxygen
     build+run:
         dev-libs/icu[>=4.0]
         sys-apps/dbus[>=1.2]
         x11-libs/qt:4[dbus][>=4.5]
 "
 
-ibus-qt_src_prepare() {
-    default
-    edo sed -e '/add_subdirectory(test)/d' -i CMakeLists.txt
-}
+#ibus-qt_src_prepare() {
+#    default
+#    edo sed -e '/add_subdirectory(test)/d' -i CMakeLists.txt
+#}
+
