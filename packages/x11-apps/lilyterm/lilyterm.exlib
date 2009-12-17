@@ -3,7 +3,7 @@
 
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
-export_exlib_phases src_prepare
+export_exlib_phases src_prepare src_install
 
 MY_PNV=${PN}-$(ever replace 3 '~')
 SUMMARY="A lightweight and easy-to-use terminal emulator"
@@ -12,7 +12,7 @@ DOWNLOADS="${HOMEPAGE}/file/${MY_PNV}.tar.gz"
 
 LICENCES="GPL-3"
 SLOT="0"
-MYOPTIONS=""
+MYOPTIONS="gnome [[ dscription = [ Adds an entry in the default applications preferences in GNOME Control Center ] ]]"
 
 DEPENDENCIES="
     build:
@@ -23,6 +23,7 @@ DEPENDENCIES="
         dev-libs/glib:2[>=2.14]
         dev-libs/vte[>=0.13]
         x11-libs/gtk+:2[>=2.10]
+        gnome? ( gnome-desktop/gnome-control-center )
 "
 
 WORK=${WORKBASE}/${MY_PNV}
@@ -38,4 +39,12 @@ lilyterm_src_prepare() {
         ${WORK}/data/Makefile.am || die "sed failed"
     ./autogen.sh || die "autogen.sh failed"
 }
+
+lilyterm_src_install() {
+    default
+    if ! option gnome && has_version 'gnome-desktop/gnome-control-center' ; then
+        edo rm "${IMAGE}"/usr/share/gnome-control-center -rf
+    fi
+}
+
 
