@@ -3,7 +3,7 @@
 
 require cmake
 
-SUMMARY="Qt4 immodule and library for IBus framework"
+SUMMARY="Qt4 library and immodule for IBus framework"
 HOMEPAGE="http://ibus.googlecode.com"
 DOWNLOADS=""
 
@@ -19,9 +19,4 @@ DEPENDENCIES="
         sys-apps/dbus[>=1.2]
         x11-libs/qt:4[dbus][>=4.5]
 "
-
-#ibus-qt_src_prepare() {
-#    default
-#    edo sed -e '/add_subdirectory(test)/d' -i CMakeLists.txt
-#}
 
