@@ -5,9 +5,9 @@
  
  install:
 -	install -d $(datadir)/icons
--	install gcin.png $(datadir)/icons
+-	install -m 644 gcin.png $(datadir)/icons
 +	install -d $(datadir)/pixmaps
-+	install gcin.png $(datadir)/pixmaps
++	install -m644 gcin.png $(datadir)/pixmaps
  	$(MAKE) -C icons install
  	install -d $(gcinlibdir)
  	install $(GCIN_SO) $(gcinlibdir)

@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 MY_PNV=${PN}-$(ever replace 3 '.')
-require gcin multilib toolchain-funcs
+require gcin toolchain-funcs
 
 PLATFORMS="~x86"
 
@@ -10,7 +10,7 @@ EXJOBS=1
 WORK=${WORKBASE}/${MY_PNV}
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
-DEFAULT_SRC_COMPILE_PARAMS=( CC=$(tc-getCC) CCLD=$(tc-getCC) OPTFLAGS="${CFLAGS} ${LDFLAGS}" )
+DEFAULT_SRC_COMPILE_PARAMS=( CC=$(tc-getCC) CCLD=$(tc-getCC) CXX=$(tc-getCC) OPTFLAGS="${CFLAGS} ${LDFLAGS}" )
 
 src_prepare() {
     echo "${PVR}" > ${WORK}/VERSION.gcin
@@ -22,7 +22,7 @@ src_configure() {
         --use_i18n=Y \
         --use_tsin=Y \
         --qt3_im=N \
-        $(! option anthy && echo '--use_anthy=N' ) \
-        $(! option qt4 && echo '--qt4_im=N' )
+        $(! option anthy && echo --use_anthy=N ) \
+        $(! option qt4 && echo --qt4_im=N )
 }
 
