@@ -40,12 +40,10 @@ src_install() {
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
     gnome_exlib_update_icon_cache
-    python_mod_optimize /usr/share/${PN}
 }
 
 pkg_postrm() {
     freedesktop-desktop_pkg_postrm
     gnome_exlib_update_icon_cache
-    python_mod_cleanup /usr/share/${PN}
 }
 
