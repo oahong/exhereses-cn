@@ -3,8 +3,6 @@
 
 require python [ python_dep=2.5 ]
 
-export_exlib_phases src_prepare pkg_postinst pkg_postrm
-
 SUMMARY="A SLM based Chinese PinYin input method engine"
 DESCRIPTION="
 SunPinyin is an SLM (Statistical Language Model) based input method
@@ -43,16 +41,4 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-{bestandalone,becjk-module}
 )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
-
-sunpinyin_src_prepare() {
-    echo "#! /bin/true" > py-compile
-}
-
-sunpinyin_pkg_postinst() {
-    python_mod_optimize /usr/share/ibus-sunpinyin/setup
-}
-
-sunpinyin_pkg_postrm() {
-    python_mod_cleanup /usr/share/ibus-sunpinyin/setup
-}
 
