@@ -6,19 +6,25 @@ myexparam -b need_pysqlite=false
 
 SUMMARY="The ${PN#*-} engine for IBus Framework"
 HOMEPAGE="http://ibus.googlecode.com"
+
 if ever at_least scm ; then
     myexparam maintainer=phuang
+
     SCM_REPOSITORY="git://github.com/$(exparam maintainer)/${PN}.git"
     require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 1.11 ] ]
+
+    export_exlib_phases src_prepare
+
+    ibus-engine_src_prepare() {
+        edo sed -e '/C.*FLAG/d;/LDFLAGS/d' -e '/configure/d' -i autogen.sh
+        edo ./autogen.sh
+    }
 else
     DOWNLOADS="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"
 fi
 
-export_exlib_phases src_prepare
-
 if exparam -b python_dep ; then
     require python [ python_dep=2.5 ]
-    export_exlib_phases pkg_postinst pkg_postrm
 
     exparam -b need_pysqlite && DEPENDENCIES="
         build+run:
@@ -37,22 +43,6 @@ DEPENDENCIES+="
         inputmethods/ibus[>=1.1]
 "
 
-BUGS_TO="http://code.google.com/p/ibus/issues/list oahong@gmail.com"
+BUGS_TO="oahong@gmail.com"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/w/list"
-
-ibus-engine_src_prepare() {
-    if ever at_least scm ; then
-        edo ./autogen.sh
-    fi
-
-    [[ -f py-compile ]] && echo "#! /bin/true" > py-compile
-}
-
-ibus-engine_pkg_postinst() {
-    python_mod_optimize /usr/share/${PN}
-}
-
-ibus-engine_pkg_postrm() {
-    python_mod_cleanup /usr/share/${PN}
-}
 
