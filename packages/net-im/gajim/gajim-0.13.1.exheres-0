@@ -12,7 +12,6 @@ SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
 
-#FIXME: should I drop the bunche of suggestion deps completely?
 DEPENDENCIES="
     build:
         dev-util/pkg-config[>=0.19]
@@ -45,16 +44,4 @@ RESTRICT="test"
 BUGS_TO="oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-trayicon ) #--enable-site-packages
-
-src_prepare() {
-    echo "#! /bin/true" > config/py-compile
-}
-
-pkg_postinst() {
-    python_mod_optimize usr/share/${PN}/src
-}
-
-pkg_postrm() {
-    python_mod_cleanup /usr/share/${PN}/src
-}
 
