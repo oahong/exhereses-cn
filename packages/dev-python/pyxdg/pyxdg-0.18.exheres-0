@@ -1,7 +1,7 @@
 # Based in part upon 'pyxdg-0.17.ebuild' from Gentoo, which is:
 # Copyright 1999-2008 Gentoo Foundation
 
-require distutils [ python_dep=2.4 python_modules=[ xdg ] ]
+require distutils [ python_dep=2.4 ]
 
 SUMMARY="A python library to access freedesktop.org standards"
 HOMEPAGE="http://pyxdg.freedesktop.org"
