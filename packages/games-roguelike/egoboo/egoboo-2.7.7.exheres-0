@@ -1,8 +1,6 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require toolchain-funcs
-
 MY_PNV=${PN}-source-${PV}
 MY_DATA=${PN}-data-${PV}
 SUMMARY="A 3D dungeon crawling adventure in the spirit of NetHack"
@@ -38,7 +36,7 @@ REMOTE_IDS="sourceforge:egoboo"
 WORK=${WORKBASE}/${MY_PNV}
 
 DEFAULT_SRC_COMPILE_PARAMS=(
-    -C game -f Makefile.unix CC=$(tc-getCC) OPT="${CFLAGS}" PREFIX=/usr
+    -C game -f Makefile.unix CC="${CC}" OPT="${CFLAGS}" PREFIX=/usr
 )
 
 src_prepare() {

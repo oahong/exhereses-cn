@@ -1,8 +1,6 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require toolchain-funcs
-
 SUMMARY="binchunker for Unix"
 DESCRIPTION="
 This package contains a UNIX/C rewrite of the BinChunker program.
@@ -24,7 +22,7 @@ DEPENDENCIES=""
 UPSTREAM_CHANGELOG="${HOMEPAGE}/ChangeLog"
 
 DEFAULT_SRC_COMPILE_PARAMS=(
-    CC=$(tc-getCC) LD=$(tc-getCC) CFLAGS=${CFLAGS}
+    CC="${CC}" LD="${CC}" CFLAGS=${CFLAGS}
 )
 
 src_install() {

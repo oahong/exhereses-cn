@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 MY_PNV=${PN}-$(ever replace 3 '.')
-require gcin toolchain-funcs
+require gcin
 
 PLATFORMS="~x86"
 
@@ -10,7 +10,7 @@ EXJOBS=1
 WORK=${WORKBASE}/${MY_PNV}
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
-DEFAULT_SRC_COMPILE_PARAMS=( CC=$(tc-getCC) CCLD=$(tc-getCC) CXX=$(tc-getCC) OPTFLAGS="${CFLAGS} ${LDFLAGS}" )
+DEFAULT_SRC_COMPILE_PARAMS=( CC="${CC}" CCLD="${CC}" CXX="${CXX}" OPTFLAGS="${CFLAGS} ${LDFLAGS}" )
 
 src_prepare() {
     echo "${PVR}" > ${WORK}/VERSION.gcin

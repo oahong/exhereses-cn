@@ -1,8 +1,6 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require toolchain-funcs
-
 SUMMARY="A 3D dungeon crawling adventure in the spirit of NetHack"
 DESCRIPTION="
 Egoboo is a top down rpg in the spirit of Nethack and other games of the
@@ -33,7 +31,7 @@ REMOTE_IDS="sourceforge:egoboo"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/forum/viewtopic.php?t=1"
 
 DEFAULT_SRC_COMPILE_PARAMS=(
-    -C game -f Makefile.unix CC=$(tc-getCC) OPT="${CFLAGS}" PREFIX=/usr
+    -C game -f Makefile.unix CC="${CC}" OPT="${CFLAGS}" PREFIX=/usr
 )
 
 src_prepare() {
