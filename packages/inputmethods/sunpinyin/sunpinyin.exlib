@@ -16,8 +16,8 @@ LICENCES="|| ( CDDL LGPL-2.1 )"
 SLOT="0"
 MYOPTIONS="debug
     (
-        ibus [[ Enable support for Ibus Platform ]]
-        xim [[ Build X Input Method frontend ]]
+        ibus [[ description = [ Enable support for Ibus Platform ] ]]
+        xim [[ description = [ Build X Input Method frontend ] ]]
     ) [[ number-selected = at-least-one ]]
 "
 
