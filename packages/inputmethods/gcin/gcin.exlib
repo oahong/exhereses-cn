@@ -16,18 +16,16 @@ keyboard layout. It is often straightforward for users to append other input tab
 originally included in the release package, or tables used by other IMs such as scim."
 HOMEPAGE="http://cle.linux.org.tw/trac/wiki"
 DOWNLOADS="${DOWNLOADS:-http://cle.linux.org.tw/gcin/download/${MY_PNV:=${PNV}}.tar.bz2}
-    listed-only: (
-        sound? ( http://cle.linux.org.tw/gcin/download/ogg.tgz )
-        http://oahong.googlepages.com/nobopomofo.tar.gz
-        ${HOMEPAGE}/attachment/wiki/GcinTablesXcin02/gcin-filter-nobopomofo?format=raw -> gcin-filter-nobopomofo
-    )"
+    listed-only: ( sound? ( http://www.calno.com/moto/gcin/ogg-gpl3-20090221.tar.gz ) )"
+#http://cle.linux.org.tw/gcin/download/ogg.tgz ) )"
 
-LICENCES="LGPL-2.1 qt4? ( || ( QPL-1.0 GPL-2 ) ) HOBA"
+LICENCES="LGPL-2.1 sound? ( GPL-3 ) qt4? ( || ( QPL-1.0 GPL-2 ) )"
 SLOT="0"
 MYOPTIONS="
     anthy [[ description = [ Enable support for anthy based input method ] ]]
     qt4 [[ description = [ Enable support for Qt4 immodule ] ]]
-    sound [[ description = [ Enable support for Chinese Text to Speech reading via media-sound/verbis-tools ] ]]"
+    sound [[ description = [ Enable support for Chinese Text to Speech reading via media-sound/verbis-tools ] ]]
+"
 
 DEPENDENCIES="
     build:
@@ -58,22 +56,12 @@ gcin_src_install() {
     rm -rf "${IMAGE}"/usr/lib/menu || die "failed to rm useless debian menu entries."
     rm -rf "${IMAGE}"/usr/share/control-center-2.0 || die "failed to remove old capplet cruft"
 
-    # http://cle.linux.org.tw/trac/wiki/GcinGirlForNoBopomofo
-    exeinto /usr/share/${PN}/filters
-    doexe "${FETCHEDDIR}"/gcin-filter-nobopomofo
-    insinto /usr/share/pixmaps/${PN}
-    doins "${WORKBASE}"/{SS1135_ST,SS1208_DT}.jpg
-
     # http://cle.linux.org.tw/trac/wiki/EnGcinTextToSpeech
     if option sound ; then
         einfo "Installing Chinese speech databases. Be patient, this might take several minutes"
         insinto /usr/share/${PN}
         doins -r "${WORKBASE}"/ogg
     fi
-
-    hereenvd 95gcin-filter << EOF
-GCIN_OUTPUT_FILTER="/usr/share/${PN}/filters/gcin-filter-nobopomofo"
-EOF
 }
 
 gcin_pkg_postinst() {

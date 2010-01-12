@@ -1,3 +1,6 @@
+Source: me#gmail.com
+Upstream: not yet
+Reason: Install gtk immodule in a better directory.
 --- gcin-1.4.6.pre10/gtk-im/Makefile~	2009-10-15 21:47:43.396302927 +0800
 +++ gcin-1.4.6.pre10/gtk-im/Makefile	2009-10-15 21:47:52.122302880 +0800
 @@ -1,7 +1,7 @@

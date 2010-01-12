@@ -1,3 +1,6 @@
+Source: me#gmail.com
+Upstream: No, upstream won't accept this.
+Reason: No strip, install icons to /usr/share/pixmaps.
 --- gcin-1.4.5.pre4.orig/Makefile	2009-03-29 21:32:52.000000000 +0800
 +++ gcin-1.4.5.pre4/Makefile	2009-04-18 19:37:57.000000000 +0800
 @@ -218,8 +218,8 @@
