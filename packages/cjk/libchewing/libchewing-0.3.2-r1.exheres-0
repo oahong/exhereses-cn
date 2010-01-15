@@ -20,6 +20,8 @@ MYOPTIONS="debug"
 DEPENDENCIES="
     build:
         dev-util/pkg-config
+    test:
+        dev-libs/check
 "
 
 BUGS_TO="chewing-devel@googlegroups.com"
@@ -27,13 +29,12 @@ BUGS_TO="chewing-devel@googlegroups.com"
 UPSTREAM_CHANGELOG="http://chewing.csie.net/news.html"
 UPSTREAM_DOCUMENTATION="http://chewing.csie.net/faq.html[[lang=zh_TW]]"
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}.chewing_zuin.patch )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 
 src_test() {
-    if has_version dev-libs/check ; then
-        cd test
-        emake check
-    else
-        ewarn "${PN} needs \"dev-libs/check\" to perform tests."
-    fi
+    pushd test
+    emake check
+    popd
 }
+
