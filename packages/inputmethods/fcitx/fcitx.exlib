@@ -15,7 +15,7 @@ DOWNLOADS="listed-only:http://gentoo-china-overlay.googlecode.com/svn/distfiles/
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS="debug"
+MYOPTIONS="debug kimpanel [[ description = [ Enable support for kimpanel, a multibyte input widget for kde4 ] ]]"
 
 DEPENDENCIES="
     build:
@@ -27,17 +27,20 @@ DEPENDENCIES="
         x11-libs/libXft
         x11-libs/libXpm
         x11-libs/libXtst
+        kimpanel? ( sys-apps/dbus )
     recommendation:
         fonts/wqy-zenhei
+        kimpanel? ( kdeplasma-addons/kdeplasma-addons[kimpanel] )
 "
 
 BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{xft,tray,recording} )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'debug log' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'debug log' 'kimpanel dbus' )
 DEFAULT_SRC_PREPARE_PATCHES=( -p0 "${FILES}" )
 
 fcitx_src_prepare() {
+    # ShanHeiSun is deprecated
     edo sed -e 's#AR PL ShanHeiSun Uni#WenQuanYi Zen Hei#' -i data/config
 
     edo mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt
