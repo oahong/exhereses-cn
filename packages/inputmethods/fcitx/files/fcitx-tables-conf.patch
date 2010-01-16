@@ -1,6 +1,6 @@
 Source: Hong Hao <oahong@gmail.com>
 Upstream: No
-Reason: Add zhengma support to tables.coonf
+Reason: Add zhengma support to tables.conf
 --- data.origin/tables.conf	2009-05-03 22:42:00.000000000 +0800
 +++ data/tables.conf	2009-05-15 23:42:41.630146450 +0800
 @@ -19,6 +19,19 @@
