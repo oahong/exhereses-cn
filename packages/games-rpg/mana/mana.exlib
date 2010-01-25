@@ -1,14 +1,12 @@
-# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Copyright 2009,2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
+
+require cmake
 
 export_exlib_phases src_install
 
-SUMMARY="A free open source 2D MMORPG in development"
-DESCRIPTION="
-The Mana World (TMW) is a great online role-playing game based upon
-the Seiken Densetsu serie. It has its own universe, and its own character management system,
-which will give you the opportunity to play in a 2D heroic-fantasy world forever."
-HOMEPAGE="http://themanaworld.org"
+SUMMARY="The Mana client"
+HOMEPAGE="http://manasource.org"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -18,25 +16,31 @@ DEPENDENCIES="
     build:
         sys-devel/gettext
     build+run:
-        dev-games/guichan[opengl?]
+        dev-games/guichan[opengl?][sdl]
         dev-games/physfs
         dev-libs/libxml2
+        fonts/dejavu
         media-libs/SDL
         media-libs/SDL_image
         media-libs/SDL_mixer[ogg]
         media-libs/SDL_net
         media-libs/SDL_ttf
         media-libs/libpng
+        net-libs/enet [[ note = [ dependency for manaserver client ] ]]
         net-misc/curl
-    run:
-        fonts/dejavu
+        opengl? ( x11-dri/mesa )
 "
 
-common-metadata_src_install() {
+CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_NLS:bool=true )
+CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 'opengl OPENGL' )
+
+mana_src_install() {
+    cmake_src_install
+
     local datadir="/usr/share/${PN}/data" fontpath="/usr/share/fonts/X11/dejavu"
 
     insinto ${datadir}
-    doins -r "${WORKBASE}"/${TMUSIC:-music}/data/music
+    doins -r "${WORKBASE}"/${MMUSIC:-music}/data/music
 
     edo rm -f "${IMAGE}"/${fontdir}/dejavusans/*.ttf
     dosym ${fontpath}/DejaVuSans.ttf ${datadir}/fonts/dejavusans.ttf

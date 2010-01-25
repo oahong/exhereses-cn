@@ -1,0 +1,14 @@
+# Copyright 2009,2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://gitorious.org/mana/mana.git"
+SCM_music_REPOSITORY="git://gitorious.org/tmw/music.git"
+SCM_SECONDARY_REPOSITORIES="music"
+require mana scm-git
+
+PLATFORMS="~x86"
+
+src_prepare() {
+    edo sed -e '/Exec/s/mana/&-ea/' -i ${PN}.desktop
+}
+
