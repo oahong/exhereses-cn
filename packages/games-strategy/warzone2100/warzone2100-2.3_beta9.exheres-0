@@ -5,5 +5,5 @@ require warzone2100
 
 PLATFORMS="~amd64 ~x86"
 
-UPSTREAM_CHANGELOG="http://forums.wz2100.net/viewtopic.php?t=4456"
+UPSTREAM_CHANGELOG="http://sourceforge.net/projects/${PN}/files/${PN}/Warzone%202100%20${PV}/$(ever delete 2)-ChangeLog/view"
 
