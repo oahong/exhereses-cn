@@ -30,7 +30,7 @@ DEPENDENCIES="
         kimpanel? ( sys-apps/dbus )
     recommendation:
         fonts/wqy-zenhei
-        kimpanel? ( kde/kdeplasma-addons[kimpanel] )
+        kimpanel? ( kde/kdeplasma-addons[kimpanel(-)] )
 "
 
 BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
