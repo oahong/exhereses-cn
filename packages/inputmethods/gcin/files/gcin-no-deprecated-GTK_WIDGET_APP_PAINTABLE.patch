@@ -1,0 +1,11 @@
+--- gcin-1.4.7.pre4/eggtrayicon.cpp.orig	2010-01-31 22:15:34.603325796 +0800
++++ gcin-1.4.7.pre4/eggtrayicon.cpp	2010-01-31 22:16:03.200325420 +0800
+@@ -398,7 +398,7 @@
+ static void
+ make_transparent (GtkWidget *widget, gpointer user_data)
+ {
+-	if (GTK_WIDGET_NO_WINDOW (widget) || GTK_WIDGET_APP_PAINTABLE (widget))
++	if (GTK_WIDGET_NO_WINDOW (widget) || gtk_widget_get_app_paintable (widget))
+ 		return;
+ 
+ 	gtk_widget_set_app_paintable (widget, TRUE);
