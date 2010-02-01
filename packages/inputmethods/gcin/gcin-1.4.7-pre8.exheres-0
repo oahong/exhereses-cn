@@ -9,18 +9,12 @@ PLATFORMS="~x86"
 EXJOBS=1
 WORK=${WORKBASE}/${MY_PNV}
 
-#DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
 DEFAULT_SRC_COMPILE_PARAMS=( CC="${CC}" CCLD="${CC}" CXX="${CXX}" OPTFLAGS="${CFLAGS} ${LDFLAGS}" )
 
 src_prepare() {
     echo "${PVR}" > ${WORK}/VERSION.gcin
-    expatch "${FILES}"/gcin-1.4.5-Makefile.diff \
-    "${FILES}"/gcin-gtk-immodule.patch \
-    "${FILES}"/gcin-1.4.6-qt4-im-makefile.diff \
-    "${FILES}"/gcin-1.4.6-configure.diff
-    if has_version 'x11-libs/gtk+[>=2.19.3]' ; then
-        expatch "${FILES}"/gcin-no-deprecated-GTK_WIDGET_APP_PAINTABLE.patch
-    fi
+    default
 }
 
 src_configure() {
