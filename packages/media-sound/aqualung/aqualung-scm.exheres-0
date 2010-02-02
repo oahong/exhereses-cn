@@ -1,105 +1,12 @@
-# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Copyright 2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="https://aqualung.svn.sourceforge.net/svnroot/aqualung"
-require freedesktop-desktop scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+require aqualung scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 
-SUMMARY="Music player for GNU/Linux"
-DESCRIPTION="
-Aqualung is an advanced music player originally targeted at the GNU/Linux
-operating system, today also running on FreeBSD, OpenBSD and Microsoft Windows.
-It plays audio CDs, internet radio streams and podcasts as well as soundfiles
-in just about any audio format and has the feature of inserting no gaps between
-adjacent tracks.
-Aqualung also supports high quality sample rate conversion between the file and the
-output device, when necessary.
-"
-HOMEPAGE="http://aqualung.factorial.hu"
 DOWNLOADS=""
 
-LICENCES="GPL-2"
-SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="cddb jack ladspa modplug musepack pulseaudio wavpack
-    cdda [[ description = [ Enable Compact Disk Digital Audio (Standard Audio CD) support ] ]]
-    lua [[ description = [ Enable Lua (programmable title formatting) support ] ]]
-    mac [[ description = [ Enable support for Monkey's Audio Codec (APE) ] ]]
-    ffmpeg [[ description = [ Enable support for FFmpeg's lavc decoder ] ]]"
-#speex ifp doc
 
-DEPENDENCIES="
-    build:
-        dev-util/pkg-config
-        sys-devel/gettext
-    build+run:
-        dev-libs/glib:2
-        dev-libs/libxml2
-        x11-libs/gtk+:2[>=2.10]
-        cdda? ( dev-libs/libcdio[>=0.76] )
-        cddb? ( media-libs/libcddb[>=1.2.1] )
-        lua? ( dev-lang/lua[>=5.1] )
-        jack? ( media-sound/jack-audio-connection-kit )
-        pulseaudio? ( media-sound/pulseaudio )
-        sys-sound/alsa-lib
-        ffmpeg? ( media/ffmpeg )
-        ladspa? ( media-libs/liblrdf[>=0.4.0] )
-        mac? ( media-libs/mac-port )
-        media-libs/flac[>=1.1.3]
-        media-libs/libmad
-        media-libs/libsamplerate
-        media-libs/libsndfile[>=1.0.18]
-        media-libs/libvorbis
-        media-sound/lame
-        modplug? ( media-libs/libmodplug[>=0.8] )
-        musepack? ( media-libs/libmpcdec )
-        wavpack? ( media-sound/wavpack )
-"
-#        speex? ( media-libs/speex media-libs/liboggz )
-#        doc? ( dev-libs/libxslt )
-
-BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="freshmeat:aqualung sourceforge:aqualung"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/feed/svnlog.xml"
-UPSTREAM_DOCUMENTATION="${HOMEPAGE}/manual/aqualung-doc.html"
-
-DEFAULT_SRC_CONFIGURE_PARAMS=(
-    # output drivers: (sndio for openbsd)
-    --with-alsa --with-oss
-    --without-sndio
-    # optional features:
-    --with-systray
-    --with-loop --with-src --with-podcast
-    # default codecs:
-    --with-mpeg --with-lame
-    --with-ogg --with-vorbisenc
-    --with-flac --with-sndfile
-    # missing deps
-    --without-speex --without-ifp
-)
-DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
-    jack 'pulseaudio pulse'
-    'modplug mod' 'musepack mpc'
-    'ffmpeg lavc' mac wavpack
-    cdda cddb lua ladspa
-)
-
-src_install() {
-    default
-    edo rm -rf "${IMAGE}"/usr/share/${PN}/doc
-
-    insinto /usr/share/applications
-    hereins ${PN}.desktop <<EOF
-[Desktop Entry]
-Encoding=UTF-8
-Name=${PN^}
-Comment=Gapless audio player
-Exec=${PN}
-Icon=/usr/share/${PN}/icon_64.png
-Categories=GTK;AudioVideo;Audio;Player;
-Terminal=false
-Type=Application
-StartupNotify=true
-MimeType=audio/aac;audio/ac3;audio/basic;audio/mp4;audio/mpeg;audio/mpegurl;audio/vnd.rn-realaudio;audio/vorbis;audio/x-adpcm;audio/x-flac;audio/x-mp2;audio/x-mp3;audio/x-mpegurl;audio/x-ms-wma;audio/x-oggflac;audio/x-speex;audio/x-vorbis;audio/x-wav;
-EOF
-}
 
