@@ -1,13 +1,13 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require common-metadata flag-o-matic
+require chmsee flag-o-matic
 
 PLATFORMS="~x86"
 
+# >=1.8 || ( >=1.9.1 & <=1.9.2 )
 DEPENDENCIES="
     build+run:
-        dev-libs/nspr
-        dev-libs/xulrunner[>=1.8|>=1.9.1]
+        dev-libs/xulrunner[>=1.9.1&<=1.9.2]
 "
 
