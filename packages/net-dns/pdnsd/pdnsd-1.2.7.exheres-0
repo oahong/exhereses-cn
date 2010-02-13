@@ -15,6 +15,7 @@ DEPENDENCIES=""
 BUGS_TO="oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --hates=docdir
     --enable-ipv6
     --sysconfdir=/etc/${PN}
 )
