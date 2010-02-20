@@ -55,6 +55,6 @@ src_install() {
 
     dodir /var/cache/man
     keepdir /var/cache/man
-    fowners man:man /var/cache/man
+    edo chown man:man "${IMAGE}"/var/cache/man
 }
 

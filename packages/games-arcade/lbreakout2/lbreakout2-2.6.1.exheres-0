@@ -35,6 +35,6 @@ src_install() {
     dovarlibgames
     preserve_scores "${IMAGE}"/var/lib/games/${PN}/${PN}.hscr
     edo chgrp games "${IMAGE}"/usr/bin/${PN}
-    fperms g+s /usr/bin/${PN}
+    edo chmod g+s "${IMAGE}"/usr/bin/${PN}
 }
 
