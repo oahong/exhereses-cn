@@ -13,6 +13,11 @@ MYOPTIONS="( android [[ description = [ Build google android pinyin database ] ]
 
 PLATFORMS="~x86"
 
+DEPENDENCIES="
+    build+run:
+        dev-cpp/libsigc++:2
+"
+
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'android db-android' 'open-phrase db-open-phrase' )
 
 src_prepare() {
