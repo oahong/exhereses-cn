@@ -32,7 +32,7 @@ DEPENDENCIES="
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:uget freshmeat:uget"
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-fix-linkage.patch )
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-fix-linkage.patch )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'libnotify notify' gstreamer )
 
 src_prepare() {

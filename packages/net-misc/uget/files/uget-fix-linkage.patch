@@ -1,6 +1,6 @@
 Source: me
 Upstream: NO
-Reason: Work around linkage problem(Patch might not be right.)
+Reason: Works around linkage problem(Patch might not be right.)
 --- uget-1.5.0/uget-gtk/Makefile.am~	2009-12-10 16:00:20.013893746 +0800
 +++ uget-1.5.0/uget-gtk/Makefile.am	2009-12-10 16:01:07.122155990 +0800
 @@ -4,7 +4,7 @@
