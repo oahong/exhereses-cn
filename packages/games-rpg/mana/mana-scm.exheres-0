@@ -8,7 +8,3 @@ require mana scm-git
 
 PLATFORMS="~x86"
 
-src_prepare() {
-    edo sed -e '/Exec/s/mana/&-ea/' -i ${PN}.desktop
-}
-

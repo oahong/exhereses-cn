@@ -21,27 +21,27 @@ DEPENDENCIES="
         dev-libs/libxml2
         fonts/dejavu
         media-libs/SDL
+        media-libs/SDL_gfx
         media-libs/SDL_image
         media-libs/SDL_mixer[ogg]
         media-libs/SDL_net
         media-libs/SDL_ttf
         media-libs/libpng
-        net-libs/enet [[ note = [ dependency for manaserver client ] ]]
+        net-libs/enet
         net-misc/curl
         opengl? ( x11-dri/mesa )
+        x11-libs/libX11
 "
 
-CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_NLS:bool=true )
+CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_NLS:bool=true -DUSE_X11:bool=true )
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 'opengl OPENGL' )
 
 mana_src_install() {
     cmake_src_install
 
     local datadir="/usr/share/${PN}/data" fontpath="/usr/share/fonts/X11/dejavu"
-
     insinto ${datadir}
     doins -r "${WORKBASE}"/${MMUSIC:-music}/data/music
-
     edo rm -f "${IMAGE}"/${fontdir}/dejavusans/*.ttf
     dosym ${fontpath}/DejaVuSans.ttf ${datadir}/fonts/dejavusans.ttf
     dosym ${fontpath}/DejaVuSans-Bold.ttf ${datadir}/fonts/dejavusans-bold.ttf
