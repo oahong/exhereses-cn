@@ -2,19 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 
 FONT=${PN%%-*}
+CODENAME=FightingState
+MY_PN=${PN/font/song}
 require xfont multilib
 
 SUMMARY="WenQuanYi Bitmap Song CJK font"
 HOMEPAGE="http://wqy.sourceforge.net/en/"
-DOWNLOADS="mirror://sourceforge/wqy/${PN/song/font}-pcf-${PV/_p/-}.tar.gz"
+DOWNLOADS="mirror://sourceforge/wqy/${MY_PN}-pcf-${PV^^}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 
-UPSTREAM_RELEASE_NOTES="http://wenq.org/index.cgi?Hero_README"
-UPSTREAM_CHANGELOG="http://wenq.org/index.cgi?Hero_ChangeLog"
-WORK=${WORKBASE}/${PN}
+UPSTREAM_RELEASE_NOTES="http://wenq.org/index.cgi?${CODENAME}_README"
+UPSTREAM_CHANGELOG="http://wenq.org/index.cgi?${CODENAME}_ChangeLog"
+WORK=${WORKBASE}/${MY_PN}
 
 src_install() {
     emagicdocs
@@ -31,3 +33,4 @@ pkg_postinst() {
     elog "eclectic fontconfig enable 85-wqy-bitmapsong.conf"
     einfo
 }
+
