@@ -3,21 +3,25 @@
 
 require python [ python_dep=2.5 ]
 
+export_exlib_phases src_prepare
+
+LM_DATA="lm_sc.t3g.arpa.tar.bz2"
 SUMMARY="A SLM based Chinese PinYin input method engine"
 DESCRIPTION="
-SunPinyin is an SLM (Statistical Language Model) based input method
-engine. To model the Chinese language, it use a backoff bigram and
-trigram language model.
-
-Currently, SunPinyin 2.0 has an XIM frontend and an ibus wrapper"
-HOMEPAGE="http://www.opensolaris.org/os/project/input-method"
+SunPinyin is a statistical language model based Chinese input method, which was firstly developed by
+Sun Beijing Globalization team, and opensource'd to community with opensolaris project,
+with LGPLv2 and CDDL dual-licenses.
+SunPinyin had been ported to various input method platforms and operating systems.
+The 2.0 release currently supports iBus, XIM, and Mac OS X."
+HOMEPAGE="http://sunpinyin.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/${LM_DATA}"
 
 LICENCES="|| ( CDDL LGPL-2.1 )"
 SLOT="0"
 MYOPTIONS="debug
     (
         ibus [[ description = [ Enable support for Ibus Platform ] ]]
-        xim [[ description = [ Build X Input Method frontend ] ]]
+        xim [[ description = [ Build an X Input Method frontend ] ]]
     ) [[ number-selected = at-least-one ]]
 "
 
@@ -32,19 +36,15 @@ DEPENDENCIES="
         ibus? ( inputmethods/ibus[>=1.2.0] )
         xim? ( x11-libs/libX11 x11-libs/gtk+:2[>=2.12.0] )
 "
-#MYOPTIONS="debug doc
-#    (
-#        ibus [[ description = [ Enable support for ibus Platform ] ]]
-#        scim [[ description = [ Enable support for scim Platform (not ready) ] ]]
-#    ) [[ number-selected = at-least-one ]]
-#"
-#        scim? ( inputmethods/scim[>=1.4] )
-#        doc? ( dev-lang/perl )
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-documents
-    --disable-{scim,cle,gtkstandalone}
-    --disable-{bestandalone,becjk-module}
+    --disable-gtkstandalone
+    --disable-scim
 )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug ibus xim )
+
+sunpinyin_src_prepare() {
+    edo cp -v "${FETCHEDDIR}"/${LM_DATA} raw
+}
 
