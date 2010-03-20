@@ -53,14 +53,15 @@ WORK=${WORKBASE}/${MY_PNV}
 
 gcin_src_install() {
     default
-    rm -rf "${IMAGE}"/usr/lib/menu || die "failed to rm useless debian menu entries."
-    rm -rf "${IMAGE}"/usr/share/control-center-2.0 || die "failed to remove old capplet cruft"
+    edo rm -rf "${IMAGE}"/usr/lib/menu
+    edo rm -rf "${IMAGE}"/usr/share/control-center-2.0
 
     # http://cle.linux.org.tw/trac/wiki/EnGcinTextToSpeech
     if option sound ; then
-        einfo "Installing Chinese speech databases. Be patient, this might take several minutes"
-        insinto /usr/share/${PN}
-        doins -r "${WORKBASE}"/ogg
+        ebegin "Installing speech database"
+            insinto /usr/share/${PN}
+            doins -r "${WORKBASE}"/ogg
+        eend $? || die
     fi
 }
 
