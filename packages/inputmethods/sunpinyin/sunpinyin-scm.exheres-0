@@ -2,13 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="git://github.com/${PN}/${PN}.git"
-
 require sunpinyin scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 
+LM_DATA="lm_sc.t3g.arpa.tar.bz2"
+DOWNLOADS="${HOMEPAGE}/files/${LM_DATA} "
 PLATFORMS="~x86"
 
 src_prepare() {
-    sunpinyin_src_prepare
+    edo cp -v "${FETCHEDDIR}"/${LM_DATA} raw
     echo "wrapper/xim/data/settings_ui.xml" >> po/POTFILES.in
     ./autogen.sh --do-not-run-configure || die "autogen.sh failed"
 }
