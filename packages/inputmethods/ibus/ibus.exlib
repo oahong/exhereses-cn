@@ -45,7 +45,7 @@ DEPENDENCIES="
     post:
         qt4? ( inputmethods/ibus-qt )
     recommendation:
-        gnome-desktop/librsvg [[ note = [  to render svg icons ] ]]
+        gnome-desktop/librsvg
 "
 #    suggestion:
 #        linguas:ja? ( inputmethods/ibus-anthy )
