@@ -12,7 +12,7 @@ DOWNLOADS="${HOMEPAGE}/file/${MY_PNV}.tar.gz"
 
 LICENCES="GPL-3"
 SLOT="0"
-MYOPTIONS="gnome [[ dscription = [ Adds an entry in the default applications preferences in GNOME Control Center ] ]]"
+MYOPTIONS="gnome"
 
 DEPENDENCIES="
     build:
@@ -34,10 +34,10 @@ UPSTREAM_CHANGELOG="${HOMEPAGE}/en/changelog.html"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/en/document.html"
 
 lilyterm_src_prepare() {
-    sed -i \
+    edo sed -i \
         -e '/examplesdir/s/\$(PACKAGE)/&-\${PV}/' \
-        ${WORK}/data/Makefile.am || die "sed failed"
-    ./autogen.sh || die "autogen.sh failed"
+        ${WORK}/data/Makefile.am
+    edo ./autogen.sh
 }
 
 lilyterm_src_install() {
