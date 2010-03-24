@@ -7,7 +7,6 @@ MY_PNV=${PN}$(ever delete_all)
 SUMMARY="IPA Fonts are JIS X 0213:2004 compliant TrueType based OpenType format outline fonts"
 HOMEPAGE="http://ossipedia.ipa.go.jp/ipafont"
 DOWNLOADS="http://info.openlab.ipa.go.jp/${PN,,}/fontdata/${MY_PNV}.zip"
-#http://ossipedia.ipa.go.jp/${PN,,}/${MY_PNV}.php -> ${MY_PNV}.zip"
 
 LICENCES="IPAFL"
 SLOT="0"
@@ -26,7 +25,7 @@ WORK=${WORKBASE}/${MY_PNV}
 
 src_install() {
     insinto /usr/share/fonts/X11/${FONT}
-    doins *.otf
+    doins *.ttf
     dodoc Readme*
     fix_fonts
 }
