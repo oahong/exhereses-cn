@@ -4,7 +4,7 @@
 require cmake
 
 SUMMARY="A QT4 frontend for various P2P network TV command line tools"
-HOMEPAGE="http://www.magiclinux.org/bugs/view.php?id=70"
+HOMEPAGE="http://ftp.magiclinux.org.cn/nihu"
 DOWNLOADS="http://ftp.magiclinux.org.cn/nihui/kde4/files/${PNV}.tar.gz"
 
 LICENCES="GPL-3"
