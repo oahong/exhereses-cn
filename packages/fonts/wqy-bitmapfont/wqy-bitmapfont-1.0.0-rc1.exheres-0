@@ -1,10 +1,10 @@
 # Copyright 1999-2008 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-FONT=${PN%%-*}
+FONT=${PN%-*}
 CODENAME=FightingState
 MY_PN=${PN/font/song}
-require xfont multilib
+require xfont
 
 SUMMARY="WenQuanYi Bitmap Song CJK font"
 HOMEPAGE="http://wqy.sourceforge.net/en/"
@@ -24,7 +24,7 @@ src_install() {
     insinto /usr/share/fonts/X11/${FONT}
     doins *.pcf
     insinto /etc/fonts/conf.avail
-    doins "85-wqy-bitmapsong.conf"
+    doins 85-wqy-bitmapsong.conf
 }
 
 pkg_postinst() {

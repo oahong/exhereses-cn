@@ -4,7 +4,7 @@
 #    Copyright 1999-2008 Gentoo Foundation
 
 FONT=${PN%-*}
-require xfont multilib
+require xfont
 
 SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
 HOMEPAGE="http://wqy.sourceforge.net/cgi-bin/enindex.cgi?ZenHei(en)"
