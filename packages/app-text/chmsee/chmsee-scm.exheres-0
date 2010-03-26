@@ -7,8 +7,3 @@ require chmsee scm-git
 DOWNLOADS=""
 PLATFORMS="~x86"
 
-DEPENDENCIES="
-    build+run:
-        dev-libs/xulrunner[>=1.9]
-"
-

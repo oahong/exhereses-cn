@@ -25,11 +25,11 @@ DEPENDENCIES="
         dev-libs/libgcrypt
         dev-libs/libxml2
         dev-libs/nspr
+        dev-libs/xulrunner[>=1.9]
         gnome-platform/libglade:2[>=2.4]
         media-libs/chmlib
-        x11-libs/gtk+:2[>=2.8]
+        x11-libs/gtk+:2[>=2.16]
 "
-#        dev-libs/xulrunner[>=1.9.1&<=1.9.2]
 
 REMOTE_IDS="freshmeat:chmsee"
 BUGS_TO="oahong@gmail.com"

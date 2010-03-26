@@ -5,9 +5,3 @@ require chmsee
 
 PLATFORMS="~x86"
 
-# >=1.8 || ( >=1.9.1 & <=1.9.2 )
-DEPENDENCIES="
-    build+run:
-        dev-libs/xulrunner[>=1.9.1&<=1.9.2]
-"
-
