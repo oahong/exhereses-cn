@@ -1,13 +1,13 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require cmake flag-o-matic
+require cmake
 
-SUMMARY="a portable, flexible file i/o abstraction library for video games"
+SUMMARY="A portable, flexible file i/o abstraction library for video games"
 HOMEPAGE="http://icculus.org/physfs"
 DOWNLOADS="${HOMEPAGE}/downloads/${PNV}.tar.gz"
 
-LICENCES="as-is LGPL-2.1 [[ description = [ for its internal copy of lzma ] ]]"
+LICENCES="ZLIB LGPL-2.1 [[ description = [ for its internal copy of lzma ] ]]"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="doc"
@@ -18,29 +18,28 @@ DEPENDENCIES="
     build+run:
         sys-libs/zlib
 "
+#    test:
+#        sys-libs/readline
 
-UPSTREAM_CHANGELOG="${HOMEPAGE}/downloads/CHANGELOG"
-UPSTREAM_RELEASE_NOTES="http://icculus.org/pipermail/physfs/2009-March/000697.html"
+UPSTREAM_RELEASE_NOTES="http://icculus.org/news/news.php?id=4586"
 
 CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DPHYSFS_INTERNAL_ZLIB:BOOL=FALSE
     -DPHYSFS_BUILD_TEST:BOOL=FALSE
     -DPHYSFS_BUILD_WX_TEST:BOOL=FALSE
 )
 
-pkg_setup() {
-    append-flags "-fno-strict-aliasing"
-}
-
 src_prepare() {
     default
-    sed -e '/DESTINATION/s/lib/&${LIB_SUFFIX}/' -i CMakeLists.txt ||
-        die "Libdir sed failed"
+    edo sed -e '/DESTINATION/s/lib/&${LIB_SUFFIX}/' \
+        -e '/Werror/d' \
+        -i CMakeLists.txt
 }
 
 src_compile() {
     cmake_src_compile
     if option doc ; then
-        doxygen || die "doxygen failed"
+        edo doxygen
     fi
 }
 
@@ -51,3 +50,4 @@ src_install() {
         dodoc "${WORK}"/docs/html/*
     fi
 }
+
