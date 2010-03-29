@@ -13,10 +13,9 @@ DEPENDENCIES="
         gnome-base/gnome-common
 "
 
-DEFAULT_SRC_CONFIGURE_PARAMS+=( '--enable-python' )
+DEFAULT_SRC_CONFIGURE_PARAMS+=( '--enable-python' '--enable-gconf' )
 
 src_prepare() {
-    edo touch ChangeLog
     NOCONFIGURE=1 ./autogen.sh || die "failed to run autogen.sh"
 }
 
