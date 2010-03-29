@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ pysqlite_dep=true maintainer=acevery ]
+require ibus-engine [ maintainer=acevery ]
 
 DESCRIPTION="
 IBus-Table is the IM Engine framework for table-based input methods,
@@ -13,6 +13,8 @@ LICENCES="LGPL-2.1"
 DEPENDENCIES="
     build:
         dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
+    build+run:
+        dev-lang/python:=[>=2.5][sqlite]
     suggestion:
         inputmethods/ibus-table-cangjie
         inputmethods/ibus-table-erbi
