@@ -2,7 +2,6 @@
 # Distributed under the terms of the GNU General Public License v2
 
 myexparam -b python_dep=true
-myexparam -b pysqlite_dep=false
 
 SUMMARY="The ${PN#*-} engine for IBus Framework"
 HOMEPAGE="http://ibus.googlecode.com"
@@ -23,17 +22,7 @@ else
     DOWNLOADS="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"
 fi
 
-if exparam -b python_dep ; then
-    if exparam -b pysqlite_dep ; then
-        DEPENDENCIES="
-            build+run:
-                dev-lang/python:=[>=2.5][sqlite] [[ note = [  for sqlite code table(s) ] ]]"
-    else
-        DEPENDENCIES="
-            build+run:
-                dev-lang/python:=[>=2.5]"
-    fi
-fi
+exparam -b python_dep && require python [ python_dep=2.5 ]
 
 LICENCES="GPL-2"
 SLOT="0"
