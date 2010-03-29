@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ pysqlite_dep=true ]
+require ibus-engine
 
 PYDB_VER="1.2.99"
 PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
