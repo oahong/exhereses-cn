@@ -1,14 +1,13 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ need_pysqlite=true maintainer=acevery ]
+require ibus-engine [ pysqlite_dep=true maintainer=acevery ]
 
 DESCRIPTION="
 IBus-Table is the IM Engine framework for table-based input methods,
 such as ZhengMa, WuBi, ErBi, CangJie and so on.
 The aim of IBus-Table is to make the users of table-based input methods
-can enjoy the typing on Linux environment.
-"
+can enjoy the typing on Linux environment."
 LICENCES="LGPL-2.1"
 
 DEPENDENCIES="
