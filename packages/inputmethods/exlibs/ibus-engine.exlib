@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 
 myexparam -b python_dep=true
-myexparam -b need_pysqlite=false
+myexparam -b pysqlite_dep=false
 
 SUMMARY="The ${PN#*-} engine for IBus Framework"
 HOMEPAGE="http://ibus.googlecode.com"
 
-if ever at_least scm ; then
+if ever is_scm ; then
     myexparam maintainer=phuang
 
     SCM_REPOSITORY="git://github.com/$(exparam maintainer)/${PN}.git"
@@ -24,12 +24,15 @@ else
 fi
 
 if exparam -b python_dep ; then
-    require python [ python_dep=2.5 ]
-
-    exparam -b need_pysqlite && DEPENDENCIES="
-        build+run:
-            dev-lang/python[sqlite] [[ note = [ for sqlite code tables ] ]]
-    "
+    if exparam -b pysqlite_dep ; then
+        DEPENDENCIES="
+            build+run:
+                dev-lang/python:=[>=2.5][sqlite] [[ note = [  for sqlite code table(s) ] ]]"
+    else
+        DEPENDENCIES="
+            build+run:
+                dev-lang/python:=[>=2.5]"
+    fi
 fi
 
 LICENCES="GPL-2"
