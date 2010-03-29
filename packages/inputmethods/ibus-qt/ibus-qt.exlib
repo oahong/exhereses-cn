@@ -3,7 +3,7 @@
 
 require cmake
 
-SUMMARY="Qt4 library and immodule for IBus framework"
+SUMMARY="Qt4 immodule and library for IBus framework"
 HOMEPAGE="http://ibus.googlecode.com"
 DOWNLOADS=""
 
