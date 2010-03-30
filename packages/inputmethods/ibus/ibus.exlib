@@ -42,6 +42,7 @@ DEPENDENCIES="
         x11-libs/libX11
     recommendation:
         gnome-desktop/librsvg
+    suggestion:
         inputmethods/ibus-qt
         inputmethods/ibus-pinyin
         inputmethods/ibus-table
