@@ -33,6 +33,7 @@ SLOT="0"
 MYOPTIONS="debug"
 
 # http://developer.wz2100.net/wiki/CompileGuide
+# glee >= 5.4.0
 DEPENDENCIES="
     build:
         dev-lang/perl[>=5.10]
@@ -40,7 +41,6 @@ DEPENDENCIES="
         sys-devel/bison
         sys-devel/flex
         sys-devel/gettext[>=0.15]
-        x11-libs/libX11
     run:
         fonts/dejavu
     build+run:
@@ -52,6 +52,7 @@ DEPENDENCIES="
         media-libs/openal[>=0.0.8]
         media-libs/quesoglc
         x11-dri/mesa
+        x11-libs/libX11
     recommendation:
         games-strategy/warzone2100-video
 "
@@ -61,6 +62,7 @@ UPSTREAM_DOCUMENTATION="http://guide.wz2100.net"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --enable-sound
+    --disable-motif
     --with-icondir=/usr/share/pixmaps
     --with-distributor=Exherbo
     --with-applicationdir=/usr/share/applications
