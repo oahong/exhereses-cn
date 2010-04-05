@@ -29,6 +29,7 @@ DEPENDENCIES="
 "
 
 WORK=${WORKBASE}/${PN/tux/-tux}-${PV/-}
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-libpng14.patch )
 
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:extremetuxracing"
