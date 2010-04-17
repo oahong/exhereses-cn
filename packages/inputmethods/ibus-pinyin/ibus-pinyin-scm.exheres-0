@@ -16,7 +16,7 @@ DEPENDENCIES="
     build:
         gnome-base/gnome-common
     build+run:
-        dev-cpp/libsigc++:2
+        dev-libs/boost[>=1.39]
 "
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'android db-android' 'open-phrase db-open-phrase' )
