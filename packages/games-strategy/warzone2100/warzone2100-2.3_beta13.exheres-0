@@ -10,5 +10,5 @@ DEPENDENCIES="
         dev-libs/popt
 "
 
-UPSTREAM_CHANGELOG="http://sourceforge.net/projects/${PN}/files/${PN}/Warzone%202100%20${PV}/$(ever delete 2)-ChangeLog/view"
+UPSTREAM_CHANGELOG="http://sourceforge.net/projects/${PN}/files/${PN}/Warzone%202100%20${PV}/ChangeLog/view"
 

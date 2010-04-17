@@ -36,6 +36,8 @@ MYOPTIONS="debug"
 # glee >= 5.4.0
 DEPENDENCIES="
     build:
+        app-arch/unzip
+        app-arch/zip
         dev-lang/perl[>=5.10]
         dev-util/pkg-config[>=0.9]
         sys-devel/bison
@@ -57,7 +59,7 @@ DEPENDENCIES="
         games-strategy/warzone2100-video
 "
 
-REMOTE_IDS="sourceforge:warzone2100 freshmeat:Warzone 2100"
+REMOTE_IDS="sourceforge:warzone2100 freshmeat:warzone2100"
 UPSTREAM_DOCUMENTATION="http://guide.wz2100.net"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
