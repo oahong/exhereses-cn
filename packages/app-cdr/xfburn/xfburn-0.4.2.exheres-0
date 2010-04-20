@@ -34,7 +34,7 @@ DEPENDENCIES="
             (
                 media-plugins/gst-plugins-base[gstreamer_plugins:ogg][gstreamer_plugins:vorbis]
                 media-plugins/gst-plugins-good[gstreamer_plugins:flac]
-                media-plugins/gst-plugins-ugly[gstreamer_plugins:mpeg2dec]
+                media-plugins/gst-plugins-ugly[gstreamer_plugins:mpeg2]
             )
          ) [[ description = [ required for burning audio CDs from compressed music files ] ]]
 "
