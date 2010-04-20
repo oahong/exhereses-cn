@@ -31,7 +31,7 @@ BUGS_TO="oahong@gmail.com"
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --enable-{gtk-immodule,setup-gtk}
     --disable-{qt-immodule,setup-qt3}
-    --disable-setup-{php,gambas}
+    --disable-setup-{php,gambas,pygtk}
 )
 
 src_install() {

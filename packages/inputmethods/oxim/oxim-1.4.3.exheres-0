@@ -29,9 +29,9 @@ DEPENDENCIES="
         x11-libs/libXtst[>=1.0.0]
         x11-libs/libXft[>=2.0]
         x11-libs/gtk+:2[>=2.2.0]
-        chewing? ( cjk/chewing[<0.3.0|>=0.3.0] )
+        chewing? ( cjk/chewing )
     recommendation:
-        inputmethods/oxim-setup
+        inputmethods/oxim-setup[~${PV}]
 "
 
 BUGS_TO="oahong@gmail.com"
