@@ -42,7 +42,7 @@ lilyterm_src_prepare() {
 
 lilyterm_src_install() {
     default
-    if ! option gnome && has_version 'gnome-desktop/gnome-control-center' ; then
+    if ! option gnome ; then
         edo rm "${IMAGE}"/usr/share/gnome-control-center -rf
     fi
 }
