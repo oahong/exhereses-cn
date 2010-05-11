@@ -11,7 +11,6 @@ DESCRIPTION="Fcitx(Free Chinese Input Toy of X) is a collection of Simplified
 Chinese input methods for Linux. It supports WuBi, Pinyin, Erbi and QuWei input
 methods."
 HOMEPAGE="http://fcitx.googlecode.com"
-DOWNLOADS="listed-only:http://gentoo-china-overlay.googlecode.com/svn/distfiles/zhengma.tbz2"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -37,18 +36,18 @@ BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{xft,tray,recording} )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'debug log' 'kimpanel dbus' )
-DEFAULT_SRC_PREPARE_PATCHES=( -p0 "${FILES}" )
 
 fcitx_src_prepare() {
     # ShanHeiSun is deprecated
-    edo sed -e 's#AR PL ShanHeiSun Uni#WenQuanYi Zen Hei#' -i data/config
+    edo sed -e 's#AR PL ShanHeiSun Uni#WenQuanYi Zen Hei#' \
+        -i data/config \
+        -i src/ui/ui.c
 
-    edo mv "${WORKBASE}"/zhm "${WORK}"/data/zhengma.txt
     autotools_src_prepare
 }
 
 fcitx_pkg_postinst() {
-    elog "Make suer the following env variables are set properly:"
+    elog "You must set the following env variables before using ${PN}"
     elog "XMODIFIERS=\"@im=fcitx\""
     elog "XIM=fcitx"
     elog "XIM_PROGRAM=fcitx"
