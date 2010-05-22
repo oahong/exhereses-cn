@@ -5,7 +5,7 @@ require cmake
 
 export_exlib_phases src_install
 
-SUMMARY="The Mana client"
+SUMMARY="The mana client for mana-based 2D MMORPGs"
 HOMEPAGE="http://manasource.org"
 
 LICENCES="GPL-2"
@@ -33,6 +33,7 @@ DEPENDENCIES="
         x11-libs/libX11
 "
 
+REMOTE_IDS="freshmeat:${PN}"
 CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_NLS:bool=true -DUSE_X11:bool=true )
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 'opengl OPENGL' )
 
