@@ -7,7 +7,7 @@ export_exlib_phases src_prepare
 PYDB_VER="1.2.99"
 PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
 
-SUMMARY="The Chinese Pinyin and Bopomof input methods for IBus platform"
+SUMMARY="The Chinese Pinyin and Bopomof engines for IBus platform"
 DOWNLOADS+=" open-phrase? ( ${HOMEPAGE}/files/${PYDB} )"
 MYOPTIONS="
 (
