@@ -1,0 +1,31 @@
+# Copyright 2009 Hong Hao
+# Distributed under the terms of the GNU General Public License v2
+
+require ibus-engine
+export_exlib_phases src_prepare
+
+PYDB_VER="1.2.99"
+PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
+
+SUMMARY="The Chinese Pinyin and Bopomof input methods for IBus platform"
+DOWNLOADS+=" open-phrase? ( ${HOMEPAGE}/files/${PYDB} )"
+MYOPTIONS="
+(
+    android [[ description = [ Build google android pinyin database ] ]]
+    open-phrase [[ description = [ Build open-phrase pinyin database ] ]]
+) [[ number-selected = at-least-one ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/boost[>=1.39]
+"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'android db-android' 'open-phrase db-open-phrase' )
+
+ibus-pinyin_src_prepare() {
+    if option open-phrase; then
+        edo cp ${FETCHEDDIR}/${PYDB} data/db/open-phrase
+    fi
+}
+

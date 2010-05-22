@@ -1,31 +1,17 @@
 # Copyright 2009 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine
-
-PYDB_VER="1.2.99"
-PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
-
-DOWNLOADS="${HOMEPAGE}/files/${PYDB}"
-MYOPTIONS="( android [[ description = [ Build google android pinyin database ] ]]
-    open-phrase [[ description = [ Build open-phrase pinyin database ] ]] )
-    [[ number-selected = at-least-one ]]"
+require ibus-pinyin
 
 PLATFORMS="~x86"
 DEPENDENCIES="
     build:
         gnome-base/gnome-common
-    build+run:
-        dev-libs/boost[>=1.39]
 "
-
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'android db-android' 'open-phrase db-open-phrase' )
 
 src_prepare() {
     echo -e "data/db/android/pydict.py\nscripts/pydict.py" >> po/POTFILES.in
     NOCONFIGURE=1 ./autogen.sh || die "failed to run autogen.sh"
-    if option open-phrase; then
-        cp ${FETCHEDDIR}/${PYDB} data/db/open-phrase || die "failed to copy openphrase database"
-    fi
+    ibus-pinyin_src_prepare
 }
 
