@@ -8,45 +8,8 @@ SCM_tinygettext_REVISION="184"
 SCM_SECONDARY_REPOSITORIES="tinygettext"
 
 SCM_SVN_EXTERNALS="external/tinygettext:tinygettext"
-require scm-svn cmake
+require scm-svn supertux
 
-SUMMARY="A classic 2D jump'n run game similar to the original Super Mario games"
-HOMEPAGE="http://supertux.lethargik.org"
 DOWNLOADS=""
-
-LICENCES="GPL-2"
-SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS=""
-
-#http://supertux.lethargik.org/wiki/Building_SuperTux#Getting_the_source_from_SVN
-DEPENDENCIES="
-    build:
-        sys-devel/gettext
-    build+run:
-        dev-games/physfs
-        dev-libs/boost
-        media-libs/SDL
-        media-libs/SDL_image
-        media-libs/glew
-        media-libs/libvorbis
-        media-libs/openal
-        net-misc/curl [[ note = [ Add-on Manager ] ]]
-        x11-dri/mesa
-"
-
-BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="freshmeat:SuperTux"
-UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki/User_Manual ${HOMEPAGE}/wiki/SuperTux_FAQ"
-
-CMAKE_SRC_CONFIGURE_PARAMS=(
-    -DWERROR:bool=OFF
-    -DENABLE_OPENGL:bool=ON
-    -DINSTALL_SUBDIR_BIN:string="bin"
-    -DINSTALL_SUBDIR_SHARE:string="share/${PN}"
-    -DINSTALL_SUBDIR_DOC:string="share/doc/${PNVR}"
-#    -DCMAKE_BUILD_TYPE:string=distribution
-)
-
-DEFAULT_SRC_INSTALL_EXTRA_DOCS=( WHATNEW.txt )
 

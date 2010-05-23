@@ -1,0 +1,9 @@
+# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require supertux
+
+DOWNLOADS="http://supertux.googlecode.com/files/${PNV}.tar.bz2"
+
+PLATFORMS="~x86"
+
