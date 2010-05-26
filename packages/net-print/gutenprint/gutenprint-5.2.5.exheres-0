@@ -71,12 +71,11 @@ src_test_expensive() {
 
 src_install() {
     default
-    edo rmdir "${IMAGE}"/usr/$(get_libdir)/gutenprint/$(ever range 1-2)/modules
     edo mv "${IMAGE}"/usr/share/${PN}/doc/* "${IMAGE}"/usr/share/doc/${PNV}
     edo find "${IMAGE}" -type d -empty -delete
 }
 
 pkg_postinst() {
-    edo /usr/sbin/cups-genppdupdate
+    edo cups-genppdupdate
 }
 
