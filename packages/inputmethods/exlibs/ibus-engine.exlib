@@ -15,7 +15,7 @@ if ever is_scm ; then
     export_exlib_phases src_prepare
 
     ibus-engine_src_prepare() {
-        edo sed -e '/C.*FLAG/d;/LDFLAGS/d' -e '/configure/d' -i autogen.sh
+        edo sed -re '/(C.*|LD)FLAGS/d;/configure/d' -i autogen.sh
         edo ./autogen.sh
     }
 else
