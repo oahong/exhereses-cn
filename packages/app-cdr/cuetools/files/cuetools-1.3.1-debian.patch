@@ -1,0 +1,1293 @@
+Source: debian
+Upstream: not sure
+Reason: various fixes from debian.
+# This patch fixes the processing of filenames containing spaces.
+
+diff -Naur cuetools-1.3.1.orig/extras/cuetag.sh cuetools-1.3.1/extras/cuetag.sh
+--- cuetools-1.3.1.orig/extras/cuetag.sh	2008-04-26 11:00:04.000000000 +0200
++++ cuetools-1.3.1/extras/cuetag.sh	2008-04-26 11:03:25.000000000 +0200
+@@ -63,7 +63,7 @@
+ 	(for field in $fields; do
+ 		value=""
+ 		for conv in `eval echo \\$$field`; do
+-			value=`$CUEPRINT -n $1 -t "$conv\n" $cue_file`
++			value=`$CUEPRINT -n $1 -t "$conv\n" "$cue_file"`
+ 
+ 			if [ -n "$value" ]; then
+ 				echo "$field=$value"
+@@ -96,7 +96,7 @@
+ 	for field in $fields; do
+ 		value=""
+ 		for conv in `eval echo \\$$field`; do
+-			value=`$CUEPRINT -n $1 -t "$conv\n" $cue_file`
++			value=`$CUEPRINT -n $1 -t "$conv\n" "$cue_file"`
+ 
+ 			if [ -n "$value" ]; then
+ 				break
+@@ -141,14 +141,14 @@
+ 	cue_file=$1
+ 	shift
+ 
+-	ntrack=`cueprint -d '%N' $cue_file`
++	ntrack=`cueprint -d '%N' "$cue_file"`
+ 	trackno=1
+ 
+ 	if [ $# -ne $ntrack ]; then
+ 		echo "warning: number of files does not match number of tracks"
+ 	fi
+ 
+-	for file in $@; do
++	for file in "$@"; do
+ 		case $file in
+ 		*.[Ff][Ll][Aa][Cc])
+ 			vorbis $trackno "$file"
+# This patch fixes the cli parameters for metaflac.
+
+diff -Naur cuetools-1.3.1.orig/extras/cuetag.sh cuetools-1.3.1/extras/cuetag.sh
+--- cuetools-1.3.1.orig/extras/cuetag.sh	2008-04-26 11:07:39.000000000 +0200
++++ cuetools-1.3.1/extras/cuetag.sh	2008-04-26 11:09:00.000000000 +0200
+@@ -18,7 +18,7 @@
+ {
+ 	# FLAC tagging
+ 	# --remove-vc-all overwrites existing comments
+-	METAFLAC="metaflac --remove-vc-all --import-vc-from=-"
++	METAFLAC="metaflac --remove-all-tags --import-tags-from=-"
+ 
+ 	# Ogg Vorbis tagging
+ 	# -w overwrites existing comments
+# This giant patch fixes many errors in the cuetools manpages.
+
+diff -Naur cuetools-1.3.1.orig/doc/cuebreakpoints.1 cuetools-1.3.1/doc/cuebreakpoints.1
+--- cuetools-1.3.1.orig/doc/cuebreakpoints.1	2008-04-26 12:44:31.000000000 +0200
++++ cuetools-1.3.1/doc/cuebreakpoints.1	2008-04-26 12:47:38.000000000 +0200
+@@ -1,46 +1,94 @@
+-.TH cuetools 1
+-.
+-.SH NAME
+-cuebreakpoints
+-.
+-.SH DESCRIPTION
+-cuebreakpoints \- print the breakpoints from a cue or toc file
+-.
++.TH "cuebreakpoints" "1"
++.SH "NAME"
++cuebreakpoints \- report track breakpoints from a CUE or TOC file
+ .SH SYNOPSIS
+ .B cuebreakpoints
+-[option...] [file...]
+-.
++[ {
++.B \-i
++.I format
++|
++.BR \-\-input\-format =\fIformat\fP
++} {
++.B \-\-append\-gaps
++|
++.B \-\-prepend\-gaps
++|
++.B \-\-split\-gaps
++} ]
++[
++.I file
++\&... ]
++.br
++.B cuebreakpoints \-\-help
++.SH "DESCRIPTION"
++.B cuebreakpoints
++reports the track breakpoints found in CUE and TOC files, which are
++typically created by compact disc ripping software.
++The breakpoints are in a format usable by
++.B shnsplit
++(part of the shntool package).
++.PP
++Three approaches to track pregaps are availabe: append (to previous track),
++prepend (to succeeding track), and split (from both preceding and
++succeeding tracks).
++The split approach can result in up to twice as many breakpoints being
++reported as there are tracks on the disc.
++.PP
++The first track's pregap cannot be appended to the previous track, so it is
++prefixed to the track in both append and prepend modes.
++If you want the track without it, use the
++.B \-\-split\-gaps
++option.
++.PP
++If no filenames are specified,
++.B cuebreakpoints
++reads from standard input, and an input format option
++.I must
++be specified.
++If one or more filenames is provided, but the input format option is not
++specified, the input format will be guessed based on each file's suffix
++(e.g.,
++.I .cue
++or
++.IR .toc ).
++This heuristic is case-insensitive.
+ .SH OPTIONS
+ .TP
+-.B \-h, \--help
+-print usage information
+-.
++.BR \-h ", " \-\-help
++displays a usage message and exits.
+ .TP
+-.B \-i, \--input-format cue|toc
+-set format of file(s)
+-.
++.BR \-i " \fIformat\fP, " \-\-input\-format=\fIformat\fP
++sets the expected format of the input file(s) to
++.IR format ,
++which must be either
++.B cue
++or
++.BR toc .
+ .TP
+-.B \--append-gaps
+-append pregaps to previous track (default)
+-.
++.B \-\-append\-gaps
++appends pregaps to the end of the previous track.
++This is the default.
+ .TP
+-.B \--prepend-gaps
+-prefix pregaps to track
+-.
++.B \-\-prepend\-gaps
++prefixes pregaps to the beginning of each subsequent track.
+ .TP
+-.B \--split-gaps
+-split at beginning and end of pregaps
+-.
+-.SH NOTES
+-The breakpoints are in a format usable by shnsplit (part of the shntool package).
+-.PP
+-The first track's pregap cannot be appended to the previous track, so it is prefixed to the track in both append and prepend modes.  If you want the track without it, use the split mode.
++.B \-\-split\-gaps
++separates pregaps from both the preceding and succeeding tracks.
+ .PP
+-If no files are specified, stdin is used.  If a filename is specified and the format is not specified, the format will be set based on a ".cue" or ".toc" suffix.
+-.
+-.SH AUTHOR
+-Svend Sorensen
+-.
++If more than one of
++.BR \-\-append\-gaps ,
++.BR \-\-prepend\-gaps ,
++and
++.B \-\-split\-gaps
++are specified, all except the last encountered are ignored.
++.SH "EXIT STATUS"
++.B cuebreakpoints
++exits with status zero if it successfully generates a report for each
++input file, and nonzero if there were problems.
++.SH "AUTHOR"
++Cuetools was written by Svend Sorensen.
++Branden Robinson contributed fixes and enhancements to the utilities and
++documentation.
+ .SH "SEE ALSO"
+-cueconvert(1),
+-cueprint(1)
++.BR cueconvert (1),
++.BR cueprint (1)
+diff -Naur cuetools-1.3.1.orig/doc/cueconvert.1 cuetools-1.3.1/doc/cueconvert.1
+--- cuetools-1.3.1.orig/doc/cueconvert.1	2008-04-26 12:44:31.000000000 +0200
++++ cuetools-1.3.1/doc/cueconvert.1	2008-04-26 12:48:45.000000000 +0200
+@@ -1,34 +1,79 @@
+-.TH cuetools 1
+-.
+-.SH NAME
+-cueconvert
+-.
+-.SH DESCRIPTION
+-cueconvert \- convert between the cue and toc formats
+-.
+-.SH SYNOPSIS
++.TH "cueconvert" "1"
++.SH "NAME"
++cueconvert \- convert files between CUE and TOC formats
++.SH "SYNOPSIS"
+ .B cueconvert
+-[option...] [infile [outfile]]
+-.
+-.SH OPTIONS
++[
++.B \-i
++.I format
++|
++.BR \-\-input\-format =\fIformat\fP
++] [
++.B \-o
++.I format
++|
++.BR \-\-output\-format =\fIformat\fP
++] [
++.I infile
++[
++.I outfile
++] ]
++.br
++.B cueconvert \-\-help
++.SH "DESCRIPTION"
++.B cueconvert
++coverts files between the CUE and TOC formats, each of which are commonly
++used by compact disc ripping software to denote track breakpoints and other
++data.
++.PP
++The operands are optional; if
++.I infile
++is not specified,
++.B cueconvert
++reads from standard input, and if
++.I outfile
++is not specified, it writes to standard output.
++.PP
++If no filenamess are specified, standard input is used, and an input format
++option
++.I must
++be specified.
++The complementary format is used for output.
++.PP
++If filenames are provided, but format options are not specified,
++the input and output formats will be guessed based on each filename's
++suffix (e.g.,
++.I .cue
++or
++.IR .toc ).
++This heuristic is case-insensitive.
++.SH "OPTIONS"
+ .TP
+-.B \-h, \--help
+-print usage information
+-.
++.BR \-h ", " \-\-help
++displays a usage message and exits.
+ .TP
+-.B \-i, \--input-format cue|toc
+-set format of input file
+-.
++.BR \-i " \fIformat\fP, " \-\-input\-format=\fIformat\fP
++sets the expected format of the input file to
++.IR format .
+ .TP
+-.B \-o, \--output-format cue|toc
+-set format of output file
+-.
+-.SH NOTES
+-If infile or outfile is not specified, stdin and stdout are used, respectively.  If a filename is specified and the format is not specified, the format will be set based on a ".cue" or ".toc" suffix.  If the output file format is not specified, and it cannot be determined from the suffix, it will be set to the opposite of the input format.
+-.
+-.SH AUTHOR
+-Svend Sorensen
+-.
++.BR \-o " \fIformat\fP, " \-\-output\-format=\fIformat\fP
++sets the format of the generated output file to
++.IR format .
++.PP
++The option argument
++.I format
++must be either
++.B cue
++or
++.BR toc .
++.SH "EXIT STATUS"
++.B cueconvert
++exits with status zero if it successfully coverts the input file, and
++nonzero if there were problems.
++.SH "AUTHOR"
++Cuetools was written by Svend Sorensen.
++Branden Robinson contributed fixes and enhancements to the utilities and
++documentation.
+ .SH "SEE ALSO"
+-cuebreakpoints(1),
+-cueprint(1)
++.BR cuebreakpoints (1),
++.BR cueprint (1)
+diff -Naur cuetools-1.3.1.orig/doc/cueprint.1 cuetools-1.3.1/doc/cueprint.1
+--- cuetools-1.3.1.orig/doc/cueprint.1	2008-04-26 12:44:31.000000000 +0200
++++ cuetools-1.3.1/doc/cueprint.1	2008-04-26 12:50:18.000000000 +0200
+@@ -1,198 +1,186 @@
+-.TH cuetools 1
+-.
+-.SH NAME
+-cueprint
+-.
+-.SH DESCRIPTION
+-cueprint \- print disc and track infomation for a cue or toc file
+-.
+-.SH SYNOPSIS
++.TH "cueprint" "1"
++.SH "NAME"
++cueprint \- report disc and track infomation from a CUE or TOC file
++.SH "SYNOPSIS"
+ .B cueprint
+-[option...] [file...]
+-.
+-.SH OPTIONS
+-.TP
+-.B \-h, \--help
+-print usage information
+-.
+-.TP
+-.B \-i, \--input-format cue|toc
+-set format of file(s)
+-.
+-.TP
+-.B \-n, \--track-number <number>
+-only print track information for single track.  The default is to print information for all tracks.
+-.
+-.TP
+-.B \-d, \--disc-template <template>
+-set disc template (see TEMPLATE EXPANSION)
+-.
+-.TP
+-.B \-t, \--track-template <template>
+-set track template (see TEMPLATE EXPANSION)
+-.
+-.SH TEMPLATE EXPANSION
+-All characters in the template are reproduced in the output except for conversions, which begin with `%'.
+-.PP
+-A conversion has the form `%[flags][width][.precision]<conversion\-char>'.
+-.PP
+-There may be zero or more of the following flags:
+-.
+-.TP
+-.B \-
+-left justification
+-.
+-.TP
+-.B +
+-place sign before numbers
+-.
+-.TP
+-.B ` '
+-(space) place a space before a positive number
+-.
+-.TP
+-.B 0
+-pad with zeros
+-.
+-.TP
+-.B #
+-(unused)
+-.
+-.PP
+-width is the minimum field width.  precision is the maximum width for strings.
+-.PP
+-Disc template expansion characters are valid for both the disc and track templates.
++[ {
++.B \-i
++.I format
++|
++.BR \-\-input\-format =\fIformat\fP
++} {
++.B \-n
++.I number
++|
++.BR \-\-track\-number =\fInumber\fP
++} {
++.B \-d
++.I template
++|
++.BR \-\-disc\-template =\fItemplate\fP
++} {
++.B \-t
++.I template
++|
++.BR \-\-track\-template =\fItemplate\fP
++} ]
++[
++.I file
++\&... ]
++.br
++.B cueprint \-\-help
++.SH "DESCRIPTION"
++.B cueprint
++reports disc and track information from CUE and TOC files, which are
++typically created by compact disc ripping software.
+ .PP
+-.B Disc Conversion Specifiers
+-.
+-.TP
+-.B A
+-album arranger
+-.
+-.TP
+-.B C
+-album composer
+-.
+-.TP
+-.B G
+-album genre
+-.
+-.TP
+-.B M
+-album message
+-.
+-.TP
+-.B N
+-number of tracks
+-.
+-.TP
+-.B P
+-album performer
+-.
+-.TP
+-.B S
+-album songwriter
+-.
+-.TP
+-.B T
+-album title
+-.
+-.TP
+-.B U
+-album UPC/EAN
+-.
++By default,
++.B cueprint
++reports a default set of disc information, and a default set of information
++for each track on the disc.
++With options, the report can be restricted to a specific track, and the
++presentation of the disc and track information can be extensively
++customized using
++.BR printf (3)-style
++format strings (referred to here as \(oqtemplates\(cq to avoid confusion
++with the concept of file format).
++All characters in a template are reproduced as-is in the output except for
++conversions (which begin with
++.RB \(oq % \(cq)
++and escapes (which begin with
++.RB \(oq \e \(cq).
+ .PP
+-.B Track Conversion Specifiers
+-.
+-.TP
+-.B a
+-track arranger
+-.
+-.TP
+-.B c
+-track composer
+-.
+-.TP
+-.B g
+-track genre
+-.
+-.TP
+-.B i
+-track ISRC
+-.
+-.TP
+-.B m
+-track message
+-.
+-.TP
+-.B n
+-track number
+-.
+-.TP
+-.B p
+-track perfomer
+-.
+-.TP
+-.B t
+-track title
+-.
+-.TP
+-.B u
+-track ISRC (CD-TEXT)
+-.
+-.PP
+-Any other character is expanded to that character.  For example, a % expands to a literal `%'.
+-.
+-.SH ESCAPES
+-The following single-character escapes are recognized:
+-.
+-.TP
+-.B \ea
+-alert (bell)
+-.
+-.TP
+-.B \eb
+-backspace
+-.
+-.TP
+-.B \ef
+-formfeed
+-.
+-.TP
+-.B \en
+-newline
+-.
++If no filenames are specified,
++.B cueprint
++reads from standard input, and an input format option
++.I must
++be specified.
++If one or more filenames is provided, but the input format option is not
++specified, the input format will be guessed based on each file's suffix
++(e.g.,
++.I .cue
++or
++.IR .toc ).
++This heuristic is case-insensitive.
++.SS Conversions
++A conversion has the form
++.RB \(oq % [ \fIflags\fP ][ \fIwidth\fP ][ .\fIprecision\fP ] \fItype\fP \(cq.
++.PP
++.I flags
++may be zero or more of the following:
++.TS
++nokeep;
++l	l.
++Character	Meaning
++_
++\-	left-justify expansion
+++	place sign before numbers
++\(oq \(cq (space)	place a blank space before a positive number
++0	pad numbers with zeroes
++.TE
++.\"#	(unused)
++.PP
++.I width
++is the minimum field width.
++.I precision
++is the maximum width for strings.
++.I type
++is a single character which specifies the conversion type \(em apart from
++.BR % ,
++it is the only mandatory part of the conversion.
++.PP
++The available conversion types are presented in the table below; disc
++conversion types are presented in the left half of the table, and track
++conversion types in the right half.
++Disc template expansion characters are valid for both disc and track
++templates.
++.TS
++nokeep;
++l	l	l	l.
++Character	Conversion	Character	Conversion
++_
++A	album arranger	a	track arranger
++C	album composer	c	track composer
++G	album genre	g	track genre
++		i	track ISRC
++M	album message	m	track message
++N	number of tracks	n	track number
++P	album performer	p	track performer
++S	album songwriter
++T	album title	t	track title
++U	album UPC/EAN	u	track ISRC (CD-TEXT)
++.TE
++.PP
++Any other character used as a conversion type expands to itself.
++This is how a literal percent sign is placed in the template; i.e.,
++.RB \(oq %% \(cq
++expands to
++.RB \(oq % \(cq.
++.SS Escapes
++The recognized escapes are all single characters, and listed in the table
++below.
++.TS
++nokeep;
++l	l.
++Escape Sequence	Expansion
++_
++\ea	alert (bell)
++\eb	backspace
++\ef	formfeed
++\en	newline
++\er	carriage return
++\et	horizontal tab
++\ev	vertical tab
++\e0	null
++.TE
++.PP
++Any other character used after the
++.RB \(oq \e \(cq
++in an escape sequence expands to itself.
++This is how a literal escape character is placed in the template; i.e.,
++.RB \(oq \e\e \(cq
++expands to
++.RB \(oq \e \(cq.
++.SH "OPTIONS"
+ .TP
+-.B \er
+-carriage return
+-.
++.BR \-d " \fItemplate\fP, " \-\-disc\-template=\fItemplate\fP
++set disc template (see TEMPLATE EXPANSION)
+ .TP
+-.B \et
+-horizontal tab
+-.
++.BR \-h ", " \-\-help
++displays a usage message and exits.
+ .TP
+-.B \ev
+-vertial tab
+-.
++.BR \-i " \fIformat\fP, " \-\-input\-format=\fIformat\fP
++sets the expected format of the input file(s) to
++.IR format ,
++which must be either
++.B cue
++or
++.BR toc .
++.TP
++.BR \-n " \fInumber\fP, " \-\-track\-number=\fInumber\fP
++only print track information for a single track.
++The default is to print information for all tracks.
+ .TP
+-.B \e0
+-NULL
+-.
+-.SH NOTES
+-If no files are specified, stdin is used.  If a filename is specified and the format is not specified, the format will be set based on a ".cue" or ".toc" suffix.
+-.
+-.SH EXAMPLES
+-To display disc and track information (using the default template for both), run:
+-.PP
+-% cueprint album.cue
+-.PP
+-To print the number of tracks in a cue file, run:
+-.PP
+-% cueprint -d '%N\en' album.cue
+-.
+-.SH AUTHOR
+-Svend Sorensen
+-.
++.BR \-t " \fItemplate\fP, " \-\-track\-template=\fItemplate\fP
++set track template (see TEMPLATE EXPANSION)
++.SH "EXIT STATUS"
++.B cueprint
++exits with status zero if it successfully reports information from each
++input file, and nonzero if there were problems.
++.SH "EXAMPLES"
++To display disc and track information (using the default template for
++both):
++.PP
++.RB "% " "cueprint album.cue"
++.PP
++To print the number of tracks in a CUE file:
++.PP
++.RB "% " "cueprint -d \(aq%N\en\(aq album.cue"
++.SH "AUTHOR"
++Cuetools was written by Svend Sorensen.
++Branden Robinson contributed fixes and enhancements to the utilities and
++documentation.
+ .SH "SEE ALSO"
+-cueconvert(1),
+-cuebreakpoints(1)
++.BR cuebreakpoints (1),
++.BR cueconvert (1),
++.BR printf(3)
+# This giant patch purges all "unholiness" from cuetools.
+
+diff -Naur cuetools-1.3.1.orig/src/tools/cuebreakpoints.c cuetools-1.3.1/src/tools/cuebreakpoints.c
+--- cuetools-1.3.1.orig/src/tools/cuebreakpoints.c	2008-04-26 12:52:15.000000000 +0200
++++ cuetools-1.3.1/src/tools/cuebreakpoints.c	2008-04-26 12:55:37.000000000 +0200
+@@ -3,18 +3,21 @@
+  *
+  * Copyright (C) 2004, 2005, 2006 Svend Sorensen
+  * For license terms, see the file COPYING in this distribution.
++ *
++ * Modified 2005-08-23 by Branden Robinson.
+  */
+ 
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <string.h>
+-#include <getopt.h>
++#include <getopt.h>	/* getopt_long() */
++#include <stdio.h>	/* fprintf(), printf(), snprintf(), stderr */
++#include <stdlib.h>	/* exit() */
++#include <string.h>	/* strcasecmp() */
+ #include "cuefile.h"
+ #include "time.h"
+ 
+ char *progname;
+ 
+-/* pregap correction modes
++/*
++ * pregap correction modes:
+  * APPEND - append pregap to previous track (except for first track)
+  * PREPEND - prefix pregap to current track
+  * SPLIT - print breakpoints for beginning and end of pregap
+@@ -23,22 +26,36 @@
+ 
+ void usage (int status)
+ {
++	char synopsis[1024];
++
++	/* TODO: We could use asprintf() if we know we're using GNU libc. */
++	snprintf(synopsis, 1023, "usage: %s [option ...] [file ...]\n",
++		 progname);
++
+ 	if (0 == status) {
+-		fprintf(stdout, "%s: usage: cuebreakpoints [option...] [file...]\n", progname);
+-		fputs("\
+-\n\
+-OPTIONS\n\
+--h, --help			print usage\n\
+--i, --input-format cue|toc	set format of file(s)\n\
+---append-gaps			append pregaps to previous track (default)\n\
+---prepend-gaps			prefix pregaps to track\n\
+---split-gaps			split at beginning and end of pregaps\n\
+-", stdout);
++		printf("%s", synopsis);
++		printf("Report track breakpoints from a CUE or TOC file.\n"
++		       "\n"
++		       "Options:\n"
++		       "-h, --help\t\t\t\tdisplay this message and exit\n"
++		       "-i {cue|toc}, --input-format={cue|toc}\tset format of"
++		       " input file(s)\n"
++		       "--append-gaps\t\t\t\tappend pregaps to previous track\n"
++		       "--prepend-gaps\t\t\t\tprefix pregaps to track\n"
++		       "--split-gaps\t\t\t\tsplit at beginning and end of"
++		       " pregaps\n"
++		       "\n"
++		       "The default handling of gaps is as if --append-gaps"
++		       " were specified.\n"
++		       "\n"
++		       "See the %s(1) manual page for more information.\n",
++		       progname);
+ 	} else {
+-		fprintf(stderr, "run `%s --help' for usage\n", progname);
++		fprintf(stderr, "%sRun \"%s --help\" for more information.\n",
++			synopsis, progname);
+ 	}
+ 
+-	exit (status);
++	exit(status);
+ }
+ 
+ void print_m_ss_ff (long frame)
+@@ -46,7 +63,7 @@
+ 	int m, s, f;
+ 
+ 	time_frame_to_msf(frame, &m, &s, &f);
+-	printf ("%d:%02d.%02d\n", m, s, f);
++	printf("%d:%02d.%02d\n", m, s, f);
+ }
+ 
+ void print_breakpoint (long b)
+@@ -65,7 +82,8 @@
+ 
+ 	for (i = 1; i <= cd_get_ntrack(cd); i++) {
+ 		track = cd_get_track(cd, i);
+-		/* when breakpoint is at:
++		/*
++		 * when breakpoint is at:
+ 		 * index 0: gap is prepended to track
+ 		 * index 1: gap is appended to previous track
+ 		 */
+@@ -91,7 +109,8 @@
+ 	Cd *cd = NULL;
+ 
+ 	if (NULL == (cd = cf_parse(name, &format))) {
+-		fprintf(stderr, "%s: input file error\n", name);
++		fprintf(stderr, "%s: error: unable to parse input file"
++			" \"%s\"\n", progname, name);
+ 		return -1;
+ 	}
+ 
+@@ -104,9 +123,10 @@
+ {
+ 	int format = UNKNOWN;
+ 	int gaps = APPEND;
++	int ret = 0;		/* return value of breaks() */
+ 
+ 	/* option variables */
+-	char c;
++	int c;
+ 	/* getopt_long() variables */
+ 	extern char *optarg;
+ 	extern int optind;
+@@ -120,7 +140,7 @@
+ 		{NULL, 0, NULL, 0}
+ 	};
+ 
+-	progname = *argv;
++	progname = argv[0];
+ 
+ 	while (-1 != (c = getopt_long(argc, argv, "hi:", longopts, NULL))) {
+ 		switch (c) {
+@@ -128,12 +148,13 @@
+ 			usage(0);
+ 			break;
+ 		case 'i':
+-			if (0 == strcmp("cue", optarg)) {
++			if (0 == strcasecmp("cue", optarg)) {
+ 				format = CUE;
+-			} else if (0 == strcmp("toc", optarg)) {
++			} else if (0 == strcasecmp("toc", optarg)) {
+ 				format = TOC;
+ 			} else {
+-				fprintf(stderr, "%s: illegal format `%s'\n", progname, optarg);
++				fprintf(stderr, "%s: error: unknown input file"
++					" format \"%s\"\n", progname, optarg);
+ 				usage(1);
+ 			}
+ 			break;
+@@ -152,12 +173,19 @@
+ 		}
+ 	}
+ 
++	/* What we do depends on the number of operands. */
+ 	if (optind == argc) {
+-		breaks("-", format, gaps);
++		/* No operands: report breakpoints of stdin. */
++		ret = breaks("-", format, gaps);
+ 	} else {
+-		for (; optind < argc; optind++)
+-			breaks(argv[optind], format, gaps);
++		/* Report track breakpoints for each operand. */
++		for (; optind < argc; optind++) {
++			ret = breaks(argv[optind], format, gaps);
++			/* Bail out if breaks() returns nonzero. */
++			if (!ret)
++				break;
++		}
+ 	}
+ 
+-	return 0;
++	return ret;
+ }
+diff -Naur cuetools-1.3.1.orig/src/tools/cueconvert.c cuetools-1.3.1/src/tools/cueconvert.c
+--- cuetools-1.3.1.orig/src/tools/cueconvert.c	2008-04-26 12:52:15.000000000 +0200
++++ cuetools-1.3.1/src/tools/cueconvert.c	2008-04-26 12:55:37.000000000 +0200
+@@ -3,32 +3,45 @@
+  *
+  * Copyright (C) 2004, 2005, 2006 Svend Sorensen
+  * For license terms, see the file COPYING in this distribution.
++ *
++ * Modified 2005-08-23 by Branden Robinson.
+  */
+ 
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <string.h>
+-#include <getopt.h>
++#include <getopt.h>	/* getopt_long() */
++#include <stdio.h>	/* fprintf(), printf(), snprintf(), stderr */
++#include <stdlib.h>	/* exit() */
++#include <string.h>	/* strcasecmp() */
+ #include "cuefile.h"
+ 
+ char *progname;
+ 
+ void usage (int status)
+ {
++	char synopsis[1024];
++
++	/* TODO: We could use asprintf() if we know we're using GNU libc. */
++	snprintf(synopsis, 1023, "usage: %s [option ...] [infile [outfile]]\n",
++		 progname);
++
+ 	if (0 == status) {
+-		fprintf(stdout, "%s: usage: cueconvert [option...] [infile [outfile]]\n", progname);
+-		fputs("\
+-\n\
+-OPTIONS\n\
+--h, --help 			print usage\n\
+--i, --input-format cue|toc	set format of input file\n\
+--o, --output-format cue|toc	set format of output file\n\
+-", stdout);
++		printf("%s", synopsis);
++		printf("Convert files between CUE and TOC formats.\n"
++		       "\n"
++		       "Options:\n"
++		       "-h, --help\t\t\t\tdisplay this message and exit\n"
++		       "-i {cue|toc}, --input-format={cue|toc}\tset format of"
++		       " input file\n"
++		       "-o {cue|toc}, --output-format={cue|toc}\tset format of"
++		       " output file\n"
++		       "\n"
++		       "See the %s(1) manual page for more information.\n",
++		       progname);
+ 	} else {
+-		fprintf(stderr, "run `%s --help' for usage\n", progname);
++		fprintf(stderr, "%sRun \"%s --help\" for more information.\n",
++				synopsis, progname);
+ 	}
+ 
+-	exit (status);
++	exit(status);
+ }
+ 
+ int convert (char *iname, int iformat, char *oname, int oformat)
+@@ -36,7 +49,8 @@
+ 	Cd *cd = NULL;
+ 
+ 	if (NULL == (cd = cf_parse(iname, &iformat))) {
+-		fprintf(stderr, "input file error\n");
++		fprintf(stderr, "%s: error: unable to parse input file\n",
++			progname);
+ 		return -1;
+ 	}
+ 
+@@ -62,9 +76,9 @@
+ {
+ 	int iformat = UNKNOWN;
+ 	int oformat = UNKNOWN;
+-	/* option variables */
+-	char c;
++	int ret = 0;		/* return value of convert() */
+ 	/* getopt_long() variables */
++	int c;
+ 	extern char *optarg;
+ 	extern int optind;
+ 
+@@ -75,7 +89,7 @@
+ 		{NULL, 0, NULL, 0}
+ 	};
+ 
+-	progname = *argv;
++	progname = argv[0];
+ 
+ 	while (-1 != (c = getopt_long(argc, argv, "hi:o:", longopts, NULL))) {
+ 		switch (c) {
+@@ -83,22 +97,24 @@
+ 			usage(0);
+ 			break;
+ 		case 'i':
+-			if (0 == strcmp("cue", optarg)) {
++			if (0 == strcasecmp("cue", optarg)) {
+ 				iformat = CUE;
+-			} else if (0 == strcmp("toc", optarg)) {
++			} else if (0 == strcasecmp("toc", optarg)) {
+ 				iformat = TOC;
+ 			} else {
+-				fprintf(stderr, "%s: illegal format `%s'\n", progname, optarg);
++				fprintf(stderr, "%s: unknown input file format"
++					" \"%s\"\n", progname, optarg);
+ 				usage(1);
+ 			}
+ 			break;
+ 		case 'o':
+-			if (0 == strcmp("cue", optarg)) {
++			if (0 == strcasecmp("cue", optarg)) {
+ 				oformat = CUE;
+-			} else if (0 == strcmp("toc", optarg)) {
++			} else if (0 == strcasecmp("toc", optarg)) {
+ 				oformat = TOC;
+ 			} else {
+-				fprintf(stderr, "%s: illegal format `%s'\n", progname, optarg);
++				fprintf(stderr, "%s: unknown output file format"
++					" \"%s\"\n", progname, optarg);
+ 				usage(1);
+ 			}
+ 			break;
+@@ -108,15 +124,23 @@
+ 		}
+ 	}
+ 
++	/* What we do depends on the number of operands. */
+ 	if (optind == argc) {
+-		convert("-", iformat, "-", oformat);
++		/* No operands: convert stdin to stdout. */
++		ret = convert("-", iformat, "-", oformat);
+ 	} else if (optind == argc - 1) {
+-		convert(argv[optind], iformat, "-", oformat);
++		/* One operand: convert operand file to stdout. */
++		ret = convert(argv[optind], iformat, "-", oformat);
+ 	} else if (optind == argc - 2) {
+-		convert(argv[optind], iformat, argv[optind + 1], oformat);
++		/* Two operands: convert input file to output file. */
++		ret = convert(argv[optind], iformat, argv[optind + 1], oformat);
+ 	} else {
+ 		usage(1);
+ 	}
+ 
+-	return 0;
++	if (0 != ret) {
++		fprintf(stderr, "%s: conversion failed\n", progname);
++	}
++
++	return ret;
+ }
+diff -Naur cuetools-1.3.1.orig/src/tools/cueprint.c cuetools-1.3.1/src/tools/cueprint.c
+--- cuetools-1.3.1.orig/src/tools/cueprint.c	2008-04-26 12:52:15.000000000 +0200
++++ cuetools-1.3.1/src/tools/cueprint.c	2008-04-26 12:55:37.000000000 +0200
+@@ -3,13 +3,15 @@
+  *
+  * Copyright (C) 2004, 2005, 2006 Svend Sorensen
+  * For license terms, see the file COPYING in this distribution.
++ *
++ * Modified 2005-08-23 by Branden Robinson.
+  */
+ 
+-#include <stdio.h>
+-#include <stdlib.h>		/* exit() */
+-#include <string.h>		/* strcmp() */
+-#include <getopt.h>
+-#include <ctype.h>		/* isdigit() */
++#include <ctype.h>	/* isdigit() */
++#include <getopt.h>	/* getopt_long() */
++#include <stdio.h>	/* fprintf(), printf(), snprintf(), stderr */
++#include <stdlib.h>	/* exit() */
++#include <string.h>	/* strcasecmp() */
+ #include "cuefile.h"
+ 
+ /* default templates */
+@@ -57,52 +59,44 @@
+ 
+ void usage (int status)
+ {
++	char synopsis[1024];
++
++	/* TODO: We could use asprintf() if we know we're using GNU libc. */
++	snprintf(synopsis, 1023, "usage: %s [option ...] [file ...]\n",
++		 progname);
++
+ 	if (0 == status) {
+-		fprintf(stdout, "%s: usage: cueprint [option...] [file...]\n", progname);
+-		fputs("\
+-\n\
+-OPTIONS\n\
+--h, --help 			print usage\n\
+--i, --input-format cue|toc	set format of file(s)\n\
+--n, --track-number <number>	only print track information for single track\n\
+--d, --disc-template <template>	set disc template (see TEMPLATE EXPANSION)\n\
+--t, --track-template <template>	set track template (see TEMPLATE EXPANSION)\n\
+-\n\
+-Template Expansion\n\
+-Disc:\n\
+-%A - album arranger\n\
+-%C - album composer\n\
+-%G - album genre\n\
+-%M - album message\n\
+-%N - number of tracks\n\
+-%P - album performer\n\
+-%S - album songwriter\n\
+-%T - album title\n\
+-%U - album UPC/EAN\n\
+-Track:\n\
+-%a - track arranger\n\
+-%c - track composer\n\
+-%g - track genre\n\
+-%i - track ISRC\n\
+-%m - track message\n\
+-%n - track number\n\
+-%p - track perfomer\n\
+-%t - track title\n\
+-%u - track ISRC (CD-TEXT)\n\
+-\n\
+-Any other %<character> is expanded to that character.  For example, to get a\n\
+-'%', use %%.\n\
+-\n\
+-", stdout);
+-		fprintf(stdout, "default disc template is:\n%s\n", D_TEMPLATE);
+-		fprintf(stdout, "default track template is:\n%s\n", T_TEMPLATE);
++		printf("%s", synopsis);
++		printf("Report disc and track information from a CUE or TOC"
++		       " file.\n"
++		       "\n"
++		       "Options:\n"
++		       "-d TEMPLATE, --disc-template=TEMPLATE\tset disc"
++		       " template\n"
++		       "-h, --help\t\t\t\tdisplay this message and exit\n"
++		       "-i {cue|toc}, --input-format={cue|toc}\tset format of"
++		       " input file(s)\n"
++		       "-n N, --track-number=N\t\t\treport information for"
++		       " track N only\n"
++		       "-t TEMPLATE, --track-template=TEMPLATE\tset track"
++		       " template\n"
++		       "\n"
++		       "TEMPLATE is a printf(3)-style format string.\n"
++		       "\n"
++		       "Default disc template: %s\n"
++		       "Default track template: %s\n"
++		       "See the %s(1) manual page for more information.\n",
++		       D_TEMPLATE, T_TEMPLATE, progname);
+ 	} else {
+-		fprintf(stderr, "run `%s --help' for usage\n", progname);
++		fprintf(stderr, "%sRun \"%s --help\" for more information.\n",
++			synopsis, progname);
+ 	}
+ 
+-	exit (status);
++	exit(status);
+ }
+ 
++/* TODO: Shouldn't we be using vprintf() to help us out with this stuff? */
++
+ void disc_field (char *conv, int length, Cd *cd, Value *value)
+ {
+ 	char *c;	/* pointer to conversion character */
+@@ -230,8 +224,9 @@
+ 
+ }
+ 
+-/* print a % conversion specification
+- * %[flag(s)][width][.precision]<conversion-char>
++/*
++ * Print a conversion specification.
++ * [flag(s)][width][.precision]<conversion-char>
+  */
+ void print_conv (char *start, int length, Cd *cd, int trackno)
+ {
+@@ -240,7 +235,7 @@
+ 	char *c;	/* pointer to conversion-char */
+ 
+ 	/* TODO: use strndup? */
+-	conv = malloc ((unsigned) (length + 1));
++	conv = malloc((unsigned) (length + 1));
+ 	strncpy(conv, start, length);
+ 	conv[length] = '\0';
+ 
+@@ -303,7 +298,7 @@
+ 				conv_length++;
+ 				c++;
+ 			}
+-			
++
+ 			/* precision */
+ 			/* '*' not recognized */
+ 			if ('.' == *c) {
+@@ -329,7 +324,8 @@
+ 	}
+ }
+ 
+-int info (char *name, int format, int trackno, char *d_template, char *t_template)
++int info (char *name, int format, int trackno, char *d_template,
++	  char *t_template)
+ {
+ 	Cd *cd = NULL;
+ 	int ntrack;
+@@ -359,8 +355,9 @@
+ 	return 0;
+ }
+ 
+-/* translate escape sequences in a string
+- * string is overwritten and terminated
++/*
++ * Translate escape sequences in a string.
++ * The string is overwritten and terminated.
+  * TODO: this does not handle octal and hexidecimal escapes
+  *       except for \0
+  */
+@@ -420,11 +417,13 @@
+ int main (int argc, char **argv)
+ {
+ 	int format = UNKNOWN;
+-	int trackno = -1;		/* track number (-1 = unspecified, 0 = disc info) */
++	int trackno = -1;		/* track number (-1 = unspecified,
++							  0 = disc info) */
+ 	char *d_template = NULL;	/* disc template */
+ 	char *t_template = NULL;	/* track template */
++	int ret = 0;			/* return value of info() */
+ 	/* getopt_long() variables */
+-	char c;
++	int c;
+ 	extern char *optarg;
+ 	extern int optind;
+ 
+@@ -437,20 +436,22 @@
+ 		{NULL, 0, NULL, 0}
+ 	};
+ 
+-	progname = *argv;
++	progname = argv[0];
+ 
+-	while (-1 != (c = getopt_long(argc, argv, "hi:n:d:t:", longopts, NULL))) {
++	while (-1 != (c = getopt_long(argc, argv, "hi:n:d:t:", longopts, NULL)))
++	{
+ 		switch (c) {
+ 		case 'h':
+ 			usage(0);
+ 			break;
+ 		case 'i':
+-			if (0 == strcmp("cue", optarg)) {
++			if (0 == strcasecmp("cue", optarg)) {
+ 				format = CUE;
+-			} else if (0 == strcmp("toc", optarg)) {
++			} else if (0 == strcasecmp("toc", optarg)) {
+ 				format = TOC;
+ 			} else {
+-				fprintf(stderr, "%s: illegal format `%s'\n", progname, optarg);
++				fprintf(stderr, "%s: error: unknown input file"
++					" format \"%s\"\n", progname, optarg);
+ 				usage(1);
+ 			}
+ 			break;
+@@ -469,7 +470,7 @@
+ 		}
+ 	}
+ 
+-	/* if no disc or track template is set, use the defaults for both */
++	/* If no disc or track template is set, use the defaults for both. */
+ 	/* TODO: alternative to strdup to get variable strings? */
+ 	if (NULL == d_template && NULL == t_template) {
+ 		d_template = strdup(D_TEMPLATE);
+@@ -482,16 +483,24 @@
+ 			t_template = strdup("");
+ 	}
+ 
+-	/* translate escape sequences */
++	/* Translate escape sequences. */
+ 	translate_escapes(d_template);
+ 	translate_escapes(t_template);
+ 
++	/* What we do depends on the number of operands. */
+ 	if (optind == argc) {
+-		info("-", format, trackno, d_template, t_template);
++		/* No operands: report information about stdin. */
++		ret = info("-", format, trackno, d_template, t_template);
+ 	} else {
+-		for (; optind < argc; optind++)
+-			info(argv[optind], format, trackno, d_template, t_template);
++		/* Report information for each operand. */
++		for (; optind < argc; optind++) {
++			ret = info(argv[optind], format, trackno, d_template,
++				   t_template);
++			/* Bail out if info() returns nonzero. */
++			if (!ret)
++				break;
++		}
+ 	}
+ 
+-	return 0;
++	return ret;
+ }
+# This patch replaces a confusing error message at comparing the file suffix.
+# It closes #499445.
+
+diff -Naur cuetools-1.3.1.orig/src/lib/cuefile.c cuetools-1.3.1/src/lib/cuefile.c
+--- cuetools-1.3.1.orig/src/lib/cuefile.c	2008-09-19 23:44:47.000000000 +0200
++++ cuetools-1.3.1/src/lib/cuefile.c	2008-09-19 23:43:48.000000000 +0200
+@@ -18,7 +18,7 @@
+ 
+ 	if (UNKNOWN == *format)
+ 		if (UNKNOWN == (*format = cf_format_from_suffix(name))) {
+-			fprintf(stderr, "%s: unknown format\n", name);
++			fprintf(stderr, "%s: unknown file suffix\n", name);
+ 			return NULL;
+ 		}
+ 
+@@ -50,7 +50,7 @@
+ 
+ 	if (UNKNOWN == *format)
+ 		if (UNKNOWN == (*format = cf_format_from_suffix(name))) {
+-			fprintf(stderr, "%s: unknown format\n", name);
++			fprintf(stderr, "%s: unknown file suffix\n", name);
+ 			return -1;
+ 		}
+ 
+# Fix "Buffer overflow detected" in cueconvert.
+# Closes Debian bug #576367
+
+diff -Naur cuetools-1.3.1.orig//src/lib/time.c cuetools-1.3.1/src/lib/time.c
+--- cuetools-1.3.1.orig//src/lib/time.c	2006-02-15 00:23:51.000000000 +0100
++++ cuetools-1.3.1/src/lib/time.c	2010-04-04 12:27:19.000000000 +0200
+@@ -34,7 +34,7 @@
+ /* print frame in mm:ss:ff format */
+ char *time_frame_to_mmssff (long f)
+ {
+-	static char msf[9];
++	static char msf[10];
+ 	int minutes, seconds, frames;
+ 
+ 	msf_frame_to_msf(f, &minutes, &seconds, &frames);

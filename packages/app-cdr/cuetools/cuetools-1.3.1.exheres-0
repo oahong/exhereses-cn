@@ -1,0 +1,33 @@
+# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="CUE and TOC file parsers and utilities"
+DESCRIPTION="
+cuetools is a set of utilities for working with Cue Sheet (CUE) and
+Table of Contents (TOC) files.
+It includes:
+* cueconvert: convert between the cue and toc formats
+* cuebreakpoints: print the breakpoints from a cue or toc file
+* cueprint: print disc and track infomation for a cue or toc file
+* cuetag: tag files based on CUE/TOC file information
+"
+HOMEPAGE="http://developer.berlios.de/projects/cuetools"
+DOWNLOADS="mirror://berlios/${PN}/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+BUGS_TO="oahong@gmail.com"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-debian.patch )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --hates=docdir )
+
+src_install() {
+    default
+    newbin extras/cuetag.sh cuetag
+}
+
