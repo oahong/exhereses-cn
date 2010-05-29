@@ -56,7 +56,10 @@ RESTRICT="test"
 BUGS_TO="${HOMEPAGE}/issues/list"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'doc gtk-doc' )
-DEFAULT_SRC_CONFIGURE_PARAMS=( --disable-dbus-python-check --enable-python --enable-gconf )
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --disable-dbus-python-check
+    --enable-{python,gconf,client}
+)
 
 ibus_src_install() {
     default
@@ -70,6 +73,6 @@ ibus_pkg_postinst() {
 
 ibus_pkg_postrm() {
     gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
-    gnome_exlib_update_icon_cache
+    gnome-2_pkg_postrm
 }
 
