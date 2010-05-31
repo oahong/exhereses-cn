@@ -20,5 +20,6 @@ BUGS_TO="oahong@gmail.com"
 WORK=${WORKBASE}/${MY_PNV}
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-Fix-compilation-with-gcc-4.3.patch )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --hates=docdir )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'x86_cpu_features:mmx assembly' )
 
