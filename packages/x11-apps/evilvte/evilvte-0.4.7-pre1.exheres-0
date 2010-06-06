@@ -25,8 +25,9 @@ BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freshmeat:evilvte"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/ChangeLog"
 
-EXJOBS=1
 WORK=${WORKBASE}/${MY_PNV}
+
+DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
 
 src_configure() {
     edo ./configure --prefix=/usr
