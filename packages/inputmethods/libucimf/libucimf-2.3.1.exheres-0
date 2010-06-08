@@ -16,9 +16,12 @@ PLATFORMS="~x86"
 MYOPTIONS="debug"
 
 DEPENDENCIES="
+    build:
+        dev-util/pkg-config
     build+run:
-        media-libs/freetype:2
         group/utmp
+        media-libs/fontconfig
+        media-libs/freetype:2
     run:
         sys-apps/dialog
     recommendation:
@@ -26,11 +29,11 @@ DEPENDENCIES="
             [[ description = [ To get openvanilla support for ucimf ] ]]"
 
 BUGS_TO="ucimf@googlegroups.com"
-REMOTE_IDS="sourceforge:ucimf"
-UPSTREAM_CHANGELOG="http://ucimf.sourceforge.net/data/ChangeLog"
+#REMOTE_IDS="sourceforge:ucimf"
+#UPSTREAM_CHANGELOG="http://ucimf.sourceforge.net/data/ChangeLog"
 UPSTREAM_DOCUMENTATION="
 http://ucimf.googlecode.com/files/UserManual.pdf [[ lang = zh_TW description = [ User Manual, PDF ] ]]
 http://code.google.com/p/ucimf/wiki [[ lang = zh_TW description = [ Wiki ] ]]"
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-gcc-4.4.diff )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
+
