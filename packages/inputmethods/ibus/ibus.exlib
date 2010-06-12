@@ -11,14 +11,15 @@ SUMMARY="Intelligent Input Bus for Linux / Unix"
 DESCRIPTION="
 Intelligent Input Bus (ibus) is a next generation input framework for Linux OS.
 It not only provides full featured and user friendly input method interface,
-but also may help developers to develop input method easily.
-"
+but also may help developers to develop input method easily."
 HOMEPAGE="http://ibus.googlecode.com"
-DOWNLOADS="listed-only: http://ibus.googlecode.com/files/${PNV}.tar.gz"
+DOWNLOADS="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
-MYOPTIONS="doc" # python gconf
+MYOPTIONS="doc gobject-introspection
+    gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]" # python gconf xim gtk2
+#    vala [[ description = [ Build vala binding for ${PN} platform ] ]]
 
 DEPENDENCIES="
     build:
@@ -40,6 +41,8 @@ DEPENDENCIES="
         sys-apps/dbus
         x11-libs/gtk+:2
         x11-libs/libX11
+        gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6.8] )
+        gtk3? ( x11-libs/gtk+:3.0 )
     recommendation:
         gnome-desktop/librsvg
     suggestion:
@@ -51,15 +54,30 @@ DEPENDENCIES="
         inputmethods/ibus-anthy
         inputmethods/ibus-hangul
 "
+#    test:
+#        vala? ( dev-lang/vala )
 
 RESTRICT="test"
-BUGS_TO="${HOMEPAGE}/issues/list"
+BUGS_TO="oahong@gmail.com"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'doc gtk-doc' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'doc gtk-doc' 'gobject-introspection introspection' gtk3 ) #vala
 DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --enable-python
+    --enable-gconf
+    --enable-xim
+    --enable-gtk2
+    --enable-vala
     --disable-dbus-python-check
-    --enable-{python,gconf,client}
+    --disable-key-snooper
 )
+
+update_gtk_immodules() {
+    einfo "Regenerating the gtk immodule file"
+    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    if option gtk3 ; then
+        gtk-query-immodules-3.0 > "${ROOT}"/etc/gtk-3.0/gtk.immodules
+    fi
+}
 
 ibus_src_install() {
     default
@@ -67,12 +85,12 @@ ibus_src_install() {
 }
 
 ibus_pkg_postinst() {
-    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    update_gtk_immodules
     gnome-2_pkg_postinst
 }
 
 ibus_pkg_postrm() {
-    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    update_gtk_immodules
     gnome-2_pkg_postrm
 }
 
