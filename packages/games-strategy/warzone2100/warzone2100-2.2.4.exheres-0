@@ -1,9 +1,0 @@
-# Copyright 2009 Hong Hao <oahong@gmail.com>
-# Distributed under the terms of the GNU General Public License v2
-
-require warzone2100
-
-PLATFORMS="~amd64 ~x86"
-
-UPSTREAM_CHANGELOG="http://sourceforge.net/projects/${PN}/files/${PN}/Warzone%202100%20${PV}/ChangeLog/view"
-

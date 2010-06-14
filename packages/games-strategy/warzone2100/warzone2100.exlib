@@ -33,7 +33,6 @@ SLOT="0"
 MYOPTIONS="debug"
 
 # http://developer.wz2100.net/wiki/CompileGuide
-# glee >= 5.4.0
 DEPENDENCIES="
     build:
         app-arch/unzip
