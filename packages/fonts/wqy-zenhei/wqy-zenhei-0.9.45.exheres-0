@@ -4,19 +4,20 @@
 #    Copyright 1999-2008 Gentoo Foundation
 
 FONT=${PN%-*}
-require xfont
+require xfont sourceforge [ project=wqy suffix=tar.gz ]
 
 SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
 HOMEPAGE="http://wqy.sourceforge.net/cgi-bin/enindex.cgi?ZenHei(en)"
-DOWNLOADS="mirror://sourceforge/wqy/${PNV/pre5/May}.tar.bz2"
 
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 
-UPSTREAM_RELEASE_NOTES="http://wenq.org/index.cgi?ZenHei_Pangu_README"
-UPSTREAM_CHANGELOG="http://wenq.org/index.cgi?ZenHei_Pangu_ChangeLog"
 WORK=${WORKBASE}/${PN}
+
+src_compile() {
+    :
+}
 
 src_install() {
     emagicdocs
@@ -27,3 +28,4 @@ src_install() {
     doins *.conf
     fix_fonts
 }
+
