@@ -5,6 +5,8 @@
 
 export_exlib_phases src_install pkg_postinst pkg_postrm
 
+require multilib
+
 SUMMARY="Gtk Chinese INput application in X"
 DESCRIPTIONS="
 gcin is a Chinese input method server for Big5 Traditional Chinese character sets.
@@ -22,6 +24,7 @@ DOWNLOADS="${DOWNLOADS:-http://cle.linux.org.tw/gcin/download/${MY_PNV:=${PNV}}.
 LICENCES="LGPL-2.1 sound? ( GPL-3 ) qt4? ( || ( QPL-1.0 GPL-2 ) )"
 SLOT="0"
 MYOPTIONS="
+    gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
     anthy [[ description = [ Enable support for anthy based input method ] ]]
     qt4 [[ description = [ Enable support for Qt4 immodule ] ]]
     sound [[ description = [ Enable support for Chinese Text to Speech reading via media-sound/verbis-tools ] ]]
@@ -34,9 +37,10 @@ DEPENDENCIES="
     run:
         sound? ( media-sound/vorbis-tools[ogg123(+)] )
     build+run:
-        anthy? ( cjk/anthy )
-        qt4? ( x11-libs/qt:4 )
         x11-libs/gtk+:2
+        anthy? ( cjk/anthy )
+        gtk3? ( x11-libs/gtk+:3.0 )
+        qt4? ( x11-libs/qt:4 )
 "
 
 REMOTE_IDS="freshmeat:gcin"
@@ -50,6 +54,13 @@ http://cle.linux.org.tw/trac/wiki/GcinFAQ [[ lang = zh_TW ]]"
 DEFAULT_SRC_INSTALL_EXCLUDE=( about.{c,cpp,o} )
 
 WORK=${WORKBASE}/${MY_PNV}
+
+update_gtk_immodules() {
+    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    if option gtk3 ; then
+        gtk-query-immodules-3.0 > "${ROOT}"/usr/$(get_libdir)/gtk-3.0/3.0.0/immodules.cache
+    fi
+}
 
 gcin_src_install() {
     default
@@ -66,10 +77,10 @@ gcin_src_install() {
 }
 
 gcin_pkg_postinst() {
-    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    update_gtk_immodules
 }
 
 gcin_pkg_postrm() {
-    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    update_gtk_immodules
 }
 

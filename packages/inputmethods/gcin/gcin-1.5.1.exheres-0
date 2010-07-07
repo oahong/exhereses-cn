@@ -22,6 +22,7 @@ src_configure() {
         --use_tsin=Y \
         --qt3_im=N \
         $(! option anthy && echo --use_anthy=N ) \
+        $(! option gtk3 && echo --use_gtk3=N ) \
         $(! option qt4 && echo --qt4_im=N )
 }
 
