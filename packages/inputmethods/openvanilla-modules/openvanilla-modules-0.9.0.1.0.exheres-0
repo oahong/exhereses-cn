@@ -3,7 +3,9 @@
 # Based in part upon 'openvanilla-modules-0.8.0.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
-MY_PNV=${PN}-$(ever replace 3 '_')
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+
+MY_PNV=${PN}-$(ever replace 3 'a')
 MY_LINGUAS="ja ko th vi zh_CN zh_HK zh_TW"
 SUMMARY="Input method modules and tables for OpenVanilla Input Method Framework"
 HOMEPAGE="http://openvanilla.org http://ucimf.googlecode.com"
@@ -24,16 +26,23 @@ DEPENDENCIES="
 
 WORK=${WORKBASE}/${MY_PNV}
 
+src_prepare() {
+    edo sed -e 's/with_/enable_/g' \
+        -e 's/withval/enableval/' \
+        -i configure.ac
+    autotools_src_prepare
+}
+
 src_configure() {
     econf \
-        $(option linguas:ja && echo '--with-jp_JP' ) \
-        $(option linguas:ko && echo '--with-ko_KR' ) \
-        $(option linguas:th && echo '--with-th_TH' ) \
-        $(option linguas:vi && echo '--with-vi_VN' ) \
-        $(option linguas:zh_CN && echo '--with-zh_CN' ) \
-        $(option linguas:zh_HK && echo '--with-zh_HK' ) \
-        $(option linguas:zh_TW && echo "--with-zh_TW{,_hakka,_taigi}" ) \
-        --without-asia
+        $(option linguas:ja && echo '--enable-jp_JP' ) \
+        $(option linguas:ko && echo '--enable-ko_KR' ) \
+        $(option linguas:th && echo '--enable-th_TH' ) \
+        $(option linguas:vi && echo '--enable-vi_VN' ) \
+        $(option linguas:zh_CN && echo '--enable-zh_CN' ) \
+        $(option linguas:zh_HK && echo '--enable-zh_HK' ) \
+        $(option linguas:zh_TW && echo "--enable-zh_TW{,_hakka,_taigi}" ) \
+        --disable-asia
 }
 
 src_install() {
