@@ -9,7 +9,7 @@ DOWNLOADS="${HOMEPAGE}/files/${MY_P}.tar.gz"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-MYOPTIONS="debug"
+MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
@@ -20,4 +20,4 @@ BUGS_TO="ucimf@googlegroups.com"
 REMOTE_IDS="sourceforge:ucimf"
 
 WORK=${WORKBASE}/${MY_P}
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
+
