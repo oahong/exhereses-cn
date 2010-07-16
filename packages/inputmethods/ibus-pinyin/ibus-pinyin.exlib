@@ -10,18 +10,25 @@ PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
 SUMMARY="The Chinese Pinyin and Bopomof engines for IBus platform"
 DOWNLOADS+=" open-phrase? ( ${HOMEPAGE}/files/${PYDB} )"
 MYOPTIONS="
+    lua
 (
     android [[ description = [ Build google android pinyin database ] ]]
     open-phrase [[ description = [ Build open-phrase pinyin database ] ]]
 ) [[ number-selected = at-least-one ]]
+    opencc [[ description = [ Use cjk/opencc for simplified and traditional Chinese conversion ] ]]
 "
 
 DEPENDENCIES="
     build+run:
         dev-libs/boost[>=1.39]
+        lua? ( dev-lang/lua[>=5.1] )
+        opencc? ( cjk/opencc )
 "
 
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'android db-android' 'open-phrase db-open-phrase' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    'android db-android' 'open-phrase db-open-phrase'
+    'lua lua-extension' opencc
+)
 
 ibus-pinyin_src_prepare() {
     if option open-phrase; then
