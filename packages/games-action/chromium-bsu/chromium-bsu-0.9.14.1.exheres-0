@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 #SCM_REPOSITORY="git://chromium-bsu.git.sourceforge.net/gitroot/chromium-bsu/chromium-bsu"
-require multilib autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
+#require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
 
 SUMMARY="Chromium B.S.U. is a fast paced, arcade-style, top-scrolling space shooter"
 HOMEPAGE="http://chromium-bsu.sourceforge.net/"
@@ -18,10 +18,12 @@ DEPENDENCIES="
         dev-util/pkg-config
         sys-devel/gettext[>=0.15]
     build+run:
-        fonts/dejavu
+        fonts/liberation-fonts
+        media-libs/glpng
+        media-libs/quesoglc
+        x11-dri/mesa
         sdl? (
             media-libs/SDL[>=1.1.6]
-            media-libs/SDL_image
             media-libs/SDL_mixer
         )
         !sdl? (
@@ -29,21 +31,17 @@ DEPENDENCIES="
             x11-dri/freeglut
             media-libs/freealut
         )
-        media-libs/glpng
-        media-libs/quesoglc
-        x11-dri/mesa
 "
+#            media-libs/SDL_image
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-pkgconfig-check.patch )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-ftgl
-    --with-font-path=/usr/$(get_libdir)/X11/fonts/dejavu/DejaVuSans.ttf
+    --disable-sdlimage # has rendering issues
+    --with-font-name="Liberation Sans"
 )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    sdl 'sdl sdlimage' 'sdl sdlmixer'
+    sdl 'sdl sdlmixer'
     '!sdl glut' '!sdl openal'
+    # 'sdl sdlimage' '!sdl glpng'
 )
 
-src_prepare() {
-    AT_M4DIR="m4" autotools_src_prepare
-}
