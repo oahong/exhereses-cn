@@ -6,7 +6,7 @@ require xfce [ module=apps ]
 SUMMARY="Volume controler for Xfce"
 
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="debug"
 
 DEPENDENCIES="
