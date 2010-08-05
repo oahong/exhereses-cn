@@ -1,9 +1,9 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_REPOSITORY="git://github.com/lidaobing/chmsee.git"
+SCM_REPOSITORY="http://github.com/jungleji/chmsee.git"
+
 require chmsee scm-git
 
-DOWNLOADS=""
 PLATFORMS="~x86"
 

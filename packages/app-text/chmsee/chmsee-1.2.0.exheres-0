@@ -3,5 +3,6 @@
 
 require chmsee
 
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
 PLATFORMS="~x86"
 

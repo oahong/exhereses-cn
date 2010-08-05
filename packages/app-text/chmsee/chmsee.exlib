@@ -10,7 +10,6 @@ Because of using gecko as the HTML rendering engine, it can
 support rich features of modern HTML page, such as CSS and JavaScript.
 "
 HOMEPAGE="https://chmsee.googlecode.com"
-DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -21,14 +20,14 @@ DEPENDENCIES="
         dev-util/intltool[>=0.37]
         sys-devel/gettext
     build+run:
-        dev-libs/glib:2[>=2.8]
+        dev-libs/glib:2[>=2.24]
         dev-libs/libgcrypt
         dev-libs/libxml2
         dev-libs/nspr
         dev-libs/xulrunner[>=1.9]
         gnome-platform/libglade:2[>=2.4]
         media-libs/chmlib
-        x11-libs/gtk+:2[>=2.16]
+        x11-libs/gtk+:2[>=2.20]
 "
 
 REMOTE_IDS="freshmeat:chmsee"
