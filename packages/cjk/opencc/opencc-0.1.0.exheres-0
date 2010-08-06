@@ -16,5 +16,4 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
-WORK=${WORKBASE}/${PN}-0.0.4.20100705
 
