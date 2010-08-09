@@ -5,5 +5,5 @@ SCM_REPOSITORY="http://github.com/jungleji/chmsee.git"
 
 require chmsee scm-git
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
