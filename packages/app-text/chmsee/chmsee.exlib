@@ -25,7 +25,6 @@ DEPENDENCIES="
         dev-libs/libxml2
         dev-libs/nspr
         dev-libs/xulrunner[>=1.9]
-        gnome-platform/libglade:2[>=2.4]
         media-libs/chmlib
         x11-libs/gtk+:2[>=2.20]
 "
