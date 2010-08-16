@@ -3,8 +3,7 @@
 # Based in part upon 'fcitx-3.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 1.11 ]  ]
-export_exlib_phases src_prepare pkg_postinst
+export_exlib_phases pkg_postinst
 
 SUMMARY="Free Chinese Input Toy for X"
 DESCRIPTION="Fcitx is a collection of Simplified Chinese input methods for Linux.
@@ -17,7 +16,9 @@ MYOPTIONS="debug kimpanel [[ description = [ Enable support for kimpanel, a mult
 
 DEPENDENCIES="
     build:
+        dev-util/intltool
         dev-util/pkg-config
+        sys-devel/gettext
         x11-proto/xproto
     build+run:
         x11-libs/cairo[X]
@@ -35,19 +36,10 @@ BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{xft,tray,recording} )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'debug log' 'kimpanel dbus' )
 
-fcitx_src_prepare() {
-    # ShanHeiSun is deprecated
-    edo sed -e 's#AR PL ShanHeiSun Uni#WenQuanYi Zen Hei#' \
-        -i data/config \
-        -i src/ui/ui.c
-
-    autotools_src_prepare
-}
-
 fcitx_pkg_postinst() {
-    elog "You must set the following env variables before using ${PN}"
-    elog "XMODIFIERS=\"@im=fcitx\""
-    elog "XIM=fcitx"
-    elog "XIM_PROGRAM=fcitx"
+    elog "You must set the following env variables properly in order to use ${PN}"
+    elog "XMODIFIERS=\"@im=${PN}\""
+    elog "XIM=${PN}"
+    elog "XIM_PROGRAM=${PN}"
 }
 
