@@ -1,0 +1,10 @@
+# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://github.com/sunpinyin/sunpinyin.git"
+SCM_CHECKOUT_TO="sunpinyin"
+
+require scm-git libsunpinyin
+
+PLATFORMS="~amd64 ~x86"
+

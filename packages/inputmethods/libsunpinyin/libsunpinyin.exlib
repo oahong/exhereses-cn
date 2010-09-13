@@ -1,0 +1,34 @@
+# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require scons
+export_exlib_phases src_prepare
+
+LM_DATA="lm_sc.t3g.arpa.tar.bz2"
+LM_DICT="dict.utf8.tar.bz2"
+LM_BASEURI="http://open-gram.googlecode.com/files"
+
+SUMMARY="An IME library based on Statistical Language Model"
+HOMEPAGE="http://sunpinyin.googlecode.com"
+DOWNLOADS="${LM_BASEURI}/${LM_DATA} ${LM_BASEURI}/${LM_DICT}"
+
+LICENCES="|| ( CDDL LGPL-2.1 )"
+SLOT="0"
+MYOPTIONS="debug"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool[>=0.35.0]
+        dev-util/pkg-config
+        sys-devel/gettext
+    build+run:
+        dev-db/sqlite:3
+"
+
+SCONS_SRC_CONFIGURE_PARAMS=( --prefix=/usr --libdir=${LIBDIR} --libdatadir=/usr/share )
+SCONS_SRC_INSTALL_PARAMS=( --install-sandbox=${IMAGE} )
+
+src_prepare() {
+    edo cp -v "${FETCHEDDIR}"/${LM_DATA} "${FETCHEDDIR}"/${LM_DICT} raw
+}
+
