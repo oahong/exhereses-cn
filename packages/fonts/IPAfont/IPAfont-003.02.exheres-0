@@ -10,7 +10,7 @@ DOWNLOADS="http://info.openlab.ipa.go.jp/${PN,,}/fontdata/${MY_PNV}.zip"
 
 LICENCES="IPAFL"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS=""
 
 DEPENDENCIES="
