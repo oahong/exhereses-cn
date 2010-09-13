@@ -5,6 +5,6 @@ require ibus-qt
 
 MY_PNV=${PNV}-Source
 DOWNLOADS="${HOMEPAGE}/files/${MY_PNV}.tar.gz"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 WORK=${WORKBASE}/${MY_PNV}
 
