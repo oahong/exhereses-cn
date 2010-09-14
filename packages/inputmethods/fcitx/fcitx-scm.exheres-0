@@ -5,7 +5,7 @@ SCM_REPOSITORY="http://fcitx.googlecode.com/svn"
 SCM_BRANCH="fcitx-utf8"
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 1.11 ]  ] fcitx scm-svn
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
 src_prepare() {
     edo intltoolize -c -f

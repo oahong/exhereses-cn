@@ -4,7 +4,7 @@
 MY_PNV=${PN}-$(ever replace 3 '.')
 require gcin
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
 WORK=${WORKBASE}/${MY_PNV}
 
