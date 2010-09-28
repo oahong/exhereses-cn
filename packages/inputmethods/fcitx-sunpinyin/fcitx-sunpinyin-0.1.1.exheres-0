@@ -1,0 +1,24 @@
+# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Fcitx wrapper for libsunpinyin"
+HOMEPAGE="http://fcitx.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool
+        sys-devel/gettext
+    build+run:
+        inputmethods/fcitx
+        inputmethods/fcitx-config
+        inputmethods/libsunpinyin
+"
+
+BUGS_TO="oahong@gmail.com"
+
