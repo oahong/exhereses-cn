@@ -25,7 +25,7 @@ DEPENDENCIES="
         dev-db/sqlite:3
 "
 
-SCONS_SRC_CONFIGURE_PARAMS=( --prefix=/usr --libdir=${LIBDIR} --libdatadir=/usr/share )
+SCONS_SRC_CONFIGURE_PARAMS=( --prefix=/usr --libdir=/usr/${LIBDIR} --libdatadir=/usr/share )
 SCONS_SRC_INSTALL_PARAMS=( --install-sandbox=${IMAGE} )
 
 src_prepare() {
