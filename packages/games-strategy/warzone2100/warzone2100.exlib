@@ -54,7 +54,7 @@ DEPENDENCIES="
         media-libs/quesoglc
         x11-dri/mesa
         x11-libs/libX11
-    recommendation:
+    suggestion:
         games-strategy/warzone2100-video
 "
 
