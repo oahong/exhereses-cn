@@ -8,7 +8,7 @@ DOWNLOADS="http://members.home.nl/p.a.rombouts/pdnsd/releases/${PNV}-par.tar.gz"
 LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS=""
+MYOPTIONS="baselayout"
 
 DEPENDENCIES=""
 
@@ -22,5 +22,5 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 
 src_install() {
     default
-    newinitd "${FILES}"/${PN}.rc6 ${PN}
+    option baselayout && newinitd "${FILES}"/${PN}.rc6 ${PN}
 }
