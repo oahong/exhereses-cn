@@ -10,6 +10,5 @@ SCM_SECONDARY_REPOSITORIES="tinygettext"
 SCM_SVN_EXTERNALS="external/tinygettext:tinygettext"
 require scm-svn supertux
 
-DOWNLOADS=""
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 

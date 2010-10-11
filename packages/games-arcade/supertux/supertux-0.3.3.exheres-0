@@ -5,5 +5,5 @@ require supertux
 
 DOWNLOADS="http://supertux.googlecode.com/files/${PNV}.tar.bz2"
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
