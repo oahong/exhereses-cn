@@ -6,5 +6,5 @@ SCM_music_REPOSITORY="git://gitorious.org/tmw/music.git"
 SCM_SECONDARY_REPOSITORIES="music"
 require mana scm-git
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 

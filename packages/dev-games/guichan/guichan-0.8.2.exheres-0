@@ -7,7 +7,7 @@ DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
 
 LICENCES="BSD-3"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="opengl sdl allegro [[ description = [ Build the Allegro frontend ] ]]"
 
 DEPENDENCIES="
