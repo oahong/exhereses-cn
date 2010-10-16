@@ -1,0 +1,63 @@
+# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Pek window manager"
+DESCRIPTION="
+The Pekwm Window Manager is written by Claes Nästén. The code is based
+on the aewm++ window manager, but it has evolved enough that it no
+longer resembles aewm++ at all. It also has an expanded feature-set,
+including window grouping (similar to ion, pwm, or fluxbox), auto
+properties, xinerama and keygrabber that supports keychains, and much
+more."
+HOMEPAGE="http://www.pekwm.org"
+DOWNLOADS="${HOMEPAGE}/projects/${PN}/files/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="debug jpeg png xft xinerama xpm xrandr"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        x11-proto/xproto
+    build+run:
+        x11-libs/libX11
+        x11-libs/libXext
+        jpeg? ( media-libs/jpeg )
+        png? ( media-libs/libpng[>=1.2.0] )
+        xft? ( x11-libs/libXft[>=2.0.0] )
+        xinerama? ( x11-libs/libXinerama )
+        xpm? ( x11-libs/libXpm )
+        xrandr? ( x11-libs/libXrandr[>=1.2.0] )
+"
+
+BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="freshmeat:${PN}"
+UPSTREAM_DOCUMENTATION="
+${HOMEPAGE}/files/${PN}/doc/${PV}/html/index.html
+${HOMEPAGE}/files/${PN}/doc/${PV}/html/faq/answers.html"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-shape --enable-menus --enable-harbour )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    debug xft xinerama xrandr
+    'xpm image-xpm'
+    'jpeg image-jpeg'
+    'png image-png'
+)
+
+src_install() {
+    default
+
+    insinto /usr/share/xsession
+    hereins pekwm.desktop <<EOF
+[Desktop Entry]
+Name=PekWM
+Comment=Use PekWM as your window manager
+Exec=pekwm
+TryExec=pekwm
+Icon=
+Type=ApplicationOA
+EOF
+}
+
