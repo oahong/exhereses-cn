@@ -1,7 +1,7 @@
 # Copyright 2008, 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require common-metadata
+require common-metadata autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -23,8 +23,12 @@ DEPENDENCIES="
         cjk/fbterm-ucimf [[ NOTE = [ Required to input CJK characters via UCIMF ] ]]
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-configure-exit-1.patch )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( gpm 'video_drivers:vesa vesa' )
+
+src_prepare() {
+    edo sed -e 's/enalbeval/enableval/g' -i configure.ac
+    autotools_src_prepare
+}
 
 src_install() {
     default
