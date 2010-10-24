@@ -17,9 +17,9 @@ DOWNLOADS="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
-MYOPTIONS="doc gobject-introspection
-    gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]" # python gconf xim gtk2
-#    vala [[ description = [ Build vala binding for ${PN} platform ] ]]
+MYOPTIONS="doc gobject-introspection gconf
+    gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]"
+# python gtk2 xim vala [[ description = [ Build vala binding for ${PN} platform ] ]]
 
 DEPENDENCIES="
     build:
@@ -37,10 +37,10 @@ DEPENDENCIES="
         app-text/iso-codes
         dev-libs/dbus-glib
         dev-libs/glib[>=2.18]
-        gnome-platform/GConf[>=2.12]
         sys-apps/dbus
         x11-libs/gtk+:2
         x11-libs/libX11
+        gconf? ( gnome-platform/GConf[>=2.12] )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.6.8] )
         gtk3? ( x11-libs/gtk+:3.0 )
     recommendation:
@@ -49,7 +49,6 @@ DEPENDENCIES="
         inputmethods/ibus-qt
         inputmethods/ibus-pinyin
         inputmethods/ibus-table
-        inputmethods/sunpinyin[ibus]
         inputmethods/ibus-chewing
         inputmethods/ibus-anthy
         inputmethods/ibus-hangul
@@ -57,18 +56,23 @@ DEPENDENCIES="
 #    test:
 #        vala? ( dev-lang/vala )
 
-RESTRICT="test"
+# requires a running ibus-daemon
+#RESTRICT="test"
 BUGS_TO="oahong@gmail.com"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'doc gtk-doc' 'gobject-introspection introspection' gtk3 ) #vala
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    'doc gtk-doc'
+    'gobject-introspection introspection'
+    gconf '!gconf memconf'
+    gtk3
+)
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --enable-python
-    --enable-gconf
-    --enable-xim
     --enable-gtk2
+    --enable-xim
     --enable-vala
+    --enable-key-snooper
     --disable-dbus-python-check
-    --disable-key-snooper
 )
 
 update_gtk_immodules() {
