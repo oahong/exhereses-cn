@@ -1,0 +1,39 @@
+# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="OpenFetion is a IM client based on GTK+2.0, using CHINA MOBILE's Fetion Protocol Version 4"
+HOMEPAGE="http://ofetion.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="debug gstreamer libnotify networkmanager xscreensaver"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool
+        dev-util/pkg-config
+        sys-devel/gettext
+    build+run:
+        dev-db/sqlite:3[>=3.3]
+        dev-libs/glib[>=2.14]
+        dev-libs/libxml2
+        dev-libs/openssl
+        x11-libs/gtk+:2[>=2.16]
+        gstreamer? ( media-libs/gstreamer:0.10 )
+        libnotify? ( x11-libs/libnotify )
+        networkmanager? ( net-apps/NetworkManager[>=0.5.0] )
+        xscreensaver? ( x11-apps/xscreensaver )
+"
+
+BUGS_TO="oahong@gmail.com"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    debug
+    gstreamer
+    'libnotify notify'
+    'networkmanager nm'
+    'xscreensaver screensaver'
+)
+
