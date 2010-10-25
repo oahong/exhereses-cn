@@ -1,7 +1,7 @@
 # Copyright 2008, 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require common-metadata autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+require common-metadata
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -25,16 +25,14 @@ DEPENDENCIES="
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( gpm 'video_drivers:vesa vesa' )
 
-src_prepare() {
-    edo sed -e 's/enalbeval/enableval/g' -i configure.ac
-    autotools_src_prepare
-}
+WORK=${WORKBASE}/${PN}-$(ever range 1-2)
 
 src_install() {
     default
 
+    setcap 'cap_sys_tty_config+ep' "${IMAGE}"/usr/bin/${PN}
     dodir /usr/share/terminfo
     $(type -P tic) -o "${IMAGE}/usr/share/terminfo/" \
-        "${WORK}"/terminfo/fbterm || die "Failed to generate terminfo database"
+        "${WORK}"/terminfo/${PN} || die "Failed to generate terminfo database"
 }
 
