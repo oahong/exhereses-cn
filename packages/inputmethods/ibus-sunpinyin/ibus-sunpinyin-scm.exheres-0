@@ -1,0 +1,26 @@
+# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://github.com/sunpinyin/sunpinyin.git"
+SCM_CHECKOUT_TO="sunpinyin"
+require cmake scm-git
+
+SUMMARY="A sunpinyin wrapper which enables user to use sunpinyin with IBus framework"
+HOMEPAGE="www.sunpinyin.org"
+DOWNLOADS=""
+
+LICENCES="|| ( CDDL LGPL-2.1 )"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        x11-libs/gtk+:2
+        inputmethods/ibus
+        inputmethods/libsunpinyin
+"
+
+BUGS_TO="oahong@gmail.com"
+WORK=${WORK}/wrapper/ibus
+
