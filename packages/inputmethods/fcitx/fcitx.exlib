@@ -19,9 +19,9 @@ DEPENDENCIES="
         sys-devel/gettext
         x11-proto/xproto
     build+run:
+        media-libs/fontconfig
         x11-libs/cairo[X]
         x11-libs/libX11
-        x11-libs/libXft
         x11-libs/libXrender
         kimpanel? ( sys-apps/dbus )
     recommendation:
@@ -30,8 +30,17 @@ DEPENDENCIES="
         kimpanel? ( kde/kdeplasma-addons[kimpanel(-)] )
 "
 
-BUGS_TO="fcitx-dev@googlegroups.com oahong@gmail.com"
+if ever is_scm ; then
+    MYOPTIONS+=" pango [[ description = [ Enable pango support for better font rendering ] ]]"
+    DEPENDENCIES+="
+        build+run:
+            pango? ( x11-libs/pango )
+    "
+    DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( pango )
+fi
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{xft,tray,recording} )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'debug log' 'kimpanel dbus' )
+BUGS_TO="oahong@gmail.com"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{tray,recording} )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES+=( debug 'kimpanel dbus' )
 
