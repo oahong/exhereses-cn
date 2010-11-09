@@ -18,7 +18,7 @@ and Ghostscript and CUPS drivers, as well as Foomatic data supporting the Ghosts
 
 LICENCES="GPL-2"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     gimp [[ description = [ Build GIMP 2.x Print plugin and ${PN} GTK+-2.0 user interface library ] ]]
     samples [[ description = [ Install sample images ] ]]
