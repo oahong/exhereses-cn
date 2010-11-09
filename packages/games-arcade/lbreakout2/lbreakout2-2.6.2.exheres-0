@@ -30,11 +30,10 @@ DEFAULT_SRC_CONFIGURE_PARAMS=( --localstatedir=/var/lib/games/${PN} --with-docdi
 src_install() {
     default
 
-    #FIXME: Is it the right way to preserve high scores?
-    keepdir /var/lib/games/${PN}
-    dovarlibgames
     preserve_scores "${IMAGE}"/var/lib/games/${PN}/${PN}.hscr
-    edo chgrp games "${IMAGE}"/usr/bin/${PN}
-    edo chmod g+s "${IMAGE}"/usr/bin/${PN}
+    dovarlibgames -R
+    keepdir /var/lib/games/${PN}
+    edo chown wizard:games "${IMAGE}"/usr/bin/${PN}
+    edo chmod ug+s "${IMAGE}"/usr/bin/${PN}
 }
 
