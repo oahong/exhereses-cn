@@ -31,9 +31,6 @@ src_install() {
     default
 
     preserve_scores "${IMAGE}"/var/lib/games/${PN}/${PN}.hscr
-    dovarlibgames -R
     keepdir /var/lib/games/${PN}
-    edo chown wizard:games "${IMAGE}"/usr/bin/${PN}
-    edo chmod ug+s "${IMAGE}"/usr/bin/${PN}
 }
 
