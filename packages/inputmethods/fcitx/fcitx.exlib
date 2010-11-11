@@ -1,4 +1,4 @@
-# Copyright 2008,2009 Hong Hao
+# Copyright 2008,2009,2010 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 # Based in part upon 'fcitx-3.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
@@ -10,7 +10,10 @@ HOMEPAGE="http://fcitx.googlecode.com"
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS="debug kimpanel [[ description = [ Enable support for kimpanel, a multibyte input widget for kde4 ] ]]"
+MYOPTIONS="debug
+    kimpanel [[ description = [ Enable support for kimpanel, a multibyte input widget for kde4 ] ]]
+    pango [[ description = [ Enable pango support for better multilingual text rendering ] ]]
+"
 
 DEPENDENCIES="
     build:
@@ -24,23 +27,19 @@ DEPENDENCIES="
         x11-libs/libX11
         x11-libs/libXrender
         kimpanel? ( sys-apps/dbus )
+        pango? ( x11-libs/pango )
     recommendation:
         fonts/wqy-zenhei
         inputmethods/fcitx-config
         kimpanel? ( kde/kdeplasma-addons[kimpanel(-)] )
 "
+# fcitx-config script:
+#    suggestion:
+#        x11-apps/xdg-utils
 
-if ever is_scm ; then
-    MYOPTIONS+=" pango [[ description = [ Enable pango support for better font rendering ] ]]"
-    DEPENDENCIES+="
-        build+run:
-            pango? ( x11-libs/pango )
-    "
-    DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( pango )
-fi
 
 BUGS_TO="oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{tray,recording} )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES+=( debug 'kimpanel dbus' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'kimpanel dbus' pango )
 
