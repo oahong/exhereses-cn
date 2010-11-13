@@ -29,7 +29,6 @@ DEPENDENCIES="
         kimpanel? ( sys-apps/dbus )
         pango? ( x11-libs/pango )
     recommendation:
-        fonts/wqy-zenhei
         inputmethods/fcitx-config
         kimpanel? ( kde/kdeplasma-addons[kimpanel(-)] )
 "
