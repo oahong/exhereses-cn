@@ -30,9 +30,13 @@ WORK=${WORKBASE}/${PN}-$(ever range 1-2)
 src_install() {
     default
 
-    setcap 'cap_sys_tty_config+ep' "${IMAGE}"/usr/bin/${PN}
     dodir /usr/share/terminfo
     $(type -P tic) -o "${IMAGE}/usr/share/terminfo/" \
         "${WORK}"/terminfo/${PN} || die "Failed to generate terminfo database"
+}
+
+pkg_postinst() {
+    setcap 'cap_sys_tty_config+ep' /usr/bin/${PN} || \
+        chmod u+s  /usr/bin/${PN}
 }
 
