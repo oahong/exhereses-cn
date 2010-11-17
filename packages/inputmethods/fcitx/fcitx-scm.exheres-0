@@ -3,10 +3,24 @@
 
 SCM_REPOSITORY="http://fcitx.googlecode.com/svn"
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 1.11 ] ] fcitx scm-svn
+require checksums [ sha1=[ pinyin.tar.gz=9ee77a4b31a6645adeb2dff9348d066312ebb2d7 table.tar.gz=b7e89f95ce2da991821acd270a1220a4cd4cb65a ] ]
+
+DOWNLOADS="
+    ${HOMEPAGE}/files/table.tar.gz
+    ${HOMEPAGE}/files/pinyin.tar.gz
+"
 
 PLATFORMS="~amd64 ~x86"
 
+src_fetch_extra() {
+    checksums_src_fetch_extra
+    scm_src_fetch_extra
+}
 src_prepare() {
+    edo cp "${FETCHEDDIR}"/pinyin.tar.gz data
+    edo cp "${FETCHEDDIR}"/table.tar.gz data/table
+
+    expatch -p0 "${FILES}"/${PN}-drop-md5check.patch
     edo intltoolize -c -f
     autotools_src_prepare
 }

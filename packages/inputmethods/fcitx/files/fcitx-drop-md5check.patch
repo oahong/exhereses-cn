@@ -1,0 +1,46 @@
+Source: me@gmail.com
+Upstream: no, impossible
+Reason: Use our own way to check src tarballs
+Index: data/table/Makefile.am
+===================================================================
+--- data/table/Makefile.am	(版本 499)
++++ data/table/Makefile.am	(工作副本)
+@@ -49,15 +49,11 @@
+ 
+ $(txt_m_data): cj.txt ;
+ 
+-cj.txt: $(table_tar) md5check
++cj.txt: $(table_tar)
+ 	$(TAR) xzvf $(table_tar)
+ 
+ $(table_tar):
+ 	$(WGET) -O $(table_tar) $(table_url)
+-	$(WGET) -O $(table_tar).md5 $(table_url).md5
+ 
+-md5check: $(table_tar)
+-	cd $(srcdir) && $(MD5SUM) -c $(table_tar).md5 || ( $(RM) $(table_tar); exit 1)
+-
+ all-local: tools $(txt_data) $(mb_data)
+ 
+Index: data/Makefile.am
+===================================================================
+--- data/Makefile.am	(版本 499)
++++ data/Makefile.am	(工作副本)
+@@ -27,16 +27,12 @@
+ tools: 
+ 	$(MAKE) -C ../tools
+ 
+-$(pyorg_data): $(py_tar) md5check
++$(pyorg_data): $(py_tar)
+ 	cd $(srcdir) && $(TAR) xzvf $(py_tar)
+ 
+ $(py_tar):
+ 	$(WGET) -O $(py_tar) $(py_url)
+-	$(WGET) -O $(py_tar).md5 $(py_url).md5
+ 
+-md5check: $(py_tar)
+-	cd $(srcdir) && $(MD5SUM) -c $(py_tar).md5 || ( $(RM) $(py_tar); exit 1 )
+-
+ all-local: tools  $(py_data)
+ 	rm -f pyERROR
+ 	rm -f pyPhrase.ok
