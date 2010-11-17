@@ -13,7 +13,7 @@ DOWNLOADS="
 
 LICENCES="GPL-3"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS=""
 
 DEPENDENCIES="
@@ -32,7 +32,7 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="sourceforge:GoldenDict freshmeat:GoldenDict"
+REMOTE_IDS="sourceforge:${PN} freshmeat:${PN}"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.php#release$(ever delete_all)"
 
 WORK=${WORKBASE}/${MY_PNV%-x11}
@@ -43,15 +43,14 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     -p2 "${FILES}"/${PNV}-fix-crash-with-qt-4.5.3.patch
 )
 
-#TODO:
-# Better morphologies ?
+# what's morphologies ?
 src_configure() {
     PREFIX=/usr eqmake4
 }
 
 src_install() {
     default
-    rm -rf "${IMAGE}"/usr/share/{doc,app-install} || die "failed to remove cruft"
+    edo rm -rf "${IMAGE}"/usr/share/{doc,app-install}
 }
 
 pkg_postinst() {
