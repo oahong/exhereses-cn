@@ -3,17 +3,27 @@
 # Based in part upon 'fcitx-3.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
+require checksums [ sha1=[ \
+    pinyin.tar.gz=9ee77a4b31a6645adeb2dff9348d066312ebb2d7 \
+    table.tar.gz=b7e89f95ce2da991821acd270a1220a4cd4cb65a \
+    ] ] \
+    autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 1.11 ] ]
+export_exlib_phases src_prepare
+
 SUMMARY="Free Chinese Input Toy for X"
-DESCRIPTION="Fcitx is a collection of Simplified Chinese input methods for Linux.
-It supports WuBi, Pinyin, Erbi and QuWei input methods."
+DESCRIPTION="Fcitx is a collection of Simplified Chinese input methods for Linux.  It supports WuBi,
+Pinyin, Erbi and QuWei input methods."
 HOMEPAGE="http://fcitx.googlecode.com"
+DOWNLOADS="
+    ${HOMEPAGE}/files/table.tar.gz
+    ${HOMEPAGE}/files/pinyin.tar.gz
+"
 
 LICENCES="GPL-2"
 SLOT="0"
 MYOPTIONS="debug
     kimpanel [[ description = [ Enable support for kimpanel, a multibyte input widget for kde4 ] ]]
-    pango [[ description = [ Enable pango support for better multilingual text rendering ] ]]
-"
+    pango [[ description = [ Enable pango support for better multilingual text rendering ] ]]"
 
 DEPENDENCIES="
     build:
@@ -29,16 +39,24 @@ DEPENDENCIES="
         kimpanel? ( sys-apps/dbus )
         pango? ( x11-libs/pango )
     recommendation:
-        inputmethods/fcitx-config
+        inputmethods/fcitx-config [[ description = [ Official GUI configuration tool for ${PN} ] ]]
         kimpanel? ( kde/kdeplasma-addons[kimpanel(-)] )
 "
 # fcitx-config script:
-#    suggestion:
-#        x11-apps/xdg-utils
+#        xdg-utils / fcitx-config
 
 
 BUGS_TO="oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{tray,recording} )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'kimpanel dbus' pango )
+
+fcitx_src_prepare() {
+    edo cp "${FETCHEDDIR}"/pinyin.tar.gz data
+    edo cp "${FETCHEDDIR}"/table.tar.gz data/table
+
+    expatch -p0 "${FILES}"/${PN}-drop-md5check.patch
+    edo intltoolize -c -f
+    autotools_src_prepare
+}
 
