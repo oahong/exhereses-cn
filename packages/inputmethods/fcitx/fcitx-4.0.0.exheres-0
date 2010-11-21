@@ -6,3 +6,5 @@ require fcitx
 DOWNLOADS+="${HOMEPAGE}/files/${PNV}.tar.gz"
 PLATFORMS="~amd64 ~x86"
 
+DEFAULT_SRC_PREPARE_PATCHES+=( "${FILES}"/${PNV}-declare-DestroyTrayWindow.patch )
+

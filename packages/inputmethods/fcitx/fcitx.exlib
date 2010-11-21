@@ -39,7 +39,7 @@ DEPENDENCIES="
         kimpanel? ( sys-apps/dbus )
         pango? ( x11-libs/pango )
     recommendation:
-        inputmethods/fcitx-config [[ description = [ Official GUI configuration tool for ${PN} ] ]]
+        inputmethods/fcitx-config
         kimpanel? ( kde/kdeplasma-addons[kimpanel(-)] )
 "
 # fcitx-config script:
@@ -56,6 +56,8 @@ fcitx_src_prepare() {
     edo cp "${FETCHEDDIR}"/table.tar.gz data/table
 
     expatch -p0 "${FILES}"/${PN}-drop-md5check.patch
+    # docdir shouldn't be overrided here.
+    edo sed -e '/^docdir/d' -i doc/Makefile.am
     edo intltoolize -c -f
     autotools_src_prepare
 }
