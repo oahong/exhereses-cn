@@ -1,0 +1,24 @@
+Source: me@gmail.com
+Upstream: fixed in r146
+Reason: Compilation fix with NetworkManager support
+--- openfetion-2.0.2/src/Makefile.am.orig	2010-11-17 17:21:04.128191003 +0800
++++ openfetion-2.0.2/src/Makefile.am	2010-11-17 17:21:53.764191009 +0800
+@@ -2,7 +2,7 @@
+ 
+ openfetion_CPPFLAGS=$(LIBXML_CFLAGS) $(GTK_CFLAGS) $(GTHREAD_CFLAGS) \
+ 					$(GSTREAMER_CFLAGS) $(LIBNOTIFY_CFLAGS) $(LIBXSS_CFLAGS) \
+-					$(NETWORKMANAGER_CFLAGS) -g -Wall\
++					$(NETWORKMANAGER_CFLAGS) $(DBUS_CFLAGS) -Wall\
+ 					-I../include -I../include/openfetion -I ../. \
+ 					-DSKIN_DIR=\"$(pkgdatadir)/skin/\" \
+ 					-DRESOURCE_DIR=\"$(pkgdatadir)/resource/\" \
+--- openfetion-2.0.2/configure.ac.orig	2010-11-17 17:20:16.632191004 +0800
++++ openfetion-2.0.2/configure.ac	2010-11-17 17:24:02.816191004 +0800
+@@ -163,6 +163,7 @@
+ 			echo ""
+ 			exit -1
+ 			])
++PKG_CHECK_MODULES(DBUS, [dbus-glib-1])
+ fi
+ 
+ PKG_CHECK_MODULES(LIBSSL, [
