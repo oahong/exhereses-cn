@@ -1,4 +1,4 @@
-# Copyright 2009 Hong Hao
+# Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require ibus-engine
@@ -11,23 +11,28 @@ SUMMARY="The Chinese Pinyin and Bopomof engines for IBus platform"
 DOWNLOADS+=" open-phrase? ( ${HOMEPAGE}/files/${PYDB} )"
 MYOPTIONS="
     lua
-(
-    android [[ description = [ Build google android pinyin database ] ]]
-    open-phrase [[ description = [ Build open-phrase pinyin database ] ]]
-) [[ number-selected = at-least-one ]]
-    opencc [[ description = [ Use cjk/opencc for simplified and traditional Chinese conversion ] ]]
+    (
+        android [[ description = [ Build google android pinyin database ] ]]
+        open-phrase [[ description = [ Build open-phrase pinyin database ] ]]
+    ) [[ number-selected = exactly-one ]]
+    opencc [[ description = [ Using opencc library for Traditional Chinese and Simplified Chinese conversion ] ]]
 "
 
 DEPENDENCIES="
     build+run:
+        dev-db/sqlite:3
         dev-libs/boost[>=1.39]
+        inputmethods/ibus[>=1.3.99]
         lua? ( dev-lang/lua[>=5.1] )
         opencc? ( cjk/opencc )
 "
 
+#DEFAULT_SRC_CONFIGURE_PARAMS=( --disable-boost )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    'android db-android' 'open-phrase db-open-phrase'
-    'lua lua-extension' opencc
+    'android db-android'
+    'open-phrase db-open-phrase'
+    'lua lua-extension'
+    opencc
 )
 
 ibus-pinyin_src_prepare() {
