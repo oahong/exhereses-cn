@@ -55,8 +55,9 @@ fcitx_src_prepare() {
     edo cp "${FETCHEDDIR}"/pinyin.tar.gz data
     edo cp "${FETCHEDDIR}"/table.tar.gz data/table
 
-    expatch -p0 "${FILES}"/${PN}-drop-md5check.patch
-    # docdir shouldn't be overrided here.
+    expatch "${FILES}"/${PNV}-remove-md5checks.patch
+
+    # docdir shouldn't be hardcoded.
     edo sed -e '/^docdir/d' -i doc/Makefile.am
     edo intltoolize -c -f
     autotools_src_prepare

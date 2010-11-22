@@ -1,0 +1,35 @@
+Source: me@gmail.com
+Upstream: no
+Reason: Use our own checksums.exlib to check integrity of code tables
+diff -r 23bdc6522b95 data/Makefile.am
+--- a/data/Makefile.am	Mon Nov 22 21:15:22 2010 +0800
++++ b/data/Makefile.am	Mon Nov 22 21:29:00 2010 +0800
+@@ -35,12 +35,10 @@
+ 	$(MAKE) -C ../tools
+ 
+ $(pyorg_data): $(py_tar)
+-	cd $(srcdir) && $(MD5SUM) -c $(py_tar).md5 || ( $(RM) $(py_tar); exit 1 )
+ 	cd $(srcdir) && $(TAR) xzmvf $(py_tar)
+ 
+ $(py_tar):
+ 	$(WGET) -O $(py_tar) $(py_url)
+-	$(WGET) -O $(py_tar).md5 $(py_url).md5
+ 
+ all-local: tools  $(py_data)
+ 	rm -f pyERROR
+diff -r 23bdc6522b95 data/table/Makefile.am
+--- a/data/table/Makefile.am	Mon Nov 22 21:15:22 2010 +0800
++++ b/data/table/Makefile.am	Mon Nov 22 21:29:00 2010 +0800
+@@ -50,12 +50,10 @@
+ $(txt_m_data): @srcdir@/cj.txt ;
+ 
+ @srcdir@/cj.txt: $(table_tar)
+-	cd $(srcdir) && $(MD5SUM) -c $(table_tar).md5 || ( $(RM) $(table_tar); exit 1)
+ 	$(TAR) xzmvf $(table_tar)
+ 
+ $(table_tar):
+ 	$(WGET) -O $(table_tar) $(table_url)
+-	$(WGET) -O $(table_tar).md5 $(table_url).md5
+ 
+ all-local: tools $(txt_data) $(mb_data)
+ 
