@@ -9,6 +9,8 @@ HOMEPAGE="www.sunpinyin.org"
 DOWNLOADS=""
 
 LICENCES="|| ( CDDL LGPL-2.1 )"
+SLOT="0"
+MYOPTIONS=""
 
 BUGS_TO="oahong@gmail.com"
 
