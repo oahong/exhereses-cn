@@ -3,7 +3,7 @@
 
 require cmake
 
-SUMMARY="Qt4 immodule and library for IBus framework"
+SUMMARY="Qt4 library and immodule for IBus framework"
 HOMEPAGE="http://ibus.googlecode.com"
 DOWNLOADS=""
 
@@ -14,9 +14,15 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         app-doc/doxygen
+        x11-proto/xproto
     build+run:
         dev-libs/icu[>=4.0]
         sys-apps/dbus[>=1.2]
+        x11-libs/libX11
         x11-libs/qt:4[dbus][>=4.5]
 "
+
+src_prepare() {
+    edo sed -e '/variables/ a\set(LIBDIR "lib${LIB_SUFFIX}")' -i CMakeLists.txt
+}
 

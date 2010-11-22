@@ -1,10 +1,11 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+MY_PNV=${PNV}-Source
 require ibus-qt
 
-MY_PNV=${PNV}-Source
 DOWNLOADS="${HOMEPAGE}/files/${MY_PNV}.tar.gz"
 PLATFORMS="~amd64 ~x86"
+
 WORK=${WORKBASE}/${MY_PNV}
 
