@@ -5,7 +5,7 @@ SCM_REPOSITORY="git://github.com/sunpinyin/sunpinyin.git"
 SCM_CHECKOUT_TO="sunpinyin"
 require scm-git
 
-HOMEPAGE="www.sunpinyin.org"
+HOMEPAGE="http://www.sunpinyin.org"
 DOWNLOADS=""
 
 LICENCES="|| ( CDDL LGPL-2.1 )"
