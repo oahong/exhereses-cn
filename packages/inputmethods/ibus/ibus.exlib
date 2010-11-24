@@ -16,7 +16,7 @@ DOWNLOADS="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
-MYOPTIONS="doc gobject-introspection gconf
+MYOPTIONS="gobject-introspection gconf gtk-doc
     gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]"
 # python gtk2 xim vala [[ description = [ Build vala binding for ${PN} platform ] ]]
 
@@ -68,9 +68,9 @@ RESTRICT="test"
 BUGS_TO="oahong@gmail.com"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    'doc gtk-doc'
     'gobject-introspection introspection'
     gconf '!gconf memconf'
+    gtk-doc
     gtk3
 )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
