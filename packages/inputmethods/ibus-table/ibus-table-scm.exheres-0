@@ -3,5 +3,5 @@
 
 require common-metadata
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
