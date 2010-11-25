@@ -39,7 +39,7 @@ DEPENDENCIES="
         kimpanel? ( sys-apps/dbus )
         pango? ( x11-libs/pango )
     recommendation:
-        inputmethods/fcitx-config
+        inputmethods/fcitx-configtool
         kimpanel? ( kde/kdeplasma-addons[kimpanel(-)] )
 "
 # fcitx-config script:
