@@ -1,7 +1,6 @@
 # Copyright 2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 SUMMARY="Simple configuration tool for fcitx"
 HOMEPAGE="http://fcitx.googlecode.com"
 DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
@@ -25,5 +24,6 @@ BUGS_TO="oahong@gmail.com"
 
 src_install() {
     default
-    edo rm -r "${IMAGE}"/usr/share/fcitx-config
+    edo rm -rf "${IMAGE}"/usr/share/doc
 }
+
