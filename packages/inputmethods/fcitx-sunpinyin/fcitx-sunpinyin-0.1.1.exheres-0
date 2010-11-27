@@ -16,7 +16,6 @@ DEPENDENCIES="
         sys-devel/gettext
     build+run:
         inputmethods/fcitx
-        inputmethods/fcitx-config
         inputmethods/libsunpinyin
 "
 
