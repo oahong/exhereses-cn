@@ -1,14 +1,15 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+require systemd-service
 SUMMARY="A proxy DNS server with permanent caching"
 HOMEPAGE="http://members.home.nl/p.a.rombouts/pdnsd/index.html"
-DOWNLOADS="http://members.home.nl/p.a.rombouts/pdnsd/releases/${PNV}-par.tar.gz"
+DOWNLOADS="${HOMEPAGE%/*}/${PNV}-par.tar.gz"
 
 LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS="baselayout"
+MYOPTIONS="baselayout systemd"
 
 DEPENDENCIES=""
 
@@ -23,4 +24,6 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 src_install() {
     default
     option baselayout && newinitd "${FILES}"/${PN}.rc6 ${PN}
+    install_systemd_files
 }
+
