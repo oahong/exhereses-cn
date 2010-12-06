@@ -4,11 +4,9 @@
 require cmake
 
 SUMMARY="HTML Help viewer for Unix/Linux"
-DESCRIPTION="ChmSee is an HTML Help viewer for Unix/Linux.
-It is based on CHMLIB and uses GTK2+ as frontend toolkit.
-Because of using gecko as the HTML rendering engine, it can
-support rich features of modern HTML page, such as CSS and JavaScript.
-"
+DESCRIPTION="ChmSee is an HTML Help viewer for Unix/Linux.  It is based on CHMLIB and uses GTK2+ as
+frontend toolkit.  Because of using gecko as the HTML rendering engine, it can support rich features
+of modern HTML page, such as CSS and JavaScript."
 HOMEPAGE="https://chmsee.googlecode.com"
 
 LICENCES="GPL-2"
