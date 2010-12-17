@@ -1,0 +1,31 @@
+# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="A simple Japanese kana (Hiragana and Katakana) drill tool"
+DESCRIPTION="Kanatest is a Japanese kana (hiragana and katakana) simple flashcard tool. It offers
+fourteen lessons and three drill modes: hiragana, katakana, and mixed mode. The tool displays
+randomly selected kana characters (respecting mode and lesson) and waits for the user answer
+(expected as the romaji equivalent). This process continues until all questions are answered or all
+questions are answered correctly (depending on options). At the end of test, information about
+drilling time and correctness ratio is displayed. The results are stored, and a user can review his
+performance at any time."
+HOMEPAGE="http://clayo.org/kanatest"
+DOWNLOADS="${HOMEPAGE}/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        sys-devel/gettext
+    build+run:
+        x11-libs/gtk+:2[>=2.12]
+        dev-libs/libxml2
+"
+
+BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="freshmeat:${PN}"
+
