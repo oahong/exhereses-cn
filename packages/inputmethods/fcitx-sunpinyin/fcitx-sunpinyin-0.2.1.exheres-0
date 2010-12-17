@@ -17,7 +17,7 @@ DEPENDENCIES="
         dev-util/intltool
         sys-devel/gettext
     build+run:
-        inputmethods/fcitx
+        inputmethods/fcitx[>=4.0.1]
         inputmethods/libsunpinyin[>=2.0]
 "
 
