@@ -1,6 +1,8 @@
 # Copyright 2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+require cmake
+
 SUMMARY="Simple configuration tool for fcitx"
 HOMEPAGE="http://fcitx.googlecode.com"
 DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
@@ -13,17 +15,12 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         dev-util/intltool
-        dev-util/pkg-config
         sys-devel/gettext
     build+run:
-        dev-libs/glib:2
-        x11-libs/gtk+:2[>=2.10.0]
+        dev-libs/unique:1
+        inputmethods/fcitx[>=4.0.1]
+        x11-libs/gtk+:2[>=2.22]
 "
 
 BUGS_TO="oahong@gmail.com"
-
-src_install() {
-    default
-    edo rm -rf "${IMAGE}"/usr/share/doc
-}
 
