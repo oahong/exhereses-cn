@@ -47,6 +47,7 @@ DEPENDENCIES="
 
 
 BUGS_TO="oahong@gmail.com"
+UPSTREAM_DOCUMENTATION="http://fcitx.github.com/handbook/fcitx.html [[ lang = zh_CN ]]"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{tray,recording} )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'kimpanel dbus' pango )
