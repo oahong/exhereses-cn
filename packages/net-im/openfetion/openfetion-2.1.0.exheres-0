@@ -4,7 +4,7 @@
 MY_PNV=${PN}-all-${PV}
 require cmake
 
-SUMMARY="An IM client based on GTK+2.0 using CHINA MOBILE's fetion protocol version 4"
+SUMMARY="Free and open source implemention of Fetion protocol library and client"
 HOMEPAGE="http://ofetion.googlecode.com"
 DOWNLOADS="${HOMEPAGE}/files/${MY_PNV}.tar.gz"
 
@@ -15,7 +15,6 @@ MYOPTIONS="gstreamer libnotify networkmanager xscreensaver"
 
 DEPENDENCIES="
     build:
-        dev-util/intltool
         dev-util/pkg-config
         sys-devel/gettext
     build+run:
