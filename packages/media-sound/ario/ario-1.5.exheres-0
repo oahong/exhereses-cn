@@ -1,7 +1,7 @@
 # Copyright 2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require gnome-2 sourceforge [ project=ario-player suffix=tar.gz ]
+require gtk-icon-cache sourceforge [ project=ario-player suffix=tar.gz ]
 
 SUMMARY="Ario is a GTK2 client for MPD"
 
@@ -40,7 +40,8 @@ BUGS_TO="oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-xmms2
-    --disable-libmpdclient2 # use external libmpdclient
+    # use system libmpdclient
+    --disable-libmpdclient2
     --enable-search
     --enable-mpdidle
     --enable-playlists
@@ -48,12 +49,4 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     audioscrobbler avahi dbus debug 'libnotify notify' python
 )
-
-pkg_postinst() {
-    gnome_exlib_update_icon_cache
-}
-
-pkg_postrm() {
-    gnome_exlib_update_icon_cache
-}
 
