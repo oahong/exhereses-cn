@@ -10,5 +10,3 @@ DEPENDENCIES="
         dev-libs/popt
 "
 
-UPSTREAM_CHANGELOG="http://sourceforge.net/projects/${PN}/files/releases/${PV}/${PV}-ChangeLog/view"
-
