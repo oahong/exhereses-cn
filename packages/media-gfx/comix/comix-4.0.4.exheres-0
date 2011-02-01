@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require freedesktop-desktop gnome-2 python [ python_dep=2.4 ]
+require freedesktop-desktop gtk-icon-cache python [ python_dep=2.4 ]
 
 SUMMARY="GTK Comic Book Viewer"
 DESCRIPTION="
@@ -39,11 +39,11 @@ src_install() {
 
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
-    gnome_exlib_update_icon_cache
+    gtk-icon-cache_pkg_postinst
 }
 
 pkg_postrm() {
     freedesktop-desktop_pkg_postrm
-    gnome_exlib_update_icon_cache
+    gtk-icon-cache_pkg_postrm
 }
 
