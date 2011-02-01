@@ -15,7 +15,7 @@ MYOPTIONS="
         android [[ description = [ Build google android pinyin database ] ]]
         open-phrase [[ description = [ Build open-phrase pinyin database ] ]]
     ) [[ number-selected = exactly-one ]]
-    opencc [[ description = [ Using opencc library for Traditional Chinese and Simplified Chinese conversion ] ]]
+    opencc [[ description = [ Use opencc library for conversion between Simplified and Traditional Chinese ] ]]
 "
 
 DEPENDENCIES="
