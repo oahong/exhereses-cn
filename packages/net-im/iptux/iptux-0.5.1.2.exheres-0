@@ -2,14 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 
 MY_PNV=${PN}-$(ever replace 3 -)
-require gnome-2
+require gtk-icon-cache
+
 SUMMARY="IP Messenger client for Linux"
 HOMEPAGE="http://iptux.googlecode.com"
 DOWNLOADS="${HOMEPAGE}/files/${MY_PNV}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS=""
 
 DEPENDENCIES="
