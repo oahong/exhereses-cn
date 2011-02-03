@@ -1,0 +1,45 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require multilib sourceforge [ suffix=zip ]
+
+SUMMARY="Lightning fast realtime 3D engine"
+DESCRIPTION=" The Irrlicht Engine is an open source high performance realtime 3D engine written and
+usable in C++ and also available for .NET languages. It is completely cross-platform, using D3D,
+OpenGL and its own software renderer, and has all of the state-of-the-art features which can be
+found in commercial 3d engines."
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        x11-proto/xproto
+    build+run:
+        media-libs/jpeg
+        media-libs/libpng
+        x11-libs/libX11
+        x11-libs/libXxf86vm
+"
+
+BUGS_TO="oahong@oahong.me"
+WORK=${WORK}/source/${PN^}
+
+DEFAULT_SRC_COMPILE_PARAMS=( sharedlib CC=${CC} CXX=${CXX} AR=${AR} )
+
+src_prepare() {
+    pushd ../..
+    expatch "${FILES}"
+    popd
+}
+
+src_install() {
+    insinto /usr/include/${PN}
+    doins ../../include/*.h
+
+    dolib.so lib${PN^}.so.${PV}
+    dosym lib${PN^}.so.${PV} /usr/$(get_libdir)/lib${PN^}.so
+}
+
