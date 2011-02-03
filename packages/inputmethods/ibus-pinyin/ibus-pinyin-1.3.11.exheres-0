@@ -3,5 +3,5 @@
 
 require ibus-pinyin
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 

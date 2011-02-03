@@ -3,7 +3,7 @@
 
 require ibus-pinyin
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 DEPENDENCIES="
     build:
         gnome-base/gnome-common
