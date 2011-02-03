@@ -7,40 +7,35 @@ SUMMARY="SuperTuxKart is a Free 3D kart racing game"
 HOMEPAGE="http://supertuxkart.sourceforge.net"
 DOWNLOADS="mirror://sourceforge/${PN}/${PNV}-src.tar.bz2"
 
-##### missing some licenses #####
-#* GPL-3
-#* Public Domain
-#Creative-Commons-Attribution
-#Creative-Commons-BY-SA
-#Creative-Commons-Sampling+
-#FreeArt License
-#SoundSnap license
-#Image*After terms
 LICENCES="GPL-3 public-domain FIXME"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS=""
+MYOPTIONS="addons"
 
 DEPENDENCIES="
     build:
         sys-devel/gettext
-        net-libs/enet
     build+run:
-        dev-games/plib[>=1.8.4]
-        media-libs/SDL
+        addons? ( net-misc/curl )
+        dev-games/irrlicht[=1.7*]
+        dev-libs/fribidi
+        media-libs/libogg
         media-libs/libvorbis
         media-libs/openal
-        x11-dri/freeglut
+        net-libs/enet
         x11-dri/mesa
 "
 
 BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="sourceforge:supertuxkart freshmeat:SuperTuxKart"
+REMOTE_IDS="sourceforge:${PN} freshmeat:${PN}"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/FAQ"
 
+DEFAULT_SRC_CONFIGURE_PARAMS=( --disable-optimization )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( addons )
+
 src_prepare() {
-    rm -rf src/enet || die "failed to remove internal enet source tree"
-    expatch "${FILES}"/${PNV}{,-desktop-entry,-no-redundant-projectile}.patch
+    edo rm -rf src/enet
+    expatch "${FILES}"/${PN}-{desktop-entry,enet}.patch
     AT_M4DIR="m4" eautoreconf
 }
 
