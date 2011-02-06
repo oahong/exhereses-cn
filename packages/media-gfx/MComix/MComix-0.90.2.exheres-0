@@ -7,7 +7,7 @@ SUMMARY="MComix is a user-friendly and customizable comic viewer. It is a fork o
 HOMEPAGE="http://www.sourceforge.net/projects/mcomix"
 DOWNLOADS="mirror://sourceforge/${PN,,}/${PNV}.tar.bz2"
 
-LICENCES="GPL-2"
+LICENCES="public-domain"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
