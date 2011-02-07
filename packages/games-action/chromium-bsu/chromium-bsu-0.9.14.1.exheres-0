@@ -10,7 +10,7 @@ DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.gz"
 
 LICENCES="Artistic"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="sdl"
 
 DEPENDENCIES="
