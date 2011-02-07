@@ -9,7 +9,7 @@ DOWNLOADS="http://repo.or.cz/w/glpng.git/snapshot/3f574b9aff2b6417bbf795e9338ab2
 
 LICENCES="as-is"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS=""
 
 DEPENDENCIES="
@@ -20,4 +20,8 @@ DEPENDENCIES="
 "
 
 WORK=${WORKBASE}/${PN}
+
+src_prepare() {
+    sed -e 's/CMAKE_INSTALL_LIBDIR/LIB_INSTALL_DIR/g' -i src/CMakeLists.txt
+}
 

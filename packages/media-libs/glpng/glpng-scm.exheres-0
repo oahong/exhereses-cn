@@ -10,7 +10,7 @@ DOWNLOADS=""
 
 LICENCES="as-is"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS=""
 
 DEPENDENCIES="
@@ -19,4 +19,8 @@ DEPENDENCIES="
          sys-libs/zlib
          x11-dri/mesa
 "
+
+src_prepare() {
+    sed -e 's/CMAKE_INSTALL_LIBDIR/LIB_INSTALL_DIR/g' -i src/CMakeLists.txt
+}
 
