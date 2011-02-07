@@ -4,7 +4,6 @@
 SCM_SUBPATH="supertux"
 SCM_REPOSITORY="http://supertux.lethargik.org/svn/supertux"
 SCM_tinygettext_REPOSITORY="http://tinygettext.googlecode.com/svn"
-SCM_tinygettext_REVISION="184"
 SCM_SECONDARY_REPOSITORIES="tinygettext"
 
 SCM_SVN_EXTERNALS="external/tinygettext:tinygettext"
