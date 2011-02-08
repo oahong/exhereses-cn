@@ -6,7 +6,7 @@ SCM_REPOSITORY="http://supertux.lethargik.org/svn/supertux"
 SCM_tinygettext_REPOSITORY="http://tinygettext.googlecode.com/svn"
 SCM_SECONDARY_REPOSITORIES="tinygettext"
 
-SCM_SVN_EXTERNALS="external/tinygettext:tinygettext"
+SCM_EXTERNAL_REFS="external/tinygettext:tinygettext"
 require scm-svn supertux
 
 PLATFORMS="~amd64 ~x86"
