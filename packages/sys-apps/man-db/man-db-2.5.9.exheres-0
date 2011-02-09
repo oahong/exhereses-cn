@@ -5,18 +5,16 @@
 # $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo-x86/sys-apps/man-db/man-db-2.5.6.ebuild,v 1.2 2009/10/02 22:13:26 flameeyes Exp $
 
 SUMMARY="The online manual database"
-DESCRIPTION="
-man-db is an implementation of the standard Unix documentation system accessed using the man command.
-It uses a Berkeley DB database in place of the traditional flat-text whatis databases.
-man-db is used by several popular GNU/Linux distributions, including Debian, Ubuntu, and SuSE.
-It also compiles and runs on a number of proprietary Unix systems.
-"
+DESCRIPTION="man-db is an implementation of the standard Unix documentation system accessed using
+the man command.  It uses a Berkeley DB database in place of the traditional flat-text whatis
+databases.  man-db is used by several popular GNU/Linux distributions, including Debian, Ubuntu, and
+SuSE.  It also compiles and runs on a number of proprietary Unix systems."
 HOMEPAGE="http://man-db.nongnu.org"
 DOWNLOADS="mirror://savannah/${PN}/${PNV}.tar.gz"
 
 LICENCES="GPL-3"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="( gdbm berkdb ) [[ number-selected = exactly-one ]]"
 
 DEPENDENCIES="
