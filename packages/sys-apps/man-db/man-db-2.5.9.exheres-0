@@ -30,14 +30,11 @@ DEPENDENCIES="
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="launchpad:man-db"
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-groff-1.21-test-failure.patch )
+
 src_configure() {
-    #Section L    math library functions
-    # http://en.wikipedia.org/wiki/Man_page#Manual_sections
-    local mysections="1 n l 8 3 2 5 4 9 6 7 0 0p 1p 3p"
     econf \
-        --enable-setuid=man \
-        --with-browser=/usr/bin/links \
-        --with-sections="${mysections}" \
+        --enable-setuid \
         --with-db=$(
         if optionq berkdb ; then
             echo db
