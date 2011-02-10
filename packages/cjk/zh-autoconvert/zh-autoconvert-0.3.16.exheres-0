@@ -19,7 +19,7 @@ HOMEPAGE="http://packages.debian.org/en/sid/zh-autoconvert"
 
 LICENCES=""
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="" #TODO: xchat support.
 
 DEPENDENCIES=""
@@ -30,7 +30,7 @@ DEFAULT_SRC_COMPILE_PARAMS=(
 )
 
 src_prepare() {
-    sed -i -e '/xchat-plugins/d' Makefile || die "failed to disable xchat plugin"
+    edo sed -i -e '/xchat-plugins/d' Makefile
 }
 
 src_install() {
