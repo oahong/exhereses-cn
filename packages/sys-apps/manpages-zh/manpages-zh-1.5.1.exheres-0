@@ -1,13 +1,13 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-SUMMARY="Chinese man pages"
+SUMMARY="Chinese manual pages"
 HOMEPAGE="http://manpages-zh.googlecode.com"
 DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
 
 LICENCES="GFDL-1.2"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     linguas:
         zh_CN
