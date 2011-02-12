@@ -1,13 +1,13 @@
-# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Copyright 2009, 2010, 2011 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 # Based in part upon 'ibus-1.1.0.20090211.ebuild' from Gentoo, which is:
 #    Copyright 1999-2009 Gentoo Foundation
 
-require gnome-2 multilib
+require gconf gtk-icon-cache multilib
 
 export_exlib_phases src_install pkg_postinst pkg_postrm
 
-SUMMARY="Intelligent Input Bus for Linux / Unix"
+SUMMARY="Intelligent Input Bus"
 DESCRIPTION=" Intelligent Input Bus (ibus) is a next generation input framework for Linux OS.  It
 not only provides full featured and user friendly input method interface, but also may help
 developers to develop input method easily."
@@ -18,7 +18,6 @@ LICENCES="LGPL-2.1"
 SLOT="0"
 MYOPTIONS="gobject-introspection gconf gtk-doc
     gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]"
-# python gtk2 xim vala [[ description = [ Build vala binding for ${PN} platform ] ]]
 
 DEPENDENCIES="
     build:
@@ -61,12 +60,12 @@ else
             dev-libs/dbus-glib
             dev-libs/glib[>=2.18]"
 fi
-#        vala? ( dev-lang/vala )
 
 # require X and a running ibus-daemon
 RESTRICT="test"
-BUGS_TO="oahong@gmail.com"
+BUGS_TO="oahong@oahong.me"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
+
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'gobject-introspection introspection'
     gconf '!gconf memconf'
@@ -95,11 +94,13 @@ ibus_src_install() {
 
 ibus_pkg_postinst() {
     update_gtk_immodules
-    gnome-2_pkg_postinst
+    gtk_icon_cache_exlib_update_theme_cache
+    gconf_pkg_postinst
 }
 
 ibus_pkg_postrm() {
     update_gtk_immodules
-    gnome-2_pkg_postrm
+    gtk_icon_cache_exlib_update_theme_cache
+    gconf_pkg_postrm
 }
 
