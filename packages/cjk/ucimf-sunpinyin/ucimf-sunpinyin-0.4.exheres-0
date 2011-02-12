@@ -1,0 +1,20 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Sunpinyin extension for UCIMF (Unicode Console Input Method Framework)"
+HOMEPAGE="http://ucimf.googlecode.com"
+DOWNLOADS="https://ucimf.googlecode.com/files/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        inputmethods/libucimf
+        inputmethods/libsunpinyin
+"
+
+BUGS_TO="ucimf@googlegroups.com"
+
