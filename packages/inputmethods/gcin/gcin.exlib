@@ -39,7 +39,7 @@ DEPENDENCIES="
     build+run:
         x11-libs/gtk+:2
         anthy? ( cjk/anthy )
-        gtk3? ( x11-libs/gtk+:3.0 )
+        gtk3? ( x11-libs/gtk+:3 )
         qt4? ( x11-libs/qt:4 )
 "
 
