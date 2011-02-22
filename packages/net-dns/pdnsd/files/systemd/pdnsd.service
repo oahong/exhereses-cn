@@ -1,10 +1,11 @@
 [Unit]
 Description=pdnsd proxy DNS server
+After=network.target
 
 [Service]
 Type=forking
-ExecStart=/usr/sbin/pdnsd -d -s -t 
 PIDFile=/var/run/pdnsd.pid
+ExecStart=/usr/sbin/pdnsd -d -s -t -p /var/run/pdnsd.pid
 ExecReload=/usr/sbin/pdnsd-ctl config
 
 [Install]
