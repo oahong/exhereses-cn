@@ -9,11 +9,14 @@ DOWNLOADS="http://supermmx.org/resources/linux/mac/${MY_PNV}.tar.gz"
 LICENCES="FIXME [[ description = [ mac-port has severe license problems ] ]]"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS="x86_cpu_features: mmx amd64_cpu_features: mmx"
+MYOPTIONS="
+    platform: amd64
+    x86_cpu_features: mmx
+"
 
 DEPENDENCIES="
     build:
-        amd64_cpu_features:mmx? ( dev-lang/yasm )
+        platform:amd64? ( dev-lang/yasm )
         x86_cpu_features:mmx? ( dev-lang/yasm )
 "
 
@@ -21,9 +24,16 @@ BUGS_TO="oahong@gmail.com"
 WORK=${WORKBASE}/${MY_PNV}
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-Fix-compilation-with-gcc-4.3.patch )
-DEFAULT_SRC_CONFIGURE_PARAMS=( --hates=docdir )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    'x86_cpu_features:mmx assembly'
-    'amd64_cpu_features:mmx assembly'
-)
+
+src_configure() {
+    local myconf=( --hates=docdir )
+
+    if option platform:amd64 || option x86_cpu_features:mmx ; then
+        myconf+=( --enable-assembly )
+    else
+        myconf+=( --disable-assembly )
+    fi
+
+    econf "${myconf[@]}"
+}
 
