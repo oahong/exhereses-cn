@@ -5,8 +5,6 @@
 
 export_exlib_phases src_install pkg_postinst pkg_postrm
 
-require multilib
-
 SUMMARY="Gtk Chinese INput application in X"
 DESCRIPTIONS="
 gcin is a Chinese input method server for Big5 Traditional Chinese character sets.
@@ -58,7 +56,7 @@ WORK=${WORKBASE}/${MY_PNV}
 update_gtk_immodules() {
     gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
     if option gtk3 ; then
-        gtk-query-immodules-3.0 > "${ROOT}"/usr/$(get_libdir)/gtk-3.0/3.0.0/immodules.cache
+        gtk-query-immodules-3.0 > "${ROOT}"/usr/${LIBDIR}/gtk-3.0/3.0.0/immodules.cache
     fi
 }
 

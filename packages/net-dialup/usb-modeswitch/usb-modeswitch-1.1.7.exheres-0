@@ -1,8 +1,6 @@
 # Copyright 2011 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require multilib
-
 SUMMARY="Mode switching tool for controlling \"flip flop\" (multiple device) USB gear"
 HOMEPAGE="http://www.draisberghof.de/usb_modeswitch"
 DOWNLOADS="${HOMEPAGE}/${PNV}.tar.bz2"
@@ -24,9 +22,8 @@ BUGS_TO="oahong@gmail.com"
 DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} )
 
 src_prepare() {
-    edo sed -e "s/^\(VERS[[:space:]]*=[[:space:]]\).*/\1${PVR}/" \
-        -e "/UDEVDIR/s/lib/$(get_libdir)/" \
-        -e 's/install -D -s/install -D/' \
+    edo sed -e "/UDEVDIR/s/lib/${LIBDIR}/" \
+        -e 's/\(install -D\) -s/\1/' \
         -i Makefile
 }
 

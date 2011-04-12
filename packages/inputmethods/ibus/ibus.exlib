@@ -3,7 +3,7 @@
 # Based in part upon 'ibus-1.1.0.20090211.ebuild' from Gentoo, which is:
 #    Copyright 1999-2009 Gentoo Foundation
 
-require gconf gtk-icon-cache multilib
+require gconf gtk-icon-cache
 
 export_exlib_phases src_install pkg_postinst pkg_postrm
 
@@ -83,7 +83,7 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 update_gtk_immodules() {
     gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
     if option gtk3 ; then
-        gtk-query-immodules-3.0 > "${ROOT}"/usr/$(get_libdir)/gtk-3.0/3.0.0/immodules.cache
+        gtk-query-immodules-3.0 > "${ROOT}"/usr/${LIBDIR}/gtk-3.0/3.0.0/immodules.cache
     fi
 }
 

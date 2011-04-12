@@ -1,7 +1,7 @@
 # Copyright 2011 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require multilib sourceforge [ suffix=zip ]
+require sourceforge [ suffix=zip ]
 
 SUMMARY="Lightning fast realtime 3D engine"
 DESCRIPTION=" The Irrlicht Engine is an open source high performance realtime 3D engine written and
@@ -40,6 +40,6 @@ src_install() {
     doins ../../include/*.h
 
     dolib.so lib${PN^}.so.${PV}
-    dosym lib${PN^}.so.${PV} /usr/$(get_libdir)/lib${PN^}.so
+    dosym lib${PN^}.so.${PV} /usr/${LIBDIR}/lib${PN^}.so
 }
 

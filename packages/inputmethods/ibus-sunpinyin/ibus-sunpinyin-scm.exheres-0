@@ -1,7 +1,7 @@
 # Copyright 2010, 2011 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require multilib scons sunpinyin
+require scons sunpinyin
 
 SUMMARY="A sunpinyin wrapper for IBus framework"
 
@@ -17,7 +17,7 @@ DEPENDENCIES="
 WORK=${WORK}/wrapper/ibus
 
 SCONS_SRC_CONFIGURE_PARAMS=(
-    --prefix=/usr --libdir=/usr/$(get_libdir) --libexecdir=/usr/libexec --datadir=/usr/share
+    --prefix=/usr --libdir=/usr/${LIBDIR} --libexecdir=/usr/libexec --datadir=/usr/share
 )
 SCONS_SRC_INSTALL_PARAMS=( --install-sandbox=${IMAGE} )
 

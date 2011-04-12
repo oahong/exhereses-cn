@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require multilib autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 require elisp-optional [ source_directory=emacs ]
 
 SUMMARY="A multilingual input method library and environment"
@@ -59,7 +59,7 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
     --without-qt-immodule
     --without-scim
     --without-{canna,eb,mana,prime,sj3,wnn,m17nlib}
-    --with-libedit=/usr/$(get_libdir)
+    --with-libedit=/usr/${LIBDIR}
 )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( anthy 'anthy anthy-utf8' qt4 'qt4 qt4-immodule' )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(

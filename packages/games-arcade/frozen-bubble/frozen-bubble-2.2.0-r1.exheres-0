@@ -1,8 +1,6 @@
 # Copyright 2009 Elias Pipping <elias@pipping.org>
 # Distributed under the terms of the GNU General Public License v2
 
-require multilib
-
 SUMMARY="Bust a Move clone"
 DOWNLOADS="http://www.frozen-bubble.org/data/${PNV}.tar.bz2"
 HOMEPAGE="http://www.frozen-bubble.org/"
@@ -24,7 +22,7 @@ DEPENDENCIES="
 
 DEFAULT_SRC_COMPILE_PARAMS=(
     PREFIX=/usr
-    LIBDIR=\$\(PREFIX\)/$(get_libdir)
+    LIBDIR=\$\(PREFIX\)/${LIBDIR}
     CPP="${CC}"
 )
 

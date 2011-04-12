@@ -4,7 +4,7 @@
 # Copyright 1999-2009 Gentoo Foundation
 # $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo-x86/net-print/gutenprint/gutenprint-5.2.3.ebuild,v 1.1 2009/03/04 22:54:09 dirtyepic Exp $
 
-require multilib sourceforge [ project=gimp-print ]
+require sourceforge [ project=gimp-print ]
 
 SUMMARY="High quality drivers for Canon, Epson, Lexmark, Sony, Olympus, and PCL printers"
 DESCRIPTION="
