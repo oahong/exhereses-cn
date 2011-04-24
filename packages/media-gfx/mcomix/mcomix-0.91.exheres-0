@@ -1,11 +1,9 @@
 # Copyright 2011 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require freedesktop-desktop freedesktop-mime gtk-icon-cache python [ python_dep=2.4 ]
+require sourceforge freedesktop-desktop freedesktop-mime gtk-icon-cache distutils [ python_dep=2.4 ]
 
-SUMMARY="MComix is a user-friendly and customizable comic viewer. It is a fork of comix"
-HOMEPAGE="http://www.sourceforge.net/projects/mcomix"
-DOWNLOADS="mirror://sourceforge/${PN,,}/${PNV}.tar.bz2"
+SUMMARY="User-friendly, customizable image viewer for comic books"
 
 LICENCES="public-domain"
 SLOT="0"
@@ -24,12 +22,6 @@ DEPENDENCIES="
 
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:${PN}"
-
-src_install() {
-    dodir /usr
-    edo python install.py --dir="${IMAGE}"/usr install
-    edo chmod 644 "${IMAGE}"/usr/share/${PN,,}/src/thumbbar.py{,c}
-}
 
 pkg_postinst() {
     freedesktop-desktop_pkg_postinst
