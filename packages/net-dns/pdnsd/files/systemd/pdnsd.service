@@ -1,11 +1,15 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
 [Unit]
-Description=pdnsd proxy DNS server
+Description=proxy DNS server
 After=network.target
+Conflicts=bind.service
 
 [Service]
 Type=forking
-PIDFile=/var/run/pdnsd.pid
-ExecStart=/usr/sbin/pdnsd -d -s -t -p /var/run/pdnsd.pid
+PIDFile=/run/pdnsd.pid
+ExecStart=/usr/sbin/pdnsd -d -s -t -p /run/pdnsd.pid
 ExecReload=/usr/sbin/pdnsd-ctl config
 
 [Install]
