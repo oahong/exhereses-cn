@@ -1,0 +1,4 @@
+(require 'ibus)
+(add-hook 'after-init-hook 'ibus-mode-on)
+(setq ibus-agent-file-name "/usr/libexec/ibus-el-agent")
+;;(setq ibus-cursor-color '("red" "blue" "limegreen"))

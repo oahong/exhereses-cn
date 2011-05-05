@@ -1,0 +1,38 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require launchpad [ project=ibus.el ] elisp-module
+
+SUMMARY="IBus client for GNU Emacs"
+DESCRIPTION="ibus.el allows users on-the-spot style input with IBus on Emacs. The input statuses are
+individually kept for each buffer, and prefix-keys such as C-x and C-c can be used even if IBus is
+active. So you can input various languages fast and comfortably by using it.  "
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        app-editors/emacs
+    run:
+        dev-lang/python:=[>=2.5]
+        dev-python/python-xlib
+        inputmethods/ibus[>=1.2]
+"
+
+BUGS_TO="oahong@oahong.me"
+
+src_compile() {
+    elisp-compile ibus.el
+}
+
+src_install() {
+    exeinto /usr/libexec
+    doexe ${PN}-agent
+
+    elisp-install ${PN} *.{el,elc}
+    elisp-install-site-file
+}
+
