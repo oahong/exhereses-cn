@@ -6,7 +6,7 @@ require aqualung
 
 DOWNLOADS="mirror://sourceforge/${PN}/${MY_PNV}.tar.gz"
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
 WORK=${WORKBASE}/${MY_PNV}
 

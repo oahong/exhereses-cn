@@ -6,7 +6,7 @@ require aqualung scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automa
 
 DOWNLOADS=""
 
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 
 UPSTREAM_CHANGELOG="${HOMEPAGE}/feed/svnlog.xml"
 
