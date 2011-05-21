@@ -9,5 +9,11 @@ PLATFORMS="~amd64 ~x86"
 
 src_prepare() {
     edo ./autogen.sh
+    echo : > po/update-po.sh
+}
+
+src_install() {
+    default
+    find "${IMAGE}" -type d -empty -delete
 }
 

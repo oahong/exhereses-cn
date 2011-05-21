@@ -32,8 +32,26 @@ LICENCES="GPL-2 public-domain CCPL-Attribution-ShareAlike-2.0 CCPL-Attribution-S
 SLOT="0"
 MYOPTIONS="debug"
 
+
+if ever is_scm ; then
+#        build:
+#            app-doc/asciidoc
+    DEPENDENCIES="
+        build+run:
+            media-libs/glew[>=1.5.2]
+            x11-libs/qt:4[X][opengl]
+    "
+else
+    DEPENDENCIES="
+        build+run:
+            media-libs/SDL[>=1.2]
+            media-libs/quesoglc
+    "
+    DEFAULT_SRC_CONFIGURE_PARAMS=( --disable-motif )
+fi
+
 # http://developer.wz2100.net/wiki/CompileGuide
-DEPENDENCIES="
+DEPENDENCIES+="
     build:
         app-arch/unzip
         app-arch/zip
@@ -46,12 +64,10 @@ DEPENDENCIES="
         fonts/dejavu
     build+run:
         dev-games/physfs
-        media-libs/SDL[>=1.2]
         media-libs/libpng[>=1.2]
         media-libs/libtheora[>=1.0]
         media-libs/libvorbis[>=1.1]
         media-libs/openal[>=0.0.8]
-        media-libs/quesoglc
         x11-dri/mesa
         x11-libs/libX11
     suggestion:
@@ -61,9 +77,8 @@ DEPENDENCIES="
 REMOTE_IDS="sourceforge:warzone2100 freshmeat:warzone2100"
 UPSTREAM_DOCUMENTATION="http://guide.wz2100.net"
 
-DEFAULT_SRC_CONFIGURE_PARAMS=(
+DEFAULT_SRC_CONFIGURE_PARAMS+=(
     --enable-sound
-    --disable-motif
     --with-icondir=/usr/share/pixmaps
     --with-distributor=Exherbo
     --with-applicationdir=/usr/share/applications
