@@ -9,7 +9,7 @@ HOMEPAGE="http://wz2100.net"
 # FIXME: use sourceforge mirrors
 #    standard-quality? ( mirror://sourceforge/warzone2100/${PN%-*}/Videos/2.2/standard-quality-en/${VIDEIO} )
 DOWNLOADS="
-    standard-quality? ( ${BASEURI}/standard-quality-en/${VIDEIO} )
+    standard-quality? ( ${BASEURI}/standard-quality-en/${VIDEO} )
     low-quality? ( ${BASEURI}/low-quality-en/${VIDEO} -> ${VIDEO}.low )
 "
 
