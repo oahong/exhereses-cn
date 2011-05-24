@@ -1,6 +1,8 @@
 # Copyright 2011 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+require gtk-icon-cache
+
 SUMMARY="A full featured and easy to use jabber client written in PyGTK"
 HOMEPAGE="http://www.gajim.org"
 DOWNLOADS="${HOMEPAGE}/downloads/$(ever range -2)/${PNV}.tar.bz2"
