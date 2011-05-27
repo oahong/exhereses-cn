@@ -1,0 +1,26 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require freedesktop-desktop
+
+SUMMARY="A simple media player for linux from China ,Base on GTK & gstreamer"
+HOMEPAGE="http://${PN}.googlecode.com"
+
+LICENCES="GPL-3"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+    build+run:
+        x11-libs/libX11
+        x11-libs/libnotify
+        x11-libs/gtk+:2
+        media-libs/gstreamer:0.10
+    run:
+        net-misc/wget
+"
+
+BUGS_TO="oahong@oahong.me"
+
