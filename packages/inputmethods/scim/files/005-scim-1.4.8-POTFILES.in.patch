@@ -1,8 +1,0 @@
---- scim-1.4.8/po/POTFILES.in.orig	2009-04-30 18:45:39.895979778 +0800
-+++ scim-1.4.8/po/POTFILES.in	2009-04-30 18:45:30.778727860 +0800
-@@ -59,3 +59,5 @@
- utils/scimkeyselection.cpp
- utils/scimtrayicon.c
- utils/scim_x11_utils.cpp
-+tests/scim_test_helper.cpp
-+tests/scim_test_imengine.cpp

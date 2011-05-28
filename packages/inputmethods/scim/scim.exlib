@@ -9,7 +9,6 @@ a user friendly, full featured input method user interface for POSIX-style
 operating systems (including Linux, FreeBSD and other Unix), but also a
 development platform to make input method development easier."
 HOMEPAGE="http://www.scim-im.org"
-DOWNLOADS="mirror://sourceforge/scim/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
