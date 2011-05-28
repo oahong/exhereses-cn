@@ -1,7 +1,7 @@
 # Copyright 2011 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require sourceforge freedesktop-desktop freedesktop-mime gtk-icon-cache distutils [ python_dep=2.4 ]
+require sourceforge freedesktop-desktop freedesktop-mime gtk-icon-cache distutils
 
 SUMMARY="User-friendly, customizable image viewer for comic books"
 
@@ -11,12 +11,15 @@ PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
+    build:
+        dev-lang/python:=[>=2.6]
     run:
         dev-python/Imaging[>=1.1.5]
         gnome-bindings/pygtk[>=2.12]
-    suggestion:
-        app-arch/unrar
+    recommendation:
+        || ( app-arch/unrar app-arch/rar )
         app-arch/unzip
+        app-arch/p7zip
         dev-lang/python[sqlite]
 "
 
