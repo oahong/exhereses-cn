@@ -1,0 +1,30 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PN=${PN/-data}
+require cmake
+
+SUMMARY="Data files for games-strategy/megaglest"
+HOMEPAGE="http://${MY_PN}.org"
+DOWNLOADS="mirror://sourceforge/${MY_PN}/${PNV}.tar.xz"
+
+LICENCES="GPL-3 FIXME"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+WORK=${WORKBASE}/${MY_PN}-$(ever range 1-3)
+BUGS_TO="oahong@gmail.com"
+
+src_prepare() {
+    edo sed -e "s:\(DataPath=\).*:\1/usr/share/${MY_PN}/:" \
+        -i glest_linux.ini
+}
+
+src_install() {
+    cmake_src_install
+    edo find "${IMAGE}" -type d -empty -delete
+}
+

@@ -1,0 +1,40 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake
+
+SUMMARY="Open Source 3D-real-time strategy game"
+DESCRIPTION="MegaGlest is an open source 3D-real-time strategy game, where you control the armies of
+one of seven different factions: Tech, Magic, Egyptians, Indians, Norsemen, Persian or Romans. The
+game is setup in one of 14 naturally looking settings, which -like the unit models- are crafted with
+great appreciation for detail. Additional game data can be downloaded from within the game at no
+cost.  "
+HOMEPAGE="http://${PN}.org"
+DOWNLOADS="mirror://sourceforge/${PN}/${PN}-source-${PVR}.tar.xz"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+# FIXME:
+DEPENDENCIES="
+    run:
+        games-strategy/megaglest-data[=${PV}]
+    build+run:
+        dev-lang/lua
+        dev-libs/xerces-c
+        media-libs/SDL
+        media-libs/jpeg
+        media-libs/libpng
+        media-libs/libvorbis
+        media-libs/openal
+        net-misc/curl
+        x11-dri/mesa
+        x11-libs/libX11
+        x11-libs/wxWidgets
+"
+
+WORK=${WORKBASE}/${PN}-$(ever range 1-3)
+BUGS_TO="oahong@gmail.com"
+
