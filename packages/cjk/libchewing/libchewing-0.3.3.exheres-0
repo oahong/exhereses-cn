@@ -14,7 +14,7 @@ DOWNLOADS="http://chewing.csie.net/download/${PN}/${PNV}.tar.bz2"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
-PLATFORMS="~x86"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="debug"
 
 DEPENDENCIES="
@@ -29,12 +29,11 @@ BUGS_TO="chewing-devel@googlegroups.com"
 UPSTREAM_CHANGELOG="http://chewing.csie.net/news.html"
 UPSTREAM_DOCUMENTATION="http://chewing.csie.net/faq.html[[lang=zh_TW]]"
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}.chewing_zuin.patch )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )
 
 src_test() {
     pushd test
-    emake check
+    default
     popd
 }
 
