@@ -24,6 +24,7 @@ SLOT="0"
 MYOPTIONS="
     gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
     anthy [[ description = [ Enable support for anthy based input method ] ]]
+    chewing [[ description = [ Enable support for libchewing based input method ] ]]
     qt4 [[ description = [ Enable support for Qt4 immodule ] ]]
     sound [[ description = [ Enable support for Chinese Text to Speech reading via media-sound/verbis-tools ] ]]
 "
@@ -37,6 +38,7 @@ DEPENDENCIES="
     build+run:
         x11-libs/gtk+:2
         anthy? ( cjk/anthy )
+        chewing? ( cjk/libchewing )
         gtk3? ( x11-libs/gtk+:3 )
         qt4? ( x11-libs/qt:4 )
 "

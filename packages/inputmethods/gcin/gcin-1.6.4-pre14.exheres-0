@@ -20,9 +20,10 @@ src_configure() {
     econf \
         --use_i18n=Y \
         --use_tsin=Y \
-        --qt3_im=N \
+        --use_qt3=N \
         $(! option anthy && echo --use_anthy=N ) \
+        $(! option chewing && echo --use_chewing=N ) \
         $(! option gtk3 && echo --use_gtk3=N ) \
-        $(! option qt4 && echo --qt4_im=N )
+        $(! option qt4 && echo --use_qt4=N )
 }
 
