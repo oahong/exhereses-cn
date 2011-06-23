@@ -13,6 +13,8 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-libs/libusb:1
+    run:
+        dev-lang/tcl[>=8.4] [[ note = [ wrapper script usb_modeswitch_dispatcher ] ]]
     post:
         net-dialup/usb-modeswitch-data
 "
