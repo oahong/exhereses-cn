@@ -1,0 +1,25 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="http://${PN}.googlecode.com/svn"
+require scm-svn autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+
+SUMMARY="QQ 2010 protocol plugin for pidgin"
+HOMEPAGE="http://${PN}.googlecode.com"
+DOWNLOADS=""
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+    build+run:
+        dev-libs/glib:2
+        net-im/pidgin[>=2.7.0]
+"
+
+BUGS_TO="oahong@gmail.com"
+
