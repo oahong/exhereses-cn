@@ -39,7 +39,7 @@ if ever is_scm ; then
     DEPENDENCIES="
         build+run:
             media-libs/glew[>=1.5.2]
-            x11-libs/qt:4[X][opengl]
+            x11-libs/qt:4[X(+)][opengl]
     "
 else
     DEPENDENCIES="
