@@ -1,7 +1,6 @@
 # Copyright 2010, 2011 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 require gtk-icon-cache sourceforge [ project=ario-player suffix=tar.gz ]
 
 SUMMARY="Ario is a GTK2 client for MPD"
@@ -39,7 +38,6 @@ DEPENDENCIES="
 
 BUGS_TO="oahong@gmail.com"
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/c02703c3dbe113fef52592e95722f72efd2c9f65.patch )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-xmms2
     # use system libmpdclient
