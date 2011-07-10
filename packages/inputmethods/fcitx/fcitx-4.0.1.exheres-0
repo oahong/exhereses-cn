@@ -1,8 +1,15 @@
 # Copyright 2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require fcitx
-
+require fcitx autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
 DOWNLOADS+="${HOMEPAGE}/files/${PNV}.tar.gz"
 PLATFORMS="~amd64 ~x86"
+
+src_prepare() {
+    fcitx_src_prepare
+    expatch "${FILES}"/${PN}-remove-md5checks.patch
+
+    edo intltoolize -c -f
+    autotools_src_prepare
+}
 
