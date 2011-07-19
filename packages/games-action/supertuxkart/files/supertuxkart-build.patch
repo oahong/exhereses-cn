@@ -12,14 +12,6 @@ diff -urN supertuxkart-0.7.1b~/configure.ac supertuxkart-0.7.1b/configure.ac
  
  # =================
  # Disable/enable addons support
-@@ -412,6 +411,7 @@
- if test "x$with_addons" == "xyes" ; then
-     SUMMARY="$SUMMARY\nEnabling addons support."
-     AC_DEFINE(ADDONS_MANAGER)
-+    AM_CONDITIONAL(ADDONS_MANAGER, test x$with_addons = xyes)
- fi
- # ==========================================
- # Check for a known compiler bug, details in 
 @@ -433,6 +433,7 @@
  AC_SUBST(fribidi_LIBS)
  AC_SUBST(bullet_LIBS)
@@ -208,10 +200,3 @@ diff -urN supertuxkart-0.7.1b~/src/Makefile.am supertuxkart-0.7.1b/src/Makefile.
  
  supertuxkart_SOURCES = \
   main.cpp \
-@@ -450,3 +449,6 @@
-         $(irrlicht_LIBS) $(fribidi_LIBS) $(bullet_LIBS) $(enet_LIBS) \
-         $(opengl_LIBS) $(openal_LIBS) $(oggvorbis_LIBS) \
-         $(INTLLIBS) $(LIBCURL_LIBS) $(LIBCURL_CFLAGS)
-+if ADDONS_MANAGER
-+supertuxkart_LDADD += -lpthread
-+endif
