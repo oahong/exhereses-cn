@@ -32,9 +32,8 @@ WORK=${WORKBASE}/${MY_PNV}
 
 src_prepare() {
     # Disable test that tries to access sound devices
-    mv t/mixerpm.{t,do_not_run} \
-        && sed -e \\:t/mixerpm.t:s/\.t/.do_not_run/ -i MANIFEST \
-        || die "failed to disable test"
+    edo mv t/mixerpm.{t,do_not_run}
+    edo sed -i -e \\:t/mixerpm.t:s/\.t/.do_not_run/ MANIFEST
     default
 }
 
