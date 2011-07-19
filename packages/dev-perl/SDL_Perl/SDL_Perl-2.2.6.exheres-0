@@ -2,7 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 MY_PNV=${PN}-v${PV}
-require perl-module [ module_author=KTHAKORE ]
+MODULE_AUTHOR=KTHAKORE
+require perl-module [ module_author=${MODULE_AUTHOR} ]
 
 SUMMARY="Perl bindings for SDL"
 LICENCES="LGPL-2"
