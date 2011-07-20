@@ -37,7 +37,8 @@ DEPENDENCIES="
         x11-libs/libXrender
     recommendation:
         inputmethods/fcitx-configtool
-        kimpanel? ( kde/kdeplasma-addons[kimpanel(-)] )
+    suggestion:
+        kimpanel? ( kde/kdeplasma-addons[kimpanel] )
 "
 # fcitx-config script:
 #        xdg-utils / fcitx-config
@@ -45,22 +46,50 @@ DEPENDENCIES="
 
 if ever at_least 4.1.0 ; then
     require cmake
+    export_exlib_phases pkg_postinst pkg_postrm
 
-    MYOPTIONS+=" opencc gtk [[ description = [ not implemented ] ]]"
+    MYOPTIONS+=" opencc ( gtk gtk3 qt4 ) [[ requires = [ kimpanel ] ]]" #fbterm
     DEPENDENCIES+="
         build+run:
             cjk/opencc[>=0.1.1]
+            gtk? (
+                dev-libs/dbus-glib
+                dev-libs/glib
+                x11-libs/gtk+:2
+            )
+            gtk3? (
+                dev-libs/dbus-glib
+                dev-libs/glib
+                x11-libs/gtk+:3
+            )
+            qt4? ( x11-libs/qt:4[>=4.5][dbus] )
     "
     CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_TABLE:BOOL=TRUE )
     CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
-        'debug DEBUG' 'kimpanel DBUS' 'pango PANGO' 'gtk GTK2_IM_MODULE' 'opencc OPENCC'
+        'debug DEBUG' 'kimpanel DBUS' 'pango PANGO'
+        'gtk GTK2_IM_MODULE' 'gtk3 GTK3_IM_MODULE' 'qt4 QT_IM_MODULE'
+        'opencc OPENCC'
     )
+
+    update_gtk_immodules() {
+        option gtk && gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+        if option gtk3 ; then
+            gtk-query-immodules-3.0 > "${ROOT}"/usr/${LIBDIR}/gtk-3.0/3.0.0/immodules.cache
+        fi
+    }
+
+    fcitx_pkg_postinst() {
+        update_gtk_immodules
+    }
+
+    fcitx_pkg_postrm() {
+        update_gtk_immodules
+    }
 else
     DEPENDENCIES+="build: dev-util/pkg-config"
 
     DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-{tray,recording} )
     DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug 'kimpanel dbus' pango )
-
 fi
 
 BUGS_TO="oahong@gmail.com"
