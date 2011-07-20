@@ -4,7 +4,8 @@
 #    Copyright 1999-2008 Gentoo Foundation
 
 FONT=${PN%-*}
-require xfont sourceforge [ project=wqy suffix=tar.gz ]
+MY_PNV=${PNV}-May
+require xfont sourceforge [ project=wqy suffix=tar.bz2 ]
 
 SUMMARY="WenQuanYi Hei-Ti Style Chinese outline font"
 HOMEPAGE="http://wqy.sourceforge.net/cgi-bin/enindex.cgi?ZenHei(en)"
