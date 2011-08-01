@@ -15,3 +15,7 @@ DEPENDENCIES=""
 BUGS_TO="oahong@gmail.com"
 DEFAULT_SRC_INSTALL_PARAMS=( RULESDIR="${IMAGE}"/${LIBDIR}/udev/rules.d )
 
+src_install() {
+    default
+    keepdir /etc/usb_modeswitch.d
+}
