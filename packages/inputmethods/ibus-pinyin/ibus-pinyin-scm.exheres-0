@@ -11,7 +11,7 @@ DEPENDENCIES="
 
 src_prepare() {
     echo -e "data/db/android/pydict.py\nscripts/pydict.py" >> po/POTFILES.in
-    NOCONFIGURE=1 ./autogen.sh || die "failed to run autogen.sh"
+    NOCONFIGURE=1 edo ./autogen.sh
     ibus-pinyin_src_prepare
 }
 

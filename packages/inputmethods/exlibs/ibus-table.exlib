@@ -34,8 +34,7 @@ fi
 BUGS_TO="${HOMEPAGE}/issues/list"
 
 src_prepare() {
-    sed -e '/AC_ARG_VAR/s#\[\[#\[#;s#\]\]#\]#' \
-        -i configure.ac || die "failed to fix configure.ac"
+    edo sed -i -e '/AC_ARG_VAR/s#\[\[#\[#;s#\]\]#\]#' configure.ac
     autotools_src_prepare
 }
 
