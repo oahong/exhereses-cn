@@ -21,5 +21,6 @@ BUGS_TO="oahong@gmail.com"
 
 src_install() {
     default
-    ! option gnome && rm ${IMAGE}/usr/bin/gfortune-zh
+    option gnome || edo rm ${IMAGE}/usr/bin/gfortune-zh
 }
+
