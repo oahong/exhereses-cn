@@ -34,7 +34,7 @@ UPSTREAM_CHANGELOG="${HOMEPAGE}/en/changelog.html"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/en/document.html"
 
 lilyterm_src_prepare() {
-    edo sed -i -e '/examplesdir/s/\$(PACKAGE)/&-\${PV}/' ${WORK}/data/Makefile.am
+    edo sed -i -e '/examplesdir/s/\$(PACKAGE)/&-\${PV}/' "${WORK}"/data/Makefile.am
     edo ./autogen.sh
 }
 

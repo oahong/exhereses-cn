@@ -9,10 +9,10 @@ PLATFORMS="~amd64 ~x86"
 WORK=${WORKBASE}/${MY_PNV}
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
-DEFAULT_SRC_COMPILE_PARAMS=( -j1 CC=${CC} CCLD=${CC} CCX="${CC} -x c" CXX=${CXX} OPTFLAGS="${CFLAGS} ${LDFLAGS}" )
+DEFAULT_SRC_COMPILE_PARAMS=( -j1 CC="${CC}" CCLD="${CC}" CCX="${CC} -x c" CXX="${CXX}" OPTFLAGS="${CFLAGS} ${LDFLAGS}" )
 
 src_prepare() {
-    echo "${PVR}" > ${WORK}/VERSION.gcin
+    echo "${PVR}" > "${WORK}"/VERSION.gcin
     default
 }
 

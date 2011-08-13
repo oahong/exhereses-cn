@@ -26,7 +26,7 @@ DEPENDENCIES="
 "
 
 SCONS_SRC_CONFIGURE_PARAMS=( --prefix=/usr --libdir=/usr/${LIBDIR} --libdatadir=/usr/share )
-SCONS_SRC_INSTALL_PARAMS=( --install-sandbox=${IMAGE} )
+SCONS_SRC_INSTALL_PARAMS=( --install-sandbox="${IMAGE}" )
 
 src_prepare() {
     edo cp -v "${FETCHEDDIR}"/${LM_DATA} "${FETCHEDDIR}"/${LM_DICT} raw

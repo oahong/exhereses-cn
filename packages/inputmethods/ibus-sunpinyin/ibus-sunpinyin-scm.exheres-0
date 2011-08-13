@@ -19,5 +19,5 @@ WORK=${WORK}/wrapper/ibus
 SCONS_SRC_CONFIGURE_PARAMS=(
     --prefix=/usr --libdir=/usr/${LIBDIR} --libexecdir=/usr/libexec --datadir=/usr/share
 )
-SCONS_SRC_INSTALL_PARAMS=( --install-sandbox=${IMAGE} )
+SCONS_SRC_INSTALL_PARAMS=( --install-sandbox="${IMAGE}" )
 

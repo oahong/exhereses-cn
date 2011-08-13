@@ -17,7 +17,7 @@ DEPENDENCIES="
 "
 
 SCONS_SRC_CONFIGURE_PARAMS=( --prefix=/usr )
-SCONS_SRC_INSTALL_PARAMS=( --install-sandbox=${IMAGE} )
+SCONS_SRC_INSTALL_PARAMS=( --install-sandbox="${IMAGE}" )
 
 WORK=${WORK}/wrapper/xim
 
