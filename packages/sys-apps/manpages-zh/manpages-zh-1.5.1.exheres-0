@@ -5,7 +5,7 @@ SUMMARY="Chinese manual pages"
 HOMEPAGE="http://manpages-zh.googlecode.com"
 DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
 
-LICENCES="GFDL-1.2"
+LICENCES="FDL-1.2"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
