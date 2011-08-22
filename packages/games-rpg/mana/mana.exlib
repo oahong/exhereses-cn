@@ -42,7 +42,6 @@ mana_src_install() {
 
     local datadir="/usr/share/${PN}/data" fontpath="/usr/share/fonts/X11/dejavu"
     insinto ${datadir}
-    doins -r "${WORKBASE}"/${MMUSIC:-music}/data/music
     edo rm -f "${IMAGE}"/${fontdir}/dejavusans/*.ttf
     dosym ${fontpath}/DejaVuSans.ttf ${datadir}/fonts/dejavusans.ttf
     dosym ${fontpath}/DejaVuSans-Bold.ttf ${datadir}/fonts/dejavusans-bold.ttf
