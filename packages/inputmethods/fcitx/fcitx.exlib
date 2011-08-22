@@ -28,12 +28,12 @@ DEPENDENCIES="
         sys-devel/gettext
         x11-proto/xproto
     build+run:
-        !pango? ( media-libs/fontconfig )
-        dbus? ( sys-apps/dbus )
-        pango? ( x11-libs/pango )
+        media-libs/fontconfig
         x11-libs/cairo[X]
         x11-libs/libX11
         x11-libs/libXrender
+        dbus? ( sys-apps/dbus )
+        pango? ( x11-libs/pango )
     recommendation:
         inputmethods/fcitx-configtool
     suggestion:
