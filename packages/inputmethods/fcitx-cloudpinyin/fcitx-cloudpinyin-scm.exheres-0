@@ -1,0 +1,25 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="https://github.com/fcitx/fcitx-cloudpinyin.git"
+require cmake scm-git
+
+SUMMARY="Cloud Pinyin module for Fcitx"
+HOMEPAGE="http://fcitx.googlecode.com"
+DOWNLOADS=""
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        sys-devel/gettext
+    build+run:
+        inputmethods/fcitx[>=4.1.0]
+"
+
+BUGS_TO="oahong@gmail.com"
+
