@@ -1,0 +1,83 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'gutenprint-5.2.3.ebuild' from Gentoo, which is:
+# Copyright 1999-2009 Gentoo Foundation
+# $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo-x86/net-print/gutenprint/gutenprint-5.2.3.ebuild,v 1.1 2009/03/04 22:54:09 dirtyepic Exp $
+
+require sourceforge [ project=gimp-print ]
+
+SUMMARY="High quality drivers for Canon, Epson, Lexmark, Sony, Olympus, and PCL printers"
+DESCRIPTION="
+Gutenprint, formerly named Gimp-Print, is a suite of printer drivers that may be used with most common
+UNIX and Linux print spooling systems, including CUPS, lpr, LPRng, or others.
+These drivers provide high quality printing for UNIX (including Macintosh OS X 10.2, 10.3, and 10.4) and Linux systems
+that in many cases equal or exceed proprietary vendor-supplied drivers in quality and functionality,
+and can be used for demanding printing tasks requiring flexibility and high quality.
+This software package includes an enhanced Print plugin for the GIMP that replaces the plugin packaged with the GIMP,
+and Ghostscript and CUPS drivers, as well as Foomatic data supporting the Ghostscript driver."
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="
+    gimp [[ description = [ Build GIMP 2.x Print plugin and ${PN} GTK+-2.0 user interface library ] ]]
+    samples [[ description = [ Install sample images ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        sys-devel/gettext
+        media-gfx/ImageMagick
+    build+run:
+        dev-libs/glib
+        dev-lang/perl:*
+        net-print/cups[>=1.2]
+        app-text/ghostscript
+        (
+            sys-libs/readline
+            sys-libs/ncurses
+        ) [[ note = [ escputil needs readline ] ]]
+        gimp? (
+            x11-libs/gtk+:2
+            media-gfx/gimp[>=2.4]
+        )
+"
+
+RESTRICT="test"
+BUGS_TO="oahong@gmail.com"
+REMOTE_IDS+="freshmeat:gutenprint"
+UPSTREAM_RELEASE_NOTES="http://sourceforge.net/projects/gimp-print/files/${PN}-$(ever range 1-2)/${PV}/NEWS/view"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/cups-1.5-compile-fix.patch )
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --with-ghostscript
+    --with-readline
+    --without-foomatic
+    --enable-cups-level3-ppds
+    --enable-cups-1_2-enhancements
+    --enable-test
+    --enable-testpattern
+    --enable-escputil
+    --disable-cups-ppds # dynamic ppds generation
+)
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
+    'gimp gimp2' 'gimp gimp2-as-gutenprint'
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( samples 'gimp libgutenprintui2' )
+
+src_test_expensive() {
+    emake check
+}
+
+src_install() {
+    default
+    edo mv "${IMAGE}"/usr/share/${PN}/doc/* "${IMAGE}"/usr/share/doc/${PNV}
+    edo find "${IMAGE}" -type d -empty -delete
+}
+
+pkg_postinst() {
+    edo cups-genppdupdate
+}
+
