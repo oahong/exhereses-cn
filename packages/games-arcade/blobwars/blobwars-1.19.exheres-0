@@ -1,0 +1,43 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require gtk-icon-cache sourceforge [ suffix=tar.gz ]
+
+SUMMARY="Mission and Objective based 2D Platform Game"
+DESCRIPTION="Metal Blob Solid is a 2D platform game, the first in the Blobwars series. You take on
+the role of a fearless Blob agent, Bob, who's mission is to infiltrate various enemy bases and
+rescue as many MIAs as possible, while battling many vicious aliens.  "
+HOMEPAGE="http://www.parallelrealities.co.uk/blobWars.php"
+
+LICENCES="GPL-2 CC-BY-SA-3.0"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+    build+run:
+        media-libs/SDL
+        media-libs/SDL_mixer
+        media-libs/SDL_image
+        media-libs/SDL_ttf
+        media-libs/SDL_net
+        sys-libs/zlib
+"
+
+BUGS_TO="oahong@gmail.com"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/${PN}-buildsystem.patch
+)
+DEFAULT_SRC_COMPILE_PARAMS=(
+    DATADIR=/usr/share/${PN}/
+    DOCDIR=/usr/share/doc/${PNVR}/
+    USEPAK=0
+)
+DEFAULT_SRC_INSTALL_PARAMS=(
+    ${DEFAULT_SRC_COMPILE_PARAMS[@]}
+    BINDIR=/usr/bin/
+)
+
