@@ -5,7 +5,7 @@ require cmake
 
 SUMMARY="Simple configuration tool for fcitx"
 HOMEPAGE="http://fcitx.googlecode.com"
-DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.bz2"
 
 LICENCES="GPL-2"
 SLOT="0"
