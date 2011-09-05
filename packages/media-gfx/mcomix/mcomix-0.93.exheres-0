@@ -21,6 +21,8 @@ DEPENDENCIES="
         app-arch/unzip
         app-arch/p7zip
         dev-lang/python[sqlite]
+    suggestion:
+        dev-python/chardet [[ note = [ use Chardet for guessing filename encodings in archives ] ]]
 "
 
 BUGS_TO="oahong@gmail.com"
