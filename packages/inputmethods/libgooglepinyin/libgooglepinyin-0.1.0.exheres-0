@@ -1,0 +1,24 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake
+SUMMARY="A fork from google pinyin on android"
+HOMEPAGE="http://libgooglepinyin.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.bz2"
+
+LICENCES="Apache-2.0"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="python ibus [[ requires = [ python ] ]]"
+
+DEPENDENCIES="
+    run:
+        cjk/opencc
+        dev-lang/python:=[>=2.5]
+        inputmethods/ibus
+"
+
+BUGS_TO="oahong@gmail.com"
+
+CMAKE_SRC_CONFIGURE_ENABLES=( "python PYTHON" "ibus IBUS" )
+
