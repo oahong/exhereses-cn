@@ -9,16 +9,9 @@ DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.bz2"
 LICENCES="Apache-2.0"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="python ibus [[ requires = [ python ] ]]"
+MYOPTIONS=""
 
-DEPENDENCIES="
-    run:
-        cjk/opencc
-        dev-lang/python:=[>=2.5]
-        inputmethods/ibus
-"
+DEPENDENCIES=""
 
 BUGS_TO="oahong@gmail.com"
-
-CMAKE_SRC_CONFIGURE_ENABLES=( "python PYTHON" "ibus IBUS" )
 
