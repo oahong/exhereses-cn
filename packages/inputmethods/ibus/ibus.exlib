@@ -16,8 +16,11 @@ DOWNLOADS="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
-MYOPTIONS="gobject-introspection gconf gtk-doc
-    gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]"
+MYOPTIONS="gobject-introspection gtk-doc gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
+    (
+        dconf gconf
+        memconf [[ description = [ Enable configure base on memory ] ]]
+     ) [[ number-selected = at-least-one ]]"
 
 DEPENDENCIES="
     build:
@@ -33,9 +36,11 @@ DEPENDENCIES="
     build+run:
         app-text/iso-codes
         dev-lang/python:=[>=2.5]
+        dev-libs/glib[>=2.26.0]
         sys-apps/dbus
         x11-libs/gtk+:2
         x11-libs/libX11
+        dconf? ( gnome-desktop/dconf[>=0.7.5] )
         gconf? ( gnome-platform/GConf[>=2.12] )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.6] )
         gtk3? ( x11-libs/gtk+:3 )
@@ -50,35 +55,18 @@ DEPENDENCIES="
         inputmethods/ibus-hangul
 "
 
-#TODO: ( memconf gconf dconf ) [[ number-selected = at-least-one ]]
-if ever is_scm ; then
-    MYOPTIONS+=" dconf"
-    DEPENDENCIES+="
-        build+run:
-            dconf? ( gnome-desktop/dconf[>=0.7.5] )
-    "
-    DEFAULT_SRC_CONFIGURE_OPTION_ENABLES+=( dconf )
-elif ever at_least 1.3.99 ; then
-    DEPENDENCIES+="
-        build+run:
-            dev-libs/glib[>=2.26.0]"
-    DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-surrounding-text )
-else
-    DEPENDENCIES+="
-        build+run:
-            dev-libs/dbus-glib
-            dev-libs/glib[>=2.18]"
-fi
-
 RESTRICT="test" # require X and a running ibus-daemon
 BUGS_TO="oahong@oahong.me"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
 
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES+=(
+#TODO: fix dconf
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'gobject-introspection introspection'
-    gconf '!gconf memconf'
+    dconf
+    gconf
     gtk-doc
     gtk3
+    memconf
 )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --enable-python
@@ -86,6 +74,7 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
     --enable-xim
     --enable-vala
     --disable-dbus-python-check
+    --enable-surrounding-text
 )
 
 update_gtk_immodules() {
