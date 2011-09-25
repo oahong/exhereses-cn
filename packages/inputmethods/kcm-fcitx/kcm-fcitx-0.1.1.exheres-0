@@ -1,0 +1,29 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake
+
+SUMMARY="KDE Config Module for Fcitx"
+HOMEPAGE="http://fcitx.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.bz2"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="debug"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool
+        dev-util/pkg-config
+        sys-devel/gettext
+    build+run:
+        x11-libs/qt[>=4.7.0]
+        inputmethods/fcitx
+        kde/kdelibs:4
+"
+
+BUGS_TO="oahong@gmail.com"
+
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'debug DEBUG' )
+
