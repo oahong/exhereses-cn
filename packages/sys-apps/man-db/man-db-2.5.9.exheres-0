@@ -23,6 +23,7 @@ DEPENDENCIES="
     build:
         sys-devel/gettext
     build+run:
+        user/man
         berkdb? ( sys-libs/db:= )
         gdbm? ( sys-libs/gdbm )
         sys-apps/groff
