@@ -55,6 +55,7 @@ DEPENDENCIES="
 #        xdg-utils / fcitx-config
 
 BUGS_TO="oahong@gmail.com"
+RESTRICT="test"
 UPSTREAM_DOCUMENTATION="http://fcitx.github.com/handbook/fcitx.html [[ lang = zh_CN ]]"
 
 
