@@ -6,8 +6,8 @@ LM_DICT="dict.utf8.tar.bz2"
 LM_BASEURI="http://open-gram.googlecode.com/files"
 require scons sunpinyin \
     checksums [ sha1=[ \
-        ${LM_DATA}=be340be53007637e58feba211715df59f9c86025   \
-        ${LM_DICT}=1132fdf243eab5c1edc408deb71809d70ba1f942 ] \
+        ${LM_DATA}=8dd20249a95bd9aa71b61fedfd3d7259033c88f6   \
+        ${LM_DICT}=92c25c1ce9559d1d88e433a54b229e21a153e3df ] \
     ]
 
 SUMMARY="An IME library based on Statistical Language Model"
