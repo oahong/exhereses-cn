@@ -8,9 +8,22 @@ require cmake checksums [ sha1=[ \
     table.tar.gz=b7e89f95ce2da991821acd270a1220a4cd4cb65a ] ]
 export_exlib_phases src_prepare pkg_postinst pkg_postrm
 
-SUMMARY="Free Chinese Input Toy for X"
-DESCRIPTION="Fcitx is a collection of Simplified Chinese input methods for Linux.  It supports WuBi,
-Pinyin, Erbi and QuWei input methods."
+SUMMARY="A Flexible Input Method Framework"
+DESCRIPTION="
+Fcitx [ˈfaɪtɪks] is a input method framework with extension support. Currently it supports linux and Unix system, like freebsd. It has three builtin Input Method Engine, Pinyin, QuWei and Table-based input methods.
+
+Feature
+* Highly modularized (You can even drop all X support, if you only need fbterm based support).
+* fbterm support (fcitx-fbterm)
+* cloud pinyin support (fcitx-cloudpinyin)
+* themable user interface (builtin classic-ui)
+* kimpanel based user interface support (builtin kimpanel-ui)
+* xlib-only user interface support (fcitx-ui-light)
+* libgooglepinyin based pinyin engine (fcitx-googlepinyin)
+* sunpinyin based pinyin engine (fcitx-sunpinyin)
+* Integrated KDE Configure Tool (kcm-fcitx)
+* GTK Based Configure Tool (fcitx-configtool)
+Japanese(Anthy based), Koarean(Hangul based), and N9-Meego/Maliit support is under development."
 HOMEPAGE="http://fcitx.googlecode.com"
 DOWNLOADS="
     ${HOMEPAGE}/files/table.tar.gz
