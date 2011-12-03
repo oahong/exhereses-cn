@@ -15,7 +15,7 @@ A GUI interface is used for gcin settings such as your favorite Chinese input ta
 keyboard layout. It is often straightforward for users to append other input tables not
 originally included in the release package, or tables used by other IMs such as scim."
 HOMEPAGE="http://cle.linux.org.tw/trac/wiki"
-DOWNLOADS="${DOWNLOADS:-http://www.csie.nctu.edu.tw/~cp76/${PN}/download/${MY_PNV:=${PNV}}.tar.bz2}
+DOWNLOADS="${DOWNLOADS:-http://cle.linux.org.tw/gcin/download/${MY_PNV:=${PNV}}.tar.xz}
     listed-only: ( sound? ( http://www.calno.com/moto/${PN}/ogg-gpl3-20090221.tar.gz ) )"
 #http://cle.linux.org.tw/gcin/download/ogg.tgz ) )"
 
