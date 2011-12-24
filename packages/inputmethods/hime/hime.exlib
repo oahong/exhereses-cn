@@ -1,0 +1,94 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'gcin-1.4.5_pre2-r1.ebuild' from Gentoo Taiwan (GOT), which is:
+#    Copyright 1999-2009 Gentoo Foundation
+
+export_exlib_phases src_configure src_install pkg_postinst pkg_postrm
+
+SUMMARY="HIME Input Method Editor"
+HOMEPAGE="http://hime.luna.com.tw"
+DESCRIPTION="The HIME INPUT METHOD EDITOR, HIME (姫) is a GTK2+/GTK3+ based universal input method
+platform, aims to be fast, lightweight, stable, and easy to use.
+
+HIME is forked from gcin 2.5.1, inherits all the functionality and stability.
+FEATURES:
+* Supports Over-The-Spot, On-The-Spot, and Root input mode.
+* Supports GTK2+/GTK3+/QT3/QT4 im-module and XIM.
+* May work under any LOCALES. Even works without any LOCALE data.
+* Support for Traditional Chinese, Simplified Chinese, Japanese, Korea, and many other languages.
+* Support for anthy and libchewing.
+"
+
+if ever is_scm ; then
+    SCM_REPOSITORY="git://github.com/caleb-/hime.git"
+    require scm-git
+else
+    DOWNLOADS="https://github.com/caleb-/hime/downloads/${PNV}.tar.xz"
+fi
+
+#    listed-only: ( sound? ( http://www.calno.com/moto/${PN}/ogg-gpl3-20090221.tar.gz ) )"
+#http://cle.linux.org.tw/gcin/download/ogg.tgz ) )
+LICENCES="LGPL-2.1 qt4? ( GPL-2 )"
+SLOT="0"
+MYOPTIONS="
+    gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
+    anthy [[ description = [ Enable support for anthy based input method ] ]]
+    chewing [[ description = [ Enable support for libchewing based input method ] ]]
+    qt4 [[ description = [ Enable support for Qt4 immodule ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        sys-devel/gettext
+    build+run:
+        x11-libs/gtk+:2
+        anthy? ( cjk/anthy )
+        chewing? ( cjk/libchewing )
+        gtk3? ( x11-libs/gtk+:3 )
+        qt4? ( x11-libs/qt:4 )
+"
+#    run:
+#        sound? ( media-sound/vorbis-tools[ogg123(+)] )
+
+BUGS_TO="oahong@oahong.me"
+UPSTREAM_DOCUMENTATION="https://github.com/caleb-/hime/wiki"
+
+DEFAULT_SRC_INSTALL_EXCLUDE=( about.{c,cpp,o} )
+
+update_gtk_immodules() {
+    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    if option gtk3 ; then
+        gtk-query-immodules-3.0 > "${ROOT}"/usr/${LIBDIR}/gtk-3.0/3.0.0/immodules.cache
+    fi
+}
+
+hime_src_configure() {
+    econf \
+        $(option anthy || echo --use_anthy=N ) \
+        $(option chewing || echo --use_chewing=N ) \
+        $(option gtk3 || echo --with_gtk3=N ) \
+        $(option qt4 || echo --use_qt4=N )
+}
+
+hime_src_install() {
+    default
+    edo rm -rf "${IMAGE}"/usr/lib/menu
+    edo rm -rf "${IMAGE}"/usr/share/control-center-2.0
+
+#    if option sound ; then
+#        ebegin "Installing speech database"
+#            insinto /usr/share/${PN}
+#            doins -r "${WORKBASE}"/ogg
+#        eend $? || die
+#    fi
+}
+
+hime_pkg_postinst() {
+    update_gtk_immodules
+}
+
+hime_pkg_postrm() {
+    update_gtk_immodules
+}
+
