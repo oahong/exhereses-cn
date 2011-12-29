@@ -1,0 +1,12 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require libpinyin
+
+PLATFORMS="~amd64"
+
+src_unpack() {
+    default
+    scm_src_unpack
+}
+

@@ -1,0 +1,36 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+DOWNLOAD_BASE="https://github.com/downloads/${PN}/${PN}"
+
+SUMMARY="Library to deal with pinyin."
+HOMEPAGE="https://github.com/${PN}"
+DOWNLOADS="${DOWNLOAD_BASE}/model.text.tar.gz"
+if ever is_scm ; then
+    SCM_REPOSITORY="git://github.com/${PN}/${PN}.git"
+    require scm-git autotools [ supported_automake=[ 1.11 ] supported_autoconf=[ 2.5 ] ]
+else
+    DOWNLOADS+=" ${DOWNLOAD_BASE}/${PNV}.tar.gz"
+fi
+
+export_exlib_phases src_prepare
+
+LICENCES="GPL-2"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+    	dev-util/pkg-config
+    build+run:
+        dev-libs/glib:2[>=2.4.0]
+        sys-libs/db:=
+"
+
+BUGS_TO="oahong@oahong.me"
+
+libpinyin_src_prepare() {
+    edo cp -v ${WORKBASE}/*.{table,text} data
+    default
+}
+
