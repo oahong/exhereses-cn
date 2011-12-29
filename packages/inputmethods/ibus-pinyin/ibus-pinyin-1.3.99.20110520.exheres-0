@@ -1,7 +1,0 @@
-# Copyright 2010 Hong Hao
-# Distributed under the terms of the GNU General Public License v2
-
-require ibus-pinyin
-
-PLATFORMS="~amd64 ~x86"
-
