@@ -1,0 +1,32 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+VIDEO="sequences.wz"
+BASEURI="mirror://sourceforge/${PN%-*}/${PN%-*}/Videos"
+
+SUMMARY="Video file for Warzone2100"
+HOMEPAGE="http://wz2100.net"
+# FIXME: use sourceforge mirrors
+#    standard-quality? ( mirror://sourceforge/warzone2100/${PN%-*}/Videos/2.2/standard-quality-en/${VIDEIO} )
+DOWNLOADS="
+    hi-quality? ( ${BASEURI}/high-quality-en/${VIDEO} -> ${VIDEO}.hi )
+    standard-quality? ( ${BASEURI}/standard-quality-en/${VIDEO} -> ${VIDEO}.st )
+    low-quality? ( ${BASEURI}/low-quality-en/${VIDEO} -> ${VIDEO}.low )
+"
+
+LICENCES="GPLv2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="( hi-quality standard-quality low-quality ) [[ number-selected = exactly-one ]]"
+
+DEPENDENCIES=""
+
+WORK=${WORKBASE}
+
+src_install() {
+    insinto /usr/share/${PN%-*}
+    option hi-quality && newins "${FETCHEDDIR}"/${VIDEO}.hi ${VIDEO}
+    option standard-quality && newins "${FETCHEDDIR}"/${VIDEO}.st ${VIDEO}
+    option low-quality && newins "${FETCHEDDIR}"/${VIDEO}.low ${VIDEO}
+}
+
