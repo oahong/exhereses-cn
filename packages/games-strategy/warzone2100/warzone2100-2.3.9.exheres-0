@@ -10,8 +10,3 @@ DEPENDENCIES="
         dev-libs/popt
 "
 
-src_install() {
-    default
-    edo rmdir "${IMAGE}"/usr/share/man{/man6,}
-}
-
