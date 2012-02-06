@@ -18,7 +18,8 @@ DEPENDENCIES="
         dev-util/pkg-config
         sys-devel/gettext
     build+run:
-        inputmethods/fcitx[>=4.1.0]
+        inputmethods/fcitx[>=4.2.0]
+        net-misc/curl
 "
 
 BUGS_TO="oahong@gmail.com"
