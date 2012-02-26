@@ -13,6 +13,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         dev-lang/python:=[>=2.6]
+        dev-python/setuptools
     run:
         dev-python/Imaging[>=1.1.5]
         gnome-bindings/pygtk[>=2.12]
