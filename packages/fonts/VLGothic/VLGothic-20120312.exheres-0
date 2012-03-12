@@ -1,18 +1,23 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-RELEASE_NO="50227"
+RELEASE_NO="55230"
 require xfont
 
 SUMMARY="Japanese TrueType fonts from the Vine Linux project"
-HOMEPAGE="http://dicey.org/vlgothic"
-DOWNLOADS="mirror://sourceforge.jp/${PN,,}/${RELEASE_NO}/${PNV}.tar.bz2"
+HOMEPAGE="http://vlgothic.dicey.org/"
+DOWNLOADS="mirror://sourceforge.jp/${PN,,}/${RELEASE_NO}/${PNV}.tar.xz"
 
 # FIXME:
 LICENCES="BSD-3" #mplus
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        app-arch/xz
+"
 
 WORK=${WORKBASE}/${PN}
 UPSTREAM_CHANGELOG="http://sourceforge.jp/projects/${PN,,}/releases/${RELEASE_NO}/changelog"
