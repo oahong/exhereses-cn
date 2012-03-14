@@ -10,3 +10,8 @@ src_unpack() {
     scm_src_unpack
 }
 
+src_prepare() {
+    libpinyin_src_prepare
+    autotools_src_prepare
+}
+
