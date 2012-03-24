@@ -1,4 +1,4 @@
-# Copyright 2008, 2009 Hong Hao <oahong@gmail.com>
+# Copyright 2008-2012 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 SUMMARY="a fast FrameBuffer based TERMinal emulator for linux"
@@ -17,10 +17,44 @@ Features included:
 * lightweight input method framework with client-server architecture
 * background image for eye candy
 "
-
 HOMEPAGE="http://fbterm.googlecode.com"
-DOWNLOADS="http://fbterm.googlecode.com/files/${PNV}.tar.gz"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.gz"
 
-REMOTE_IDS="freshmeat:FbTerm"
-BUGS_TO="http://code.google.com/p/fbterm/issues/list"
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="gpm video_drivers: vesa"
+
+REMOTE_IDS="freshmeat:fbterm"
+BUGS_TO="oahong@oahong.me"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+        sys-libs/ncurses
+    build+run:
+        gpm? ( sys-libs/gpm )
+        media-libs/fontconfig
+        media-libs/freetype
+        video_drivers:vesa? ( dev-libs/libx86 )
+    recommendation:
+        fonts/unifont-ttf
+"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( gpm 'video_drivers:vesa vesa' )
+
+WORK=${WORKBASE}/${PN}-$(ever range 1-2)
+
+src_install() {
+    default
+
+    dodir /usr/share/terminfo
+    $(type -P tic) -o "${IMAGE}/usr/share/terminfo/" \
+        "${WORK}"/terminfo/${PN} || die "Failed to generate terminfo database"
+}
+
+pkg_postinst() {
+    setcap 'cap_sys_tty_config+ep' /usr/bin/${PN} || \
+        chmod u+s  /usr/bin/${PN}
+}
 
