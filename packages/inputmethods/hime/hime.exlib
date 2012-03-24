@@ -41,7 +41,10 @@ DEPENDENCIES="
     build:
         dev-util/pkg-config
         sys-devel/gettext
+        x11-proto/xproto
     build+run:
+        x11-libs/libX11
+        x11-libs/libXtst
         anthy? ( cjk/anthy )
         chewing? ( cjk/libchewing )
         gtk3? ( x11-libs/gtk+:3 )
