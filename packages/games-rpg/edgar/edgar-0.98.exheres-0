@@ -1,0 +1,35 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require gtk-icon-cache
+
+SUMMARY="The legend of edgar"
+DESCRIPTION="A 2D platform game with a persistent world. When Edgar's father fails to return home
+after venturing out one dark and stormy night, Edgar fears the worst: he has been captured by the
+evil sorcerer who lives in a fortress beyond the forbidden swamp.
+
+In The Legend of Edgar, you take on the role of Edgar as he ventures across the world, battling
+fearsome creatures and solving puzzles whilst trying to find and rescue his father."
+HOMEPAGE="http://www.parallelrealities.co.uk/p/legend-of-edgar.html"
+DOWNLOADS="mirror://sourceforge/legendofedgar/${PNV}-3.tar.gz"
+
+LICENCES="GPL"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+    build+run:
+        media-libs/SDL
+        media-libs/SDL_image
+        media-libs/SDL_mixer
+        media-libs/SDL_ttf
+        media-libs/SDL_net
+"
+
+BUGS_TO="oahong@gmail.com"
+
+DEFAULT_SRC_COMPILE_PARAMS=( CXX=${CC} )
+DEFAULT_SRC_INSTALL_PARAMS=( BIN_DIR="${IMAGE}"/usr/bin/ )
+
