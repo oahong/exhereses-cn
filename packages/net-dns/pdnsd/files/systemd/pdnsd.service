@@ -7,9 +7,7 @@ After=network.target
 Conflicts=bind.service
 
 [Service]
-Type=forking
-PIDFile=/run/pdnsd.pid
-ExecStart=/usr/sbin/pdnsd -d -s -t -p /run/pdnsd.pid
+ExecStart=/usr/sbin/pdnsd -s -t -p /run/pdnsd.pid
 ExecReload=/usr/sbin/pdnsd-ctl config
 
 [Install]

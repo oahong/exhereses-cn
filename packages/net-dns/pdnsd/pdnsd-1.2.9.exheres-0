@@ -4,7 +4,7 @@
 require systemd-service
 SUMMARY="A proxy DNS server with permanent caching"
 HOMEPAGE="http://members.home.nl/p.a.rombouts/pdnsd/index.html"
-DOWNLOADS="${HOMEPAGE%/*}/${PNV}-par.tar.gz"
+DOWNLOADS="${HOMEPAGE%/*}/releases/${PNV}-par.tar.gz"
 
 LICENCES="GPL-3"
 SLOT="0"
