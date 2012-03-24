@@ -31,7 +31,7 @@ fi
 LICENCES="LGPL-2.1 qt4? ( GPL-2 )"
 SLOT="0"
 MYOPTIONS="
-    gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
+    gtk gtk3
     anthy [[ description = [ Enable support for anthy based input method ] ]]
     chewing [[ description = [ Enable support for libchewing based input method ] ]]
     qt4 [[ description = [ Enable support for Qt4 immodule ] ]]
@@ -42,10 +42,10 @@ DEPENDENCIES="
         dev-util/pkg-config
         sys-devel/gettext
     build+run:
-        x11-libs/gtk+:2
         anthy? ( cjk/anthy )
         chewing? ( cjk/libchewing )
         gtk3? ( x11-libs/gtk+:3 )
+        gtk? ( x11-libs/gtk+:2 )
         qt4? ( x11-libs/qt:4 )
 "
 #    run:
@@ -57,18 +57,20 @@ UPSTREAM_DOCUMENTATION="https://github.com/caleb-/hime/wiki"
 DEFAULT_SRC_INSTALL_EXCLUDE=( about.{c,cpp,o} )
 
 update_gtk_immodules() {
-    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
-    if option gtk3 ; then
+    option gtk && \
+        gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    option gtk3 && \
         gtk-query-immodules-3.0 > "${ROOT}"/usr/${LIBDIR}/gtk-3.0/3.0.0/immodules.cache
-    fi
 }
 
 hime_src_configure() {
+    local myconf="--disable-appindicator"
     econf \
-        $(option anthy || echo --use_anthy=N ) \
-        $(option chewing || echo --use_chewing=N ) \
-        $(option gtk3 || echo --with_gtk3=N ) \
-        $(option qt4 || echo --use_qt4=N )
+        ${myconf} \
+        $(option anthy || echo --disable-anthy )
+        $(option chewing || echo --disable-chewing ) \
+        $(option gtk3 || echo --disable-gtk3-im-module ) \
+        $(option qt4 || echo --disable-qt4-immodule )
 }
 
 hime_src_install() {
