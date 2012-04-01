@@ -1,8 +1,7 @@
 # Copyright 2012 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_REPOSITORY="git://github.com/muennich/${PN}.git"
-require scm-git
+require github [ user=muennich ]
 
 SUMMARY="Simple (or small or suckless) X Image Viewer"
 DESCRIPTION="
@@ -20,7 +19,6 @@ Features:
 * Load all frames from GIF files and play GIF animations
 * Display image information in window title
 "
-HOMEPAGE="https://github.com/muennich/${PN}"
 DOWNLOADS=""
 
 LICENCES="GPL-2"
@@ -39,5 +37,6 @@ DEPENDENCIES="
 
 BUGS_TO="oahong@oahong.me"
 
-DEFAULT_SRC_COMPILE_PARAMS=( PREFIX=/usr CC=${CC} LDFLAGS=${LDFLAGS} CFLAGS=${CFLAGS} )
+DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} LDFLAGS=${LDFLAGS} CFLAGS=${CFLAGS} )
+DEFAULT_SRC_INSTALL_PARAMS=( PREFIX=/usr )
 
