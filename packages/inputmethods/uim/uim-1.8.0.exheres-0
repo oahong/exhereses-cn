@@ -68,8 +68,6 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
 )
 
 src_prepare() {
-    edo patch -p1 -i "${FILES}"/uim-1.7-fix-build-with-intltool-0.50.x.patch
-
     edo sed -i configure.ac \
         -e '/uim_pixmapsdir/s#\(${PACKAGE_TARNAME}\)/\(pixmaps\)#\2/\1#'
     edo ./autogen.sh
