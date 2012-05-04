@@ -32,7 +32,7 @@ DOWNLOADS="
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS="debug dbus opencc ( gtk gtk3 qt4 ) [[ requires = [ dbus ] ]]
+MYOPTIONS="debug dbus opencc lua ( gtk gtk3 qt4 ) [[ requires = [ dbus ] ]]
     pango [[ description = [ Enable pango support for better multilingual text rendering ] ]]"
 
 DEPENDENCIES="
@@ -41,7 +41,6 @@ DEPENDENCIES="
         sys-devel/gettext
         x11-proto/xproto
     build+run:
-        cjk/opencc[>=0.1.1]
         media-libs/fontconfig
         x11-libs/cairo[X]
         x11-libs/libX11
@@ -57,8 +56,10 @@ DEPENDENCIES="
             dev-libs/glib
             x11-libs/gtk+:3
         )
-        qt4? ( x11-libs/qt:4[>=4.5][dbus] )
+        lua? ( dev-lang/lua )
+        opencc? ( cjk/opencc[>=0.1.1] )
         pango? ( x11-libs/pango )
+        qt4? ( x11-libs/qt:4[>=4.5][dbus] )
     recommendation:
         inputmethods/fcitx-configtool
     suggestion:
@@ -77,6 +78,7 @@ CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
     'debug DEBUG'
     'dbus DBUS' 'pango PANGO'
     'gtk GTK2_IM_MODULE' 'gtk3 GTK3_IM_MODULE' 'qt4 QT_IM_MODULE'
+    'lua LUA'
     'opencc OPENCC'
 )
 

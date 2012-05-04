@@ -2,6 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require fcitx 
-DOWNLOADS+="${HOMEPAGE}/files/${PNV}.tar.bz2"
+DOWNLOADS+="${HOMEPAGE}/files/${PNV}.tar.xz"
 PLATFORMS="~amd64 ~x86"
+
+DEPENDENCIES+="
+    build:
+        app-arch/xz
+"
 
