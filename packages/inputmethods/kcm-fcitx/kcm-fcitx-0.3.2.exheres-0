@@ -5,7 +5,7 @@ require cmake
 
 SUMMARY="KDE Config Module for Fcitx"
 HOMEPAGE="http://fcitx.googlecode.com"
-DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.bz2"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.xz"
 
 LICENCES="GPL-3"
 SLOT="0"
@@ -14,6 +14,7 @@ MYOPTIONS="debug"
 
 DEPENDENCIES="
     build:
+        app-arch/xz
         dev-util/intltool
         dev-util/pkg-config
         sys-devel/gettext
