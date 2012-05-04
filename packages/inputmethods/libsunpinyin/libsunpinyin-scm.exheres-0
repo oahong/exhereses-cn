@@ -6,8 +6,8 @@ LM_DICT="dict.utf8.tar.bz2"
 LM_BASEURI="http://open-gram.googlecode.com/files"
 require scons sunpinyin \
     checksums [ sha1=[ \
-        ${LM_DATA}=8dd20249a95bd9aa71b61fedfd3d7259033c88f6   \
-        ${LM_DICT}=92c25c1ce9559d1d88e433a54b229e21a153e3df ] \
+        ${LM_DATA}=32df2c0dd1c4a1376d2e5e7bbc997a500d1148cc   \
+        ${LM_DICT}=f22fc699538bdeae4cd41c4a2bbece69a5f82555 ] \
     ]
 
 SUMMARY="An IME library based on Statistical Language Model"
@@ -27,6 +27,11 @@ DEPENDENCIES="
 
 SCONS_SRC_CONFIGURE_PARAMS=( --prefix=/usr --libdir=/usr/${LIBDIR} --libdatadir=/usr/share )
 SCONS_SRC_INSTALL_PARAMS=( --install-sandbox="${IMAGE}" )
+
+src_fetch_extra() {
+    checksums_src_fetch_extra
+    scm_src_fetch_extra
+}
 
 src_prepare() {
     edo cp -v "${FETCHEDDIR}"/${LM_DATA} "${FETCHEDDIR}"/${LM_DICT} raw
