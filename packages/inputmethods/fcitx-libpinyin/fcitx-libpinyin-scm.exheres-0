@@ -24,11 +24,6 @@ DEPENDENCIES="
 
 BUGS_TO="oahong@gmail.com"
 
-src_unpack() {
-    scm_src_unpack
-    cmake_src_unpack
-}
-
 src_prepare() {
     edo mkdir -pv "${WORK}"/data
     edo mv ../{gb_char,gbk_char}.table ../interpolation.text "${WORK}"/data
