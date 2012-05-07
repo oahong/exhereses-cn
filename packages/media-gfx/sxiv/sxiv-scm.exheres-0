@@ -31,7 +31,7 @@ DEPENDENCIES="
         x11-proto/xproto
     build+run:
         media-libs/giflib
-        media-libs/imlib2
+        media-libs/imlib2[X]
         x11-libs/libX11
 "
 
