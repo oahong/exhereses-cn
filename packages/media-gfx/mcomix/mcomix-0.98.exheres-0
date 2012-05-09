@@ -15,13 +15,13 @@ DEPENDENCIES="
         dev-lang/python:=[>=2.6]
         dev-python/setuptools
     run:
+        dev-lang/python[sqlite]
         dev-python/Imaging[>=1.1.5]
         gnome-bindings/pygtk[>=2.12]
     recommendation:
         || ( app-arch/unrar app-arch/rar )
         app-arch/unzip
         app-arch/p7zip
-        dev-lang/python[sqlite]
     suggestion:
         dev-python/chardet [[ note = [ use Chardet for guessing filename encodings in archives ] ]]
 "
