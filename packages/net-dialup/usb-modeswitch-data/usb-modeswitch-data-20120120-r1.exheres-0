@@ -1,6 +1,8 @@
 # Copyright 2011 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+require udev-rules
+
 SUMMARY="Device database and udev rules for ${PN/-data}"
 HOMEPAGE="http://www.draisberghof.de/usb_modeswitch"
 DOWNLOADS="${HOMEPAGE}/${PNV}.tar.bz2"
@@ -13,7 +15,7 @@ MYOPTIONS=""
 DEPENDENCIES=""
 
 BUGS_TO="oahong@gmail.com"
-DEFAULT_SRC_INSTALL_PARAMS=( RULESDIR="${IMAGE}"/${LIBDIR}/udev/rules.d )
+DEFAULT_SRC_INSTALL_PARAMS=( RULESDIR="${IMAGE}"/"${UDEVRULESDIR}" )
 
 src_install() {
     default
