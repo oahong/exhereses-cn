@@ -11,7 +11,7 @@ evil sorcerer who lives in a fortress beyond the forbidden swamp.
 In The Legend of Edgar, you take on the role of Edgar as he ventures across the world, battling
 fearsome creatures and solving puzzles whilst trying to find and rescue his father."
 HOMEPAGE="http://www.parallelrealities.co.uk/p/legend-of-edgar.html"
-DOWNLOADS="mirror://sourceforge/legendofedgar/${PNV}-3.tar.gz"
+DOWNLOADS="mirror://sourceforge/legendofedgar/${PNV}-2.tar.gz"
 
 LICENCES="GPL"
 SLOT="0"
@@ -19,7 +19,6 @@ PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    build:
     build+run:
         media-libs/SDL
         media-libs/SDL_image
