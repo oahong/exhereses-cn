@@ -1,0 +1,51 @@
+From 9ddd1dba7c006f7d2551caaa22f077558f835a0f Mon Sep 17 00:00:00 2001
+From: Weng Xuetian <wengxt@gmail.com>
+Date: Mon, 4 Jun 2012 04:29:25 +0800
+Subject: [PATCH 2/3] fix gir compatible with 1.30
+
+---
+ cmake/GObjectIntrospection.cmake |   15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
+
+diff --git a/cmake/GObjectIntrospection.cmake b/cmake/GObjectIntrospection.cmake
+index e9099de..7c0d588 100644
+--- a/cmake/GObjectIntrospection.cmake
++++ b/cmake/GObjectIntrospection.cmake
+@@ -141,6 +141,15 @@ function(gobject_introspection _FIRST_ARG)
+         _gir_list_prefix(GIR_REAL_INCLUDE GIR_INCLUDE "--include=")
+     endif(GIR_INCLUDE)
+ 
++	if (GIR_SOURCES)
++		set(GIR_REAL_SOURCES)
++
++		foreach(ITEM ${GIR_SOURCES})
++			get_source_file_property(LOCATION ${ITEM} LOCATION)
++			list(APPEND GIR_REAL_SOURCES "${LOCATION}")
++		endforeach(ITEM)
++	endif(GIR_SOURCES)
++
+ 	# if the user specified BUILT_SOURCES, we need to get their paths since
+ 	# they could be in CMAKE_CURRENT_BUILD_DIR
+ 	if(GIR_BUILT_SOURCES)
+@@ -170,15 +179,15 @@ function(gobject_introspection _FIRST_ARG)
+ 			${GIR_REAL_PACKAGES}
+             ${GIR_REAL_INCLUDE}
+ 			--no-libtool
+-			-L${CMAKE_CURRENT_BINARY_DIR}
++			-L ${CMAKE_CURRENT_BINARY_DIR}
+ 			--output=${CMAKE_CURRENT_BINARY_DIR}/${GIR_FILENAME}
+             ${GIR_PACKAGE_EXPORT}
+             ${GIR_SCANNER_FLAGS}
+-			${GIR_SOURCES}
++			${GIR_REAL_SOURCES}
+ 			${GIR_REAL_BUILT_SOURCES}
+ 		OUTPUT ${GIR_FILENAME}
+ 		DEPENDS ${GIR_LIBRARY}
+-		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
++		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+ 		VERBATIM
+ 	)
+ 
+-- 
+1.7.10.3
+
