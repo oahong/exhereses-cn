@@ -3,7 +3,7 @@
 
 require cmake
 
-SUMMARY="Fcitx wrapper for libsunpinyin"
+SUMMARY="Sunpinyin Wrapper for Fcitx"
 HOMEPAGE="http://fcitx.googlecode.com"
 DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.xz"
 
@@ -15,9 +15,10 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         dev-util/intltool
+        dev-util/pkg-config
         sys-devel/gettext
     build+run:
-        inputmethods/fcitx[>=4.2.0]
+        inputmethods/fcitx[>=4.2.4]
         inputmethods/libsunpinyin[>=2.0.4]
 "
 
