@@ -15,12 +15,11 @@ MYOPTIONS="debug"
 DEPENDENCIES="
     build:
         app-arch/xz
-        dev-util/intltool
         dev-util/pkg-config
         sys-devel/gettext
     build+run:
         x11-libs/qt[>=4.7.0]
-        inputmethods/fcitx
+        inputmethods/fcitx[>=4.2.4]
         kde/kdelibs:4
 "
 
