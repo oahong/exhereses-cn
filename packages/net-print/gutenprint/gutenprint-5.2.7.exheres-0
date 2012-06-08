@@ -46,7 +46,7 @@ DEPENDENCIES="
 
 RESTRICT="test"
 BUGS_TO="oahong@gmail.com"
-REMOTE_IDS+="freshmeat:gutenprint"
+REMOTE_IDS+="freecode:${PN}"
 UPSTREAM_RELEASE_NOTES="http://sourceforge.net/projects/gimp-print/files/${PN}-$(ever range 1-2)/${PV}/NEWS/view"
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/cups-1.5-compile-fix.patch )

@@ -33,7 +33,7 @@ DEPENDENCIES="
         x11-libs/libX11
 "
 
-REMOTE_IDS="freshmeat:${PN}"
+REMOTE_IDS="freecode:${PN}"
 CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_NLS:bool=true -DUSE_X11:bool=true )
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 'opengl OPENGL' )
 

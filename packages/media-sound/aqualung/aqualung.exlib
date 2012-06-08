@@ -58,7 +58,7 @@ DEPENDENCIES="
 #        doc? ( dev-libs/libxslt )
 
 BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="freshmeat:aqualung sourceforge:aqualung"
+REMOTE_IDS="freecode:aqualung sourceforge:aqualung"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/manual/aqualung-doc.html"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(

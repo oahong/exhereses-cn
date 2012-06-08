@@ -23,7 +23,7 @@ DEPENDENCIES="
 #sqlite? ( dev-db/sqlite:3 )
 
 RESTRICT="test" # need X access
-REMOTE_ID="freshmeat:QuesoGLC"
+REMOTE_ID="freecode:${PN}"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --with-{glew,fribidi}

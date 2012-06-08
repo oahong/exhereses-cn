@@ -22,7 +22,7 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="freshmeat:lbreakout"
+REMOTE_IDS="freecode:lbreakout"
 UPSTREAM_CHANGELOG="http://sourceforge.net/projects/lgames/files/${PN}/ChangeLog/view"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --localstatedir=/var/lib/games/${PN} --with-docdir=/usr/share/doc )

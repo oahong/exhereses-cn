@@ -76,7 +76,7 @@ DEPENDENCIES+="
         games-strategy/warzone2100-video
 "
 
-REMOTE_IDS="sourceforge:warzone2100 freshmeat:warzone2100"
+REMOTE_IDS="sourceforge:${PN} freecode:${PN}"
 UPSTREAM_DOCUMENTATION="http://guide.wz2100.net"
 
 DEFAULT_SRC_CONFIGURE_PARAMS+=(

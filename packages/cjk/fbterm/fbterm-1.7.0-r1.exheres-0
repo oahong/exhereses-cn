@@ -25,7 +25,7 @@ SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="gpm video_drivers: vesa"
 
-REMOTE_IDS="freshmeat:fbterm"
+REMOTE_IDS="freecode:${PN}"
 BUGS_TO="oahong@oahong.me"
 
 DEPENDENCIES="

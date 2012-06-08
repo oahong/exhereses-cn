@@ -33,7 +33,7 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="sourceforge:${PN} freshmeat:${PN}"
+REMOTE_IDS="sourceforge:${PN} freecode:${PN}"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.php"
 
 WORK=${WORKBASE}

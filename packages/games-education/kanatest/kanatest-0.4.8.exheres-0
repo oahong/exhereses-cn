@@ -27,5 +27,5 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="freshmeat:${PN}"
+REMOTE_IDS="freecode:${PN}"
 

@@ -22,7 +22,7 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="freshmeat:evilvte"
+REMOTE_IDS="freecode:${PN}"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/ChangeLog"
 
 WORK=${WORKBASE}/${MY_PNV}

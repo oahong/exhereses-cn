@@ -34,7 +34,7 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="freshmeat:SuperTux"
+REMOTE_IDS="freecode:${PN}"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki/User_Manual ${HOMEPAGE}/wiki/SuperTux_FAQ"
 
 CMAKE_SRC_CONFIGURE_PARAMS=(
