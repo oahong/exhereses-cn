@@ -32,12 +32,13 @@ LICENCES="GPL-2 public-domain CCPL-Attribution-ShareAlike-2.0 CCPL-Attribution-S
 SLOT="0"
 MYOPTIONS="debug"
 
-if ever is_scm ; then
+if ever at_least 3.0 ; then
     DEPENDENCIES="
         build+run:
-            dev-libs/qjson[>=0.7.1]
+            dev-libs/fribidi
+            media-libs/fontconfig
+            media-libs/freetype:2
             media-libs/glew[>=1.5.2]
-            media-libs/quesoglc[>=0.7.2]
             x11-libs/qt:4[X(+)][opengl]
     "
     # SDL backend needs qt4 too
@@ -57,21 +58,22 @@ DEPENDENCIES+="
         app-arch/zip
         app-doc/asciidoc [[ note = [ document generator ] ]]
         dev-lang/perl[>=5.10]
-        dev-util/pkg-config[>=0.9]
+        dev-util/pkg-config
         sys-devel/bison
         sys-devel/flex
-        sys-devel/gettext[>=0.15]
-    run:
-        fonts/dejavu
+        sys-devel/gettext
     build+run:
         dev-games/physfs
         media-libs/libpng[>=1.2]
         media-libs/libtheora[>=1.0]
         media-libs/libvorbis[>=1.1]
         media-libs/openal[>=0.0.8]
-        media-libs/quesoglc
+        media-libs/quesoglc[>=0.7.2]
         x11-dri/mesa
         x11-libs/libX11
+        x11-libs/libXrandr
+    run:
+        fonts/dejavu
     suggestion:
         games-strategy/warzone2100-video
 "
