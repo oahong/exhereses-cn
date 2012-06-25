@@ -10,6 +10,7 @@ Me and My Shadow is a free libre puzzle/platform game in which you try to reach 
 puzzles. Spikes, moving blocks, fragile blocks and much more stand between you and the exit. Record
 your moves and let your shadow mimic them to reach blocks you couldn't reach alone.
 
+Features:
 * Tutorial for beginners
 * 2 level packs containing over 40 levels
 * 18 different block types
@@ -36,7 +37,7 @@ DEPENDENCIES="
         net-misc/curl
 "
 
-WORK=${WORKBASE}/${PNV}
+WORK="${WORKBASE}"/${PNV}
 BUGS_TO="oahong@oahong.me"
 DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-gcc-4.7.patch )
 
