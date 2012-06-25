@@ -1,0 +1,14 @@
+Source: http://sourceforge.net/apps/trac/meandmyshadow/attachment/ticket/67/meandmyshadow-gcc47.patch
+Upstream: Yes, upstream commit 403
+Reason: Fix build issue with gcc 4.7
+--- meand:xmyshadow-0.3/src/TreeStorageNode.cpp.orig	2012-06-25 15:45:41.583576186 +0800
++++ meandmyshadow-0.3/src/TreeStorageNode.cpp	2012-06-25 15:45:59.542591941 +0800
+@@ -20,6 +20,8 @@
+ #include "TreeStorageNode.h"
+ #include "MD5.h"
+ #include <string.h>
++#include <stdint.h>
++
+ using namespace std;
+ 
+ TreeStorageNode::~TreeStorageNode(){

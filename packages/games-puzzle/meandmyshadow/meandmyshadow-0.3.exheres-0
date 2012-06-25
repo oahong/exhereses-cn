@@ -1,0 +1,47 @@
+# Copyright 2012 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PNV=${PNV}-src
+require sourceforge [ suffix=tar.gz ] cmake [ api=2 ] gtk-icon-cache
+
+SUMMARY="An open-source 2D puzzle platform game"
+DESCRIPTION="
+Me and My Shadow is a free libre puzzle/platform game in which you try to reach the exit by solving
+puzzles. Spikes, moving blocks, fragile blocks and much more stand between you and the exit. Record
+your moves and let your shadow mimic them to reach blocks you couldn't reach alone.
+
+* Tutorial for beginners
+* 2 level packs containing over 40 levels
+* 18 different block types
+* Built-in level editor
+* Easily installable addons
+* Original music by Juho-Petteri Yliuntinen
+* Cross platform
+"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        app-arch/libarchive
+        dev-libs/openssl
+        media-libs/SDL
+        media-libs/SDL_gfx
+        media-libs/SDL_image
+        media-libs/SDL_mixer
+        media-libs/SDL_ttf
+        net-misc/curl
+"
+
+WORK=${WORKBASE}/${PNV}
+BUGS_TO="oahong@oahong.me"
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-gcc-4.7.patch )
+
+src_install() {
+    cmake_src_install
+    keepdir /usr/share/${PN}/data/levels
+}
+
