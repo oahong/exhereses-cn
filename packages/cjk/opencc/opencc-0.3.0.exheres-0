@@ -1,7 +1,8 @@
 # Copyright 2010, 2011 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require cmake
+
+require cmake [[ api=2 ]] easy-multibuild
 
 SUMMARY="Open Chinese conversion library"
 HOMEPAGE="http://${PN}.googlecode.com"
@@ -10,7 +11,7 @@ DOWNLOADS="${HOMEPAGE}/files/${PN}-${PVR/-pre/.pre.}.tar.gz"
 LICENCES="Apache-2.0"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS=""
+MYOPTIONS="multibuild_c: 32 64"
 
 DEPENDENCIES="
     build:
@@ -21,6 +22,14 @@ BUGS_TO="oahong@oahong.me"
 
 src_prepare() {
     edo sed -e '/SHARED\|STATIC_LIBRARY_PREFIX/s/)/\${LIB_SUFFIX})/' \
-        -i CMakeLists.txt
+        -i "${WORKBASE}"/${PNV}/CMakeLists.txt
+}
+
+configure_one_multibuild() {
+    cmake_src_configure
+}
+
+install_one_multibuild() {
+    cmake_src_install
 }
 
