@@ -1,0 +1,42 @@
+# Copyright 2012 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+PYDB_VER="1.2.99"
+PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
+
+require googlecode [[ suffix=tar.gz ]]
+SUMMARY="The Chinese PinYin and Bopomofo conversion library."
+DOWNLOADS+=" open-phrase? ( http://ibus.googlecode.com/files/${PYDB} )"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="boost
+    (
+        open-phrase [[ description = [ Use open-phrase pinyin database ] ]]
+        db-android [[ description = [  Use android pinyin database ] ]]
+    ) [[ number-selected = exactly-one ]]
+    opencc [[ description = [ Use opencc for simplified and traditional Chinese conversion ] ]]"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+    build+run:
+        dev-libs/glib[>=2.24.0]
+        dev-db/sqlite:3
+        sys-apps/util-linux
+        boost? ( dev-libs/boost[>=1.39] )
+        opencc? ( cjk/opencc )
+"
+
+BUGS_TO="oahong@oahong.me"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-tests )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( boost opencc open-phrase db-android )
+
+pyzy_src_prepare() {
+    if option open-phrase; then
+        edo cp "${FETCHEDDIR}"/${PYDB} data/db/open-phrase
+    fi
+}
+
