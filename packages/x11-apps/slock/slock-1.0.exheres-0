@@ -1,0 +1,25 @@
+# Copyright 2012 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Simple X display locker"
+HOMEPAGE="http://tools.suckless.org/slock"
+DOWNLOADS="http://dl.suckless.org/tools/${PNV}.tar.gz"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        x11-proto/xproto
+    build+run:
+        x11-libs/libX11
+        x11-libs/libXext
+"
+
+BUGS_TO="oahong@oahong.me"
+
+DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} )
+DEFAULT_SRC_INSTALL_PARAMS=( PREFIX=/usr )
+
