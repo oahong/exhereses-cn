@@ -29,7 +29,7 @@ DEFAULT_SRC_INSTALL_PARAMS=( UDEVDIR=${IMAGE}/${UDEVRULESDIR/rules.d} )
 src_prepare() {
     # no strip plus some hack on usb_modeswitch_dispatcher
     edo sed -e 's/\(install -D\) -s/\1/' -i Makefile \
-        -e '/regex/s#/lib/##g' -i usb_modeswitch.tcl
+        -e "/regex/s#lib#usr/$LIBDIR#g" -i usb_modeswitch.tcl
 }
 
 src_install() {
