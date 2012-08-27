@@ -18,7 +18,8 @@ LICENCES="LGPL-2.1"
 SLOT="0"
 MYOPTIONS="gobject-introspection gtk-doc gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
     (
-        dconf gconf
+        dconf
+        gconf
         memconf [[ description = [ Enable configure base on memory ] ]]
      ) [[ number-selected = at-least-one ]]"
 
