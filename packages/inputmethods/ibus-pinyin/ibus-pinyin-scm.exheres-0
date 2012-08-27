@@ -6,7 +6,7 @@ require ibus-pinyin
 PLATFORMS="~amd64 ~x86"
 DEPENDENCIES="
     build:
-        gnome-base/gnome-common
+        gnome-desktop/gnome-common
 "
 
 src_prepare() {

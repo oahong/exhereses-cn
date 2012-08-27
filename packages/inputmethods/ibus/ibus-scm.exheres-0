@@ -11,7 +11,7 @@ MYOPTIONS+="dconf"
 DEPENDENCIES="
     build:
         dev-doc/gtk-doc[>=1.9]
-        gnome-base/gnome-common
+        gnome-desktop/gnome-common
 "
 
 src_prepare() {
