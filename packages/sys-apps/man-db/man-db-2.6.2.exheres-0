@@ -21,30 +21,22 @@ MYOPTIONS="( gdbm berkdb ) [[ number-selected = exactly-one ]]"
 
 DEPENDENCIES="
     build:
+        dev-util/pkg-config
         sys-devel/gettext
     build+run:
         user/man
+        dev-libs/libpipeline[>=1.1.10]
+        sys-apps/groff
         berkdb? ( sys-libs/db:= )
         gdbm? ( sys-libs/gdbm )
-        sys-apps/groff
 "
 
 BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="launchpad:man-db"
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-groff-1.21-test-failure.patch )
-
-src_configure() {
-    econf \
-        --enable-setuid \
-        --with-db=$(
-        if optionq berkdb ; then
-            echo db
-        else
-            echo gdbm
-        fi
-    )
-}
+#DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-groff-1.21-test-failure.patch )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-setuid )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'berkdb db' gdbm )
 
 src_install() {
     default
