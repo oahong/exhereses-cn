@@ -1,0 +1,21 @@
+# Copyright 2012 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Pipeline manipulation library"
+HOMEPAGE="http://libpipeline.nongnu.org"
+DOWNLOADS="mirror://savannah/${PN}/${PNV}.tar.gz"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+    test:
+        dev-libs/check[>=0.9.4]
+"
+
+BUGS_TO="oahong@gmail.com"
+
