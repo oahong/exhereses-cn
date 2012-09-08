@@ -29,7 +29,7 @@ DEPENDENCIES="
 
 BUGS_TO="oahong@gmail.com"
 
-DEFAULT_SRC_COMPILE_PARAMS=( CXX=${CC} )
+DEFAULT_SRC_COMPILE_PARAMS=( CXX=${CC} DATA_DIR=/usr/share/${PN}/ )
 DEFAULT_SRC_INSTALL_PARAMS=(
     BIN_DIR="${IMAGE}"/usr/bin/
     DOC_DIR="${IMAGE}"/usr/share/doc/${PNV}/
