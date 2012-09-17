@@ -30,11 +30,13 @@ DEFAULT_SRC_COMPILE_PARAMS=(
 )
 
 src_prepare() {
-    edo sed -i -e '/xchat-plugins/d' Makefile
+    edo sed -e '/xchat-plugins/d' \
+        -e "s#/usr/lib#/usr/$LIBDIR#g" \
+        -i Makefile
 }
 
 src_install() {
-    dodir /usr/{bin,lib,include}
+    dodir /usr/{bin,$LIBDIR,include}
     default
 }
 
