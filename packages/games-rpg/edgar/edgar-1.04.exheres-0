@@ -1,4 +1,4 @@
-# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Copyright 2011, 2012 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
 require gtk-icon-cache
@@ -28,6 +28,7 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
+REMOTE_IDS="sourceforge:legendofedgar freecode:the-legend-of-edgar"
 
 DEFAULT_SRC_COMPILE_PARAMS=( CXX=${CC} DATA_DIR=/usr/share/${PN}/ )
 DEFAULT_SRC_INSTALL_PARAMS=(
