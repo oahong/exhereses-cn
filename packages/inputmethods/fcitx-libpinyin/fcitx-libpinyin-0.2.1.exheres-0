@@ -1,0 +1,9 @@
+# Copyright 2012 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require fcitx-libpinyin
+
+DOWNLOADS+=" ${HOMEPAGE}/files/${PNV}.tar.xz"
+
+PLATFORMS="~amd64"
+
