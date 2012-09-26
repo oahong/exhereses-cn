@@ -18,12 +18,11 @@ DEPENDENCIES="
         dev-util/pkg-config
         sys-devel/gettext
     build+run:
-        x11-libs/qt[>=4.7.0]
-        inputmethods/fcitx[>=4.2.4]
+        inputmethods/fcitx[>=4.2.6]
         kde/kdelibs:4
+        x11-libs/libxkbfile
+        x11-libs/qt[>=4.7.0]
 "
-
-BUGS_TO="oahong@gmail.com"
 
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'debug DEBUG' )
 
