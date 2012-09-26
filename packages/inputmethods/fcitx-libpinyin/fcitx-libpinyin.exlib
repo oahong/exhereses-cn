@@ -1,0 +1,29 @@
+# Copyright 2012 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=fcitx ] cmake [ api=2 ] gtk-icon-cache
+export_exlib_phases src_prepare
+
+SUMMARY="Libpinyin Wrapper for Fcitx"
+HOMEPAGE="http://fcitx.googlecode.com"
+DOWNLOADS="https://github.com/downloads/fcitx/fcitx-libpinyin/model.text.20120921.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+        dev-util/intltool
+    build+run:
+        inputmethods/fcitx[>=4.2]
+        inputmethods/libpinyin
+        dev-libs/glib:2
+"
+
+fcitx-libpinyin_src_prepare() {
+    edo mkdir -pv "${WORK}"/data
+    edo mv ../{gb_char,gbk_char}.table ../interpolation.text "${WORK}"/data
+}
+
