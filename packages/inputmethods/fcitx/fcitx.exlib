@@ -28,11 +28,14 @@ HOMEPAGE="http://fcitx.googlecode.com"
 DOWNLOADS="
     ${HOMEPAGE}/files/table.tar.gz
     ${HOMEPAGE}/files/pinyin.tar.gz
+    ${HOMEPAGE}/files/en_dict-20120815.tar.gz
 "
 
 LICENCES="GPL-2"
 SLOT="0"
 MYOPTIONS="debug dbus gobject-intropection opencc lua ( gtk gtk3 qt4 ) [[ requires = [ dbus ] ]]
+    autostart [[ requires = [ dbus ] description = [ Enable xdg autostart desktop file installation ] ]]
+    enchant [[ description = [ Enable enchant for word predication ] ]]
     pango [[ description = [ Enable pango support for better multilingual text rendering ] ]]"
 
 DEPENDENCIES="
@@ -42,9 +45,8 @@ DEPENDENCIES="
         x11-proto/kbproto
         x11-proto/xproto
     build+run:
-        app-spell/enchant
-        app-text/iso-codes
         dev-libs/libxml2
+        dev-libs/icu
         media-libs/fontconfig
         x11-libs/cairo[X]
         x11-libs/libX11
@@ -52,6 +54,7 @@ DEPENDENCIES="
         x11-libs/libXrender
         x11-libs/libxkbfile
         dbus? ( sys-apps/dbus[>=1.1.0] )
+        enchant? ( app-spell/enchant )
         gobject-intropection? ( gnome-desktop/gobject-introspection:1 )
         gtk? (
             dev-libs/dbus-glib
@@ -75,17 +78,24 @@ DEPENDENCIES="
 # fcitx-config script:
 #        xdg-utils / fcitx-config
 
-BUGS_TO="oahong@gmail.com"
 RESTRICT="test"
 UPSTREAM_DOCUMENTATION="http://fcitx.github.com/handbook/fcitx.html [[ lang = zh_CN ]]"
 
 
-CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_TABLE:BOOL=TRUE -DENABLE_TEST:BOOL=TRUE )
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DENABLE_TABLE:BOOL=TRUE
+    -DENABLE_TEST:BOOL=TRUE
+    -DENABLE_PRESAGE:BOOL=FALSE
+)
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
+    'autostart XDGAUTOSTART'
     'debug DEBUG'
-    'dbus DBUS' 'pango PANGO'
+    'dbus DBUS'
+    'pango PANGO'
     'gobject-intropection GIR'
-    'gtk GTK2_IM_MODULE' 'gtk3 GTK3_IM_MODULE' 'qt4 QT_IM_MODULE'
+    'gtk GTK2_IM_MODULE'
+    'gtk3 GTK3_IM_MODULE'
+    'qt4 QT_IM_MODULE'
     'lua LUA'
     'opencc OPENCC'
 )
@@ -101,6 +111,7 @@ fcitx_src_prepare() {
     default
     edo cp "${FETCHEDDIR}"/pinyin.tar.gz data
     edo cp "${FETCHEDDIR}"/table.tar.gz data/table
+    edo cp "${FETCHEDDIR}"/en_dict-20120815.tar.gz data
 }
 
 fcitx_pkg_postinst() {

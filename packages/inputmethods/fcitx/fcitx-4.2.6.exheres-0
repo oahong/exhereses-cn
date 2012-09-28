@@ -10,5 +10,3 @@ DEPENDENCIES+="
         app-arch/xz
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}" )
-
