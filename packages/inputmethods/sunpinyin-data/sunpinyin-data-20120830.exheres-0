@@ -1,0 +1,29 @@
+# Copyright 2012 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+LM_DATA="lm_sc.t3g.arpa-20120212.tar.bz2" # Language model file
+LM_DICT="dict.utf8-20120830.tar.bz2" # Dict file
+require checksums [ sha1=[ \
+        ${LM_DATA}=32df2c0dd1c4a1376d2e5e7bbc997a500d1148cc \
+        ${LM_DICT}=f68592198ad7f760864b1f76ad25b988f7e79534 ] ]
+
+SUMMARY="Statistical language model data from open-gram"
+HOMEPAGE="http://opengram.googlecode.com"
+DOWNLOADS="${HOMEPAGE}/files/${LM_DATA} ${HOMEPAGE}/files/${LM_DICT}"
+
+LICENCES="Apache-2.0"
+PLATFORMS="~amd64"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        inputmethods/libsunpinyin
+"
+
+WORK=${WORKBASE}
+
+src_prepare() {
+    edo cp -v "${FILES}"/Makefile .
+}
+
