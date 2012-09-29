@@ -22,5 +22,5 @@ DEPENDENCIES="
         inputmethods/libsunpinyin[>=2.0.4]
 "
 
-BUGS_TO="oahong@gmail.com"
+CMAKE_SRC_CONFIGURE_PARAMS=( -DLIB_INSTALL_DIR:string=/usr/${LIBDIR} )
 
