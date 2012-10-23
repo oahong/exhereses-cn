@@ -1,10 +1,10 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-MY_PNV=${PN/-port}-$(ever range 1-2)-u$(ever range 3)-b$(ever range 4)
+MY_PNV=${PN/-port}-$(ever range 1-2)-u$(ever range 3)-b$(ever range 4)-s$(ever range 5)
 SUMMARY="Monkey's Audio Codec(APE) non-win32 Port"
-HOMEPAGE="http://supermmx.org/linux/mac"
-DOWNLOADS="http://supermmx.org/resources/linux/mac/${MY_PNV}.tar.gz"
+HOMEPAGE="http://etree.org/shnutils/shntool/support/formats/ape/unix"
+DOWNLOADS="http://www.etree.org/shnutils/shntool/support/formats/ape/unix/${MY_PNV/mac-}/${MY_PNV}.tar.gz"
 
 LICENCES="FIXME [[ description = [ mac-port has severe license problems ] ]]"
 SLOT="0"
