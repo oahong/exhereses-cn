@@ -23,8 +23,6 @@ DEPENDENCIES="
 BUGS_TO="oahong@gmail.com"
 WORK=${WORKBASE}/${MY_PNV}
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-Fix-compilation-with-gcc-4.3.patch )
-
 src_configure() {
     local myconf=( --hates=docdir )
 
