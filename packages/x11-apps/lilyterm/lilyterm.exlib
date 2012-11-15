@@ -17,7 +17,7 @@ MYOPTIONS="gnome"
 DEPENDENCIES="
     build:
         dev-util/intltool
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
     build+run:
         dev-libs/glib:2[>=2.12.4]

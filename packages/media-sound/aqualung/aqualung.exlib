@@ -29,7 +29,7 @@ MYOPTIONS="cddb jack ladspa modplug musepack pulseaudio wavpack
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
     build+run:
         dev-libs/glib:2

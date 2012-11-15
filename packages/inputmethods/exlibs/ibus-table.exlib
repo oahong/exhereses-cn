@@ -22,7 +22,7 @@ DEPENDENCIES="
         inputmethods/ibus-table[>=1.1]
     build:
         dev-lang/python:=[>=2.5][sqlite]
-        dev-util/pkg-config
+        virtual/pkg-config
 "
 
 if [[ "${PN%extraphrase}" == ${PN} ]] ; then

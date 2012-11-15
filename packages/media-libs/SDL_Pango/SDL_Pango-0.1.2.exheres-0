@@ -19,7 +19,7 @@ DEPENDENCIES="
         media-libs/SDL[>=1.2.4]
         x11-libs/pango[>=1.2.0]
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
 "
 
 # For games-arcade/frozen-bubble

@@ -59,7 +59,7 @@ DEPENDENCIES+="
         app-arch/zip
         app-doc/asciidoc [[ note = [ document generator ] ]]
         dev-lang/perl[>=5.10]
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/bison
         sys-devel/flex
         sys-devel/gettext

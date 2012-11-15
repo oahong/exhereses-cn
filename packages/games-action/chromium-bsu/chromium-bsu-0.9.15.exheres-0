@@ -15,7 +15,7 @@ MYOPTIONS="sdl"
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext[>=0.15]
     build+run:
         fonts/liberation-fonts

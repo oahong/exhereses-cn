@@ -10,7 +10,7 @@ including window grouping (similar to ion, pwm, or fluxbox), auto
 properties, xinerama and keygrabber that supports keychains, and much
 more."
 HOMEPAGE="http://www.pekwm.org"
-DOWNLOADS="${HOMEPAGE}/projects/${PN}/files/${PNV}.tar.gz"
+DOWNLOADS="${HOMEPAGE}/projects/${PN}/files/${PNV}.tar.bz2"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -19,7 +19,7 @@ MYOPTIONS="debug jpeg png xft xinerama xpm xrandr"
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         x11-proto/xproto
     build+run:
         x11-libs/libX11

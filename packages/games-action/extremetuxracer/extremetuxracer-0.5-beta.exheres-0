@@ -12,7 +12,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
     build+run:
         dev-lang/tcl

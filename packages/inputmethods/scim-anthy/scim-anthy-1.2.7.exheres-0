@@ -17,7 +17,7 @@ DEPENDENCIES="
         x11-libs/gtk+[>=2.4]
     build:
         sys-devel/gettext
-        dev-util/pkg-config"
+        virtual/pkg-config"
 # kasumi-0.6
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( debug )

@@ -26,7 +26,7 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
         media-gfx/ImageMagick
     build+run:

@@ -12,7 +12,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
     test:
         dev-libs/check[>=0.9.4]
 "

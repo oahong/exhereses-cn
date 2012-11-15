@@ -14,7 +14,7 @@ MYOPTIONS="debug doc qt4" # emacs?
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
     build+run:
         doc? ( app-doc/doxygen )
         inputmethods/scim[>=1.4.6][debug?]

@@ -15,7 +15,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
     build+run:
         dev-libs/glib:2[>=2.16.0]

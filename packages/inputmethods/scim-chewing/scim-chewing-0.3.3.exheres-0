@@ -16,7 +16,7 @@ DEPENDENCIES="
         cjk/libchewing[>=0.3.2]
     build:
         sys-devel/gettext
-        dev-util/pkg-config
+        virtual/pkg-config
 "
 
 BUGS_TO="chewing-devel@googlegroups.com"

@@ -15,7 +15,7 @@ DEPENDENCIES="
         cjk/libhangul[>=0.0.4]
         inputmethods/scim[>=0.99.8]
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
 "
 

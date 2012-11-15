@@ -22,7 +22,7 @@ DEPENDENCIES="
         x11-libs/pango[>=1.1.0]
      build:
         dev-util/intltool[>=0.33]
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
 "
 

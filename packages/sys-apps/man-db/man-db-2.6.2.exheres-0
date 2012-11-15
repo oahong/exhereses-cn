@@ -21,7 +21,7 @@ MYOPTIONS="( gdbm berkdb ) [[ number-selected = exactly-one ]]"
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
     build+run:
         user/man

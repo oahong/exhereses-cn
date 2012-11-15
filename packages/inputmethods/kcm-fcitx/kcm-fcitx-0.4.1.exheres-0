@@ -15,7 +15,7 @@ MYOPTIONS="debug"
 DEPENDENCIES="
     build:
         app-arch/xz
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
     build+run:
         inputmethods/fcitx[>=4.2.6]

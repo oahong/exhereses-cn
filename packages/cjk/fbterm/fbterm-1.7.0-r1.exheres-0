@@ -30,7 +30,7 @@ BUGS_TO="oahong@oahong.me"
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-libs/ncurses
     build+run:
         gpm? ( sys-libs/gpm )

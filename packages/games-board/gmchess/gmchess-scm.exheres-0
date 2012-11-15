@@ -16,7 +16,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.35.0]
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
     build+run:
         gnome-bindings/gtkmm[>=2.6.0]

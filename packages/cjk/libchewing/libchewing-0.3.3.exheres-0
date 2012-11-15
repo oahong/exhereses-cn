@@ -19,7 +19,7 @@ MYOPTIONS="debug"
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
     test:
         dev-libs/check
 "

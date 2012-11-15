@@ -14,7 +14,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         dev-util/intltool
         sys-devel/gettext
     build:

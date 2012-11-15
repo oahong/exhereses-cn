@@ -19,7 +19,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
     build+run:
         x11-libs/gtk+:2[>=2.12]

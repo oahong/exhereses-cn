@@ -15,7 +15,7 @@ MYOPTIONS="( gtk gtk3 ) [[ number-selected = exactly-one ]]"
 DEPENDENCIES="
     build:
         dev-util/intltool
-        dev-util/pkg-config
+        virtual/pkg-config
         sys-devel/gettext
     build+run:
         app-text/iso-codes
