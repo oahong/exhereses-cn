@@ -3,6 +3,7 @@
 # Based in part upon 'fcitx-3.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
+dict_release=20121020
 require cmake checksums [ sha1=[ \
     pinyin.tar.gz=af6f6fceed89a2b533b39a73e277675361298745 \
     table.tar.gz=b7e89f95ce2da991821acd270a1220a4cd4cb65a ] ]
@@ -28,7 +29,7 @@ HOMEPAGE="http://fcitx.googlecode.com"
 DOWNLOADS="
     ${HOMEPAGE}/files/table.tar.gz
     ${HOMEPAGE}/files/pinyin.tar.gz
-    ${HOMEPAGE}/files/en_dict-20120815.tar.gz
+    ${HOMEPAGE}/files/en_dict-${dict_release}.tar.gz
 "
 
 LICENCES="GPL-2"
@@ -110,9 +111,10 @@ update_gtk_immodules() {
 
 fcitx_src_prepare() {
     default
+    sed -e "s/20120815/${dict_release}/" -i data/CMakeLists.txt
     edo cp "${FETCHEDDIR}"/pinyin.tar.gz data
     edo cp "${FETCHEDDIR}"/table.tar.gz data/table
-    edo cp "${FETCHEDDIR}"/en_dict-20120815.tar.gz data
+    edo cp "${FETCHEDDIR}"/en_dict-${dict_release}.tar.gz data
 }
 
 fcitx_pkg_postinst() {
