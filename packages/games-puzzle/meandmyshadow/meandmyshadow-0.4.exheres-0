@@ -29,17 +29,17 @@ DEPENDENCIES="
     build+run:
         app-arch/libarchive
         dev-libs/openssl
-        media-libs/SDL
+        media-libs/SDL[X]
         media-libs/SDL_gfx
         media-libs/SDL_image
         media-libs/SDL_mixer
         media-libs/SDL_ttf
         net-misc/curl
+        x11-dri/glu
 "
 
 WORK="${WORKBASE}"/${PNV}
 BUGS_TO="oahong@oahong.me"
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PN}-gcc-4.7.patch )
 
 src_install() {
     cmake_src_install
