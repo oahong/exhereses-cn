@@ -21,7 +21,6 @@ DEPENDENCIES="
         media-libs/SDL_mixer
 "
 
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freecode:lbreakout"
 UPSTREAM_CHANGELOG="http://sourceforge.net/projects/lgames/files/${PN}/ChangeLog/view"
 
