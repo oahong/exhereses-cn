@@ -27,7 +27,6 @@ DEPENDENCIES="
         media-libs/SDL_net
 "
 
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:legendofedgar freecode:the-legend-of-edgar"
 
 DEFAULT_SRC_COMPILE_PARAMS=( CXX=${CC} DATA_DIR=/usr/share/${PN}/ )
