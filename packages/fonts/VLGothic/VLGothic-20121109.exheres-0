@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-RELEASE_NO="55230"
+RELEASE_NO="57344"
 require xfont
 
 SUMMARY="Japanese TrueType fonts from the Vine Linux project"
