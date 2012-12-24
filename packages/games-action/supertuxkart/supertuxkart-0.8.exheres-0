@@ -1,0 +1,47 @@
+# Copyright 2009, 2010, 2011 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake [ api=2 ]
+
+SUMMARY="SuperTuxKart is a Free 3D kart racing game"
+HOMEPAGE="http://supertuxkart.sourceforge.net"
+DOWNLOADS="mirror://sourceforge/${PN}/${PNV}-src.tar.bz2"
+
+LICENCES="GPL-3 public-domain FIXME"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="wiiremote [[ description = [ Support for wiimote input devices ] ]]" #addons fribidi
+
+DEPENDENCIES="
+    build+run:
+        dev-games/irrlicht[>=1.8]
+        media-libs/libogg
+        media-libs/libvorbis
+        media-libs/openal
+        net-misc/curl
+        x11-dri/mesa
+"
+#       fribidi? ( dev-libs/fribidi )
+# bundled libraries:
+#        tinygettext
+#        wiiuse
+#        bullet
+#        net-libs/enet
+#        dev-games/irrlicht[>=1.8]
+
+CMAKE_SOURCE=${WORKBASE}/SuperTuxKart-${PV}
+
+REMOTE_IDS="sourceforge:${PN} freecode:${PN}"
+UPSTREAM_DOCUMENTATION="${HOMEPAGE}/FAQ"
+
+CMAKE_SRC_CONFIGURE_PARAMS=( -DUSE_FRIBIDI:bool=false )
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'wiiremote USE_WIIUSE'  )
+
+src_prepare() {
+    cmake_src_prepare
+    # user external irrlicht
+    edo sed -e "s#\(set(IRRLICHT_LIBRARY \).*libIrrlicht.a)\$#\1/usr/${LIBDIR}/libIrrlicht.so)#" \
+        -e "s#\(include_directories(\).*irrlicht/include)\$#\1/usr/include/irrlicht)#" \
+        -i CMakeLists.txt
+}
+
