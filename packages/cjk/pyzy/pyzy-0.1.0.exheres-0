@@ -1,12 +1,12 @@
 # Copyright 2012 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-PYDB_VER="1.2.99"
-PYDB="pinyin-database-${PYDB_VER}.tar.bz2"
+PYDBVER=1.0.0
+PYDB="pyzy-database-${PYDBVER}.tar.bz2"
 
 require googlecode [[ suffix=tar.gz ]]
 SUMMARY="The Chinese PinYin and Bopomofo conversion library."
-DOWNLOADS+=" open-phrase? ( http://ibus.googlecode.com/files/${PYDB} )"
+DOWNLOADS+=" open-phrase? ( http://pyzy.googlecode.com/files/${PYDB} )"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
