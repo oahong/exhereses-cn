@@ -1,0 +1,72 @@
+# Copyright 2011 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require gtk-icon-cache
+
+SUMMARY="A full featured and easy to use jabber client written in PyGTK"
+HOMEPAGE="http://www.gajim.org"
+DOWNLOADS="${HOMEPAGE}/downloads/$(ever range -2)/${PNV}.tar.bz2"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+        dev-util/intltool
+        sys-devel/gettext
+        gnome-bindings/pygtk:2[>=2.16]
+    build+run:
+        dev-lang/python:=[>=2.5][sqlite]
+    run:
+        dev-python/dbus-python
+        dev-python/docutils
+        dev-python/pyasn1
+        dev-python/pyopenssl
+        net-dns/bind-tools
+    suggestion:
+        (
+            media-plugins/gst-plugins-bad:0
+            net-im/farstream:0.1[python]
+        ) [[ *description = [ Jingle support ] *group-name = [ jingle ] ]]
+        (
+            app-text/texlive
+            app-text/dvipng
+            media-gfx/ImageMagick
+        ) [[ *description = [ LaTeX $$$$ support ] *group-name = [ latex ] ]]
+        dev-python/pycrypto [[ description = [ E2E encryption support ] ]]
+        net-apps/NetworkManager [[
+            description = [ Autodetection of network status ]
+        ]]
+        gnome-bindings/gnome-python [[
+            description = [ Session management support ]
+        ]]
+        dev-python/notify-python [[
+            description = [ Notifications support ]
+        ]]
+        app-crypt/gnupg [[
+            description = [ OpenPGP message encryption support ]
+        ]]
+        app-spell/gtkspell:2 [[ description = [ Spellchecking support ] ]]
+        net-libs/gupnp-igd:1.0[python] [[
+            description = [ Ability to request your router to forward port for file transfer ]
+        ]]
+        sys-apps/upower [[
+            description = [ Ability to disconnect properly just before suspending ]
+        ]]
+        (
+            gnome-desktop/gnome-keyring:1
+            gnome-bindings/gnome-python-desktop:2.0
+        ) [[
+            *description = [ Enable gnome-keyring support ]
+            *group-name = [ keyring ]
+        ]]
+        kde/kwallet:4 [[ description = [ Enable kwallet support ] ]]
+"
+
+BUGS_TO="oahong@gmail.com"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-site-packages )
+
