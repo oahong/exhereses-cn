@@ -1,0 +1,17 @@
+# Copyright 2013 Song Wenwu <iyzsong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require sourceforge [ suffix=tar.gz ]
+
+SUMMARY="Lightweight GTK+ clipboard manager"
+
+LICENCES="GPL-3"
+SLOT="0"
+
+DEPENDENCIES="
+    build:
+        dev-util/intltool
+        virtual/pkg-config
+    build+run:
+        x11-libs/gtk+:2
+"
