@@ -10,7 +10,7 @@ if ever is_scm ; then
     myexparam maintainer=ibus
 
     SCM_REPOSITORY="git://github.com/$(exparam maintainer)/${PN}.git"
-    require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 1.11 ] ]
+    require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 1.10 ] ]
 
     export_exlib_phases src_prepare
 
