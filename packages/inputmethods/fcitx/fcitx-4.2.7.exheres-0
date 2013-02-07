@@ -10,3 +10,7 @@ DEPENDENCIES+="
         app-arch/xz
 "
 
+src_unpack() {
+    unpack --if-compressed ${PNV}.tar.xz
+}
+

@@ -10,3 +10,7 @@ src_fetch_extra() {
     scm_src_fetch_extra
 }
 
+src_unpack() {
+    scm_src_unpack
+}
+
