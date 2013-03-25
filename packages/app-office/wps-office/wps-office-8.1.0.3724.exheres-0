@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 # TODO: fonts, icons, mime info and desktop entries
-MY_PNV=${PN}_${PV}~b1_x86
+MY_PNV=${PN}_${PV}~b1p2_x86
 
 SUMMARY="WPS beta for Linux (Chinese software)"
 DESCRIPTION="
@@ -49,7 +49,7 @@ src_prepare() {
 src_install() {
     kdir=/opt/kingsoft/${PN}
     dodir $kdir
-    edo cp -ar office6 utility templates "${IMAGE}"/$kdir
+    edo cp -ar office6 utility templates "${IMAGE}"/${kdir}
     dobin et wpp wps wps_error_check.sh
 }
 
