@@ -1,14 +1,19 @@
 # Copyright 2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-SUMMARY="Pek window manager"
+SUMMARY="A small and flexible window manager"
 DESCRIPTION="
-The Pekwm Window Manager is written by Claes Nästén. The code is based
-on the aewm++ window manager, but it has evolved enough that it no
-longer resembles aewm++ at all. It also has an expanded feature-set,
-including window grouping (similar to ion, pwm, or fluxbox), auto
-properties, xinerama and keygrabber that supports keychains, and much
-more."
+Pekwm is a window manager that once up on a time was based on the aewm++ window
+manager, but it has evolved enough that it no longer resembles aewm++ at all.
+It has a much expanded feature-set, including window grouping (similar to ion,
+pwm, or fluxbox), autoproperties, xinerama, keygrabber that supports keychains,
+and much more.
+
+   * Lightweight and Unobtrusive, a window manager shouldn't be noticed.
+   * Very configurable, we all work and think in different ways.
+   * Automatic properties, for all the lazy people, make things appear as they
+should when starting applications.
+   * Chainable Keygrabber, usability for everyone."
 HOMEPAGE="http://www.pekwm.org"
 DOWNLOADS="${HOMEPAGE}/projects/${PN}/files/${PNV}.tar.bz2"
 
@@ -38,7 +43,7 @@ UPSTREAM_DOCUMENTATION="
 ${HOMEPAGE}/files/${PN}/doc/${PV}/html/index.html
 ${HOMEPAGE}/files/${PN}/doc/${PV}/html/faq/answers.html"
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-shape --enable-menus --enable-harbour )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-shape )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     debug xft xinerama xrandr
     'xpm image-xpm'
@@ -57,7 +62,7 @@ Comment=Use PekWM as your window manager
 Exec=pekwm
 TryExec=pekwm
 Icon=
-Type=ApplicationOA
+Type=Application
 EOF
 }
 
