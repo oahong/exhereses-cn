@@ -34,7 +34,7 @@ DEPENDENCIES="
     build+run:
         app-text/iso-codes
         dev-lang/python:=[>=2.5]
-        dev-libs/glib[>=2.26.0]
+        dev-libs/glib[>=2.32.0]
         sys-apps/dbus
         x11-libs/gtk+:2
         x11-libs/libX11
