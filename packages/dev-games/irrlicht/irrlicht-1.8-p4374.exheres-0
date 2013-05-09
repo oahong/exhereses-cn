@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="https://irrlicht.svn.sourceforge.net/svnroot/irrlicht"
-SCM_REVISION="4116"
+SCM_REVISION="4374"
 require sourceforge scm-svn
 
 SUMMARY="Lightning fast realtime 3D engine"
