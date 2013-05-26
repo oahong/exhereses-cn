@@ -1,12 +1,11 @@
-# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Copyright 2009-2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_REPOSITORY="git://repo.or.cz/glpng.git"
-require scm-git cmake
+require cmake
 
 SUMMARY="PNG loader for OpenGL"
 HOMEPAGE="http://www.wyatt100.freeserve.co.uk/download.htm"
-DOWNLOADS=""
+DOWNLOADS="http://repo.or.cz/w/glpng.git/snapshot/06b1d04aab2a7ec0385cc62cd01dae71af326619.tar.gz -> ${PNV}.tar.gz"
 
 LICENCES="as-is"
 SLOT="0"
@@ -19,6 +18,8 @@ DEPENDENCIES="
          sys-libs/zlib
          x11-dri/mesa
 "
+
+WORK=${WORKBASE}/${PN}
 
 src_prepare() {
     sed -e 's/CMAKE_INSTALL_LIBDIR/LIB_INSTALL_DIR/g' -i src/CMakeLists.txt
