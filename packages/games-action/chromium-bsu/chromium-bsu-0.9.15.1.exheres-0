@@ -34,7 +34,6 @@ DEPENDENCIES="
         )
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/${PNV}-close-file-descriptor.patch )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-ftgl
     --with-font-name="Liberation Sans"
