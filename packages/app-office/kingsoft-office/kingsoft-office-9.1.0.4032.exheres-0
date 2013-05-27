@@ -2,17 +2,17 @@
 # Distributed under the terms of the GNU General Public License v2
 
 # TODO: fonts, icons, mime info and desktop entries
-MY_PNV=${PN}_${PV}~b1p2_x86
+MY_PNV=${PN}_${PV}~a10_x86
 
-SUMMARY="WPS beta for Linux (Chinese software)"
+SUMMARY="Kingsoft office for Linux"
 DESCRIPTION="
-Kingsoft WPS is a Microsoft Office compatible suite of applications, which provides friendly
+Kingsoft office is a Microsoft Office compatible suite of applications, which provides friendly
 Word processing (wps), Presentation (wpp) and spreadsheets (et) software,
 It has been rewritten in Qt4 framework and mainly targets to Chinese users."
 HOMEPAGE="http://community.wps.cn"
 DOWNLOADS="
-    http://wdl.cache.ijinshan.com/wps/download/Linux/unstable/${MY_PNV}.tar.xz
     http://oahong.me/~oahong/distfiles/libpng12.so.tar.xz
+    http://wdl.cache.ijinshan.com/wps/download/Linux/unstable/${MY_PNV}.tar.xz
 "
 
 # http://community.wps.cn/wiki/WPS_Office_Linux%E7%89%88%E6%9C%80%E7%BB%88%E7%94%A8%E6%88%B7%E5%8D%8F%E8%AE%AE
@@ -47,9 +47,9 @@ src_prepare() {
 }
 
 src_install() {
-    kdir=/opt/kingsoft/${PN}
+    kdir=/opt/kingsoft/${PN/kingsoft/wps}
     dodir $kdir
-    edo cp -ar office6 utility templates "${IMAGE}"/${kdir}
+    edo cp -ar office6 utility "${IMAGE}"/${kdir}
     dobin et wpp wps wps_error_check.sh
 }
 
