@@ -6,7 +6,7 @@
 export_exlib_phases src_configure src_install pkg_postinst pkg_postrm
 
 SUMMARY="HIME Input Method Editor"
-HOMEPAGE="http://hime.luna.com.tw"
+HOMEPAGE="http://hime-ime.github.io"
 DESCRIPTION="The HIME INPUT METHOD EDITOR, HIME (姫) is a GTK2+/GTK3+ based universal input method
 platform, aims to be fast, lightweight, stable, and easy to use.
 
@@ -20,10 +20,10 @@ FEATURES:
 "
 
 if ever is_scm ; then
-    SCM_REPOSITORY="git://github.com/caleb-/hime.git"
+    SCM_REPOSITORY="git://github.com/hime-ime/hime.git"
     require scm-git
 else
-    DOWNLOADS="https://github.com/caleb-/hime/downloads/${PNV}.tar.xz"
+    DOWNLOADS="https://github.com/hime-ime/hime/downloads/${PNV}.tar.xz"
 fi
 
 #    listed-only: ( sound? ( http://www.calno.com/moto/${PN}/ogg-gpl3-20090221.tar.gz ) )"
@@ -53,9 +53,6 @@ DEPENDENCIES="
 "
 #    run:
 #        sound? ( media-sound/vorbis-tools[ogg123(+)] )
-
-BUGS_TO="oahong@oahong.me"
-UPSTREAM_DOCUMENTATION="https://github.com/caleb-/hime/wiki"
 
 DEFAULT_SRC_INSTALL_EXCLUDE=( about.{c,cpp,o} )
 
