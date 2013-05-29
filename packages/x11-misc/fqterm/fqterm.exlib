@@ -1,4 +1,4 @@
-# Copyright 2008,2009 Hong Hao <oahong@gmail.com>
+# Copyright 2008-2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require cmake
@@ -23,6 +23,7 @@ DEPENDENCIES="
         dev-lang/python:=[>=2.5]
         dev-libs/openssl
         sys-sound/alsa-lib
+        x11-libs/libX11
         x11-libs/qt:4[X(+)][ssl]
 "
 
