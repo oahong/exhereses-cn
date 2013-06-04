@@ -14,7 +14,6 @@ MYOPTIONS=""
 
 DEPENDENCIES=""
 
-BUGS_TO="oahong@gmail.com"
 DEFAULT_SRC_INSTALL_PARAMS=( RULESDIR="${IMAGE}"/"${UDEVRULESDIR}" )
 
 src_install() {
