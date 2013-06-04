@@ -21,8 +21,6 @@ DEPENDENCIES="
         net-dialup/usb-modeswitch-data
 "
 
-BUGS_TO="oahong@gmail.com"
-
 DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} )
 DEFAULT_SRC_INSTALL_PARAMS=( UDEVDIR=${IMAGE}/${UDEVRULESDIR/rules.d} )
 
