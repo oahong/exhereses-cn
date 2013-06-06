@@ -16,7 +16,9 @@ DOWNLOADS="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
-MYOPTIONS="gnome gobject-introspection gtk-doc gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
+MYOPTIONS="gnome gobject-introspection gtk-doc
+    gtk [[ description = [ Build GTK+ 2 immodule ] ]]
+    gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
     (
         dconf
         gconf
@@ -36,20 +38,22 @@ DEPENDENCIES="
         dev-lang/python:=[>=2.5]
         dev-libs/glib[>=2.32.0]
         sys-apps/dbus
-        x11-libs/gtk+:2
         x11-libs/libX11
         gnome-bindings/pygobject:3
         dconf? ( gnome-desktop/dconf[>=0.7.5] )
         gconf? ( gnome-platform/GConf[>=2.12] )
         gnome? ( gnome-desktop/gnome-icon-theme-symbolic )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.6] )
+        gtk? ( x11-libs/gtk+:2 )
         gtk3? ( x11-libs/gtk+:3 )
         vala? ( dev-lang/vala[>=0.16] )
     run:
-        dev-python/dbus-python[>=0.83.0]
-        dev-python/notify-python
-        dev-python/pyxdg
-        gnome-bindings/pygtk[>=2.12.1]
+        gtk? (
+            dev-python/dbus-python[>=0.83.0]
+            dev-python/notify-python
+            dev-python/pyxdg
+            gnome-bindings/pygtk[>=2.12.1]
+        )
     recommendation:
         gnome-desktop/librsvg
     suggestion:
@@ -65,7 +69,9 @@ RESTRICT="test" # require X and a running ibus-daemon
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
 
 update_gtk_immodules() {
-    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    if option gtk ; then
+        gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    fi
     if option gtk3 ; then
         gtk-query-immodules-3.0 > "${ROOT}"/usr/${LIBDIR}/gtk-3.0/3.0.0/immodules.cache
     fi
@@ -74,8 +80,8 @@ update_gtk_immodules() {
 ibus_src_configure() {
     local myconf=(
         --enable-python-library
-        # Build gtk2 im modules and xim server unconditional
-        --enable-{gtk2,xim}
+        # Build xim server unconditionally
+        --enable-xim
         --disable-dbus-python-check
         --enable-surrounding-text
     )
@@ -85,6 +91,7 @@ ibus_src_configure() {
         $(option_enable gconf ) \
         $(option_enable memconf ) \
         $(option_enable gtk-doc ) \
+        $(option_enable gtk gtk2) \
         $(option_enable gtk3 ) \
         $(option_enable vala) \
         $(if option gnome ; then
