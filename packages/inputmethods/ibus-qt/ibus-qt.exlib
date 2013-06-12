@@ -1,7 +1,9 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require cmake
+WORK+="-Source"
+
+require cmake [ api=2 ] easy-multibuild
 
 SUMMARY="Qt4 library and immodule for IBus framework"
 HOMEPAGE="http://ibus.googlecode.com"
@@ -9,20 +11,28 @@ DOWNLOADS=""
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS=""
+MYOPTIONS="multibuild_c: 32 64"
 
 DEPENDENCIES="
     build:
         app-doc/doxygen
         x11-proto/xproto
     build+run:
-        dev-libs/icu[>=4.0]
-        sys-apps/dbus[>=1.2]
-        x11-libs/libX11
-        x11-libs/qt:4[dbus][>=4.5]
+        dev-libs/icu[>=4.0][multibuild_c:*(-)?]
+        sys-apps/dbus[>=1.2][multibuild_c:*(-)?]
+        x11-libs/libX11[multibuild_c:*(-)?]
+        x11-libs/qt:4[dbus][>=4.5][multibuild_c:*(-)?]
 "
 
 src_prepare() {
     edo sed -e '/variables/ a\set(LIBDIR "lib${LIB_SUFFIX}")' -i CMakeLists.txt
+}
+
+configure_one_multibuild() {
+    cmake_src_configure
+}
+
+install_one_multibuild() {
+    cmake_src_install
 }
 
