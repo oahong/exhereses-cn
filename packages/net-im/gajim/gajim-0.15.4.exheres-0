@@ -70,13 +70,3 @@ BUGS_TO="oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-site-packages )
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/update-POTFILES.skip-generation.patch" )
-
-src_prepare() {
-    default
-
-    # autogen.sh generates POTFILES.in and POTFILES.skip
-    # note that this will cause kind of autoreconf too
-    edo ./autogen.sh
-}
-
