@@ -121,10 +121,20 @@ update_gtk_immodules() {
 
 fcitx_src_prepare() {
     default
-    for d in ${pydata} ${pystroke} ${endict} pinyin.tar.gz; do
-        edo cp "${FETCHEDDIR}"/${d} data
-    done
-    edo cp "${FETCHEDDIR}"/table.tar.gz data/table
+    if ever is_scm ; then
+        for d in ${pydata} ${pystroke}; do
+            edo cp "${FETCHEDDIR}"/${d} src/module/pinyin-enhance/data
+        done
+        edo cp "${FETCHEDDIR}"/pinyin.tar.gz src/im/pinyin/data
+        edo cp "${FETCHEDDIR}"/${endict} src/module/spell/dict
+        edo cp "${FETCHEDDIR}"/table.tar.gz src/im/table/data
+    else
+        for d in ${pydata} ${pystroke} ${endict} pinyin.tar.gz; do
+            edo cp "${FETCHEDDIR}"/${d} data
+        done
+        edo cp "${FETCHEDDIR}"/table.tar.gz data/table
+    fi
+
 }
 
 fcitx_pkg_postinst() {
