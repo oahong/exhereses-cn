@@ -35,7 +35,7 @@ DEPENDENCIES="
             app-text/texlive
             app-text/dvipng
             media-gfx/ImageMagick
-        ) [[ *description = [ LaTeX $$$$ support ] *group-name = [ latex ] ]]
+        ) [[ *description = [ LaTeX $\$$\$ support ] *group-name = [ latex ] ]]
         dev-python/pycrypto [[ description = [ E2E encryption support ] ]]
         net-apps/NetworkManager [[
             description = [ Autodetection of network status ]
