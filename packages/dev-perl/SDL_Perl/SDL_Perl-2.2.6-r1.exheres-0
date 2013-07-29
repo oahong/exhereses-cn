@@ -24,7 +24,7 @@ DEPENDENCIES="
         media-libs/SDL_ttf[>=2.0.5]
         media-libs/jpeg
         media-libs/libpng
-        media-libs/smpeg
+        media-libs/smpeg:0
         x11-dri/mesa
 "
 
