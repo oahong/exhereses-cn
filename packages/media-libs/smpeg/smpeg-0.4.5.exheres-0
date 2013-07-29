@@ -1,0 +1,56 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+#require autotools [ supported_autoconf=[ 2.1 ] supported_automake=[ 1.8 ] ] \
+require debian-upstream [ debian_pv=${PV}+cvs20030824.orig ]
+
+SUMMARY="SDL MPEG Player Library"
+HOMEPAGE="http://icculus.org/smpeg"
+DOWNLOADS+="
+mirror://debian/pool/main/${DEBIAN_UPSTREAM_PREFIX}/${DEBIAN_UPSTREAM_PN}/${DEBIAN_UPSTREAM_PN}_${DEBIAN_UPSTREAM_PV/.orig/-5.debian}.tar.gz
+"
+
+LICENCES="LGPL-2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="
+    gtk-player [[ description = [ Build a GTk sample SMPEG player ] ]]
+    opengl-player [[ description = [ Build an OpenGL sample SMPEG player ] ]]
+    x86_cpu_features: mmx
+"
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        media-libs/SDL[>=2.0.0]
+        gtk-player? ( x11-libs/gtk+:2 )
+        opengl-player? ( x11-dri/mesa )
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${WORKBASE}"/debian/patches/ )
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( gtk-player opengl-player 'x86_cpu_features:mmx mmx' )
+
+WORK=${WORKBASE}/${PN}-${DEBIAN_UPSTREAM_PV}
+
+src_prepare() {
+    # This patch breaks the installation of the lib.
+    edo rm "${WORKBASE}"/debian/patches/100_rebootstrap.diff
+
+    default
+
+    edo sed -i -e "s:\(--foreign\):\1 --add-missing:" autogen.sh
+    edo ./autogen.sh
+}
+
+src_install() {
+    default
+
+    # avoid collisions with smpeg:2
+    edo mv "${IMAGE}"/usr/bin/plaympeg "${IMAGE}"/usr/bin/plaympeg-1
+    edo mv "${IMAGE}"/usr/share/man/man1/plaympeg.1 "${IMAGE}"/usr/share/man/man1/plaympeg-1.1
+
+    ! option gtk-player && edo rm "${IMAGE}"/usr/share/man/man1/gtv.1
+}
+
