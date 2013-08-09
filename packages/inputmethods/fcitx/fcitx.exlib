@@ -1,10 +1,11 @@
-# Copyright 2008,2009,2010 Hong Hao
+# Copyright 2008-2013 Hong Hao
 # Distributed under the terms of the GNU General Public License v2
 # Based in part upon 'fcitx-3.5.ebuild', which is:
 #    Copyright 1999-2008 Gentoo Foundation
 
 dict_release=20121020
 table_release=20121124
+download_base="http://download.fcitx-im.org/"
 
 pystroke=py_stroke-${table_release}.tar.gz # Stroke Input data for pinyin-enhance
 pydata=py_table-${table_release}.tar.gz    # Pinyin data for pinyin-enhance
@@ -35,11 +36,11 @@ Feature
 Japanese(Anthy based), Koarean(Hangul based), and N9-Meego/Maliit support is under development."
 HOMEPAGE="http://fcitx.googlecode.com"
 DOWNLOADS="
-    ${HOMEPAGE}/files/table.tar.gz
-    ${HOMEPAGE}/files/pinyin.tar.gz
-    ${HOMEPAGE}/files/${pystroke}
-    ${HOMEPAGE}/files/${pydata}
-    ${HOMEPAGE}/files/${endict}
+    ${download_base}/data/table.tar.gz
+    ${download_base}/data/pinyin.tar.gz
+    ${download_base}/data/${pystroke}
+    ${download_base}/data/${pydata}
+    ${download_base}/data/${endict}
 "
 
 LICENCES="GPL-2"
@@ -121,20 +122,12 @@ update_gtk_immodules() {
 
 fcitx_src_prepare() {
     default
-    if ever is_scm ; then
-        for d in ${pydata} ${pystroke}; do
-            edo cp "${FETCHEDDIR}"/${d} src/module/pinyin-enhance/data
-        done
-        edo cp "${FETCHEDDIR}"/pinyin.tar.gz src/im/pinyin/data
-        edo cp "${FETCHEDDIR}"/${endict} src/module/spell/dict
-        edo cp "${FETCHEDDIR}"/table.tar.gz src/im/table/data
-    else
-        for d in ${pydata} ${pystroke} ${endict} pinyin.tar.gz; do
-            edo cp "${FETCHEDDIR}"/${d} data
-        done
-        edo cp "${FETCHEDDIR}"/table.tar.gz data/table
-    fi
-
+    for d in ${pydata} ${pystroke}; do
+        edo cp "${FETCHEDDIR}"/${d} src/module/pinyin-enhance/data
+    done
+    edo cp "${FETCHEDDIR}"/pinyin.tar.gz src/im/pinyin/data
+    edo cp "${FETCHEDDIR}"/${endict} src/module/spell/dict
+    edo cp "${FETCHEDDIR}"/table.tar.gz src/im/table/data
 }
 
 fcitx_pkg_postinst() {

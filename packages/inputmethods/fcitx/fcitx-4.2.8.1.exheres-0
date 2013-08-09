@@ -1,8 +1,8 @@
-# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Copyright 2010-2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require fcitx
-DOWNLOADS+="${HOMEPAGE}/files/${PNV}.tar.xz"
+DOWNLOADS+="${download_base}/${PN}/${PNV}.tar.xz"
 PLATFORMS="~amd64 ~x86"
 
 DEPENDENCIES+="
