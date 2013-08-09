@@ -6,24 +6,28 @@ export_exlib_phases src_prepare
 
 SUMMARY="Libpinyin Wrapper for Fcitx"
 HOMEPAGE="http://fcitx.googlecode.com"
-DOWNLOADS="https://github.com/downloads/fcitx/fcitx-libpinyin/model.text.20120921.tar.gz"
+DOWNLOADS="http://download.fcitx-im.org/data/model.text.20130308.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS=""
+MYOPTIONS="qt4"
 
 DEPENDENCIES="
     build:
         sys-devel/gettext
         dev-util/intltool
+        dev-util/pkg-config
     build+run:
-        inputmethods/fcitx[>=4.2]
+        inputmethods/fcitx[>=4.2.8][qt4?]
         inputmethods/libpinyin
         dev-libs/glib:2
+        sys-apps/dbus
+        qt4? ( x11-libs/qt:4[webkit] )
 "
 
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( "qt4 QT" )
+
 fcitx-libpinyin_src_prepare() {
-    edo mkdir -pv "${WORK}"/data
-    edo mv ../{gb_char,gbk_char}.table ../interpolation.text "${WORK}"/data
+    edo cp "${FETCHEDDIR}"/model.text.20130308.tar.gz "${WORKBASE}"/${PNVR}/data
 }
 

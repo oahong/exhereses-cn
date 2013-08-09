@@ -3,7 +3,7 @@
 
 require fcitx-libpinyin
 
-DOWNLOADS+=" ${HOMEPAGE}/files/${PNV}.tar.xz"
+DOWNLOADS+=" http://download.fcitx-im.org/${PN}/${PNV}.tar.xz"
 
 PLATFORMS="~amd64"
 
