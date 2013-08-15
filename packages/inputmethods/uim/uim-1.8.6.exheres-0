@@ -91,13 +91,13 @@ src_install() {
 }
 
 pkg_postinst() {
-    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    gtk-query-immodules-2.0 --update-cache
     option gtk3 && gtk-query-immodules-3.0 --update-cache
     elisp-optional_pkg_postinst
 }
 
 pkg_postrm() {
-    gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+    gtk-query-immodules-2.0 --update-cache
     option gtk3 && gtk-query-immodules-3.0 --update-cache
     elisp-optional_pkg_postrm
 }
