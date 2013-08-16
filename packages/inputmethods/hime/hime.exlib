@@ -58,9 +58,9 @@ DEFAULT_SRC_INSTALL_EXCLUDE=( about.{c,cpp,o} )
 
 update_gtk_immodules() {
     option gtk && \
-        gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
+        gtk-query-immodules-2.0 --update-cache
     option gtk3 && \
-        gtk-query-immodules-3.0 > "${ROOT}"/usr/${LIBDIR}/gtk-3.0/3.0.0/immodules.cache
+        gtk-query-immodules-3.0 --update-cache
 }
 
 hime_src_configure() {

@@ -114,10 +114,8 @@ CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
 )
 
 update_gtk_immodules() {
-    option gtk && gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
-    if option gtk3 ; then
-        gtk-query-immodules-3.0 > "${ROOT}"/usr/${LIBDIR}/gtk-3.0/3.0.0/immodules.cache
-    fi
+    option gtk && gtk-query-immodules-2.0 --update-cache
+    option gtk3 && gtk-query-immodules-3.0 --update-cache
 }
 
 fcitx_src_prepare() {

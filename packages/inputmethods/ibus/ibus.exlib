@@ -71,12 +71,8 @@ RESTRICT="test" # require X and a running ibus-daemon
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
 
 update_gtk_immodules() {
-    if option gtk ; then
-        gtk-query-immodules-2.0 > "${ROOT}"/etc/gtk-2.0/gtk.immodules
-    fi
-    if option gtk3 ; then
-        gtk-query-immodules-3.0 > "${ROOT}"/usr/${LIBDIR}/gtk-3.0/3.0.0/immodules.cache
-    fi
+    option gtk && gtk-query-immodules-2.0 --update-cache
+    option gtk3 && gtk-query-immodules-3.0 --update-cache
 }
 
 ibus_src_configure() {
