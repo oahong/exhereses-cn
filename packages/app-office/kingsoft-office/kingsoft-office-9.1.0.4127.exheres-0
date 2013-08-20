@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 # TODO: fonts, icons, mime info and desktop entries
-MY_PNV=${PN}_${PV}~a10_x86
+MY_PNV=${PN}_${PV}~a11p3_x86
 
 SUMMARY="Kingsoft office for Linux"
 DESCRIPTION="
