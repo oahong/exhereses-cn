@@ -24,7 +24,7 @@ DEPENDENCIES="
         dev-libs/openssl
         sys-sound/alsa-lib
         x11-libs/libX11
-        x11-libs/qt:4[X(+)][ssl]
+        x11-libs/qt:4[X(+)][ssl(+)]
 "
 
 DEFAULT_SRC_INSTALL_EXCLUDE=( README.txt )
