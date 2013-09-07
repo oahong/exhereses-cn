@@ -25,14 +25,17 @@ DEPENDENCIES="
     build+run:
         ssl? ( dev-libs/openssl )
         x11-libs/libX11
-        x11-libs/qt:4[dbus?][ssl?][qt3support][phonon][>=4.5.0]
+        x11-libs/qt:4[dbus?][ssl(+)?][qt3support][phonon][>=4.5.0]
     suggestion:
-        dbus? ( kde/kdeutils:4[kde_parts:kwallet] )
+        dbus? ( kde/kwallet )
 "
 
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:qterm"
 
+DEFAULT_SRC_PREPARE_PATCHES=(
+     "${FILES}"/qterm-qt4_8.patch
+     "${FILES}"/qterm-gcc-4.7.patch
+)
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
     'dbus DBUS' 'ssl SSH'
     'debug DEBUG' 'debug SCRIPT_DEBUGGER'
@@ -46,6 +49,7 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( script.txt )
 
 src_prepare() {
+    default
     edo sed -e 's/QTERM_ENABLE/ENABLE/g' -i src/CMakeLists.txt
 }
 

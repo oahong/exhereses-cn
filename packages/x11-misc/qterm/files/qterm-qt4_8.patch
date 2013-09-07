@@ -1,0 +1,20 @@
+Source: upstream, commit 1311
+Upstream: Yes
+Reason: Use the new find_package syntax introduced in CMake 2.6 to workaround a problem with Find_Qt4 shipped with KDE.
+--- qterm-0.5.12/CMakeLists.txt.old	2013-09-07 21:00:42.092301635 +0800
++++ qterm-0.5.12/CMakeLists.txt	2013-09-07 21:01:26.737299353 +0800
+@@ -1,13 +1,12 @@
+ project(qterm)
+ include(CTest)
+ cmake_minimum_required(VERSION 2.6.2 FATAL_ERROR)
+-set(QT_MIN_VERSION "4.5.0")
+ set(QTERM_VERSION_MAJOR 0)
+ set(QTERM_VERSION_MINOR 5)
+ set(QTERM_VERSION_RELEASE 12)
+ set(QTERM_VERSION "${QTERM_VERSION_MAJOR}.${QTERM_VERSION_MINOR}.${QTERM_VERSION_RELEASE}" )
+ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+-find_package(Qt4 REQUIRED)
++find_package(Qt4 4.5.0 REQUIRED)
+ find_package(KDE4)
+ 
+ IF(WIN32 AND MSVC)

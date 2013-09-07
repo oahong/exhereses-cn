@@ -1,0 +1,13 @@
+Source: Upstream commit 1313
+Upstream: Yes
+Reason: Compile with gcc 4.7, fix bug 3474368
+--- qterm-0.5.12/src/main.cpp.old	2013-09-07 21:04:44.699289235 +0800
++++ qterm-0.5.12/src/main.cpp	2013-09-07 21:05:25.020287174 +0800
+@@ -41,6 +41,7 @@
+ #include <fcntl.h>
+ #include <execinfo.h>
+ #include <signal.h>
++#include <unistd.h>
+ 
+ #define QTERM_SIG_MAX_RETS 50
+ #define QTERM_SIG_LOG_DIR "/var/tmp"
