@@ -1,9 +1,11 @@
 # Copyright 2011 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require sourceforge freedesktop-desktop freedesktop-mime gtk-icon-cache distutils
+require sourceforge freedesktop-desktop freedesktop-mime gtk-icon-cache \
+    setuptools [ python_dep='[>=2.6]' python_sup="2.7 2.6" ]
 
 SUMMARY="User-friendly, customizable image viewer for comic books"
+HOMEPAGE="https://sourceforge.net/p/mcomix/wiki"
 
 LICENCES="public-domain"
 SLOT="0"
@@ -11,9 +13,6 @@ PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    build:
-        dev-lang/python:=[>=2.6]
-        dev-python/setuptools
     run:
         dev-lang/python[sqlite]
         dev-python/Imaging[>=1.1.5]
@@ -26,7 +25,7 @@ DEPENDENCIES="
         dev-python/chardet [[ note = [ use Chardet for guessing filename encodings in archives ] ]]
 "
 
-BUGS_TO="oahong@gmail.com"
+RESTRICT="test" #Broken and require X
 REMOTE_IDS="sourceforge:${PN}"
 
 pkg_postinst() {
