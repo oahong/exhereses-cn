@@ -1,46 +1,38 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.10 ] ]
-
-export_exlib_phases src_prepare src_install
-
-MY_PNV=${PN}-$(ever replace 3 '~')
 SUMMARY="A lightweight and easy-to-use terminal emulator"
 HOMEPAGE="http://lilyterm.luna.com.tw"
-DOWNLOADS="${HOMEPAGE}/file/${MY_PNV}.tar.gz"
+DOWNLOADS="${HOMEPAGE}/file/${PNV}.tar.gz"
 
 LICENCES="GPL-3"
 SLOT="0"
-MYOPTIONS="gnome"
+MYOPTIONS="( gtk gtk3 ) [[ number-selected = exactly-one ]]"
 
 DEPENDENCIES="
     build:
         dev-util/intltool
-        virtual/pkg-config
         sys-devel/gettext
+        virtual/pkg-config
     build+run:
-        dev-libs/glib:2[>=2.12.4]
-        dev-libs/vte[>=0.12.2]
-        x11-libs/gtk+:2[>=2.8.20]
-        gnome? ( gnome-desktop/gnome-control-center )
+        dev-libs/glib:2[>=2.12]
+        gtk? (
+            dev-libs/vte:0
+            x11-libs/gtk+:2[>=0.12]
+        )
+        gtk3? (
+            dev-libs/vte:3.0
+            x11-libs/gtk+:3
+        )
 "
 
-WORK=${WORKBASE}/${MY_PNV}
-
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="sourceforge:lilyterm"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/en/changelog.html"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/en/document.html"
 
-lilyterm_src_prepare() {
-    edo sed -i -e '/examplesdir/s/\$(PACKAGE)/&-\${PV}/' "${WORK}"/data/Makefile.am
-    edo ./autogen.sh
-}
-
-lilyterm_src_install() {
-    default
-    option gnome || \
-        edo rm -rf "${IMAGE}"/usr/share/gnome-control-center
-}
+DEFAULT_SRC_CONFIGURE_PARAMS=( --disable-gnome-control-center )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
+    'gtk gtk 2.0'
+    'gtk3 gtk 3.0'
+)
 
