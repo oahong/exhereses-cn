@@ -1,4 +1,4 @@
-# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Copyright 2009-2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="git://github.com/ibus/ibus.git"
@@ -6,7 +6,6 @@ require ibus scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[
 
 DOWNLOADS=""
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS+="dconf"
 
 DEPENDENCIES="
     build:
