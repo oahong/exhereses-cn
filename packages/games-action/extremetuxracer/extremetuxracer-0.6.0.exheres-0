@@ -1,0 +1,30 @@
+# Copyright 2009 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PN=etr
+require sourceforge [ project=${PN} suffix=tar.xz ]
+
+SUMMARY="High speed arctic racing game based on TuxRacer"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+        sys-devel/gettext
+    build+run:
+        media-libs/SDL[>=1.2.0]
+        media-libs/SDL_image
+        media-libs/SDL_mixer[ogg]
+        x11-dri/glu
+        x11-dri/mesa
+"
+
+WORK=${WORKBASE}/${MY_PN}-${PVR}
+REMOTE_IDS="sourceforge:extremetuxracing"
+
+DEFAULT_SRC_INSTALL_EXCLUDE=( "credits.*" )
+
