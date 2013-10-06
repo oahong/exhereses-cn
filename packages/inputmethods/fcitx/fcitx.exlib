@@ -5,7 +5,7 @@
 
 dict_release=20121020
 table_release=20121124
-download_base="http://download.fcitx-im.org/"
+download_base="http://download.fcitx-im.org"
 
 pystroke=py_stroke-${table_release}.tar.gz # Stroke Input data for pinyin-enhance
 pydata=py_table-${table_release}.tar.gz    # Pinyin data for pinyin-enhance
@@ -34,7 +34,7 @@ Feature
 * Integrated KDE Configure Tool (kcm-fcitx)
 * GTK Based Configure Tool (fcitx-configtool)
 Japanese(Anthy based), Koarean(Hangul based), and N9-Meego/Maliit support is under development."
-HOMEPAGE="http://fcitx.googlecode.com"
+HOMEPAGE="http://fcitx-im.org"
 DOWNLOADS="
     ${download_base}/data/table.tar.gz
     ${download_base}/data/pinyin.tar.gz
