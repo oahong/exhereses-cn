@@ -15,3 +15,6 @@ DEPENDENCIES="
     build+run:
         x11-libs/gtk+:2
 "
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( --disable-appindicator )
+
