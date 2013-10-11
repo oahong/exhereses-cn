@@ -27,15 +27,15 @@ DEPENDENCIES="
     build:
         app-arch/dpkg
     run:
-        dev-libs/glib[multibuild_c:32(?)]
-        media-libs/fontconfig[multibuild_c:32(?)]
-        media-libs/freetype[multibuild_c:32(?)]
-        media-libs/jpeg[multibuild_c:32(?)]
-        media-libs/libmng[multibuild_c:32(?)]
-        x11-libs/libSM[multibuild_c:32(?)]
-        x11-libs/libX11[multibuild_c:32(?)]
-        x11-libs/libXext[multibuild_c:32(?)]
-        x11-libs/libXrender[multibuild_c:32(?)]
+        dev-libs/glib[multibuild_c:32(-)]
+        media-libs/fontconfig[multibuild_c:32(-)]
+        media-libs/freetype[multibuild_c:32(-)]
+        media-libs/jpeg[multibuild_c:32(-)]
+        media-libs/libmng[multibuild_c:32(-)]
+        x11-libs/libSM[multibuild_c:32(-)]
+        x11-libs/libX11[multibuild_c:32(-)]
+        x11-libs/libXext[multibuild_c:32(-)]
+        x11-libs/libXrender[multibuild_c:32(-)]
 "
 
 RESTRICT="strip"
