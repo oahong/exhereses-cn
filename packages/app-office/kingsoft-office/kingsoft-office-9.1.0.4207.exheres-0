@@ -1,7 +1,7 @@
 # Copyright 2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-MY_PNV=${PN}_${PV}~a12p1_i386
+MY_PNV=${PN}_${PV}~a12p2_i386
 FONT=${PN/kingsoft/wps}
 require xfont gtk-icon-cache freedesktop-mime freedesktop-desktop
 
