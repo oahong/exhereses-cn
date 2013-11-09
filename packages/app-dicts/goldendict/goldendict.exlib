@@ -1,51 +1,52 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
+# Copyright 2013 Ivan Diorditsa <ivan.diorditsa@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require qmake4 [ no_qt_dependency=true ]
 
-MY_PNV=${PNV}-src
 SUMMARY="A feature-rich dictionary lookup program"
-HOMEPAGE="http://goldendict.berlios.de"
-DOWNLOADS="
-    mirror://sourceforge/${PN}/${MY_PNV}.tar.bz2
-    mirror://berlios/${PN}/${MY_PNV}.tar.bz2
-"
+HOMEPAGE="http://goldendict.org/"
 
 LICENCES="GPL-3"
 SLOT="0"
-PLATFORMS="~amd64 ~x86"
 MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        x11-proto/xproto
+        virtual/pkg-config
         x11-proto/recordproto
+        x11-proto/xproto
     build+run:
+        app-arch/lzo:2
         app-spell/hunspell
+        media-libs/libao
         media-libs/libogg
         media-libs/libvorbis
+        media/ffmpeg
         x11-libs/libX11
         x11-libs/libXtst
-        x11-libs/qt:4[phonon][webkit]
-    suggestion:
+        x11-libs/qt:4[>=4.5][webkit]
+    recommendation:
         x11-server/xorg-server[record] [[ description = [ required for hotkeys monitoring mechanism ] ]]
-        media-sound/WyabdcRealPeopleTTS
 "
+# TODO: package WyabdcRealPeopleTTS
 
-BUGS_TO="oahong@gmail.com"
-REMOTE_IDS="sourceforge:${PN} freecode:${PN}"
-UPSTREAM_CHANGELOG="${HOMEPAGE}/changelog.php"
-
-WORK=${WORKBASE}
-
+# TODO: upstream patches
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/${PN}-desktop-entry.patch
+    "${FILES}"/do-not-run-git.patch
 )
 
+# TODO: QMAKE_SRC_CONFIGURE_PARAMS=( PREFIX=/usr )
 src_configure() {
     PREFIX=/usr eqmake4
 }
 
+# TODO: `make install` installs crap like .cc and .hh files to /usr/share/doc. Two other files:
+#       (1) README is obsolete (lib requirements are not adequate) and (2) CREDITS is the only
+#       file worth installing but then creating doc/ just for credits makes no sense.
+#
+#       fix this upstream somehow
 src_install() {
     default
     edo rm -rf "${IMAGE}"/usr/share/{doc,app-install}

@@ -1,0 +1,10 @@
+# Copyright 2013 Ivan Diorditsa <ivan.diorditsa@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_EXTERNAL_REFS="winlibs/lib/msvc:"
+SCM_REPOSITORY="https://github.com/${PN}/${PN}.git"
+
+require goldendict scm-git
+
+PLATFORMS="~amd64 ~x86"
+
