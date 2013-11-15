@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require sourceforge freedesktop-desktop freedesktop-mime gtk-icon-cache \
-    setuptools [ python_dep='[>=2.6]' python_sup="2.7 2.6" ]
+    setup-py [ import=setuptools blacklist="3" ]
 
 SUMMARY="User-friendly, customizable image viewer for comic books"
 HOMEPAGE="https://sourceforge.net/p/mcomix/wiki"
