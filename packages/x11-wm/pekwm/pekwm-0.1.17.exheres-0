@@ -1,4 +1,4 @@
-# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Copyright 2010-2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 SUMMARY="A small and flexible window manager"
@@ -37,7 +37,6 @@ DEPENDENCIES="
         xrandr? ( x11-libs/libXrandr[>=1.2.0] )
 "
 
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freecode:${PN}"
 UPSTREAM_DOCUMENTATION="
 ${HOMEPAGE}/files/${PN}/doc/${PV}/html/index.html
