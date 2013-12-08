@@ -1,0 +1,26 @@
+# Copyright 2013 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Dynamic xdg menu creator for pekwm"
+HOMEPAGE="https://bitbucket.org/nfisher1226/pekwm-menu"
+DOWNLOADS="${HOMEPAGE}/downloads/${PNV}.tar.gz"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+    build+run:
+        dev-libs/glib:2
+        lxde-base/menu-cache
+        x11-libs/gtk+:2
+"
+
+src_install() {
+    emagicdocs
+    dobin ${PN}
+}
+
