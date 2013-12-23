@@ -22,7 +22,7 @@ DEPENDENCIES="
         virtual/pkg-config
     build+run:
         gtk-player? ( x11-libs/gtk+:2 )
-        media-libs/SDL[>=2.0.0]
+        media-libs/SDL:2[>=2.0.0]
         opengl-player? ( x11-dri/mesa )
 "
 
