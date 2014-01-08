@@ -32,7 +32,7 @@ DEPENDENCIES="
         net-misc/curl
         x11-dri/mesa
         x11-libs/libX11
-        x11-libs/wxWidgets
+        x11-libs/wxGTK
 "
 
 WORK=${WORKBASE}/${PN}-$(ever range 1-3)
