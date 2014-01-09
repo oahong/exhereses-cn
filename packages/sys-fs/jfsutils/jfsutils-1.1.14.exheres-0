@@ -32,4 +32,9 @@ http://jfs.cvs.sourceforge.net/*checkout*/jfs/jfsutils/NEWS?revision=1.41"
 UPSTREAM_DOCUMENTATION="
 http://jfs.sourceforge.net/project/pub/faq.txt"
 
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/${PN}-1.1.14-missing-include.patch
+)
+
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--sbindir=/sbin' )
+
