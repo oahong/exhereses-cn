@@ -20,7 +20,7 @@ DOWNLOADS="${HOMEPAGE}/projects/${PN}/files/${PNV}.tar.bz2"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="debug jpeg png xft xinerama xpm xrandr"
+MYOPTIONS="debug jpeg png"
 
 DEPENDENCIES="
     build:
@@ -29,12 +29,12 @@ DEPENDENCIES="
     build+run:
         x11-libs/libX11
         x11-libs/libXext
+        x11-libs/libXft[>=2.0.0]
+        x11-libs/libXinerama
+        x11-libs/libXpm
+        x11-libs/libXrandr[>=1.2.0]
         jpeg? ( media-libs/jpeg )
         png? ( media-libs/libpng[>=1.2.0] )
-        xft? ( x11-libs/libXft[>=2.0.0] )
-        xinerama? ( x11-libs/libXinerama )
-        xpm? ( x11-libs/libXpm )
-        xrandr? ( x11-libs/libXrandr[>=1.2.0] )
 "
 
 REMOTE_IDS="freecode:${PN}"
@@ -42,10 +42,9 @@ UPSTREAM_DOCUMENTATION="
 ${HOMEPAGE}/files/${PN}/doc/${PV}/html/index.html
 ${HOMEPAGE}/files/${PN}/doc/${PV}/html/faq/answers.html"
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-shape )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-shape --enable-xft --enable-xinerama --enable-xrandr --enable-image-xpm )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
-    debug xft xinerama xrandr
-    'xpm image-xpm'
+    debug
     'jpeg image-jpeg'
     'png image-png'
 )
