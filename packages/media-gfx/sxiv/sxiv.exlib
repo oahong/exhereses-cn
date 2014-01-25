@@ -1,7 +1,7 @@
 # Copyright 2012 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=muennich ]
+require github [ user=muennich tag=v${PV} ]
 
 SUMMARY="Simple (or small or suckless) X Image Viewer"
 DESCRIPTION="

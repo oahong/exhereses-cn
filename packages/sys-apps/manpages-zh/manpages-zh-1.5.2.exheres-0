@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=lidaobing ]
+require github [ user=lidaobing suffix=tar.bz2 ]
 SUMMARY="Chinese manual pages"
 
 LICENCES="FDL-1.2"

@@ -1,10 +1,7 @@
 # Copyright 2012 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-MPNV="v1.1.1"
 require sxiv
-
-DOWNLOADS="${HOMEPAGE}/archive/${MPNV}.tar.gz"
 
 PLATFORMS="~amd64"
 
