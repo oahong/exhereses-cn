@@ -17,5 +17,3 @@ DEPENDENCIES="
         dev-libs/check[>=0.9.4]
 "
 
-BUGS_TO="oahong@gmail.com"
-
