@@ -5,8 +5,8 @@ require xfont
 
 MY_PNV=${PN}$(ever delete_all)
 SUMMARY="IPA Fonts are JIS X 0213:2004 compliant TrueType based OpenType format outline fonts"
-HOMEPAGE="http://ossipedia.ipa.go.jp/ipafont"
-DOWNLOADS="http://info.openlab.ipa.go.jp/${PN,,}/fontdata/${MY_PNV}.zip"
+HOMEPAGE="http://ipafont.ipa.go.jp/"
+DOWNLOADS="http://dl.ipafont.ipa.go.jp/${PN}/${MY_PNV}.zip"
 
 LICENCES="IPAFL"
 SLOT="0"
@@ -19,7 +19,7 @@ DEPENDENCIES="
 "
 
 BUGS_TO="oahong@gmail.com"
-UPSTREAM_RELEASE_NOTES="${HOMEPAGE}/releasenote.html"
+UPSTREAM_RELEASE_NOTES="${HOMEPAGE}${PN,,}/releasenote.html"
 
 WORK=${WORKBASE}/${MY_PNV}
 
