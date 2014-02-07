@@ -1,0 +1,32 @@
+# Copyright 2010 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require xfont
+
+MY_PNV=${PN}$(ever delete_all)
+SUMMARY="IPAex Fonts are JIS X 0213:2004 compliant TrueType based OpenType format outline fonts"
+HOMEPAGE="http://ipafont.ipa.go.jp/"
+DOWNLOADS="http://dl.ipafont.ipa.go.jp/${PN}/${MY_PNV}.zip"
+
+LICENCES="IPAFL"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        app-arch/unzip
+"
+
+BUGS_TO="oahong@gmail.com"
+UPSTREAM_RELEASE_NOTES="${HOMEPAGE}${PN,,}/releasenote.html"
+
+WORK=${WORKBASE}/${MY_PNV}
+
+src_install() {
+    insinto /usr/share/fonts/X11/${FONT}
+    doins *.ttf
+    dodoc Readme*
+    fix_fonts
+}
+
