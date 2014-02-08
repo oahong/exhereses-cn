@@ -2,7 +2,7 @@
 # Copyright 2013 Ivan Diorditsa <ivan.diorditsa@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require qmake4 [ no_qt_dependency=true ]
+require qmake
 
 SUMMARY="A feature-rich dictionary lookup program"
 HOMEPAGE="http://goldendict.org/"
@@ -37,10 +37,7 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/do-not-run-git.patch
 )
 
-# TODO: QMAKE_SRC_CONFIGURE_PARAMS=( PREFIX=/usr )
-src_configure() {
-    PREFIX=/usr eqmake4
-}
+EQMAKE_PARAMS=( PREFIX=/usr )
 
 # TODO: `make install` installs crap like .cc and .hh files to /usr/share/doc. Two other files:
 #       (1) README is obsolete (lib requirements are not adequate) and (2) CREDITS is the only
