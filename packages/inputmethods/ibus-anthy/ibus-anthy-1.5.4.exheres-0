@@ -5,6 +5,10 @@ require ibus-engine
 
 PLATFORMS="~amd64 ~x86"
 
+MYOPTIONS="
+    ( linguas: el fr ja zh_CN )
+"
+
 DEPENDENCIES="
     build:
         dev-lang/swig
