@@ -41,13 +41,13 @@ DEPENDENCIES="
         dev-lang/python:=[>=2.5]
         dev-libs/glib[>=2.32.0]
         sys-apps/dbus
+        x11-libs/gtk+:2 [[ note = [ for xim ] ]]
         x11-libs/libX11
         gnome-bindings/pygobject:3
         dconf? ( gnome-desktop/dconf[>=0.7.5] )
         gconf? ( gnome-platform/GConf[>=2.12] )
         gnome? ( gnome-desktop/gnome-icon-theme-symbolic )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.6] )
-        gtk? ( x11-libs/gtk+:2 )
         gtk3? ( x11-libs/gtk+:3 )
         libnotify? ( x11-libs/libnotify[>=0.7] )
         vala? ( dev-lang/vala[>=0.16] )
