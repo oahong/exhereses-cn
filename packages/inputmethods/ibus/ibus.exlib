@@ -26,6 +26,8 @@ MYOPTIONS="gnome gobject-introspection gtk-doc
      ) [[ number-selected = at-least-one ]]
     libnotify
     vala
+    ( linguas: ar as bg bn_IN ca da de en_GB es et eu fa fr gu hi hu ia it ja kn ko lv ml mr nb nl
+               or pa pl pt_BR ru sr sr@latin ta te tg uk vi zh_CN zh_HK zh_TW )
 "
 
 DEPENDENCIES="
