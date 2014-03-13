@@ -38,9 +38,9 @@ DEPENDENCIES+="
         app-arch/unzip
         app-arch/zip
         app-doc/asciidoc [[ note = [ document generator ] ]]
-        dev-lang/perl[>=5.10]
-        virtual/pkg-config
+        dev-lang/perl:*[>=5.10]
         sys-devel/gettext
+        virtual/pkg-config
     build+run:
         dev-games/physfs
         dev-libs/fribidi
