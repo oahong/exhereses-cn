@@ -1,0 +1,22 @@
+# Copyright 2014 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=lenky0401 tag=${PN}-${PV} ] cmake [ api=2 ]
+
+SUMMARY="An input method frontend for fcitx written in Qt/QML"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        inputmethods/fcitx[>=4.2.7]
+        x11-libs/qt:4
+"
+
+src_install() {
+    default_src_install
+}
+
