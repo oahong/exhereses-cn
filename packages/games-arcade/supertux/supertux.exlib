@@ -9,7 +9,7 @@ SuperTux is a jump'n'run game with strong inspiration from the Super Mario Bros.
 games for the various Nintendo platforms. Run and jump through multiple worlds,
 fighting off enemies by jumping on them, bumping them from below or tossing objects at them,
 grabbing power-ups and other stuff on the way."
-HOMEPAGE="http://supertux.lethargik.org" # http://supertux.googlecode.com
+HOMEPAGE="http://supertux.lethargik.org"
 DOWNLOADS=""
 
 LICENCES="GPL-2"
@@ -33,7 +33,6 @@ DEPENDENCIES="
         x11-dri/mesa
 "
 
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freecode:${PN}"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki/User_Manual ${HOMEPAGE}/wiki/SuperTux_FAQ"
 
