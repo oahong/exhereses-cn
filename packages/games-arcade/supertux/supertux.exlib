@@ -47,3 +47,10 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
 
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( WHATNEW.txt )
 
+src_prepare() {
+    # Stop runnig git in the compile phase
+    edo sed -e 's#\(FIND_PROGRAM(GIT_EXECUTABLE\) git)#\1 git_NOWHERE)#' \
+        -i "${WORK}"/CMakeLists.txt
+    cmake_src_prepare
+}
+
