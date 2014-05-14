@@ -3,29 +3,29 @@
 # Based in part upon 'ibus-1.1.0.20090211.ebuild' from Gentoo, which is:
 #    Copyright 1999-2009 Gentoo Foundation
 
-require gconf gtk-icon-cache
+require gconf gtk-icon-cache github [ suffix=tar.gz ]
 
-export_exlib_phases src_configure src_install pkg_postinst pkg_postrm
+export_exlib_phases src_prepare src_configure src_install pkg_postinst pkg_postrm
 
 SUMMARY="Intelligent Input Bus"
 DESCRIPTION="IBus is an Intelligent Input Bus. It is a new input framework for Linux OS.
 It provides full featured and user friendly input method user interface.
 It also may help developers to develop input method easily."
-HOMEPAGE="http://ibus.googlecode.com"
-DOWNLOADS="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"
+DOWNLOADS="listed-only: https://github.com/${PN}/${PN}/releases/download/${PV}/${PNV}.tar.gz"
 
 LICENCES="LGPL-2.1"
 SLOT="0"
 MYOPTIONS="gnome gobject-introspection gtk-doc
     gtk [[ description = [ Build GTK+ 2 immodule ] ]]
     gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
+    libnotify
+    python3 [[ description = [ Enable python3 ibus-setup ] ]]
+    vala
     (
         dconf
         gconf
         memconf [[ description = [ Enable configure base on memory ] ]]
      ) [[ number-selected = at-least-one ]]
-    libnotify
-    vala
     ( linguas: ar as bg bn_IN ca da de en_GB es et eu fa fr gu hi hu ia it ja kn ko lv ml mr nb nl
                or pa pl pt_BR ru sr sr@latin ta te tg uk vi zh_CN zh_HK zh_TW )
 "
@@ -39,6 +39,7 @@ DEPENDENCIES="
     build+run:
         app-text/iso-codes
         dev-lang/python:=[>=2.5]
+        python3? ( dev-lang/python[>3.0] )
         dev-libs/glib[>=2.32.0]
         sys-apps/dbus
         x11-libs/gtk+:2 [[ note = [ for xim ] ]]
@@ -77,6 +78,10 @@ update_gtk_immodules() {
     option gtk3 && gtk-query-immodules-3.0 --update-cache
 }
 
+ibus_src_prepare() {
+    edo sed -e "/PYTHON2_LIBDIR/s/lib/${LIBDIR}/" -i configure
+}
+
 ibus_src_configure() {
     local myconf=(
         --enable-python-library
@@ -95,6 +100,11 @@ ibus_src_configure() {
         $(option_enable gtk3 ) \
         $(option_enable libnotify ) \
         $(option_enable vala) \
+        $(if option python3; then
+            echo '--with-python=python3'
+          else
+            echo '--with-python=python2'
+        fi) \
         $(if option gnome ; then
             echo '--with-panel-icon-keyboard=yes'
           else
