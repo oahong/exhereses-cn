@@ -3,8 +3,8 @@
 
 MY_PNV=${PNV}-Source
 require ibus-qt
+DOWNLOADS="https://github.com/ibus/${PN}/releases/download/${PV}/${PNV}-Source.tar.gz"
 
-DOWNLOADS="${HOMEPAGE}/files/${MY_PNV}.tar.gz"
 PLATFORMS="~amd64 ~x86"
 
 WORK=${WORKBASE}/${MY_PNV}
