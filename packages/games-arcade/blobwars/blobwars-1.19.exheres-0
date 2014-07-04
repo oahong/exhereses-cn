@@ -26,7 +26,6 @@ DEPENDENCIES="
         sys-libs/zlib
 "
 
-BUGS_TO="oahong@gmail.com"
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/${PN}-buildsystem.patch

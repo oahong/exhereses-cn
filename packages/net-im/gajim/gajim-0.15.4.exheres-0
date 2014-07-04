@@ -66,7 +66,6 @@ DEPENDENCIES="
         kde/kwallet:4 [[ description = [ Enable kwallet support ] ]]
 "
 
-BUGS_TO="oahong@gmail.com"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-site-packages )
 

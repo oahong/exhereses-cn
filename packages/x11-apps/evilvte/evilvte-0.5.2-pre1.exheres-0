@@ -21,7 +21,6 @@ DEPENDENCIES="
         x11-libs/gtk+:3
 "
 
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freecode:${PN}"
 UPSTREAM_CHANGELOG="${HOMEPAGE}/ChangeLog"
 

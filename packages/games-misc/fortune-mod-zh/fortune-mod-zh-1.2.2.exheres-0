@@ -17,7 +17,6 @@ DEPENDENCIES="
         gnome? ( gnome-desktop/zenity )
 "
 
-BUGS_TO="oahong@gmail.com"
 
 src_install() {
     default

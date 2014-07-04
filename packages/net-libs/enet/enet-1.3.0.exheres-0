@@ -12,7 +12,6 @@ MYOPTIONS=""
 
 DEPENDENCIES=""
 
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freecode:${PN}"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/FAQ.html ${HOMEPAGE}/Tutorial.html"
 

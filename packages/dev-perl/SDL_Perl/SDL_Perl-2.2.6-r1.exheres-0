@@ -8,7 +8,6 @@ require perl-module [ module_author=${MODULE_AUTHOR} ]
 SUMMARY="Perl bindings for SDL"
 LICENCES="LGPL-2"
 UPSTREAM_CHANGELOG="http://search.cpan.org/src/${MODULE_AUTHOR}/${MY_PNV}/CHANGELOG"
-BUGS_TO="oahong@gmail.com"
 
 SLOT="0"
 PLATFORMS="~amd64 ~x86"

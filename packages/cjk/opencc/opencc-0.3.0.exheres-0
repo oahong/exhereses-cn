@@ -18,7 +18,6 @@ DEPENDENCIES="
         sys-devel/gettext
 "
 
-BUGS_TO="oahong@oahong.me"
 
 src_prepare() {
     edo sed -e '/SHARED\|STATIC_LIBRARY_PREFIX/s/)/\${LIB_SUFFIX})/' \

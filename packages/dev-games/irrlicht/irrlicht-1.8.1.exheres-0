@@ -25,7 +25,6 @@ DEPENDENCIES="
 #        media-libs/libpng
 
 
-BUGS_TO="oahong@oahong.me"
 WORK=${WORK}/source/${PN^}
 
 DEFAULT_SRC_COMPILE_PARAMS=( sharedlib CC=${CC} CXX=${CXX} AR=${AR} NDEBUG=1 )

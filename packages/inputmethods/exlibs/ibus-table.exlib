@@ -31,7 +31,6 @@ if [[ "${PN%extraphrase}" == ${PN} ]] ; then
     DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'extra extra-phrases' )
 fi
 
-BUGS_TO="${HOMEPAGE}/issues/list"
 
 src_prepare() {
     edo sed -i -e '/AC_ARG_VAR/s#\[\[#\[#;s#\]\]#\]#' configure.ac

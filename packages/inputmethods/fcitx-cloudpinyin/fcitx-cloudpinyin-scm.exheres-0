@@ -22,5 +22,4 @@ DEPENDENCIES="
         net-misc/curl
 "
 
-BUGS_TO="oahong@gmail.com"
 

@@ -29,7 +29,6 @@ DEPENDENCIES="
         opencc? ( cjk/opencc )
 "
 
-BUGS_TO="oahong@oahong.me"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --disable-tests )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(

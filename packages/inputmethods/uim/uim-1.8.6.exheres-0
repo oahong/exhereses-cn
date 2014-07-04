@@ -46,7 +46,6 @@ DEPENDENCIES="
         gnome-desktop/librsvg
 "
 
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freecode:${PN}"
 UPSTREAM_RELEASE_NOTES="${HOMEPAGE}/svn/tags/${PNV}/RELNOTE"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/uim/wiki/UIMSystemConfiguration"

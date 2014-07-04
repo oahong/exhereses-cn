@@ -26,6 +26,5 @@ DEPENDENCIES="
         dev-libs/libxml2
 "
 
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS="freecode:${PN}"
 

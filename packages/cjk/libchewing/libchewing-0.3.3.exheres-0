@@ -24,7 +24,6 @@ DEPENDENCIES="
         dev-libs/check
 "
 
-BUGS_TO="chewing-devel@googlegroups.com"
 
 UPSTREAM_CHANGELOG="http://chewing.csie.net/news.html"
 UPSTREAM_DOCUMENTATION="http://chewing.csie.net/faq.html[[lang=zh_TW]]"

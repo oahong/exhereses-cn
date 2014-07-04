@@ -21,5 +21,4 @@ DEPENDENCIES="
         net-im/pidgin[>=2.7.0]
 "
 
-BUGS_TO="oahong@gmail.com"
 

@@ -25,7 +25,6 @@ DEPENDENCIES="
         sys-libs/glibc"
 
 REMOTE_IDS="sourceforge:jfs"
-BUGS_TO="http://sourceforge.net/tracker/?group_id=128802&atid=712756"
 
 UPSTREAM_CHANGELOG="
 http://jfs.cvs.sourceforge.net/*checkout*/jfs/jfsutils/NEWS?revision=1.41"

@@ -36,5 +36,4 @@ DEPENDENCIES="
 "
 
 WORK=${WORKBASE}/${PN}-$(ever range 1-3)
-BUGS_TO="oahong@gmail.com"
 

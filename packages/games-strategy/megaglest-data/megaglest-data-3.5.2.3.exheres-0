@@ -16,7 +16,6 @@ MYOPTIONS=""
 DEPENDENCIES=""
 
 WORK=${WORKBASE}/${MY_PN}-$(ever range 1-3)
-BUGS_TO="oahong@gmail.com"
 
 src_prepare() {
     edo sed -e "s:\(DataPath=\).*:\1/usr/share/${MY_PN}/:" \

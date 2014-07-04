@@ -45,7 +45,6 @@ DEPENDENCIES="
 "
 
 RESTRICT="test"
-BUGS_TO="oahong@gmail.com"
 REMOTE_IDS+="freecode:${PN}"
 UPSTREAM_RELEASE_NOTES="http://sourceforge.net/projects/gimp-print/files/${PN}-$(ever range 1-2)/${PV}/NEWS/view"
 

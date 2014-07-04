@@ -22,7 +22,6 @@ DEPENDENCIES="
         inputmethods/ibus[>=1.2]
 "
 
-BUGS_TO="oahong@oahong.me"
 
 src_compile() {
     elisp-compile ibus.el
