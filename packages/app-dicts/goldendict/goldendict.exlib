@@ -33,11 +33,10 @@ DEPENDENCIES="
 
 # TODO: upstream patches
 DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/${PN}-desktop-entry.patch
     "${FILES}"/do-not-run-git.patch
 )
 
-EQMAKE_PARAMS=( PREFIX=/usr )
+EQMAKE_PARAMS=( PREFIX=/usr CONFIG+=no_epwing_support )
 
 # TODO: `make install` installs crap like .cc and .hh files to /usr/share/doc. Two other files:
 #       (1) README is obsolete (lib requirements are not adequate) and (2) CREDITS is the only
