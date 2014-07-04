@@ -2,24 +2,22 @@
 # Distributed under the terms of the GNU General Public License v2
 
 myexparam -b python_dep=true
+myexparam maintainer=ibus
+
+require github [[ user=$(exparam maintainer) ]]
 
 SUMMARY="The ${PN#*-} engine for IBus Framework"
 HOMEPAGE="http://ibus.googlecode.com"
 
 if ever is_scm ; then
-    myexparam maintainer=ibus
-
     SCM_REPOSITORY="git://github.com/$(exparam maintainer)/${PN}.git"
     require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 1.10 ] ]
 
     export_exlib_phases src_prepare
 
     ibus-engine_src_prepare() {
-        #edo sed -re '/(C.*|LD)FLAGS/d;/configure/d' -i autogen.sh
         edo ./autogen.sh
     }
-else
-    DOWNLOADS="listed-only: ${HOMEPAGE}/files/${PNV}.tar.gz"
 fi
 
 exparam -b python_dep && require python [ python_dep=2.5 ]
@@ -35,6 +33,5 @@ DEPENDENCIES="
         inputmethods/ibus[>=1.3]
 "
 
-BUGS_TO="oahong@gmail.com"
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/w/list"
 
