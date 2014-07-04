@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 MY_PNV=${PNV}-Source
-require cmake [ out_of_source=false ]
+require github [ user=definite ] cmake [ out_of_source=false ]
 
 SUMMARY="Chinese tables for IBus-Table"
 DESCRIPTION="
@@ -29,7 +29,7 @@ IBus-Table, an input method that support table input methods.
 * Yong (永码)
 "
 HOMEPAGE="http://ibus.googlecode.com"
-DOWNLOADS="${HOMEPAGE}/files/${MY_PNV}-Standalone.tar.gz"
+DOWNLOADS+=" http://oahong.me/~oahong/distfiles/cmake-fedora-1.3.0.tar.xz"
 
 LICENCES="GPL-3"
 SLOT="0"
@@ -43,6 +43,7 @@ DEPENDENCIES="
         inputmethods/ibus-table
 "
 
-BUGS_TO="oahong@gmail.com"
-WORK=${WORKBASE}/${MY_PNV}
+src_prepare() {
+    edo mv "${WORKBASE}"/{Modules,${PNV}/cmake-fedora}
+}
 
