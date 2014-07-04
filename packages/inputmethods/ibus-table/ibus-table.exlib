@@ -1,7 +1,8 @@
-# Copyright 2009 Hong Hao
+# Copyright 2009 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ maintainer=acevery ]
+require ibus-engine [ maintainer=kaio ]
+export_exlib_phases src_prepare
 
 DESCRIPTION="
 IBus-Table is the IM Engine framework for table-based input methods,
@@ -11,8 +12,6 @@ can enjoy the typing on Linux environment."
 LICENCES="LGPL-2.1"
 
 DEPENDENCIES="
-    build:
-        dev-scm/cvs [[ description = [ autopoint needs cvs ] ]]
     build+run:
         dev-lang/python:=[>=2.5][sqlite]
     suggestion:
@@ -22,5 +21,14 @@ DEPENDENCIES="
         inputmethods/ibus-table-zhengma
 "
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-additional )
+ibus-table_src_prepare() {
+    edo sed -e '/BUILT_MANS/d' \
+        -i engine/Makefile.am \
+        -e '/tabcreatedb.py/s/@PYTHON@/python3/' \
+        -i engine/ibus-table-createdb.in \
+        -e '/configure/d' \
+        -i autogen.sh
+    
+    ibus-engine_src_prepare
+}
 

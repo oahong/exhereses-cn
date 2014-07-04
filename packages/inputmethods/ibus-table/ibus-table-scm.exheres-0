@@ -1,7 +1,7 @@
-# Copyright 2009 Hong Hao
+# Copyright 2009 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require common-metadata
+require ibus-table
 
 PLATFORMS="~amd64 ~x86"
 
