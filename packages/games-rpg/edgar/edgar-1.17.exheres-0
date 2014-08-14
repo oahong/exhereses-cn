@@ -17,6 +17,10 @@ LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
+#    ( linguas:
+#        de pt ja eo fr fa vi da ur ru tr sv pl es pt_BR jv cs
+#        it en_US hi uk ar ro nl zh_CN sk ko ms el ta
+#    )
 
 DEPENDENCIES="
     build+run:
