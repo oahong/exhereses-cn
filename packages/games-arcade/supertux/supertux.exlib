@@ -3,6 +3,8 @@
 
 require cmake
 
+export_exlib_phases src_prepare
+
 SUMMARY="A classic 2D jump'n run sidescroller game"
 DESCRIPTION="
 SuperTux is a jump'n'run game with strong inspiration from the Super Mario Bros.
@@ -47,7 +49,7 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
 
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( WHATNEW.txt )
 
-src_prepare() {
+supertux_src_prepare() {
     # Stop runnig git in the compile phase
     edo sed -e 's#\(FIND_PROGRAM(GIT_EXECUTABLE\) git)#\1 git_NOWHERE)#' \
         -i "${WORK}"/CMakeLists.txt

@@ -5,6 +5,8 @@ WORK+="-Source"
 
 require cmake [ api=2 ] easy-multibuild
 
+export_exlib_phases src_prepare
+
 SUMMARY="Qt4 library and immodule for IBus framework"
 HOMEPAGE="http://ibus.googlecode.com"
 DOWNLOADS=""
@@ -24,7 +26,7 @@ DEPENDENCIES="
         x11-libs/qt:4[dbus][>=4.5][multibuild_c:*(-)?]
 "
 
-src_prepare() {
+ibus-qt_src_prepare() {
     edo sed -e '/variables/ a\set(LIBDIR "lib${LIB_SUFFIX}")' -i CMakeLists.txt
 }
 

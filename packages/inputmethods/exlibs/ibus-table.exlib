@@ -31,9 +31,10 @@ if [[ "${PN%extraphrase}" == ${PN} ]] ; then
     DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'extra extra-phrases' )
 fi
 
-
-src_prepare() {
-    edo sed -i -e '/AC_ARG_VAR/s#\[\[#\[#;s#\]\]#\]#' configure.ac
-    autotools_src_prepare
-}
+if ever at_least scm ; then
+    ibus-table_src_prepare() {
+        edo sed -i -e '/AC_ARG_VAR/s#\[\[#\[#;s#\]\]#\]#' configure.ac
+        autotools_src_prepare
+    }
+fi
 

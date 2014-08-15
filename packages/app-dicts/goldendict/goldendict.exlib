@@ -4,6 +4,8 @@
 
 require qmake
 
+export_exlib_phases src_install pkg_postinst
+
 SUMMARY="A feature-rich dictionary lookup program"
 HOMEPAGE="http://goldendict.org/"
 
@@ -43,12 +45,12 @@ EQMAKE_PARAMS=( PREFIX=/usr CONFIG+=no_epwing_support )
 #       file worth installing but then creating doc/ just for credits makes no sense.
 #
 #       fix this upstream somehow
-src_install() {
+goldendict_src_install() {
     default
     edo rm -rf "${IMAGE}"/usr/share/{doc,app-install}
 }
 
-pkg_postinst() {
+goldendict_pkg_postinst() {
     elog "${PN} requires some thirdparty dictionaries."
     elog "See the following link for more information:"
     elog "${HOMEPAGE}/dictionaries.php"
