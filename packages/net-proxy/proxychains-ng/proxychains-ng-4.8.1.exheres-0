@@ -1,0 +1,29 @@
+# Copyright 2014 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=rofl0r tag=v${PV} ]
+
+SUMMARY="Continuation of the famous proxychains project by netcreature"
+DESCRIPTION="
+ProxyChains is a UNIX program, that hooks network-related libc functions in DYNAMICALLY LINKED
+programs via a preloaded DLL (dlsym(), LD_PRELOAD) and redirects the connections through SOCKS4a/5
+or HTTP proxies.  It supports TCP only (no UDP/ICMP etc)."
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+src_configure() {
+    edo ./configure --prefix=/usr \
+        --libdir=/usr/${LIBDIR} \
+        --sysconfdir=/etc
+}
+
+src_install() {
+    default
+    edo emake -j1 DESTDIR="${IMAGE}" install-config
+}
+
