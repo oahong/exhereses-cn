@@ -5,8 +5,3 @@ require sxiv
 
 PLATFORMS="~amd64"
 
-DEPENDENCIES="
-    build+run:
-        media-libs/libexif
-"
-
