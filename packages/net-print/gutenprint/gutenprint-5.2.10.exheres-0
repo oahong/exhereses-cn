@@ -31,6 +31,7 @@ DEPENDENCIES="
         media-gfx/ImageMagick
     build+run:
         dev-libs/glib
+        dev-libs/libusb:1[>=1.0.0]
         dev-lang/perl:*
         net-print/cups[>=1.2]
         app-text/ghostscript
