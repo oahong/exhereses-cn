@@ -22,7 +22,7 @@ DEPENDENCIES="
     build+run:
         dev-lang/python:=[>=2.5&<3.0][sqlite]
     run:
-        dev-python/python-nbxmpp[python_abis:2.7]
+        dev-python/python-nbxmpp[>=0.5.1][python_abis:2.7]
     recommendation:
         dev-python/dbus-python[python_abis:2.7]
         dev-python/pyasn1[python_abis:2.7]
