@@ -16,11 +16,12 @@ DOWNLOADS="mirror://sourceforge/legendofedgar/${PNV}-1.tar.gz"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
-#    ( linguas:
-#        de pt ja eo fr fa vi da ur ru tr sv pl es pt_BR jv cs
-#        it en_US hi uk ar ro nl zh_CN sk ko ms el ta
-#    )
+MYLOCALE=(
+    de pt ja eo fr fa vi da ur ru tr sv pl es pt_BR jv cs
+    it en_US hi uk ar ro nl zh_CN sk ko ms el ta
+)
+
+MYOPTIONS="( linguas: ${MYLOCALE[@]} )"
 
 DEPENDENCIES="
     build+run:
@@ -31,7 +32,7 @@ DEPENDENCIES="
         media-libs/SDL_net
 "
 
-REMOTE_IDS="sourceforge:legendofedgar freecode:the-legend-of-edgar"
+REMOTE_IDS="sourceforge:legendofedgar"
 
 DEFAULT_SRC_COMPILE_PARAMS=( CXX=${CC} DATA_DIR=/usr/share/${PN}/ )
 DEFAULT_SRC_INSTALL_PARAMS=(
@@ -40,4 +41,14 @@ DEFAULT_SRC_INSTALL_PARAMS=(
     DATA_DIR="${IMAGE}"/usr/share/${PN}/
 )
 DEFAULT_SRC_INSTALL_EXCLUDE=( *.o )
+
+src_install() {
+    default
+    for lang in ${MYLOCALE[@]} ; do
+        if ! option "linguas:${lang}" ; then
+            edo rm -rv "${IMAGE}"/usr/share/locale/${lang}
+        fi
+    done
+    edo find "${IMAGE}"/usr/share/locale -type d -empty -delete
+}
 
