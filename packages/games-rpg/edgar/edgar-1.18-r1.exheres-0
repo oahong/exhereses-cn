@@ -32,6 +32,7 @@ DEPENDENCIES="
         media-libs/SDL_net
 "
 
+RESTRICT="test"
 REMOTE_IDS="sourceforge:legendofedgar"
 
 DEFAULT_SRC_COMPILE_PARAMS=( CXX=${CC} DATA_DIR=/usr/share/${PN}/ )
