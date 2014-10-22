@@ -1,7 +1,7 @@
 # Copyright 2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-REV=a15
+REV=a16
 MY_PNV=${PN}_${PV}~${REV}_i386
 FONT=${PN}
 require xfont gtk-icon-cache freedesktop-mime freedesktop-desktop
@@ -13,7 +13,6 @@ Word processing (wps), Presentation (wpp) and spreadsheets (et) software,
 It has been rewritten in Qt4 framework and mainly targets to Chinese users."
 HOMEPAGE="http://community.wps.cn"
 DOWNLOADS="
-    http://oahong.me/~oahong/distfiles/libpng12.so.tar.xz
     http://kdl.cc.ksosoft.com/wps-community/download/${REV}/${MY_PNV}.deb
     http://kdl.cc.ksosoft.com/wps-community/download/${REV}/${FONT}-fonts_1.0_all.deb
 "
@@ -38,6 +37,7 @@ DEPENDENCIES="
         media-libs/freetype[multibuild_c:32(-)]
         media-libs/jpeg[multibuild_c:32(-)]
         media-libs/libmng[multibuild_c:32(-)]
+        media-libs/libpng:1.2[multibuild_c:32(-)]
         x11-libs/libSM[multibuild_c:32(-)]
         x11-libs/libX11[multibuild_c:32(-)]
         x11-libs/libXext[multibuild_c:32(-)]
@@ -54,16 +54,11 @@ pkg_setup() {
 src_unpack() {
     edo mkdir -pv "${WORK}"
     for a in ${ARCHIVES} ; do
-        if [[ ${a} =~ tar ]] ; then
-            unpack --if-compressed ${a}
-        else
-            edo dpkg -X "${FETCHEDDIR}"/${a} "${WORK}"
-        fi
+        edo dpkg -X "${FETCHEDDIR}"/${a} "${WORK}"
     done
 }
 
 src_prepare() {
-    edo mv "${WORKBASE}"/libpng12.so.0 "${WORK}"/opt/kingsoft/wps-office/office6
     edo mkdir -pv "${WORK}"/usr/share/fonts/X11
     edo mv "${WORK}"/usr/share/fonts/{,X11}/wps-office
 }
