@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=muennich tag=v${PV} ]
+export_exlib_phases src_compile
 
 SUMMARY="Simple (or small or suckless) X Image Viewer"
 DESCRIPTION="
@@ -30,9 +31,16 @@ DEPENDENCIES="
     build+run:
         media-libs/giflib
         media-libs/imlib2[X]
+        media-libs/libexif
         x11-libs/libX11
 "
 
 DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} LDFLAGS=${LDFLAGS} CFLAGS=${CFLAGS} )
 DEFAULT_SRC_INSTALL_PARAMS=( PREFIX=/usr )
+
+sxiv_src_compile() {
+    #TODO: save and restore config.h
+    edo cp config{.def,}.h
+    default
+}
 
