@@ -1,7 +1,7 @@
 # Copyright 2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-REV=a16
+REV=a16p1
 MY_PNV=${PN}_${PV}~${REV}_i386
 FONT=${PN}
 require xfont gtk-icon-cache freedesktop-mime freedesktop-desktop
@@ -13,8 +13,8 @@ Word processing (wps), Presentation (wpp) and spreadsheets (et) software,
 It has been rewritten in Qt4 framework and mainly targets to Chinese users."
 HOMEPAGE="http://community.wps.cn"
 DOWNLOADS="
-    http://kdl.cc.ksosoft.com/wps-community/download/${REV}/${MY_PNV}.deb
-    http://kdl.cc.ksosoft.com/wps-community/download/${REV}/${FONT}-fonts_1.0_all.deb
+    http://kdl.cc.ksosoft.com/wps-community/download/${REV%p*}/${MY_PNV}.deb
+    http://kdl.cc.ksosoft.com/wps-community/download/${REV%p*}/${FONT}-fonts_1.0_all.deb
 "
 
 LICENCES="KINGSOFT-EULA"
