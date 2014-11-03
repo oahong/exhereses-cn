@@ -13,7 +13,6 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-python/M2Crypto
-        
 "
 
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki"
