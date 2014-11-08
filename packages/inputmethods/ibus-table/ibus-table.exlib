@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require ibus-engine [ maintainer=kaio ]
-export_exlib_phases src_prepare
+export_exlib_phases pkg_setup src_prepare
 
 DESCRIPTION="
 IBus-Table is the IM Engine framework for table-based input methods,
@@ -13,7 +13,8 @@ LICENCES="LGPL-2.1"
 
 DEPENDENCIES="
     build+run:
-        dev-lang/python:=[>=2.5][sqlite]
+        inputmethods/ibus[>=1.1.0]
+        dev-lang/python:=[>=3.3][sqlite]
     suggestion:
         inputmethods/ibus-table-cangjie
         inputmethods/ibus-table-erbi
@@ -21,14 +22,12 @@ DEPENDENCIES="
         inputmethods/ibus-table-zhengma
 "
 
+ibus-table_pkg_setup() {
+    export PYTHON=python3
+}
+
 ibus-table_src_prepare() {
-    edo sed -e '/BUILT_MANS/d' \
-        -i engine/Makefile.am \
-        -e '/tabcreatedb.py/s/@PYTHON@/python3/' \
-        -i engine/ibus-table-createdb.in \
-        -e '/configure/d' \
-        -i autogen.sh
-    
+    edo sed -e '/configure/d' -i autogen.sh
     ibus-engine_src_prepare
 }
 
