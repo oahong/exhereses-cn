@@ -23,7 +23,7 @@ DEPENDENCIES="
 "
 
 ibus-table_pkg_setup() {
-    export PYTHON=python3
+    export PYTHON=python3.3
 }
 
 ibus-table_src_prepare() {
