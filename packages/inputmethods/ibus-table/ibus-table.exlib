@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ maintainer=kaio ]
+require ibus-engine [ maintainer=kaio python_dep=false ]
 export_exlib_phases pkg_setup src_prepare
 
 DESCRIPTION="
@@ -14,13 +14,21 @@ LICENCES="LGPL-2.1"
 DEPENDENCIES="
     build+run:
         inputmethods/ibus[>=1.1.0]
-        dev-lang/python:=[>=3.3][sqlite]
+        dev-lang/python:=[>=3.3&<3.4][sqlite]
     suggestion:
         inputmethods/ibus-table-cangjie
         inputmethods/ibus-table-erbi
         inputmethods/ibus-table-wubi
         inputmethods/ibus-table-zhengma
 "
+
+if ever is_scm  ; then
+    DEPENDENCIES+="
+        build:
+            app-text/docbook-utils
+            app-text/docbook-sgml-dtd:4.1
+    "
+fi
 
 ibus-table_pkg_setup() {
     export PYTHON=python3.3
