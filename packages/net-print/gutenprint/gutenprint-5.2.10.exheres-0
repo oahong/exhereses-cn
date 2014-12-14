@@ -22,13 +22,21 @@ PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
     gimp [[ description = [ Build GIMP 2.x Print plugin and ${PN} GTK+-2.0 user interface library ] ]]
     samples [[ description = [ Install sample images ] ]]
+    ( providers:
+        graphicsmagick
+        imagemagick
+    ) [[
+        *description = [ Software suites to create, edit, and compose bitmap images ]
+        number-selected = at-least-one
+    ]]
 "
 
 DEPENDENCIES="
     build:
         virtual/pkg-config
         sys-devel/gettext
-        media-gfx/ImageMagick
+        providers:graphicsmagick? ( media-gfx/GraphicsMagick[imagemagick] )
+        providers:imagemagick?    ( media-gfx/ImageMagick )
     build+run:
         dev-libs/glib
         dev-libs/libusb:1[>=1.0.0]
