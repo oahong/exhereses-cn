@@ -21,15 +21,20 @@ MYOPTIONS="gnome gobject-introspection gtk-doc
     libnotify
     python3 [[ description = [ Enable python3 ibus-setup ] ]]
     vala
+    wayland
     (
         dconf
         gconf
-        memconf [[ description = [ Enable configure base on memory ] ]]
+        memconf [[ description = [ Build memconf module ] ]]
      ) [[ number-selected = at-least-one ]]
     ( linguas: ar as bg bn_IN ca da de en_GB es et eu fa fr gu hi hu ia it ja kn ko lv ml mr nb nl
                or pa pl pt_BR ru sr sr@latin ta te tg uk vi zh_CN zh_HK zh_TW )
 "
 
+#        dev-python/dbus-python[>=0.83.0]
+#    run:
+#        dev-python/notify-python
+#        gnome-bindings/pygtk[>=2.12.1]
 DEPENDENCIES="
     build:
         dev-util/intltool[>=0.35.0]
@@ -39,26 +44,23 @@ DEPENDENCIES="
     build+run:
         app-text/iso-codes
         dev-lang/python:=[>=2.5]
-        python3? ( dev-lang/python[>3.0] )
         dev-libs/glib[>=2.32.0]
-        sys-apps/dbus
-        x11-libs/gtk+:2 [[ note = [ for xim ] ]]
-        x11-libs/libX11
         gnome-bindings/pygobject:3
+        sys-apps/dbus
+        (
+            x11-libs/gtk+:2
+            x11-libs/libX11
+        ) [[ note = [ build XIM agent server ] ]]
         dconf? ( gnome-desktop/dconf[>=0.7.5] )
         gconf? ( gnome-platform/GConf[>=2.12] )
         gnome? ( gnome-desktop/gnome-icon-theme-symbolic )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.6] )
         gtk3? ( x11-libs/gtk+:3 )
+        gtk-doc? ( dev-doc/gtk-doc[>=0.19] )
         libnotify? ( x11-libs/libnotify[>=0.7] )
+        python3? ( dev-lang/python:=[>3.0] )
         vala? ( dev-lang/vala[>=0.16] )
-    run:
-        gtk? (
-            dev-python/dbus-python[>=0.83.0]
-            dev-python/notify-python
-            dev-python/pyxdg
-            gnome-bindings/pygtk[>=2.12.1]
-        )
+        wayland? ( sys-libs/wayland )
     recommendation:
         gnome-desktop/librsvg
     suggestion:
@@ -84,11 +86,12 @@ ibus_src_prepare() {
 
 ibus_src_configure() {
     local myconf=(
-        --enable-python-library
+        --disable-tests
+        --disable-python-library
+        --enable-setup
+        --enable-surrounding-text
         # Build xim server unconditionally
         --enable-xim
-        --disable-dbus-python-check
-        --enable-surrounding-text
     )
     econf ${myconf[@]} \
         $(option_enable gobject-introspection introspection ) \
@@ -99,7 +102,8 @@ ibus_src_configure() {
         $(option_enable gtk gtk2) \
         $(option_enable gtk3 ) \
         $(option_enable libnotify ) \
-        $(option_enable vala) \
+        $(option_enable vala ) \
+        $(option_enable wayland ) \
         $(if option python3; then
             echo '--with-python=python3'
           else
