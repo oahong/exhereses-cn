@@ -56,7 +56,6 @@ DEPENDENCIES="
         gnome? ( gnome-desktop/gnome-icon-theme-symbolic )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.6] )
         gtk3? ( x11-libs/gtk+:3 )
-        gtk-doc? ( dev-doc/gtk-doc[>=0.19] )
         libnotify? ( x11-libs/libnotify[>=0.7] )
         python3? ( dev-lang/python:=[>3.0] )
         vala? ( dev-lang/vala[>=0.16] )
