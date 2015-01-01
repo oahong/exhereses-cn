@@ -1,7 +1,7 @@
 # Copyright 2014 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=${PN} ] setup-py [ import=distutils ]
+require github [ user=${PN} ] setup-py [ import=setuptools ]
 
 SUMMARY="A fast tunnel proxy that helps you bypass firewalls"
 DOWNLOADS="https://pypi.python.org/packages/source/s/${PN}/${PNV}.tar.gz"
