@@ -1,0 +1,31 @@
+# Copyright 2015 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Block IO tracer"
+DESCRIPTION="
+blktrace is a block layer IO tracing mechanism which provides detailed
+information about request queue operations up to user space. This is
+valuable for diagnosing and fixing performance or application problems
+relating to block layer io.
+"
+HOMEPAGE="http://brick.kernel.dk/snaps"
+DOWNLOADS="${HOMEPAGE}/${PNV}.tar.bz2"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-kernel/linux-headers
+    build+run:
+        dev-libs/libaio
+"
+
+src_install() {
+    emagicdocs
+    emake install prefix="${IMAGE}"/usr \
+        mandir="${IMAGE}"/usr/share/man
+}
+
