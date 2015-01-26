@@ -1,15 +1,14 @@
 # Copyright 2012 Hong Hao <oahong@oahong.me>
+# Copyright 2015 Yuxuan Shui <yshuiv7@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-LM_DATA="lm_sc.t3g.arpa-20121025.tar.bz2" # Language model file
-LM_DICT="dict.utf8-20130220.tar.bz2" # Dict file
-require checksums [ sha1=[ \
-        ${LM_DATA}=6c647bbe6ea02bf1e853a6e930980051cb99abf2 \
-        ${LM_DICT}=67a620d48cb41288e193a3fac09f87308a1df207 ] ]
+LM_DATA="lm_sc.3gm.arpa-20140820.tar.bz2" # Language model file
+LM_DICT="dict.utf8-20131214.tar.bz2"      # Dict file
+BASE_URL="http://oahong.me/~oahong/distfiles"
 
 SUMMARY="Statistical language model data from open-gram"
 HOMEPAGE="http://open-gram.googlecode.com"
-DOWNLOADS="${HOMEPAGE}/files/${LM_DATA} ${HOMEPAGE}/files/${LM_DICT}"
+DOWNLOADS="${BASE_URL}/${LM_DATA} ${BASE_URL}/${LM_DICT}"
 
 LICENCES="Apache-2.0"
 PLATFORMS="~amd64"
@@ -24,6 +23,6 @@ DEPENDENCIES="
 WORK=${WORKBASE}
 
 src_prepare() {
-    edo cp -v "${FILES}"/Makefile .
+    edo cp -v /usr/share/doc/sunpinyin/SLM-inst.mk Makefile
 }
 
