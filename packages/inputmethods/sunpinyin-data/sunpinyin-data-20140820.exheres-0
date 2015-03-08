@@ -22,7 +22,7 @@ DEPENDENCIES="
 
 WORK=${WORKBASE}
 
-src_prepare() {
-    edo cp -v /usr/share/doc/sunpinyin/SLM-inst.mk Makefile
+src_compile() {
+    emake -f /usr/share/doc/sunpinyin/SLM-inst.mk
 }
 
