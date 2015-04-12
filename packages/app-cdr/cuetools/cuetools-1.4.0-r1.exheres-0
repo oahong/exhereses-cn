@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=svend ] \
-    autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+    autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 
 SUMMARY="CUE and TOC file parsers and utilities"
 DESCRIPTION="
@@ -21,4 +21,10 @@ MYOPTIONS=""
 DEPENDENCIES=""
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --hates=docdir )
+
+src_prepare() {
+    edo sed -e '/AM_PROG_LEX/iAM_PROG_AR' \
+        -i configure.ac
+    autotools_src_prepare
+}
 
