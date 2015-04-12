@@ -20,7 +20,7 @@ HOMEPAGE="http://packages.debian.org/en/sid/zh-autoconvert"
 LICENCES=""
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS="" #TODO: xchat support.
+MYOPTIONS=""
 
 DEPENDENCIES=""
 
@@ -31,12 +31,19 @@ DEFAULT_SRC_COMPILE_PARAMS=(
 
 src_prepare() {
     edo sed -e '/xchat-plugins/d' \
-        -e "s#/usr/lib#/usr/$LIBDIR#g" \
         -i Makefile
+    edo sed -e "s#ar #${AR} #" \
+        -e "s#gcc #${CC} #" \
+        -i hzconvert/Makefile
 }
 
 src_install() {
-    dodir /usr/{bin,$LIBDIR,include}
-    default
+    dobin autogb
+    dosym autogb /usr/$(exhost --target)/bin/autob5
+    dolib.so lib/libhz.so.0.0
+    dosym libhz.so.0.0 /usr/$(exhost --target)/lib/libhz.so.0
+    dosym libhz.so.0.0 /usr/$(exhost --target)/lib/libhz.so
+    insinto /usr/$(exhost --target)/include
+    doins include/*.h
 }
 
