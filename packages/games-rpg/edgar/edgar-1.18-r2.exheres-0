@@ -35,9 +35,9 @@ DEPENDENCIES="
 RESTRICT="test"
 REMOTE_IDS="sourceforge:legendofedgar"
 
-DEFAULT_SRC_COMPILE_PARAMS=( CXX=${CC} DATA_DIR=/usr/share/${PN}/ )
+DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} CXX=${CC} DATA_DIR=/usr/share/${PN}/ )
 DEFAULT_SRC_INSTALL_PARAMS=(
-    BIN_DIR="${IMAGE}"/usr/bin/
+    BIN_DIR="${IMAGE}"/usr/$(exhost --target)/bin/
     DOC_DIR="${IMAGE}"/usr/share/doc/${PNV}/
     DATA_DIR="${IMAGE}"/usr/share/${PN}/
 )
