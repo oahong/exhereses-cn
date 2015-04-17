@@ -20,6 +20,11 @@ WORK=${WORKBASE}/${PN}
 
 DEFAULT_SRC_PREPARE_PATCHES=( "${WORKBASE}"/${MY_PATCH} )
 
+src_prepare() {
+    default
+    edo sed -e "s/cc -o/${CC} -o/" -i Makefile
+}
+
 src_install() {
     insinto /usr/share/${PN}
     doins ${PN}.bitmap
