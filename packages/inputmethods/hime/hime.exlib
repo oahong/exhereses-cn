@@ -3,7 +3,7 @@
 # Based in part upon 'gcin-1.4.5_pre2-r1.ebuild' from Gentoo Taiwan (GOT), which is:
 #    Copyright 1999-2009 Gentoo Foundation
 
-export_exlib_phases src_configure src_install pkg_postinst pkg_postrm
+export_exlib_phases src_prepare src_configure src_install pkg_postinst pkg_postrm
 
 SUMMARY="HIME Input Method Editor"
 HOMEPAGE="http://hime-ime.github.io"
@@ -63,8 +63,17 @@ update_gtk_immodules() {
         gtk-query-immodules-3.0 --update-cache
 }
 
+hime_src_prepare() {
+    edo find . -type f \( -name configure -or -name Makefile \) \
+        -exec sed -e "s/pkg-config/${PKG_CONFIG}/g" -i {} \;
+    edo sed -e "s:@ar:@${AR}:" \
+        -e "s:@ranlib:@${RANLIB}:" \
+        -i src/IMdkit/lib/Makefile
+    edo sed -e '/^datadir/s:$prefix:/usr:' -i configure
+}
+
 hime_src_configure() {
-    local myconf="--disable-appindicator"
+    local myconf="--disable-appindicator --disable-lib64"
     econf \
         ${myconf} \
         $(option anthy || echo --disable-anthy )
