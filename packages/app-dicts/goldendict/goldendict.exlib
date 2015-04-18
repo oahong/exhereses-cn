@@ -38,7 +38,7 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/do-not-run-git.patch
 )
 
-EQMAKE_PARAMS=( PREFIX=/usr CONFIG+=no_epwing_support )
+EQMAKE_PARAMS=( PREFIX=/usr/$(exhost --target) CONFIG+=no_epwing_support )
 
 # TODO: `make install` installs crap like .cc and .hh files to /usr/share/doc. Two other files:
 #       (1) README is obsolete (lib requirements are not adequate) and (2) CREDITS is the only
@@ -47,7 +47,7 @@ EQMAKE_PARAMS=( PREFIX=/usr CONFIG+=no_epwing_support )
 #       fix this upstream somehow
 goldendict_src_install() {
     default
-    edo rm -rf "${IMAGE}"/usr/share/{doc,app-install}
+    edo rm -rf "${IMAGE}"/usr/share/{doc,app-install,}
 }
 
 goldendict_pkg_postinst() {
