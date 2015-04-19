@@ -90,7 +90,7 @@ DEPENDENCIES="
     recommendation:
         inputmethods/fcitx-configtool
     suggestion:
-        dbus? ( kde/kdeplasma-addons[kimpanel] )
+        kde/kdeplasma-addons[kimpanel] [[ note = [ KDE plasma integration ] ]]
 "
 # fcitx-config script:
 #        xdg-utils / fcitx-config
@@ -106,7 +106,8 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
     -DENABLE_TABLE:BOOL=TRUE
     -DENABLE_TEST:BOOL=TRUE
     -DENABLE_X11:BOOL=TRUE
-    -DLIB_INSTALL_DIR:PATH=/usr/${LIBDIR}
+    -DCMAKE_INSTALL_PREFIX:PATH=/usr
+    -DLIB_INSTALL_DIR:PATH=/usr/$(exhost --target)/lib
     -DSYSCONFDIR:PATH=/etc
 )
 
@@ -133,7 +134,14 @@ update_gtk_immodules() {
 
 fcitx_src_prepare() {
     default
-    edo sed -e '/UseDoxygen/d' -i CMakeLists.txt
+    edo sed -e "s#\${package}#${PNVR}#" -i doc/CMakeLists.txt
+
+    edo sed -e "/^set(includedir/s#/include#/$(exhost --target)&#" \
+        -e "/^set(bindir/s#/bin#/$(exhost --target)/bin#" \
+        -e '/UseDoxygen/d' -i CMakeLists.txt
+    edo sed -e "/FCITX_INCLUDEDIR/s#\${CMAKE_INSTALL_PREFIX}#&/$(exhost --target)#" \
+        -e '/LC_MESSAGES/s#share#/usr/share#' -i cmake/FcitxMacro.cmake
+
     for d in ${pydata} ${pystroke}; do
         edo cp "${FETCHEDDIR}"/${d} src/module/pinyin-enhance/data
     done
