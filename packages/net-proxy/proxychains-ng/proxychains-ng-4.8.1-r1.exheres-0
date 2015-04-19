@@ -17,8 +17,7 @@ MYOPTIONS=""
 DEPENDENCIES=""
 
 src_configure() {
-    edo ./configure --prefix=/usr \
-        --libdir=/usr/${LIBDIR} \
+    edo ./configure --prefix=/usr/$(exhost --target) \
         --sysconfdir=/etc
 }
 
