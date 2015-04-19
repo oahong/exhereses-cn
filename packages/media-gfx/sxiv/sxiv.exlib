@@ -35,8 +35,13 @@ DEPENDENCIES="
         x11-libs/libX11
 "
 
-DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} LDFLAGS=${LDFLAGS} CFLAGS=${CFLAGS} )
-DEFAULT_SRC_INSTALL_PARAMS=( PREFIX=/usr )
+DEFAULT_SRC_COMPILE_PARAMS=(
+    CC=${CC} LDFLAGS=${LDFLAGS} CFLAGS=${CFLAGS}
+)
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=/usr/$(exhost --target)
+    MANPREFIX=/usr/share/man
+)
 
 sxiv_src_compile() {
     #TODO: save and restore config.h
