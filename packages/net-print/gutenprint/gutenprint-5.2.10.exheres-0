@@ -79,6 +79,11 @@ src_test_expensive() {
 
 src_install() {
     default
+
+    # gutenprint's build system always appends sbin to cups_sbindir...
+    edo mv "${IMAGE}"/usr/$(exhost --target)/sbin/{cups-genppd.$(ever range 1-2),cups-genppdupdate} \
+           "${IMAGE}"/usr/$(exhost --target)/bin
+
     edo mv "${IMAGE}"/usr/share/${PN}/doc/* "${IMAGE}"/usr/share/doc/${PNV}
     edo find "${IMAGE}" -type d -empty -delete
 }
