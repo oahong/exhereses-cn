@@ -15,7 +15,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     run:
         dev-lang/python[sqlite]
-        dev-python/Imaging[>=1.1.5]
+        dev-python/Pillow
         gnome-bindings/pygtk[>=2.12]
     recommendation:
         || ( app-arch/unrar app-arch/rar )
