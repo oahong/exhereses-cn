@@ -52,7 +52,7 @@ goldendict_src_prepare() {
 #       fix this upstream somehow
 goldendict_src_install() {
     default
-    edo rm -rf "${IMAGE}"/usr/share/{doc,app-install,}
+    edo rm -rf "${IMAGE}"/usr/share/doc
 }
 
 goldendict_pkg_postinst() {
