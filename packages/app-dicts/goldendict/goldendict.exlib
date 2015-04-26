@@ -4,7 +4,7 @@
 
 require qmake
 
-export_exlib_phases src_install pkg_postinst
+export_exlib_phases src_prepare src_install pkg_postinst
 
 SUMMARY="A feature-rich dictionary lookup program"
 HOMEPAGE="http://goldendict.org/"
@@ -38,7 +38,12 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/do-not-run-git.patch
 )
 
-EQMAKE_PARAMS=( PREFIX=/usr/$(exhost --target) CONFIG+=no_epwing_support )
+EQMAKE_PARAMS=( PREFIX=/usr CONFIG+=no_epwing_support )
+
+goldendict_src_prepare() {
+    edo sed -e "/target\.path/s#bin#$(exhost --target)/bin#" \
+        -i ${PN}.pro
+}
 
 # TODO: `make install` installs crap like .cc and .hh files to /usr/share/doc. Two other files:
 #       (1) README is obsolete (lib requirements are not adequate) and (2) CREDITS is the only
