@@ -1,13 +1,11 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-MY_PATCH=${PN}_${PVR/p}.debian
-
-require debian-upstream [ debian_pv="${PV}.orig" ]
+require debian-upstream [ debian_pv="${PV%%_*}.orig" ]
 
 SUMMARY="Chinese Lunar Calendar conversion utility"
 HOMEPAGE="http://packages.debian.org/unstable/utils/lunar"
-DOWNLOADS+=" mirror://debian/pool/main/l/${PN}/${MY_PATCH}.tar.gz"
+DOWNLOADS+=" mirror://debian/pool/main/l/${PN}/${PN}_${PV/_p/-}.debian.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
