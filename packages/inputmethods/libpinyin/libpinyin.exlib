@@ -2,10 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require sourceforge
+export_exlib_phases src_prepare
 
 SUMMARY="Library to deal with pinyin."
 HOMEPAGE="https://github.com/${PN}"
-DOWNLOADS="mirror://sourceforge/${PN}/model5.text.tar.gz"
+DOWNLOADS="mirror://sourceforge/${PN}/model8.text.tar.gz"
+
 if ever is_scm ; then
     SCM_REPOSITORY="git://github.com/${PN}/${PN}.git"
     require scm-git autotools [ supported_automake=[ 1.11 ] supported_autoconf=[ 2.5 ] ]
@@ -13,22 +15,20 @@ else
     DOWNLOADS+=" mirror://sourceforge/${PN}/${PNV}.tar.gz"
 fi
 
-export_exlib_phases src_prepare
-
 LICENCES="GPL-2"
 SLOT="0"
 MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-    	virtual/pkg-config
+        virtual/pkg-config
     build+run:
         dev-libs/glib:2[>=2.4.0]
         sys-libs/db:=
 "
 
 libpinyin_src_prepare() {
-    edo cp -v ${WORKBASE}/*.{table,text} data
+    edo cp -v ${WORKBASE}/*.{table,text,conf} data
     default
 }
 
