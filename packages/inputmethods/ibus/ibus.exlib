@@ -37,6 +37,7 @@ MYOPTIONS="gnome gobject-introspection gtk-doc
 #        dev-python/notify-python
 DEPENDENCIES="
     build:
+        app-doc/gtk-doc-autotools
         dev-util/intltool[>=0.35.0]
         sys-devel/gettext
         virtual/pkg-config
@@ -85,6 +86,7 @@ update_gtk_immodules() {
 
 ibus_src_prepare() {
     edo intltoolize --force --automake
+    edo gtkdocize
     autotools_src_prepare
 }
 
