@@ -48,7 +48,7 @@ src_install() {
     default
 
     # avoid collisions with smpeg:2
-    edo mv "${IMAGE}"/usr/bin/plaympeg "${IMAGE}"/usr/bin/plaympeg-1
+    edo mv "${IMAGE}"/usr/$(exhost --target)/bin/plaympeg "${IMAGE}"/usr/$(exhost --target)/bin/plaympeg-1
     edo mv "${IMAGE}"/usr/share/man/man1/plaympeg.1 "${IMAGE}"/usr/share/man/man1/plaympeg-1.1
 
     ! option gtk-player && edo rm "${IMAGE}"/usr/share/man/man1/gtv.1
