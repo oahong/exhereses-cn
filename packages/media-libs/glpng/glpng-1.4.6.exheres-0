@@ -1,11 +1,12 @@
 # Copyright 2009-2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+REV=1079563
 require cmake
 
 SUMMARY="PNG loader for OpenGL"
 HOMEPAGE="http://www.wyatt100.freeserve.co.uk/download.htm"
-DOWNLOADS="http://repo.or.cz/w/glpng.git/snapshot/06b1d04aab2a7ec0385cc62cd01dae71af326619.tar.gz -> ${PNV}.tar.gz"
+DOWNLOADS="http://repo.or.cz/w/${PN}.git/snapshot/${REV}.tar.gz -> ${PNV}.tar.gz"
 
 LICENCES="as-is"
 SLOT="0"
@@ -19,9 +20,7 @@ DEPENDENCIES="
          x11-dri/mesa
 "
 
-WORK=${WORKBASE}/${PN}
+WORK=${WORKBASE}/${PN}-${REV}
 
-src_prepare() {
-    sed -e 's/CMAKE_INSTALL_LIBDIR/LIB_INSTALL_DIR/g' -i src/CMakeLists.txt
-}
+CMAKE_SRC_CONFIGURE_PARAMS=( -DCMAKE_INSTALL_DOCDIR:STRING=/usr/share/doc/${PNVR} )
 
