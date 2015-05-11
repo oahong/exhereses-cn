@@ -1,0 +1,51 @@
+# Copyright 2011 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require sourceforge [ suffix=zip ]
+
+SUMMARY="Lightning fast realtime 3D engine"
+DESCRIPTION="Irrlicht Engine is an open source high performance realtime 3D engine written and
+usable in C++ and also available for .NET languages. It is completely cross-platform, using D3D,
+OpenGL and its own software renderer, and has all of the state-of-the-art features which can be
+found in commercial 3d engines."
+
+LICENCES="FIXME"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        x11-proto/xproto
+    build+run:
+        app-arch/bzip2
+        media-libs/jpeg
+        media-libs/libpng
+        sys-libs/zlib
+        x11-dri/mesa
+        x11-libs/libX11
+        x11-libs/libXxf86vm
+"
+
+MYWORK=${WORK}/source/${PN^}
+
+src_prepare() {
+    edo sed -e 's/-O3//g' -i "${MYWORK}"/Makefile
+    # Apply debian patches
+    expatch "${FILES}"
+}
+
+src_compile() {
+    emake -C "${MYWORK}" sharedlib CC=${CC} CXX=${CXX} AR=${AR} \
+        NDEBUG=1 VERSION_RELEASE=1
+}
+
+src_install() {
+    insinto /usr/$(exhost --target)/include/${PN}
+    doins include/*.h
+
+    dolib.so "${MYWORK}"/lib${PN^}.so.${PV}
+    dosym lib${PN^}.so.${PV} /usr/$(exhost --target)/lib/lib${PN^}.so.$(ever range 1-2 ${PV})
+    dosym lib${PN^}.so.${PV} /usr/$(exhost --target)/lib/lib${PN^}.so
+}
+
