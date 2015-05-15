@@ -1,8 +1,8 @@
 # Copyright 2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-REV=a16p3
-MY_PNV=${PN}_${PV}~${REV}_i386
+REV=a18
+MY_PNV=${PN}_${PV}~${REV}_amd64
 FONT=${PN}
 require xfont gtk-icon-cache freedesktop-mime freedesktop-desktop
 
@@ -10,7 +10,7 @@ SUMMARY="Kingsoft office for Linux"
 DESCRIPTION="
 Kingsoft office is a Microsoft Office compatible suite of applications, which provides friendly
 Word processing (wps), Presentation (wpp) and spreadsheets (et) software,
-It has been rewritten in Qt4 framework and mainly targets to Chinese users."
+It has been rewritten in Qt4 framework"
 HOMEPAGE="http://wps-community.org"
 DOWNLOADS="
     http://kdl.cc.ksosoft.com/wps-community/download/${REV%p*}/${MY_PNV}.deb
@@ -32,16 +32,16 @@ DEPENDENCIES="
             resolution = uninstall-blocked-after
         ]]
     run:
-        dev-libs/glib[multibuild_c:32(-)]
-        media-libs/fontconfig[multibuild_c:32(-)]
-        media-libs/freetype[multibuild_c:32(-)]
-        media-libs/jpeg[multibuild_c:32(-)]
-        media-libs/libmng[multibuild_c:32(-)]
-        media-libs/libpng:1.2[multibuild_c:32(-)]
-        x11-libs/libSM[multibuild_c:32(-)]
-        x11-libs/libX11[multibuild_c:32(-)]
-        x11-libs/libXext[multibuild_c:32(-)]
-        x11-libs/libXrender[multibuild_c:32(-)]
+        dev-libs/glib
+        media-libs/fontconfig
+        media-libs/freetype
+        media-libs/jpeg
+        media-libs/libmng
+        media-libs/libpng:1.2
+        x11-libs/libSM
+        x11-libs/libX11
+        x11-libs/libXext
+        x11-libs/libXrender
 "
 
 RESTRICT="strip"
@@ -65,7 +65,10 @@ src_prepare() {
 
 src_install() {
     edo cp -aR opt usr "${IMAGE}"
-    edo find "${IMAGE}" -type d -empty -delete
+    dodir /usr/$(exhost --target)
+    edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
+    edo rmdir "${IMAGE}"/usr/share/icons/hicolor/32x32/apps
+
     xfont_src_install
 }
 
