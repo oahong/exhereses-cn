@@ -14,7 +14,7 @@ It has been rewritten in Qt4 framework"
 HOMEPAGE="http://wps-community.org"
 DOWNLOADS="
     http://kdl.cc.ksosoft.com/wps-community/download/${REV%p*}/${MY_PNV}.deb
-    http://kdl.cc.ksosoft.com/wps-community/download/${REV%p*}/${FONT}-fonts_1.0_all.deb
+    http://kdl.cc.ksosoft.com/wps-community/download/a15/${FONT}-fonts_1.0_all.deb
 "
 
 LICENCES="KINGSOFT-EULA"
@@ -26,11 +26,6 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         app-arch/dpkg
-    build+run:
-        !app-office/kingsoft-office [[
-            description = [ Rebranding to ${PN} ]
-            resolution = uninstall-blocked-after
-        ]]
     run:
         dev-libs/glib
         media-libs/fontconfig
@@ -64,10 +59,11 @@ src_prepare() {
 }
 
 src_install() {
-    edo cp -aR opt usr "${IMAGE}"
+    edo cp -aR opt usr etc "${IMAGE}"
     dodir /usr/$(exhost --target)
     edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
     edo rmdir "${IMAGE}"/usr/share/icons/hicolor/32x32/apps
+    edo rm /etc/fonts/conf.d/40-wps-office.conf
 
     xfont_src_install
 }
