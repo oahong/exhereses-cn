@@ -63,7 +63,7 @@ src_install() {
     dodir /usr/$(exhost --target)
     edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
     edo rmdir "${IMAGE}"/usr/share/icons/hicolor/32x32/apps
-    edo rm /etc/fonts/conf.d/40-wps-office.conf
+    edo rm -r "${IMAGE}"/etc/fonts/conf.d
 
     xfont_src_install
 }
