@@ -26,7 +26,6 @@ DEPENDENCIES="
         sys-libs/zlib
 "
 
-
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/${PN}-buildsystem.patch
 )
@@ -37,6 +36,6 @@ DEFAULT_SRC_COMPILE_PARAMS=(
 )
 DEFAULT_SRC_INSTALL_PARAMS=(
     ${DEFAULT_SRC_COMPILE_PARAMS[@]}
-    BINDIR=/usr/bin/
+    BINDIR=/usr/$(exhost --target)/bin/
 )
 
