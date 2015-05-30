@@ -39,6 +39,21 @@ DEPENDENCIES="
 "
 
 WORK="${WORKBASE}"/${PNV}
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DCMAKE_INSTALL_PREFIX:PATH=/usr
+    -DBINDIR:PATH=/usr/$(exhost --target)/bin
+)
+
+src_prepare() {
+    edo edo sed -e "s@/usr/include@/usr/$(exhost --target)/include@g" \
+        -i cmake/Modules/FindSDL_gfx.cmake \
+
+    # Link against X11
+    edo sed -e "/OpenGL REQUIRED)/a \\\tInclude(FindX11)" \
+        -i CMakeLists.txt
+
+    cmake_src_prepare
+}
 
 src_install() {
     cmake_src_install
