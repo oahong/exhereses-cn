@@ -19,6 +19,13 @@ DEPENDENCIES="
         x11-libs/gtk+:2
 "
 
+DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} )
+
+src_prepare() {
+    edo sed -e "s/pkg-config/${PKG_CONFIG}/g" \
+        -i Makefile
+}
+
 src_install() {
     emagicdocs
     dobin ${PN}
