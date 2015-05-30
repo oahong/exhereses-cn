@@ -23,9 +23,13 @@ DEPENDENCIES="
         dev-libs/libaio
 "
 
+DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} )
+
 src_install() {
     emagicdocs
-    emake install prefix="${IMAGE}"/usr \
+    emake install CC=${CC} \
+        prefix="${IMAGE}"/usr \
+        bindir="${IMAGE}"/usr/$(exhost --target)/bin \
         mandir="${IMAGE}"/usr/share/man
 }
 
