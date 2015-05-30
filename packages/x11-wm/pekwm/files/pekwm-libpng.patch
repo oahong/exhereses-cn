@@ -1,0 +1,34 @@
+Source: Hong Hao <oahong@gmail.com>
+Upstream: No
+Reasons: build against more recent libpng version
+--- configure.ac.orig	2015-05-30 23:28:03.308003601 +0800
++++ configure.ac	2015-05-30 23:30:59.172012011 +0800
+@@ -119,23 +119,14 @@
+ if test "x$enable_image_png" = "xyes"; then
+  	AC_MSG_RESULT([yes])
+ 
+-        PKG_CHECK_MODULES([libpng12], [libpng12 >= 1.2.0], HAVE_LIBPNG=yes, HAVE_LIBPNG=no)
++        PKG_CHECK_MODULES([libpng], [libpng >= 1.0.0], HAVE_LIBPNG=yes, HAVE_LIBPNG=no)
+         if test "x$HAVE_LIBPNG" = "xyes"; then
+-		AC_DEFINE(HAVE_IMAGE_PNG, [1], [Define to 1 if you have libpng12])
+- 		LIBS="$LIBS $libpng12_LIBS"
+-                CXXFLAGS="$CXXFLAGS $libpng12_CFLAGS"
++		AC_DEFINE(HAVE_IMAGE_PNG, [1], [Define to 1 if you have libpng])
++ 		LIBS="$LIBS $libpng_LIBS"
++                CXXFLAGS="$CXXFLAGS $libpng_CFLAGS"
+  		FEATURES="$FEATURES image-png"
+  	else
+-                PKG_CHECK_MODULES([libpng], [libpng >= 1.0.0], HAVE_LIBPNG=yes, HAVE_LIBPNG=no)
+-
+-                if test "x$HAVE_LIBPNG" = "xyes"; then                
+-	        	AC_DEFINE(HAVE_IMAGE_PNG, [1], [Define to 1 if you have libpng12])
+- 		        LIBS="$LIBS $libpng_LIBS"
+-                        CXXFLAGS="$CXXFLAGS $libpng_CFLAGS"
+-                        FEATURES="$FEATURES image-png"
+-                else
+-                        AC_MSG_RESULT([no])
+-                fi
++                AC_MSG_RESULT([no])
+         fi
+ else
+ 	AC_MSG_RESULT([no])
