@@ -1,6 +1,8 @@
 # Copyright 2010-2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+
 SUMMARY="A small and flexible window manager"
 DESCRIPTION="
 Pekwm is a window manager that once up on a time was based on the aewm++ window
@@ -42,7 +44,10 @@ UPSTREAM_DOCUMENTATION="
 ${HOMEPAGE}/files/${PN}/doc/${PV}/html/index.html
 ${HOMEPAGE}/files/${PN}/doc/${PV}/html/faq/answers.html"
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-shape --enable-xft --enable-xinerama --enable-xrandr --enable-image-xpm )
+DEFAULT_SRC_PREPARE_PATCHES=( -p0 "${FILES}"/${PN}-libpng.patch )
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --enable-shape --enable-xft --enable-xinerama --enable-xrandr --enable-image-xpm
+)
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     debug
     'jpeg image-jpeg'
