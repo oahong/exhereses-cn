@@ -1,6 +1,9 @@
 # Copyright 2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+require gtk-icon-cache
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.11 ] ]
+
 SUMMARY="A simple Japanese kana (Hiragana and Katakana) drill tool"
 DESCRIPTION="Kanatest is a Japanese kana (hiragana and katakana) simple flashcard tool. It offers
 fourteen lessons and three drill modes: hiragana, katakana, and mixed mode. The tool displays
@@ -15,7 +18,8 @@ DOWNLOADS="${HOMEPAGE}/${PNV}.tar.gz"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
+LANGUAGES=( de es fr hu it pl pt ru )
+MYOPTIONS="( linguas: ${LANGUAGES[@]} )"
 
 DEPENDENCIES="
     build:
@@ -27,4 +31,28 @@ DEPENDENCIES="
 "
 
 REMOTE_IDS="freecode:${PN}"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/003_gtk_ftbfs_fix.patch
+    "${FILES}"/004_enable_deprecated.patch
+)
+
+src_prepare() {
+    edo sed -e "s/pkg-config/${PKG_CONFIG}/" \
+        -i configure.ac \
+        -e "s@/usr/bin@/usr/$(exhost --target)/bin@g" \
+        -i po/Makefile.am
+    autotools_src_prepare
+}
+
+src_install() {
+    default
+
+    for i in ${LANGUAGES[@]} ; do
+        if ! option linguas:${i} ; then
+            edo rm -r "${IMAGE}"/usr/share/locale/${i}
+        fi
+    done
+    edo find "${IMAGE}"/usr/share/locale -type d -empty -delete
+}
 

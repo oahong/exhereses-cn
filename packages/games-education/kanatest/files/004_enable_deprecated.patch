@@ -1,0 +1,31 @@
+Description: Drop -DGTK_DISABLE_DEPRECATED for now
+Author: Colin Watson <cjwatson@ubuntu.com>
+Bug-Debian: http://bugs.debian.org/632604
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/770736
+Forwarded: no
+Last-Update: 2011-09-12
+Index: kanatest-0.4.8/src/Makefile.am
+===================================================================
+--- kanatest-0.4.8.orig/src/Makefile.am	2009-04-12 15:10:45.000000000 -0400
++++ kanatest-0.4.8/src/Makefile.am	2013-06-27 12:20:22.000000000 -0400
+@@ -1,6 +1,6 @@
+ REVISION := $(shell if test -e .svn; then echo -DREV=\"`LC_ALL=C svn info | sed -n '/^Rev/p'| sed -e 's/^Revision:\ //'`\"; fi;)
+ AM_CPPFLAGS = -Wall -DLOCALEDIR=\"$(datadir)/locale\" $(REVISION) \
+-			  -DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED
++			  -DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED
+ bin_PROGRAMS = kanatest
+ kanatest_SOURCES = about.c about.h \
+ 				   chart.c chart.h \
+Index: kanatest-0.4.8/src/Makefile.in
+===================================================================
+--- kanatest-0.4.8.orig/src/Makefile.in	2009-04-12 15:10:50.000000000 -0400
++++ kanatest-0.4.8/src/Makefile.in	2013-06-27 12:20:51.000000000 -0400
+@@ -149,7 +149,7 @@
+ var = @var@
+ REVISION := $(shell if test -e .svn; then echo -DREV=\"`LC_ALL=C svn info | sed -n '/^Rev/p'| sed -e 's/^Revision:\ //'`\"; fi;)
+ AM_CPPFLAGS = -Wall -DLOCALEDIR=\"$(datadir)/locale\" $(REVISION) \
+-			  -DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED
++			  -DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED
+ 
+ kanatest_SOURCES = about.c about.h \
+ 				   chart.c chart.h \

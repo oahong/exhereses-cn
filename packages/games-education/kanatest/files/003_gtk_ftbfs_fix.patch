@@ -1,0 +1,478 @@
+From: Tomasz Maka <pasp@users.sourceforge.net>
+Subject: Compilation fixes (based on patch by Miyako Miyamura)
+Origin: upstream, http://svn.gna.org/viewcvs/kanatest?view=rev&revision=60
+ Slightly modified to apply on 0.4.8
+Updated: 2013-06-28
+Index: kanatest-0.4.8/src/about.c
+===================================================================
+--- kanatest-0.4.8.orig/src/about.c	2013-06-27 18:16:59.000000000 -0400
++++ kanatest-0.4.8/src/about.c	2013-06-27 18:16:59.000000000 -0400
+@@ -430,7 +430,12 @@
+     g_signal_connect (G_OBJECT (close_button), "clicked",
+                         G_CALLBACK (about_close_button_cb), appGUI);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox), close_button);
++
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_default (close_button, TRUE);
++#else
+     GTK_WIDGET_SET_FLAGS (close_button, GTK_CAN_DEFAULT);
++#endif 
+ 
+     gtk_widget_grab_default (close_button);
+ 
+Index: kanatest-0.4.8/src/chart.c
+===================================================================
+--- kanatest-0.4.8.orig/src/chart.c	2013-06-27 18:16:50.000000000 -0400
++++ kanatest-0.4.8/src/chart.c	2013-06-27 18:16:59.000000000 -0400
+@@ -260,7 +260,12 @@
+     g_signal_connect (G_OBJECT (close_button), "clicked",
+                         G_CALLBACK (chart_close_button_cb), appGUI);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox), close_button);
++
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_default (close_button, TRUE);
++#else
+     GTK_WIDGET_SET_FLAGS (close_button, GTK_CAN_DEFAULT);
++#endif 
+ 
+     chart_display_kanas(HIRAGANA, appGUI);
+ 
+Index: kanatest-0.4.8/src/gui.c
+===================================================================
+--- kanatest-0.4.8.orig/src/gui.c	2013-06-27 18:16:50.000000000 -0400
++++ kanatest-0.4.8/src/gui.c	2013-06-27 18:16:59.000000000 -0400
+@@ -121,7 +121,7 @@
+     GUI *appGUI = (GUI *)user_data;
+ 
+     appGUI->tst->test_state = TRUE;
+-    g_timeout_add (1000, (GtkFunction) time_handler, appGUI);
++    g_timeout_add (1000, time_handler, appGUI);
+ 
+     gtk_widget_show (appGUI->char_label);
+     gtk_widget_hide (appGUI->logo_area);
+@@ -561,7 +561,11 @@
+     gtk_box_pack_start (GTK_BOX (hbox2), appGUI->timer_label, TRUE, TRUE, 0);
+ 
+     appGUI->stat_button = gui_stock_label_button(NULL, KANATEST_STOCK_BUTTON_STATISTICS);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (appGUI->stat_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (appGUI->stat_button, GTK_CAN_FOCUS);
++#endif 
+     g_signal_connect (G_OBJECT (appGUI->stat_button), "clicked",
+                         G_CALLBACK (show_statistics_window_cb), appGUI);
+     gtk_widget_show (appGUI->stat_button);
+@@ -570,7 +574,11 @@
+     gtk_widget_set_tooltip_text (appGUI->stat_button, _("Statistics"));
+ 
+     appGUI->chart_button = gui_stock_label_button(NULL, KANATEST_STOCK_BUTTON_CHART);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (appGUI->chart_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (appGUI->chart_button, GTK_CAN_FOCUS);
++#endif 
+     g_signal_connect (G_OBJECT (appGUI->chart_button), "clicked",
+                         G_CALLBACK (show_chart_window_cb), appGUI);
+     gtk_widget_show (appGUI->chart_button);
+@@ -579,7 +587,11 @@
+     gtk_widget_set_tooltip_text (appGUI->chart_button, _("Kana chart"));
+ 
+     appGUI->prefs_button = gui_stock_label_button(NULL, KANATEST_STOCK_BUTTON_OPTIONS);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (appGUI->prefs_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (appGUI->prefs_button, GTK_CAN_FOCUS);
++#endif 
+     g_signal_connect (G_OBJECT (appGUI->prefs_button), "clicked",
+                         G_CALLBACK (show_options_window_cb), appGUI);
+     gtk_widget_show (appGUI->prefs_button);
+@@ -588,7 +600,11 @@
+     gtk_widget_set_tooltip_text (appGUI->prefs_button, _("Options"));
+ 
+     appGUI->about_button = gui_stock_label_button(NULL, KANATEST_STOCK_BUTTON_ABOUT);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (appGUI->about_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (appGUI->about_button, GTK_CAN_FOCUS);
++#endif 
+     g_signal_connect (G_OBJECT (appGUI->about_button), "clicked",
+                         G_CALLBACK (show_about_window_cb), appGUI);
+     gtk_widget_show (appGUI->about_button);
+@@ -660,33 +676,57 @@
+     gtk_box_set_spacing (GTK_BOX (hbuttonbox), 5);
+ 
+     appGUI->start_button = gui_stock_label_button(_("Start"), GTK_STOCK_EXECUTE);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (appGUI->start_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (appGUI->start_button, GTK_CAN_FOCUS);
++#endif
+     g_signal_connect (G_OBJECT (appGUI->start_button), "clicked",
+                         G_CALLBACK (start_test_cb), appGUI);
+     gtk_widget_show (appGUI->start_button);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox), appGUI->start_button);
+     gtk_container_set_border_width (GTK_CONTAINER (appGUI->start_button), 4);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_default (appGUI->start_button, TRUE);
++#else
+     GTK_WIDGET_SET_FLAGS (appGUI->start_button, GTK_CAN_DEFAULT);
++#endif
+     gtk_widget_set_tooltip_text (appGUI->start_button, _("Press to begin testing..."));
+ 
+     appGUI->stop_button = gui_stock_label_button(_("Stop"), GTK_STOCK_STOP);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (appGUI->stop_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (appGUI->stop_button, GTK_CAN_FOCUS);
++#endif
+     g_signal_connect (G_OBJECT (appGUI->stop_button), "clicked",
+                         G_CALLBACK (stop_test_cb), appGUI);
+     gtk_widget_show (appGUI->stop_button);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox), appGUI->stop_button);
+     gtk_container_set_border_width (GTK_CONTAINER (appGUI->stop_button), 4);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_default (appGUI->stop_button, TRUE);
++#else
+     GTK_WIDGET_SET_FLAGS (appGUI->stop_button, GTK_CAN_DEFAULT);
++#endif
+     gtk_widget_set_tooltip_text (appGUI->stop_button, _("Press to stop testing..."));
+ 
+     appGUI->quit_button = gui_stock_label_button(_("Quit"), GTK_STOCK_QUIT);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (appGUI->quit_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (appGUI->quit_button, GTK_CAN_FOCUS);
++#endif
+     g_signal_connect (G_OBJECT (appGUI->quit_button), "clicked",
+                         G_CALLBACK (gui_close_window_cb), appGUI);
+     gtk_widget_show (appGUI->quit_button);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox), appGUI->quit_button);
+     gtk_container_set_border_width (GTK_CONTAINER (appGUI->quit_button), 4);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_default (appGUI->quit_button, TRUE);
++#else
+     GTK_WIDGET_SET_FLAGS (appGUI->quit_button, GTK_CAN_DEFAULT);
++#endif
+     gtk_widget_set_tooltip_text (appGUI->quit_button, _("Exit!"));
+ 
+     gui_disable_test (appGUI);
+Index: kanatest-0.4.8/src/gui_utils.c
+===================================================================
+--- kanatest-0.4.8.orig/src/gui_utils.c	2013-06-27 18:16:50.000000000 -0400
++++ kanatest-0.4.8/src/gui_utils.c	2013-06-27 18:16:59.000000000 -0400
+@@ -294,7 +294,7 @@
+ GSList *tags = NULL, *tagp = NULL;
+ GtkTextTag *tag;
+ gchar *link;
+-gint slink;
++size_t slink;
+ 
+     if (ev->type != GDK_BUTTON_RELEASE) {
+         return FALSE;
+@@ -322,7 +322,7 @@
+     for (tagp = tags;  tagp != NULL;  tagp = tagp->next) {
+ 
+         tag = tagp->data;
+-        slink = (gint) g_object_get_data (G_OBJECT (tag), "link");
++        slink = (size_t)g_object_get_data (G_OBJECT (tag), "link");
+ 
+         if (slink != 0) {
+             link = g_slist_nth_data (links_list, slink);
+Index: kanatest-0.4.8/src/options.c
+===================================================================
+--- kanatest-0.4.8.orig/src/options.c	2013-06-27 18:16:50.000000000 -0400
++++ kanatest-0.4.8/src/options.c	2013-06-27 18:16:59.000000000 -0400
+@@ -105,13 +105,13 @@
+ void
+ kana_selected_cb (GtkToggleButton *button, gpointer user_data) {
+ 
+-gint pos;
++size_t pos;
+ 
+     MESSAGE *msg = (MESSAGE *)user_data;
+ 
+     if (msg->appGUI->opt->disable_toggles == FALSE) {
+ 
+-        pos = (int) msg->data;
++        pos = (size_t) msg->data;
+ 
+         if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(button)) == TRUE) {
+             config.user_defined_lesson[pos] = '+';
+@@ -315,7 +315,7 @@
+ row_button_select_cb (GtkWidget *widget, gpointer user_data) {
+ 
+     MESSAGE *msg = (MESSAGE *)user_data;
+-    select_deselect_row ((gint) msg->data, TRUE, msg->appGUI);
++    select_deselect_row ((size_t) msg->data, TRUE, msg->appGUI);
+ }
+ 
+ /*--------------------------------------------------------------------*/
+@@ -324,7 +324,7 @@
+ row_button_deselect_cb (GtkWidget *widget, gpointer user_data) {
+ 
+     MESSAGE *msg = (MESSAGE *)user_data;
+-    select_deselect_row ((gint) msg->data, FALSE, msg->appGUI);
++    select_deselect_row ((size_t) msg->data, FALSE, msg->appGUI);
+ }
+ 
+ /*--------------------------------------------------------------------*/
+@@ -521,7 +521,11 @@
+ 
+     appGUI->opt->hiragana_radiobutton = gtk_radio_button_new_with_mnemonic (NULL, _("Hiragana"));
+     gtk_widget_show (appGUI->opt->hiragana_radiobutton);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (appGUI->opt->hiragana_radiobutton, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (appGUI->opt->hiragana_radiobutton, GTK_CAN_FOCUS);
++#endif
+     gtk_box_pack_start (GTK_BOX (hbox1), appGUI->opt->hiragana_radiobutton, FALSE, FALSE, 0);
+     gtk_radio_button_set_group (GTK_RADIO_BUTTON (appGUI->opt->hiragana_radiobutton), radiobutton_group);
+     radiobutton_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (appGUI->opt->hiragana_radiobutton));
+@@ -530,7 +534,11 @@
+ 
+     katakana_radiobutton = gtk_radio_button_new_with_mnemonic (NULL, _("Katakana"));
+     gtk_widget_show (katakana_radiobutton);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (katakana_radiobutton, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (katakana_radiobutton, GTK_CAN_FOCUS);
++#endif
+     gtk_box_pack_start (GTK_BOX (hbox1), katakana_radiobutton, FALSE, FALSE, 0);
+     gtk_radio_button_set_group (GTK_RADIO_BUTTON (katakana_radiobutton), radiobutton_group);
+     radiobutton_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (katakana_radiobutton));
+@@ -669,14 +677,22 @@
+     g_signal_connect (G_OBJECT (cancel_button), "clicked",
+                         G_CALLBACK (auto_select_close_button_cb), appGUI);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox), cancel_button);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_default (cancel_button, TRUE);
++#else
+     GTK_WIDGET_SET_FLAGS (cancel_button, GTK_CAN_DEFAULT);
++#endif
+ 
+     appGUI->opt->select_button = gui_stock_label_button(_("Select"), GTK_STOCK_INDEX);
+     gtk_widget_show (appGUI->opt->select_button);
+     g_signal_connect (G_OBJECT (appGUI->opt->select_button), "clicked",
+                         G_CALLBACK (auto_select_select_button_cb), appGUI);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox), appGUI->opt->select_button);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_default(appGUI->opt->select_button, TRUE);
++#else
+     GTK_WIDGET_SET_FLAGS (appGUI->opt->select_button, GTK_CAN_DEFAULT);
++#endif
+ 
+     if (config.hiragana_mode == TRUE) {
+         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(appGUI->opt->hiragana_radiobutton), TRUE);
+@@ -746,7 +762,11 @@
+     gtk_container_add (GTK_CONTAINER (appGUI->opt->options_window), vbox1);
+ 
+     appGUI->opt->notebook = gtk_notebook_new();
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (appGUI->opt->notebook, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (appGUI->opt->notebook, GTK_CAN_FOCUS);
++#endif
+     gtk_widget_show (appGUI->opt->notebook);
+     gtk_notebook_set_tab_pos (GTK_NOTEBOOK(appGUI->opt->notebook), GTK_POS_TOP);
+     gtk_box_pack_start (GTK_BOX (vbox1), appGUI->opt->notebook, TRUE, TRUE, 0);
+@@ -823,7 +843,11 @@
+                     (GtkAttachOptions) (0), 0, 0);
+ 
+     combobox_ca_timeout = gtk_combo_box_new_text ();
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (combobox_ca_timeout, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (combobox_ca_timeout, GTK_CAN_FOCUS);
++#endif
+     gtk_widget_show (combobox_ca_timeout);
+     g_signal_connect (G_OBJECT (combobox_ca_timeout), "changed",
+                       G_CALLBACK (options_combobox_ca_timeout_handler_cb), NULL);
+@@ -959,12 +983,16 @@
+ 
+                 gtk_widget_show (appGUI->opt->check_buttons[pos]);
+ 
+-                msg[pos].data = (gpointer) pos;
++                msg[pos].data = (gpointer)((size_t)pos);
+                 msg[pos].appGUI = appGUI;
+                 g_signal_connect (G_OBJECT (appGUI->opt->check_buttons[pos]), "toggled",
+                                   G_CALLBACK (kana_selected_cb), &msg[pos]);
+ 
++#if (GTK_MINOR_VERSION >= 22)
++                gtk_widget_set_can_focus (appGUI->opt->check_buttons[pos], FALSE);
++#else
+                 GTK_WIDGET_UNSET_FLAGS (appGUI->opt->check_buttons[pos], GTK_CAN_FOCUS);
++#endif
+                 gtk_container_add (GTK_CONTAINER (frames[pos]), appGUI->opt->check_buttons[pos]);
+ 
+                 if(config.user_defined_lesson[pos] == '+') {
+@@ -980,14 +1008,18 @@
+ 
+         appGUI->opt->row_button_s[j] = gui_stock_label_button (NULL, GTK_STOCK_APPLY);
+         gtk_button_set_relief (GTK_BUTTON (appGUI->opt->row_button_s[j]), GTK_RELIEF_NONE);
++#if (GTK_MINOR_VERSION >= 22)
++        gtk_widget_set_can_focus (appGUI->opt->row_button_s[j], FALSE);
++#else
+         GTK_WIDGET_UNSET_FLAGS (appGUI->opt->row_button_s[j], GTK_CAN_FOCUS);
++#endif
+         gtk_widget_set_tooltip_text (appGUI->opt->row_button_s[j], _("Select all kanas in row"));
+         gtk_widget_show (appGUI->opt->row_button_s[j]);
+         gtk_table_attach (GTK_TABLE (table), appGUI->opt->row_button_s[j], i, i+1, j, j+1,
+                           (GtkAttachOptions) (GTK_FILL),
+                           (GtkAttachOptions) (GTK_FILL), 0, 0);
+ 
+-        msg2[j].data = (gpointer) j;
++        msg2[j].data = (gpointer)((size_t)j);
+         msg2[j].appGUI = appGUI;
+         g_signal_connect (G_OBJECT (appGUI->opt->row_button_s[j]), "clicked",
+                           G_CALLBACK (row_button_select_cb), &msg2[j]);
+@@ -996,7 +1028,11 @@
+ 
+         appGUI->opt->row_button_c[j] = gui_stock_label_button (NULL, GTK_STOCK_CLEAR);
+         gtk_button_set_relief (GTK_BUTTON (appGUI->opt->row_button_c[j]), GTK_RELIEF_NONE);
++#if (GTK_MINOR_VERSION >= 22)
++        gtk_widget_set_can_focus (appGUI->opt->row_button_c[j], FALSE);
++#else
+         GTK_WIDGET_UNSET_FLAGS (appGUI->opt->row_button_c[j], GTK_CAN_FOCUS);
++#endif
+         gtk_widget_set_tooltip_text (appGUI->opt->row_button_c[j], _("Deselect all kanas in row"));
+         gtk_widget_show (appGUI->opt->row_button_c[j]);
+         gtk_table_attach (GTK_TABLE (table), appGUI->opt->row_button_c[j], i, i+1, j, j+1,
+@@ -1026,7 +1062,11 @@
+     gtk_misc_set_padding (GTK_MISC (appGUI->opt->number_of_kanas_label), 4, 0);
+ 
+     auto_select_button = gtk_button_new_with_label (_("Statistics based selection"));
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (auto_select_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (auto_select_button, GTK_CAN_FOCUS);
++#endif
+     gtk_widget_show (auto_select_button);
+     gtk_box_pack_end (GTK_BOX (hbox), auto_select_button, FALSE, FALSE, 0);
+     g_signal_connect (G_OBJECT (auto_select_button), "clicked",
+@@ -1044,7 +1084,11 @@
+     gtk_misc_set_padding (GTK_MISC (label), 4, 0);
+ 
+     combobox_dtf = gtk_combo_box_new_text ();
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (combobox_dtf, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (combobox_dtf, GTK_CAN_FOCUS);
++#endif
+     gtk_widget_show (combobox_dtf);
+     gtk_box_pack_start (GTK_BOX (hbox), combobox_dtf, FALSE, FALSE, 0);
+     g_signal_connect (G_OBJECT (combobox_dtf), "changed",
+@@ -1068,21 +1112,33 @@
+     gtk_misc_set_padding (GTK_MISC (label), 4, 0);
+ 
+     select_all_button = gtk_button_new_with_label (_("All"));
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (select_all_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (select_all_button, GTK_CAN_FOCUS);
++#endif
+     gtk_widget_show (select_all_button);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox_s), select_all_button);
+     g_signal_connect (G_OBJECT (select_all_button), "clicked",
+                       G_CALLBACK (select_all_action_cb), appGUI);
+ 
+     select_none_button = gtk_button_new_with_label (_("None"));
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (select_none_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (select_none_button, GTK_CAN_FOCUS);
++#endif
+     gtk_widget_show (select_none_button);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox_s), select_none_button);
+     g_signal_connect (G_OBJECT (select_none_button), "clicked",
+                       G_CALLBACK (select_none_action_cb), appGUI);
+ 
+     invert_selection_button = gtk_button_new_with_label (_("Invert"));
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus (invert_selection_button, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS (invert_selection_button, GTK_CAN_FOCUS);
++#endif
+     gtk_widget_show (select_none_button);
+     gtk_widget_show (invert_selection_button);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox_s), invert_selection_button);
+@@ -1103,7 +1159,11 @@
+     g_signal_connect (G_OBJECT (close_button), "clicked",
+                       G_CALLBACK (options_close_button_cb), appGUI);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox), close_button);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_default (close_button, TRUE);
++#else
+     GTK_WIDGET_SET_FLAGS (close_button, GTK_CAN_DEFAULT);
++#endif
+ 
+     switch(config.repeat_mode) {
+         case REPEAT_ALL:
+Index: kanatest-0.4.8/src/stats.c
+===================================================================
+--- kanatest-0.4.8.orig/src/stats.c	2013-06-27 18:16:50.000000000 -0400
++++ kanatest-0.4.8/src/stats.c	2013-06-27 18:16:59.000000000 -0400
+@@ -84,7 +84,7 @@
+ 
+     info_dialog = gtk_message_dialog_new (GTK_WINDOW(appGUI->sts->stat_window),
+                                           GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+-                                          GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, buffer);
++                                          GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, "%s", buffer);
+ 
+     gtk_window_set_title(GTK_WINDOW(info_dialog), _("Question"));
+     gtk_widget_show (info_dialog);
+@@ -148,7 +148,7 @@
+     MESSAGE *msg = (MESSAGE *)user_data;
+ 
+     msg->appGUI->sts->old_column = config.stats_sort_column;
+-    config.stats_sort_column = (gint) msg->data;
++    config.stats_sort_column = (size_t) msg->data;
+ 
+     if (msg->appGUI->sts->disable_dir == FALSE) {
+ 
+@@ -405,7 +405,11 @@
+     gtk_container_add (GTK_CONTAINER (appGUI->sts->stat_window), vbox1);
+ 
+     appGUI->sts->notebook = gtk_notebook_new ();
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_focus(appGUI->sts->notebook, FALSE);
++#else
+     GTK_WIDGET_UNSET_FLAGS(appGUI->sts->notebook, GTK_CAN_FOCUS);
++#endif
+     gtk_widget_show (appGUI->sts->notebook);
+     gtk_box_pack_start (GTK_BOX (vbox1), appGUI->sts->notebook, TRUE, TRUE, 4);
+ 
+@@ -449,7 +453,7 @@
+                                 stats_renderer, "text", i, NULL);
+         gtk_tree_view_column_set_sort_column_id (stats_column[i], i);
+         gtk_tree_view_append_column (GTK_TREE_VIEW(stats_treeview), stats_column[i]);
+-        msg[i].data = (gpointer)i;
++        msg[i].data = (gpointer)((size_t)i);
+         msg[i].appGUI = appGUI;
+         g_signal_connect (G_OBJECT(stats_column[i]), "clicked",
+                           G_CALLBACK(stats_column_clicked_cb), &msg[i]);
+@@ -638,8 +642,11 @@
+     g_signal_connect (G_OBJECT (close_button), "clicked",
+                         G_CALLBACK (stats_window_close_cb), appGUI);
+     gtk_container_add (GTK_CONTAINER (hbuttonbox), close_button);
++#if (GTK_MINOR_VERSION >= 22)
++    gtk_widget_set_can_default (close_button, TRUE);
++#else
+     GTK_WIDGET_SET_FLAGS (close_button, GTK_CAN_DEFAULT);
+-
++#endif
+     if (appGUI->sts->active_tab != -1) {
+         gtk_notebook_set_current_page (GTK_NOTEBOOK (appGUI->sts->notebook), appGUI->sts->active_tab);
+     }
+Index: kanatest-0.4.8/src/test.c
+===================================================================
+--- kanatest-0.4.8.orig/src/test.c	2009-04-12 15:10:45.000000000 -0400
++++ kanatest-0.4.8/src/test.c	2013-06-27 18:17:55.000000000 -0400
+@@ -538,7 +538,7 @@
+ 
+     info_dialog = gtk_message_dialog_new_with_markup (GTK_WINDOW(appGUI->main_window),
+                                                       GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+-                                                      GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE, message);
++                                                      GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE, "%s", message);
+ 
+     gtk_window_set_title (GTK_WINDOW(info_dialog), _("Information"));
+     gtk_widget_show (info_dialog);
