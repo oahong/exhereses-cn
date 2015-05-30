@@ -22,13 +22,14 @@ DOWNLOADS="${HOMEPAGE}/projects/${PN}/files/${PNV}.tar.bz2"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="debug jpeg png"
+MYOPTIONS="debug jpeg"
 
 DEPENDENCIES="
     build:
         virtual/pkg-config
         x11-proto/xproto
     build+run:
+        media-libs/libpng[>=1.2.0]
         x11-libs/libX11
         x11-libs/libXext
         x11-libs/libXft[>=2.0.0]
@@ -36,7 +37,6 @@ DEPENDENCIES="
         x11-libs/libXpm
         x11-libs/libXrandr[>=1.2.0]
         jpeg? ( media-libs/jpeg )
-        png? ( media-libs/libpng[>=1.2.0] )
 "
 
 REMOTE_IDS="freecode:${PN}"
@@ -46,12 +46,12 @@ ${HOMEPAGE}/files/${PN}/doc/${PV}/html/faq/answers.html"
 
 DEFAULT_SRC_PREPARE_PATCHES=( -p0 "${FILES}"/${PN}-libpng.patch )
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-    --enable-shape --enable-xft --enable-xinerama --enable-xrandr --enable-image-xpm
+    --enable-{shape,xft,xinerama,xrandr}
+    --enable-image-{xpm,png}
 )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     debug
     'jpeg image-jpeg'
-    'png image-png'
 )
 
 src_install() {
