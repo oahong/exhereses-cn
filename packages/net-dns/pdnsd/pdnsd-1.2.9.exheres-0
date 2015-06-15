@@ -9,7 +9,7 @@ DOWNLOADS="${HOMEPAGE%/*}/releases/${PNV}-par.tar.gz"
 LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS="baselayout systemd"
+MYOPTIONS="baselayout"
 
 DEPENDENCIES=""
 
