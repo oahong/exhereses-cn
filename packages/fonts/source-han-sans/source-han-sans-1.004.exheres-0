@@ -1,9 +1,18 @@
 # Copyright 2014 Hong Hao  <oahong@oahong.me>
 # Distributed under the terms of the GNU General Purpose License v2
 
-FONT=adobe
-MY_PNV=SourceHanSansOTF-${PV}
-require xfont sourceforge [ suffix=zip project=${PN}.adobe ]
+declare -A PACKAGE
+LINGUAS=( ja ko zh_CN zh_TW )
+PACKAGE=(
+	[ja]=SourceHanSansJ
+	[ko]=SourceHanSansK
+	[zh_CN]=SourceHanSansSC
+	[zh_TW]=SourceHanSansTC
+)
+BASE_URI="http://oahong.me/~oahong/distfiles"
+
+FONT=adobe-fonts
+require xfont github [ user=$FONT ]
 
 SUMMARY="A set of Pan-CJK fonts designed to complement Source Sans Pro"
 DESCRIPTION="
@@ -11,14 +20,19 @@ Source Han Sans is a sans serif Pan-CJK font family that is offered in seven wei
 Light, Normal, Regular, Medium, Bold, and Heavy—and in several OpenType/CFF-based deployment
 configurations to accommodate various system requirements or limitations. As the name suggests,
 Pan-CJK fonts are intended to support the characters necessary to render or display text in
-Simplified Chinese, Traditional Chinese, Japanese, and Korean.
-"
+Simplified Chinese, Traditional Chinese, Japanese, and Korean."
+DOWNLOADS=""
+
+for lang in ${LINGUAS[@]} ; do
+    DOWNLOADS+=" linguas:${lang}? ( ${BASE_URI}/${PACKAGE[$lang]}-${PV}.zip )"
+done
 
 LICENCES="Apache-2.0"
 SLOT="0"
 PLATFORMS="~amd64"
+MYOPTIONS="( linguas: ${LINGUAS[@]} ) [[ number-selected = at-least-one ]]"
 
-WORK=${WORKBASE}/${MY_PNV}
+WORK=${WORKBASE}
 
 src_compile() {
     :
@@ -28,7 +42,6 @@ src_install() {
     emagicdocs
 
     insinto /usr/share/fonts/X11/${FONT}
-    doins *.otf
+    doins SourceHanSans*/*.otf
     fix_fonts
 }
-
