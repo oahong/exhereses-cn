@@ -1,10 +1,9 @@
-# Copyright 2013 Hong Hao <oahong@gmail.com>
+# Copyright 2013-2015 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-REV=a18
+REV=a18p1
 MY_PNV=${PN}_${PV}~${REV}_amd64
-FONT=${PN}
-require xfont gtk-icon-cache freedesktop-mime freedesktop-desktop
+require gtk-icon-cache freedesktop-mime freedesktop-desktop
 
 SUMMARY="Kingsoft office for Linux"
 DESCRIPTION="
@@ -12,10 +11,7 @@ Kingsoft office is a Microsoft Office compatible suite of applications, which pr
 Word processing (wps), Presentation (wpp) and spreadsheets (et) software,
 It has been rewritten in Qt4 framework"
 HOMEPAGE="http://wps-community.org"
-DOWNLOADS="
-    http://kdl.cc.ksosoft.com/wps-community/download/${REV%p*}/${MY_PNV}.deb
-    http://kdl.cc.ksosoft.com/wps-community/download/a15/${FONT}-fonts_1.0_all.deb
-"
+DOWNLOADS="http://kdl.cc.ksosoft.com/wps-community/download/${REV%p*}/${MY_PNV}.deb"
 
 LICENCES="KINGSOFT-EULA"
 SLOT="0"
@@ -46,16 +42,15 @@ pkg_setup() {
     exdirectory --allow /opt
 }
 
+src_prepare() {
+    edo sed -e "s@readelf@${CHOST}-&@" -i usr/bin/wps_error_check.sh
+}
+
 src_unpack() {
     edo mkdir -pv "${WORK}"
     for a in ${ARCHIVES} ; do
         edo dpkg -X "${FETCHEDDIR}"/${a} "${WORK}"
     done
-}
-
-src_prepare() {
-    edo mkdir -pv "${WORK}"/usr/share/fonts/X11
-    edo mv "${WORK}"/usr/share/fonts/{,X11}/wps-office
 }
 
 src_install() {
@@ -64,12 +59,9 @@ src_install() {
     edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
     edo rmdir "${IMAGE}"/usr/share/icons/hicolor/32x32/apps
     edo rm -r "${IMAGE}"/etc/fonts/conf.d
-
-    xfont_src_install
 }
 
 pkg_postinst() {
-    xfont_pkg_postinst
     gtk-icon-cache_pkg_postinst
     freedesktop-mime_pkg_postinst
     freedesktop-desktop_pkg_postinst
@@ -83,7 +75,6 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-    xfont_pkg_postrm
     gtk-icon-cache_pkg_postrm
     freedesktop-mime_pkg_postrm
     freedesktop-desktop_pkg_postrm
