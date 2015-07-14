@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user=muennich tag=v${PV} ]
-export_exlib_phases src_compile
+export_exlib_phases src_compile src_install
 
 SUMMARY="Simple (or small or suckless) X Image Viewer"
 DESCRIPTION="
@@ -39,7 +39,7 @@ DEFAULT_SRC_COMPILE_PARAMS=(
     CC=${CC} LDFLAGS=${LDFLAGS} CFLAGS=${CFLAGS}
 )
 DEFAULT_SRC_INSTALL_PARAMS=(
-    PREFIX=/usr/$(exhost --target)
+    PREFIX=/usr
     MANPREFIX=/usr/share/man
 )
 
@@ -47,5 +47,11 @@ sxiv_src_compile() {
     #TODO: save and restore config.h
     edo cp config{.def,}.h
     default
+}
+
+sxiv_src_install() {
+    default
+    dodir /usr/$(exhost --target)
+    edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
 }
 
