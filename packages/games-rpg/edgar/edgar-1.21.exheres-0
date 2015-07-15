@@ -1,7 +1,7 @@
 # Copyright 2011-2014 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require gtk-icon-cache
+require gtk-icon-cache github [ user=riksweeney ]
 
 SUMMARY="The legend of edgar"
 DESCRIPTION="A 2D platform game with a persistent world. When Edgar's father fails to return home
@@ -11,7 +11,6 @@ evil sorcerer who lives in a fortress beyond the forbidden swamp.
 In The Legend of Edgar, you take on the role of Edgar as he ventures across the world, battling
 fearsome creatures and solving puzzles whilst trying to find and rescue his father."
 HOMEPAGE="http://www.parallelrealities.co.uk/p/legend-of-edgar.html"
-DOWNLOADS="mirror://sourceforge/legendofedgar/${PNV}-1.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
