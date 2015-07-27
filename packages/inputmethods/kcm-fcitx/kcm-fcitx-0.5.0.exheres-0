@@ -1,0 +1,32 @@
+# Copyright 2011-2015 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake github
+
+SUMMARY="KDE Config Module for Fcitx"
+DOWNLOADS="http://download.fcitx-im.org/${PN}/${PNV}.tar.xz"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        app-arch/xz
+        virtual/pkg-config
+        sys-devel/gettext
+    build+run:
+        inputmethods/fcitx[dbus][>=4.2.8]
+        x11-libs/libxkbfile
+        kde-frameworks/kcoreaddons
+        kde-frameworks/kwidgetsaddons
+        kde-frameworks/kcmutils
+        kde-frameworks/kitemviews
+        kde-frameworks/ki18n
+        kde-frameworks/kio
+        kde-frameworks/knewstuff
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=( -DCONFIG_INSTALL_DIR:PATH=/etc )
+
