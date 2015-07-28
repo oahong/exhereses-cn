@@ -10,7 +10,7 @@ DOWNLOADS="http://download.fcitx-im.org/data/model.text.20130308.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS="qt4"
+MYOPTIONS="qt4 [[ description = [ Build dict manager ] ]]"
 
 DEPENDENCIES="
     build:
@@ -25,9 +25,13 @@ DEPENDENCIES="
         qt4? ( x11-libs/qt:4[webkit] )
 "
 
-CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( "qt4 QT" )
+CMAKE_SRC_CONFIGURE_PARAMS=( -DCMAKE_INSTALL_PREFIX:PATH=/usr )
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'qt4 QT' )
 
 fcitx-libpinyin_src_prepare() {
+    cmake_src_prepare
+    edo sed -e "s#\${CMAKE_INSTALL_PREFIX}#/usr/$(exhost --target)#" \
+        -i CMakeLists.txt
     edo cp "${FETCHEDDIR}"/model.text.20130308.tar.gz "${WORKBASE}"/${PNVR}/data
 }
 
