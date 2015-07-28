@@ -144,6 +144,7 @@ fcitx_src_prepare() {
         -e '/UseDoxygen/d' \
         -i CMakeLists.txt
     edo sed -e "/FCITX_INCLUDEDIR/s#\${CMAKE_INSTALL_PREFIX}#&/$(exhost --target)#" \
+        -e "s#share/locale#/usr/&#g" \
         -i cmake/FcitxMacro.cmake
 
     for d in ${pydata} ${pystroke}; do
