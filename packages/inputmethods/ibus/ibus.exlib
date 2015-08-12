@@ -5,7 +5,7 @@
 
 require gconf gtk-icon-cache github \
     python [ blacklist=none multibuild=false ] \
-    vala [ with_opt=true vala_dep=true vala_slots=[ 0.28 0.24 0.22 ] ] \
+    vala [ with_opt=true vala_dep=true vala_slots=[ 0.30 0.28 ] ] \
     autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 
 export_exlib_phases src_prepare src_configure src_install pkg_postinst pkg_postrm
