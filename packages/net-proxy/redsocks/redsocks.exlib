@@ -1,0 +1,23 @@
+# Copyright 2015 Dai Ming <radaiming@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Transparent socks redirector"
+HOMEPAGE="http://darkk.net.ru/redsocks/"
+DOWNLOADS="https://github.com/darkk/redsocks/archive/release-${PV}.zip"
+
+LICENCES="Apache-2.0"
+SLOT="0"
+WORK="${WORKBASE}/${PN}-release-${PV}"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/libevent
+"
+
+src_install() {
+    dobin redsocks
+    dodir /etc/redsocks/
+    insinto /etc/redsocks/
+    doins redsocks.conf.example
+}
+
