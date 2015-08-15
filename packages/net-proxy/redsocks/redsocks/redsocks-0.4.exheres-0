@@ -1,0 +1,5 @@
+# Copyright 2015 radaiming <radaiming@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+PLATFORMS="~amd64"
+require redsocks
