@@ -5,3 +5,7 @@ require warzone2100
 
 PLATFORMS="~amd64 ~x86"
 
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/${PN}-glew-1.12.patch
+)
+

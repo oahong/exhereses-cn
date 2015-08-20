@@ -1,6 +1,9 @@
 # Copyright 2009-2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+export_exlib_phases src_prepare
+
 SUMMARY="A 3D realtime strategy game on the future Earth"
 DESCRIPTION="
 In Warzone 2100 you command the forces of \"The Project\" in a battle to rebuild
@@ -65,7 +68,7 @@ DEPENDENCIES+="
 REMOTE_IDS="sourceforge:${PN} freecode:${PN}"
 UPSTREAM_DOCUMENTATION="http://guide.wz2100.net"
 
-# SDL backend also needs qt4 
+# SDL backend also needs qt4
 DEFAULT_SRC_CONFIGURE_PARAMS=( --with-backend=qt )
 
 DEFAULT_SRC_CONFIGURE_PARAMS+=(
@@ -75,4 +78,9 @@ DEFAULT_SRC_CONFIGURE_PARAMS+=(
 )
 # http://forums.wz2100.net/viewtopic.php?f=4&t=3126
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'debug debug relaxed' )
+
+warzone2100_src_prepare() {
+    edo sed -e '/AC_PROG_RANLIB/a AM_PROG_AR' -i configure.ac
+    autotools_src_prepare
+}
 
