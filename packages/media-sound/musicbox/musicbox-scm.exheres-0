@@ -1,0 +1,20 @@
+# Copyright 2015 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require setup-py [ import=setuptools blacklist=3 ] github [ user=darknessomi ]
+SUMMARY="A sexy cli netease musicbox"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/requests[python_abis:*(-)?]
+        dev-python/beautifulsoup4[python_abis:*(-)?]
+        dev-python/pycrypto
+    run:
+        media-sound/mpg123
+"
+
