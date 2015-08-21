@@ -6,13 +6,13 @@ require github [ user=${PN} ] setup-py [ import=setuptools ]
 SUMMARY="A fast tunnel proxy that helps you bypass firewalls"
 DOWNLOADS="https://pypi.python.org/packages/source/s/${PN}/${PNV}.tar.gz"
 
-LICENCES="MIT"
+LICENCES="Apache-2.0"
 SLOT="0"
 MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        dev-python/M2Crypto
+        virtual/libssl
 "
 
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/wiki"
