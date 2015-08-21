@@ -7,27 +7,28 @@
 require systemd-service
 
 SUMMARY="A protocol for securing communications between a client and a DNS resolver"
-HOMEPAGE="http://dnscrypt.org/"
-DOWNLOADS="https://download.dnscrypt.org/dnscrypt-proxy/${PN}-${PV}.tar.gz"
+HOMEPAGE="http://dnscrypt.org"
+DOWNLOADS="https://download.dnscrypt.org/${PN}/${PNV}.tar.gz"
 
-LICENCES="ISC"
+LICENCES="ISC BSD-3 [[ note = [ libevent-modified ] ]]"
 SLOT="0"
-MYOPTIONS="
-    systemd [[ description = [ Add support for the systemd init daemon (usually by installing units (configuration files)). ] ]]
-"
+MYOPTIONS="systemd"
+
+# FIXME: Automagic depends on ldns
 DEPENDENCIES="
     build+run:
-        dev-libs/libsodium
+        dev-libs/libsodium[>=0.7.0]
 "
 
-src_configure() {
-    econf $(option systemd && echo '--enable-systemd')
-}
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
+    systemd
+)
 
 src_install() {
     default
     option systemd && install_systemd_files
 
-    insinto /etc/conf.d/
+    insinto /etc/conf.d
     doins "${FILES}/dnscrypt-proxy"
 }
+
