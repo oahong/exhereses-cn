@@ -1,17 +1,16 @@
 # Copyright 2008-2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require cmake
 
-export_exlib_phases src_install
+require cmake [ api=2 ] github [ user=mytbk tag=${PVR/-/.} ]
+
+export_exlib_phases src_prepare src_install
 
 SUMMARY="A modern terminal emulator for Linux"
 DESCRIPTION="
 FQTerm is a cross-platform terminal emulator program which supports
 telnet/ssh1/ssh2 protocols and can process ANSI control sequences. It
 can be used to login BBS sites or *NIX hosts."
-HOMEPAGE="http://fqterm.googlecode.com"
-DOWNLOADS="${HOMEPAGE}/files/QQWry.Dat.zip "
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -21,19 +20,29 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-lang/python:=[>=2.5]
-        dev-libs/openssl
         sys-sound/alsa-lib
+        virtual/libssl
         x11-libs/libX11
         x11-libs/qt:4[X(+)][ssl(+)]
 "
 
+CMAKE_SOURCE=${WORKBASE}/${PN}-${PVR/-/.}
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/Use-CMAKE_INSTALL_FULL_DATAROOTDIR.patch
+)
 DEFAULT_SRC_INSTALL_EXCLUDE=( README.txt )
+
+fqterm_src_prepare() {
+    cmake_src_prepare
+    edo sed -e '/Icon=/s:/usr/local:/usr:' -i res/${PN}.desktop
+}
 
 fqterm_src_install() {
     cmake_src_install
-
-    # IP location database file
-    insinto /usr/share/FQTerm
-    doins "${WORKBASE}"/QQWry.Dat
+    herebin ${PN} <<EOF
+export FQTERM_RESOURCE=/usr/share/FQTerm
+/usr/x86_64-pc-linux-gnu/bin/fqterm.bin \$@
+EOF
 }
 

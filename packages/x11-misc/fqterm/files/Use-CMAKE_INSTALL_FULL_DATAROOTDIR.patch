@@ -1,0 +1,29 @@
+--- fqterm/CMakeLists.txt.linux.orig	2015-08-12 13:28:41.256298734 +0800
++++ fqterm/CMakeLists.txt.linux	2015-08-12 13:31:30.730965855 +0800
+@@ -118,7 +118,7 @@
+ 
+ INSTALL(
+   DIRECTORY ${CMAKE_SOURCE_DIR}/res/
+-  DESTINATION share/FQTerm/
++  DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/FQTerm/
+   DIRECTORY_PERMISSIONS
+               OWNER_EXECUTE OWNER_WRITE OWNER_READ
+               GROUP_EXECUTE GROUP_READ
+@@ -133,7 +133,7 @@
+ 
+ INSTALL(
+   FILES ${fqterm_qm_files}
+-  DESTINATION share/FQTerm/dict/
++  DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/FQTerm/dict/
+   PERMISSIONS
+       OWNER_WRITE OWNER_READ
+       GROUP_READ
+@@ -142,7 +142,7 @@
+ 
+ INSTALL(
+   FILES res/fqterm.desktop
+-  DESTINATION share/applications
++  DESTINATION ${CMAKE_INSTALL_FULL_DATAROOTDIR}/applications
+ )
+ 
+ SET(CPACK_PACKAGE_CONTACT FireLakeWalker@gmail.com)
