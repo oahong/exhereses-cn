@@ -6,6 +6,7 @@
 require gconf gtk-icon-cache github \
     python [ blacklist=none multibuild=false ] \
     vala [ with_opt=true vala_dep=true vala_slots=[ 0.30 0.28 ] ] \
+    option-renames [ renames=[ 'gtk3 gtk' ] ] \
     autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 1.13 ] ]
 
 export_exlib_phases src_prepare src_configure src_install pkg_postinst pkg_postrm
@@ -17,9 +18,12 @@ It also may help developers to develop input method easily."
 
 LICENCES="LGPL-2.1"
 SLOT="0"
-MYOPTIONS="gnome gobject-introspection gtk-doc
-    gtk [[ description = [ Build GTK+ 2 immodule ] ]]
-    gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
+MYOPTIONS="gnome gobject-introspection gtk gtk-doc
+    gtk? (
+        ( providers: gtk2 [[ description = [ Build GTK+ 2 immodule ] ]]
+                     gtk3 [[ description = [ Build GTK+ 3 immodule ] ]]
+        ) [[ number-selected = at-least-one ]]
+    )
     libnotify
     vapi [[ requires = gobject-introspection ]]
     wayland
@@ -58,8 +62,8 @@ DEPENDENCIES="
         gconf? ( gnome-platform/GConf[>=2.12] )
         gnome? ( gnome-desktop/gnome-icon-theme-symbolic )
         gobject-introspection? ( gnome-desktop/gobject-introspection:1[>=0.9.6] )
-        gtk? ( x11-libs/gtk+:2 )
-        gtk3? ( x11-libs/gtk+:3 )
+        providers:gtk2? ( x11-libs/gtk+:2 )
+        providers:gtk3? ( x11-libs/gtk+:3 )
         libnotify? ( x11-libs/libnotify[>=0.7] )
         wayland? (
             sys-libs/wayland
@@ -80,8 +84,8 @@ RESTRICT="test" # require X and a running ibus-daemon
 UPSTREAM_DOCUMENTATION="http://code.google.com/p/ibus/wiki [[ lang = en,zh_CN ]]"
 
 update_gtk_immodules() {
-    option gtk && gtk-query-immodules-2.0 --update-cache
-    option gtk3 && gtk-query-immodules-3.0 --update-cache
+    option providers:gtk2 && gtk-query-immodules-2.0 --update-cache
+    option providers:gtk3 && gtk-query-immodules-3.0 --update-cache
 }
 
 ibus_src_prepare() {
@@ -107,8 +111,8 @@ ibus_src_configure() {
         $(option_enable gconf ) \
         $(option_enable memconf ) \
         $(option_enable gtk-doc ) \
-        $(option_enable gtk gtk2) \
-        $(option_enable gtk3 ) \
+        $(option_enable providers:gtk2) \
+        $(option_enable providers:gtk3 ) \
         $(option_enable libnotify ) \
         $(option_enable vapi vala ) \
         $(option_enable wayland ) \
