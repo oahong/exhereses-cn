@@ -1,0 +1,64 @@
+# Copyright 2009-2015 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake [ api=2 ] gtk-icon-cache
+
+SUMMARY="SuperTuxKart is a Free 3D kart racing game"
+HOMEPAGE="http://supertuxkart.sourceforge.net"
+DOWNLOADS="mirror://sourceforge/${PN}/${PNV}-src.tar.xz"
+
+LICENCES="GPL-3 public-domain FIXME"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="bidi wiiremote [[ description = [ Support for wiimote input devices ] ]]"
+
+DEPENDENCIES="
+    build:
+        x11-proto/xproto
+    build+run:
+        media-libs/jpeg
+        media-libs/libogg
+        media-libs/libpng
+        media-libs/libvorbis
+        media-libs/openal
+        net-libs/enet
+        net-misc/curl
+        x11-dri/mesa
+        x11-libs/libX11
+        x11-libs/libXrandr
+        bidi? ( dev-libs/fribidi )
+"
+# bundled libraries:
+#        tinygettext
+#        wiiuse
+#        bullet
+#        glew angelscript
+#        dev-games/irrlicht[>=1.8]
+
+REMOTE_IDS="sourceforge:${PN} github:${PN}"
+UPSTREAM_DOCUMENTATION="${HOMEPAGE}/FAQ"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/build_against_system_enet.patch
+    "${FILES}"/link_against_system_libs.patch
+    "${FILES}"/build_against_jpeg_9.patch
+)
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DUSE_XRANDR:BOOL=TRUE
+    -DCMAKE_INSTALL_PREFIX:PATH=/usr
+    -DSTK_INSTALL_BINARY_DIR:PAHT=/usr/$(exhost --target)/bin
+)
+
+CMAKE_SRC_CONFIGURE_OPTION_USES=( 'bidi FRIBIDI' 'wiiremote WIIUSE' )
+
+src_install() {
+    cmake_src_install
+
+    # cleanup
+    edo find "${IMAGE}" -type f \( -name "*~" -or -name "*.sh" \) \
+        -delete
+    edo find "${IMAGE}"/usr/share/${PN}/data/po -type f \
+        ! -name "*.po" -delete
+}
+
