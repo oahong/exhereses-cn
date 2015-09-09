@@ -10,13 +10,14 @@ DOWNLOADS="mirror://sourceforge/${PN}/${PNV}-src.tar.xz"
 LICENCES="GPL-3 public-domain FIXME"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS="bidi wiiremote [[ description = [ Support for wiimote input devices ] ]]"
+MYOPTIONS="bidi wiiremote [[ description = [ Support for wiimote input devices ] ]]
+    ( providers: ijg-jpeg jpeg-turbo ) [[ number-selected = exactly-one ]]
+"
 
 DEPENDENCIES="
     build:
         x11-proto/xproto
     build+run:
-        media-libs/jpeg
         media-libs/libogg
         media-libs/libpng
         media-libs/libvorbis
@@ -27,6 +28,8 @@ DEPENDENCIES="
         x11-libs/libX11
         x11-libs/libXrandr
         bidi? ( dev-libs/fribidi )
+        providers:ijg-jpeg? ( media-libs/jpeg:= )
+        providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
 "
 # bundled libraries:
 #        tinygettext
