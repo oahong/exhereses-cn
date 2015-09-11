@@ -9,7 +9,7 @@ Type=notify
 NonBlocking=true
 NotifyAccess=main
 User=dnscrypt-proxy
-Environment=DNSCRYPT_PROXY_RESOLVER_NAME=cisco
+Environment=DNSCRYPT_PROXY_RESOLVER_NAME=cloudns-syd
 ExecStart=/usr/sbin/dnscrypt-proxy \
         --resolver-name=${DNSCRYPT_PROXY_RESOLVER_NAME}
 Restart=on-abort
