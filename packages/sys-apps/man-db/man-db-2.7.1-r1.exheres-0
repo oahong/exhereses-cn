@@ -50,7 +50,7 @@ src_configure() {
     econf ${myconf} \
         --enable-setuid \
         --with-sections='0p 1 1p 2 3 3p 4 5 6 7 8 m n' \
-        --with-systemdtmpfilesdir=/usr/$LIBDIR/tmpfiles.d
+        --with-systemdtmpfilesdir=/usr/$(exhost --target)/lib/tmpfiles.d
 }
 
 src_install() {
@@ -59,10 +59,12 @@ src_install() {
 
     local alternatives=(
         man ${PN} 10
-        /usr/bin/man ${PN}.man
-        /usr/bin/whatis ${PN}.whatis
+        /usr/$(exhost --target)/bin/man ${PN}.man
+        /usr/$(exhost --target)/bin/apropos ${PN}.apropos
+        /usr/$(exhost --target)/bin/whatis ${PN}.whatis
         /usr/share/man/man1/man.1 ${PN}.man.1
         /usr/share/man/man1/apropos.1 ${PN}.apropos.1
+        /usr/share/man/man1/whatis.1 ${PN}.whatis.1
     )
     alternatives_for "${alternatives[@]}"
 }
