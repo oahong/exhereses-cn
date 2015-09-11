@@ -18,6 +18,8 @@ MYOPTIONS="systemd"
 DEPENDENCIES="
     build+run:
         dev-libs/libsodium[>=0.7.0]
+        user/dnscrypt-proxy
+        group/dnscrypt-proxy
 "
 
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
