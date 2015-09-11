@@ -1,21 +1,19 @@
 [Unit]
-Description=A tool for securing communications between a client and a DNS resolver
+Description=DNSCrypt proxy
+Documentation=man:dnscrypt-proxy(8)
+After=network.target iptables.service
+Requires=dnscrypt-proxy.socket
 
 [Service]
-Type=forking
-PIDFile=/var/run/dnscrypt-proxy.pid
-EnvironmentFile=/etc/conf.d/dnscrypt-proxy
-ExecStartPre=/bin/rm -f /var/run/dnscrypt-proxy.pid
-ExecStartPre=/usr/bin/touch /var/run/dnscrypt-proxy.pid
-ExecStart=/usr/sbin/dnscrypt-proxy --daemonize \
-	--pidfile=/var/run/dnscrypt-proxy.pid \
-	--logfile=/var/log/dnscrypt-proxy.log \
-	--local-address=${DNSCRYPT_LOCALIP}:${DNSCRYPT_LOCALPORT} \
-	--resolver-address=${DNSCRYPT_RESOLVERIP}:${DNSCRYPT_RESOLVERPORT} \
-	--provider-name=${DNSCRYPT_PROVIDER_NAME} \
-	--provider-key=${DNSCRYPT_PROVIDER_KEY} \
-	--user=${DNSCRYPT_USER}
+Type=notify
+NonBlocking=true
+NotifyAccess=main
+User=dnscrypt-proxy
+Environment=DNSCRYPT_PROXY_RESOLVER_NAME=cisco
+ExecStart=/usr/sbin/dnscrypt-proxy \
+        --resolver-name=${DNSCRYPT_PROXY_RESOLVER_NAME}
 Restart=on-abort
 
 [Install]
 WantedBy=multi-user.target
+Also=dnscrypt-proxy.socket
