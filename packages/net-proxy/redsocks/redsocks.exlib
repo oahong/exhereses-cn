@@ -1,13 +1,15 @@
 # Copyright 2015 Dai Ming <radaiming@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+require github [ user=darkk tag=release-${PV} ]
+
 SUMMARY="Transparent socks redirector"
-HOMEPAGE="http://darkk.net.ru/redsocks/"
-DOWNLOADS="https://github.com/darkk/redsocks/archive/release-${PV}.zip"
+HOMEPAGE="http://darkk.net.ru/redsocks"
 
 LICENCES="Apache-2.0"
 SLOT="0"
-WORK="${WORKBASE}/${PN}-release-${PV}"
+
+WORK=${WORKBASE}/${PN}-release-${PV}
 
 DEPENDENCIES="
     build+run:
@@ -15,9 +17,11 @@ DEPENDENCIES="
 "
 
 src_install() {
-    dobin redsocks
-    dodir /etc/redsocks/
-    insinto /etc/redsocks/
-    doins redsocks.conf.example
+    emagicdocs
+
+    dobin ${PN}
+    insinto /etc/${PN}
+    newins ${PN}.conf{.example,}
+    doman debian/${PN}.8
 }
 
