@@ -24,7 +24,7 @@ DEPENDENCIES="
 "
 
 WORK=${WORKBASE}/${MY_PN}-${PVR}
-REMOTE_IDS="sourceforge:extremetuxracing"
 
+DEFAULT_SRC_CONFIGURE_PARAMS=( --prefix=/usr )
 DEFAULT_SRC_INSTALL_EXCLUDE=( "credits.*" )
 
