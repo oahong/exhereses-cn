@@ -9,14 +9,12 @@ the role of a fearless Blob agent, Bob, who's mission is to infiltrate various e
 rescue as many MIAs as possible, while battling many vicious aliens.  "
 HOMEPAGE="http://www.parallelrealities.co.uk/p/blob-wars-metal-blob-solid.html"
 
-LICENCES="GPL-2 CC-BY-SA-3.0"
+LICENCES="GPL-2 CC-BY-SA-3.0 [[ note = [ music and sound ] ]]"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    build:
-        sys-devel/gettext
     build+run:
         media-libs/SDL
         media-libs/SDL_mixer
@@ -32,7 +30,7 @@ DEFAULT_SRC_PREPARE_PATCHES=(
 DEFAULT_SRC_COMPILE_PARAMS=(
     DATADIR=/usr/share/${PN}/
     DOCDIR=/usr/share/doc/${PNVR}/
-    USEPAK=0
+    RELEASE=1
 )
 DEFAULT_SRC_INSTALL_PARAMS=(
     ${DEFAULT_SRC_COMPILE_PARAMS[@]}
