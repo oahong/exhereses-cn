@@ -23,12 +23,13 @@ Features:
 LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
+MYOPTIONS="
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
+"
 
 DEPENDENCIES="
     build+run:
         app-arch/libarchive
-        dev-libs/openssl
         media-libs/SDL[X]
         media-libs/SDL_gfx
         media-libs/SDL_image
@@ -36,6 +37,8 @@ DEPENDENCIES="
         media-libs/SDL_ttf
         net-misc/curl
         x11-dri/glu
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
 "
 
 WORK="${WORKBASE}"/${PNV}
@@ -52,11 +55,6 @@ src_prepare() {
     edo sed -e "/OpenGL REQUIRED)/a \\\tInclude(FindX11)" \
         -i CMakeLists.txt
 
-    cmake_src_prepare
-}
-
-src_install() {
-    cmake_src_install
-    keepdir /usr/share/${PN}/data/levels
+    default
 }
 
