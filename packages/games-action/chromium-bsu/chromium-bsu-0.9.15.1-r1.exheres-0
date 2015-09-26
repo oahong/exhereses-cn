@@ -21,8 +21,8 @@ DEPENDENCIES="
         fonts/liberation-fonts
         media-libs/quesoglc
         x11-dri/mesa
-        media-libs/SDL[>=1.1.6]
-        media-libs/SDL_image
+        media-libs/SDL:0[>=1.1.6]
+        media-libs/SDL_image:1
         media-libs/SDL_mixer
 "
 
