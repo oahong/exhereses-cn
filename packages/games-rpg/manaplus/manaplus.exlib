@@ -20,11 +20,11 @@ DEPENDENCIES="
     build:
         sys-devel/gettext
     build+run:
-        media-libs/SDL
-        media-libs/SDL_image
+        media-libs/SDL:0
+        media-libs/SDL_image:1
         media-libs/SDL_mixer[ogg]
         media-libs/SDL_net
-        media-libs/SDL_ttf
+        media-libs/SDL_ttf:0
         media-libs/SDL_gfx
         net-misc/curl
         dev-libs/libxml2
@@ -50,6 +50,7 @@ CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 'opengl OPENGL' )
 manaplus_src_prepare() {
     cmake_src_prepare
     edo sed -e "/PKG_BINDIR/s#bin#$(exhost --target)/&#" \
+        -e "/PROJECT/i set(CMAKE_DEBUG_TARGET_PROPERTIES INCLUDE_DIRECTORIES)" \
         -i CMakeLists.txt
 }
 
