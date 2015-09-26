@@ -30,11 +30,11 @@ MYOPTIONS="
 DEPENDENCIES="
     build+run:
         app-arch/libarchive
-        media-libs/SDL[X]
+        media-libs/SDL:0[X]
         media-libs/SDL_gfx
-        media-libs/SDL_image
+        media-libs/SDL_image:1
         media-libs/SDL_mixer
-        media-libs/SDL_ttf
+        media-libs/SDL_ttf:0
         net-misc/curl
         x11-dri/glu
         providers:libressl? ( dev-libs/libressl:= )
