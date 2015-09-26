@@ -15,8 +15,8 @@ DEPENDENCIES="
         allegro? ( media-libs/allegro )
         opengl? ( x11-dri/mesa )
         sdl? (
-            media-libs/SDL
-            media-libs/SDL_image
+            media-libs/SDL:0
+            media-libs/SDL_image:1
         )
 "
 
