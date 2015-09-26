@@ -26,8 +26,8 @@ DEPENDENCIES="
     build+run:
         dev-games/physfs
         dev-libs/boost
-        media-libs/SDL
-        media-libs/SDL_image
+        media-libs/SDL:0
+        media-libs/SDL_image:1
         media-libs/glew
         media-libs/libvorbis
         media-libs/openal
