@@ -16,10 +16,10 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        media-libs/SDL
+        media-libs/SDL:0
         media-libs/SDL_mixer
-        media-libs/SDL_image
-        media-libs/SDL_ttf
+        media-libs/SDL_image:1
+        media-libs/SDL_ttf:0
         media-libs/SDL_net
         sys-libs/zlib
 "
