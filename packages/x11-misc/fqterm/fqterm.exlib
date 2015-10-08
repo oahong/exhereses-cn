@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 
-require cmake [ api=2 ] github [ user=mytbk tag=${PVR/-/.} ]
+require cmake [ api=2 ] github [ user=mytbk tag=${PVR/_/.} ]
 
 export_exlib_phases src_prepare src_install
 
@@ -14,23 +14,27 @@ can be used to login BBS sites or *NIX hosts."
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS=""
+MYOPTIONS="
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
+"
 
 # FIXME:
 DEPENDENCIES="
     build+run:
         dev-lang/python:=[>=2.5]
         sys-sound/alsa-lib
-        virtual/libssl
         x11-libs/libX11
         x11-libs/qt:4[X(+)][ssl(+)]
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
 "
 
-CMAKE_SOURCE=${WORKBASE}/${PN}-${PVR/-/.}
+CMAKE_SOURCE=${WORKBASE}/${PN}-${PVR/_/.}
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/Use-CMAKE_INSTALL_FULL_DATAROOTDIR.patch
 )
+#README.txt has not beeen updated in years
 DEFAULT_SRC_INSTALL_EXCLUDE=( README.txt )
 
 fqterm_src_prepare() {
