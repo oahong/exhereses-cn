@@ -1,13 +1,13 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-#require autotools [ supported_autoconf=[ 2.1 ] supported_automake=[ 1.8 ] ] \
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
 require debian-upstream [ debian_pv=${PV}+cvs20030824.orig ]
 
 SUMMARY="SDL MPEG Player Library"
 HOMEPAGE="http://icculus.org/smpeg"
 DOWNLOADS+="
-mirror://debian/pool/main/${DEBIAN_UPSTREAM_PREFIX}/${DEBIAN_UPSTREAM_PN}/${DEBIAN_UPSTREAM_PN}_${DEBIAN_UPSTREAM_PV/.orig/-5.debian}.tar.gz
+mirror://debian/pool/main/${DEBIAN_UPSTREAM_PREFIX}/${DEBIAN_UPSTREAM_PN}/${DEBIAN_UPSTREAM_PN}_${DEBIAN_UPSTREAM_PV/.orig/-7.1.debian}.tar.xz
 "
 
 LICENCES="LGPL-2"
@@ -28,20 +28,17 @@ DEPENDENCIES="
         opengl-player? ( x11-dri/mesa )
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=( "${WORKBASE}"/debian/patches/ )
-
+DEFAULT_SRC_PREPARE_PATCHES=( "${WORKBASE}"/debian/patches )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( gtk-player opengl-player 'x86_cpu_features:mmx mmx' )
 
 WORK=${WORKBASE}/${PN}-${DEBIAN_UPSTREAM_PV}
+AT_M4DIR=( m4 )
 
 src_prepare() {
-    # This patch breaks the installation of the lib.
-    edo rm "${WORKBASE}"/debian/patches/100_rebootstrap.diff
-
-    default
-
-    edo sed -i -e "s:\(--foreign\):\1 --add-missing:" autogen.sh
-    edo ./autogen.sh
+    edo rm "${WORKBASE}"/debian/patches/000_no_rpath.diff
+    # provide a fake AM_PATH_GTK macro
+    option gtk-player || expatch "${FILES}"/smpeg-gtk+-m4.patch
+    autotools_src_prepare
 }
 
 src_install() {
@@ -51,6 +48,6 @@ src_install() {
     edo mv "${IMAGE}"/usr/$(exhost --target)/bin/plaympeg "${IMAGE}"/usr/$(exhost --target)/bin/plaympeg-1
     edo mv "${IMAGE}"/usr/share/man/man1/plaympeg.1 "${IMAGE}"/usr/share/man/man1/plaympeg-1.1
 
-    ! option gtk-player && edo rm "${IMAGE}"/usr/share/man/man1/gtv.1
+    option gtk-player || edo rm "${IMAGE}"/usr/share/man/man1/gtv.1
 }
 
