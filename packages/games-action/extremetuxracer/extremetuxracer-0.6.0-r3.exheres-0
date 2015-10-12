@@ -19,6 +19,7 @@ DEPENDENCIES="
         media-libs/SDL:0[>=1.2.0]
         media-libs/SDL_image:1
         media-libs/SDL_mixer[ogg]
+        media-libs/freetype:2
         x11-dri/glu
         x11-dri/mesa
 "
