@@ -1,0 +1,6 @@
+# Copyright 2015 Ming Dai <radaiming@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+# dependencies are copied from gentoo portage
+
+PLATFORMS="~amd64"
+require intel-gpu-tools
