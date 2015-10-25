@@ -1,7 +1,7 @@
 # Copyright 2009,2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require cmake gitlab [ tag=v${PV} ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ] gitlab [ tag=v${PV} ]
 export_exlib_phases src_prepare
 
 SUMMARY="The Mana Plus Client"
@@ -11,6 +11,7 @@ on eAthena fork.  As a 2D style game, Evol Online aims to create a friendly envi
 can escape reality and interact with others while enjoying themselves through a fantasy style game.
 The Mana World (TMW) is a serious effort to create an innovative free and open source MMORPG. TMW
 uses 2D graphics and aims to create a large and diverse interactive world."
+DOWNLOADS="http://download.evolonline.org/manaplus/download/${PV}/${PNV}.tar.xz"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -18,39 +19,37 @@ MYOPTIONS="opengl"
 
 DEPENDENCIES="
     build:
+        virtual/pkg-config
         sys-devel/gettext
     build+run:
+        dev-games/physfs
+        dev-libs/libxml2
         media-libs/SDL:0
+        media-libs/SDL_gfx
         media-libs/SDL_image:1
         media-libs/SDL_mixer[ogg]
         media-libs/SDL_net
         media-libs/SDL_ttf:0
-        media-libs/SDL_gfx
-        net-misc/curl
-        dev-libs/libxml2
-        dev-games/physfs
         media-libs/libpng
-        opengl? ( x11-dri/mesa )
+        net-misc/curl
         x11-libs/libX11
+        opengl? ( x11-dri/mesa )
      suggestion:
         x11-apps/xdg-utils
         x11-utils/xsel
 "
 
-REMOTE_IDS="freecode:${PN}"
-CMAKE_SRC_CONFIGURE_PARAMS=(
-    -DENABLE_NLS:bool=true
-    -DUSE_X11:bool=true
-    -DENABLE_EATHENA:BOOL=TRUE
-    -DENABLE_EATHENA:BOOL=TRUE
-    -DCMAKE_INSTALL_PREFIX:PATH=/usr
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --with-dyecmd
+    # SDL:2 has a testing mask
+    --without-sdl2
+    --enable-eathena
+    --enable-tmwa
 )
-CMAKE_SRC_CONFIGURE_OPTION_WITHS=( 'opengl OPENGL' )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( opengl )
 
 manaplus_src_prepare() {
-    cmake_src_prepare
-    edo sed -e "/PKG_BINDIR/s#bin#$(exhost --target)/&#" \
-        -e "/PROJECT/i set(CMAKE_DEBUG_TARGET_PROPERTIES INCLUDE_DIRECTORIES)" \
-        -i CMakeLists.txt
+    edo sed -e "s/pkg-config/${PKG_CONFIG}/" -i configure.ac
+    autotools_src_prepare
 }
 
