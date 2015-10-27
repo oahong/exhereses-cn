@@ -1,7 +1,7 @@
-# Copyright 2015 radaiming <radaiming@gmail.com>
+# Copyright 2015 Dai Ming <radaiming@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
-#
 
 require tinc
 
 PLATFORMS="~amd64"
+

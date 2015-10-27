@@ -1,35 +1,36 @@
-# Copyright 2015 radaiming <radaiming@gmail.com>
+# Copyright 2015 Dai Ming <radaiming@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
-#
 
+export_exlib_phases src_install
 
-SUMMARY="A Virtual Private Network (VPN) daemon"
-HOMEPAGE="http://www.tinc-vpn.org/"
+SUMMARY="A Virtual Private Network daemon"
+HOMEPAGE="http://www.tinc-vpn.org"
 DOWNLOADS="http://www.tinc-vpn.org/packages/${PNV}.tar.gz"
 
-LICENCES="GPL-v2"
+LICENCES="GPL-2"
 SLOT="0"
 MYOPTIONS="
-    uml [[ description = [ support for User Mode Linux ] ]]
     lzo [[ description = [ enable lzo compression support ] ]]
-    zlib [[ description = [ enable zlib compression support ] ]]
     vde [[ description = [ support for Virtual Distributed Ethernet ] ]]
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
+    parts: binaries documentation
 "
-# seems does not take effect?
-DEFAULT_SRC_CONFIGURE_OPTION_WITHS=("lzo" "zlib")
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-uml --enable-zlib )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( lzo vde )
 
 DEPENDENCIES="
     build+run:
-        dev-libs/openssl
+        sys-libs/zlib
         lzo? ( app-arch/lzo )
-        zlib? ( sys-libs/zlib )
         vde? ( net/vde )
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
 "
 
-src_configure() {
-    econf \
-        $(option_enable vde)
-        $(option_enable uml)
-        $(option lzo || echo '--disable-lzo')
-        $(option zlib || echo '--disable-zlib')
+tinc_src_install() {
+    default
+    expart binaries /usr/$(exhost --target)/bin
+    expart documentation /usr/share/{doc,info,man}
 }
+
