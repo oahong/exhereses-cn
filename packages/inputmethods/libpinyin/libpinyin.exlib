@@ -6,7 +6,7 @@ export_exlib_phases src_prepare
 
 SUMMARY="Library to deal with pinyin."
 HOMEPAGE="https://github.com/${PN}"
-DOWNLOADS="mirror://sourceforge/${PN}/model10.text.tar.gz"
+DOWNLOADS="mirror://sourceforge/${PN}/model11.text.tar.gz"
 
 if ever is_scm ; then
     SCM_REPOSITORY="git://github.com/${PN}/${PN}.git"
