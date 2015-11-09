@@ -24,6 +24,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         app-arch/dpkg
+        dev-util/patchelf
     run:
         dev-libs/glib
         media-libs/fontconfig
@@ -62,6 +63,12 @@ src_install() {
     edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
     edo rmdir "${IMAGE}"/usr/share/icons/hicolor/32x32/apps
     edo rm -r "${IMAGE}"/etc/fonts/conf.d
+
+    # Replace /lib64/ld-linux-x86-64.so.2 with our loader
+    ELF_INTERPRETER=/usr/$(exhost --build)/lib/ld-linux-x86-64.so.2
+    for binary in "${IMAGE}"/opt/kingsoft/wps-office/office6/{et,wpp,wps} ; do
+        edo patchelf --set-interpreter ${ELF_INTERPRETER} "${binary}"
+    done
 }
 
 pkg_postinst() {
