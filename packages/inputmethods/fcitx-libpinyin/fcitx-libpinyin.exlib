@@ -19,7 +19,7 @@ DEPENDENCIES="
         dev-util/pkg-config
     build+run:
         inputmethods/fcitx[>=4.2.8][qt4?]
-        inputmethods/libpinyin
+        inputmethods/libpinyin[>=1.2.91]
         dev-libs/glib:2
         sys-apps/dbus
         qt4? ( x11-libs/qt:4[webkit] )
