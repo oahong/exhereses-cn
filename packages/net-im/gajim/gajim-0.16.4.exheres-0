@@ -1,7 +1,7 @@
 # Copyright 2011-2014 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require gtk-icon-cache
+require gtk-icon-cache python [ has_bin=true blacklist=3 multibuild=false  ]
 
 SUMMARY="A full featured and easy to use jabber client written in PyGTK"
 HOMEPAGE="http://www.gajim.org"
@@ -18,9 +18,9 @@ DEPENDENCIES="
         virtual/pkg-config
         dev-util/intltool
         sys-devel/gettext
-        gnome-bindings/pygtk:2[>=2.16]
     build+run:
         dev-lang/python:=[>=2.5&<3.0][sqlite]
+        gnome-bindings/pygtk:2[>=2.16][python_abis:2.7]
     run:
         dev-python/python-nbxmpp[>=0.5.2][python_abis:2.7]
     recommendation:
@@ -30,9 +30,4 @@ DEPENDENCIES="
 "
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-site-packages )
-
-pkg_setup() {
-    einfo "${PN} is not compatible with python3, make sure we are building against python2"
-    export PYTHON=python2
-}
 
