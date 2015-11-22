@@ -10,15 +10,10 @@ to use Jabber/XMPP networks in a non-blocking way. This library is initialy a
 fork of xmpppy one, but using non-blocking sockets.
 "
 HOMEPAGE="https://python-nbxmpp.gajim.org"
-DOWNLOADS="${HOMEPAGE}/downloads/7 -> ${PNV}.tar.gz"
+DOWNLOADS="${HOMEPAGE}/downloads/8 -> ${PNV}.tar.gz"
 
 LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
-
-src_prepare() {
-    edo find "${WORK}" -name xmpp_stringprep.py -exec rm {} \;
-    setup-py_src_prepare
-}
 
