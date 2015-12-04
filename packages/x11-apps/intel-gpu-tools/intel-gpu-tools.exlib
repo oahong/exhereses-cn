@@ -13,16 +13,22 @@ HOMEPAGE="http://cgit.freedesktop.org/xorg/app/intel-gpu-tools"
 
 LICENCES="MIT"
 SLOT="0"
+MYOPTIONS="
+    ( providers: eudev systemd ) [[ number-selected = exactly-one ]]
+"
 
 DEPENDENCIES="
     build:
         app-doc/gtk-doc-autotools
+        x11-utils/util-macros
     build+run:
         dev-libs/glib
-        x11-libs/cairo
-        x11-dri/libdrm[video_drivers:intel]
-        x11-libs/libpciaccess
         dev-libs/libunwind
+        x11-dri/libdrm[>=2.4.64][video_drivers:intel]
+        x11-libs/cairo
+        x11-libs/libpciaccess
+        providers:eudev? ( sys-apps/eudev )
+        providers:systemd? ( sys-apps/systemd )
 "
 
 intel-gpu-tools_src_prepare() {
