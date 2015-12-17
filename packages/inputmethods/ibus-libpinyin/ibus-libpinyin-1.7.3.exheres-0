@@ -1,6 +1,7 @@
 # Copyright 2012 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
+LANG=( ca fr ru zh_CN zh_HK zh_TW )
 require python [ python_dep=2.5 ] github [ user=libpinyin suffix=tar.gz ] sourceforge [ project=libpinyin suffix=tar.gz ]
 
 SUMMARY="Intelligent Pinyin engine based on libpinyin for IBus"
@@ -9,7 +10,9 @@ LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="boost lua
-    opencc [[ description = [ Use opencc for simplified and traditional Chinese conversion ] ]]" # hard enable libpinyin
+    opencc [[ description = [ Use opencc for simplified and traditional Chinese conversion ] ]]
+    ( linguas: ${LANG[@]} )
+" # hard enable libpinyin
 
 DEPENDENCIES="
     build:
