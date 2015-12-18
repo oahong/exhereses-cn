@@ -20,7 +20,7 @@ DEPENDENCIES="
     build+run:
         app-arch/bzip2
         media-libs/jpeg
-        media-libs/libpng
+        media-libs/libpng:=
         sys-libs/zlib
         x11-dri/mesa
         x11-libs/libX11
