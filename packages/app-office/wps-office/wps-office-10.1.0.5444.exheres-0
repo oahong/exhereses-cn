@@ -1,7 +1,7 @@
 # Copyright 2013-2015 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-REV=a19p1
+REV=a20
 MY_PNV=${PN}_${PV}~${REV}_amd64
 require gtk-icon-cache freedesktop-mime freedesktop-desktop
 
@@ -16,9 +16,7 @@ DOWNLOADS="http://kdl.cc.ksosoft.com/wps-community/download/${REV%p*}/${MY_PNV}.
 LICENCES="KINGSOFT-EULA"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="
-    ( providers: ijg-jpeg jpeg-turbo ) [[ number-selected = exactly-one ]]
-"
+MYOPTIONS=""
 
 # http://community.wps.cn/wiki/%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB
 DEPENDENCIES="
@@ -27,16 +25,15 @@ DEPENDENCIES="
         dev-util/patchelf
     run:
         dev-libs/glib
+        dev-libs/libxml2
         media-libs/fontconfig
         media-libs/freetype
-        media-libs/libmng
-        media-libs/libpng:1.2
+        media-libs/libpng:=1.2
+        x11-libs/libICE
         x11-libs/libSM
         x11-libs/libX11
         x11-libs/libXext
         x11-libs/libXrender
-        providers:ijg-jpeg? ( media-libs/jpeg:= )
-        providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
 "
 
 RESTRICT="strip"
@@ -44,10 +41,6 @@ WORK=${WORKBASE}/${MY_PNV}
 
 pkg_setup() {
     exdirectory --allow /opt
-}
-
-src_prepare() {
-    edo sed -e "s@readelf@${CHOST}-&@" -i usr/bin/wps_error_check.sh
 }
 
 src_unpack() {
@@ -75,13 +68,6 @@ pkg_postinst() {
     gtk-icon-cache_pkg_postinst
     freedesktop-mime_pkg_postinst
     freedesktop-desktop_pkg_postinst
-    if has_version --slash "${CATEGORY}/${PN}[<${PV}]"; then
-        echo
-        elog "To merge old user configurations, you need to run"
-        elog "the following script as your normal user:"
-        elog "http://wps-community.org/download/tools/wps_merge_old_conf.sh"
-        echo
-    fi
 }
 
 pkg_postrm() {
