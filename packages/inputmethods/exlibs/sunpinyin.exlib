@@ -8,7 +8,7 @@ require scm-git
 HOMEPAGE="http://www.sunpinyin.org"
 DOWNLOADS=""
 
-LICENCES="|| ( CDDL LGPL-2.1 )"
+LICENCES="|| ( CDDL-1.0 LGPL-2.1 )"
 SLOT="0"
 MYOPTIONS=""
 
