@@ -9,7 +9,7 @@ the role of a fearless Blob agent, Bob, who's mission is to infiltrate various e
 rescue as many MIAs as possible, while battling many vicious aliens.  "
 HOMEPAGE="http://www.parallelrealities.co.uk/p/blob-wars-metal-blob-solid.html"
 
-LICENCES="GPL-2 CC-BY-SA-3.0 [[ note = [ music and sound ] ]]"
+LICENCES="GPL-2 CCPL-Attribution-ShareAlike-3.0 [[ note = [ music and sound ] ]]"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
