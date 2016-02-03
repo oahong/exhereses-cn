@@ -1,0 +1,28 @@
+From 93f3e553827807f4de9c92dc610e4c346c12470e Mon Sep 17 00:00:00 2001
+From: Hong Hao <oahong@oahong.me>
+Date: Wed, 3 Feb 2016 12:48:54 +0800
+Subject: [PATCH] Use DATADIR
+
+---
+ SConstruct | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/SConstruct b/SConstruct
+index 01b5cca..fca366f 100644
+--- a/SConstruct
++++ b/SConstruct
+@@ -249,9 +249,9 @@ env['ENABLE_PLUGINS'] = GetOption('enable_plugins')
+ opts.Save('configure.conf', env)
+ 
+ bindir = os.path.join(env['PREFIX'], 'bin')
+-mandir = os.path.join(env['PREFIX'], 'share/man')
++mandir = os.path.join(env['DATADIR'], 'man')
+ man1dir = os.path.join(mandir, 'man1')
+-docdir = os.path.join(env['PREFIX'], 'share/doc/sunpinyin')
++docdir = os.path.join(env['DATADIR'], 'doc/sunpinyin')
+ headersdir = os.path.join(env['PREFIX'], 'include/sunpinyin-2.0')
+ datadir = os.path.join(env['DATADIR'], 'sunpinyin')
+ libdir = env['LIBDIR']
+-- 
+2.7.0
+

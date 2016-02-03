@@ -17,6 +17,18 @@ DEPENDENCIES="
         dev-db/sqlite:3
 "
 
-SCONS_SRC_CONFIGURE_PARAMS=( --prefix=/usr --libdir=/usr/${LIBDIR} --datadir=/usr/share )
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/0001-Use-DATADIR.patch )
+SCONS_SRC_CONFIGURE_PARAMS=(
+    --prefix=/usr/$(exhost --target)
+    --libdir=/usr/$(exhost --target)/lib
+    --datadir=/usr/share
+)
 SCONS_SRC_INSTALL_PARAMS=( --install-sandbox="${IMAGE}" )
+
+src_prepare() {
+    default
+    edo sed -e "s@pkg-config@${PKG_CONFIG}@g" \
+        -e "/^docdir/s@sunpinyin@${PNV}@" \
+        -i SConstruct
+}
 
