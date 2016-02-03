@@ -1,7 +1,7 @@
 # Copyright 2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github cmake [ api=2 ]
+require github [ release=v${PV} pnv=${PNV} suffix=tar.bz2 ] cmake [ api=2 ]
 
 export_exlib_phases src_prepare
 
@@ -11,7 +11,7 @@ SuperTux is a jump'n'run game with strong inspiration from the Super Mario Bros.
 games for the various Nintendo platforms. Run and jump through multiple worlds,
 fighting off enemies by jumping on them, bumping them from below or tossing objects at them,
 grabbing power-ups and other stuff on the way."
-HOMEPAGE="https://supertux.github.io"
+HOMEPAGE="http://supertuxproject.org"
 
 LICENCES="GPL-2"
 SLOT="0"
