@@ -1,11 +1,11 @@
 # Copyright 2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require cmake
+require cmake [ api=2 ]
 
 SUMMARY="Sunpinyin Wrapper for Fcitx"
-HOMEPAGE="http://fcitx.googlecode.com"
-DOWNLOADS="${HOMEPAGE}/files/${PNV}.tar.xz"
+HOMEPAGE="https://www.fcitx-im.org"
+DOWNLOADS="https://download.fcitx-im.org/fcitx-sunpinyin/${PNV}.tar.xz"
 
 LICENCES="GPL-3"
 SLOT="0"
@@ -14,13 +14,14 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        dev-util/intltool
         virtual/pkg-config
         sys-devel/gettext
     build+run:
-        inputmethods/fcitx[>=4.2.4]
+        inputmethods/fcitx[>=4.2.7]
         inputmethods/libsunpinyin[>=2.0.4]
 "
 
-CMAKE_SRC_CONFIGURE_PARAMS=( -DLIB_INSTALL_DIR:string=/usr/${LIBDIR} )
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DCMAKE_INSTALL_PREFIX:PATH=/usr
+)
 
