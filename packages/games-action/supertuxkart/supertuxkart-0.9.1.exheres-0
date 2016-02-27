@@ -19,11 +19,11 @@ DEPENDENCIES="
         x11-proto/xproto
     build+run:
         media-libs/libogg
-        media-libs/libpng
+        media-libs/libpng:=
         media-libs/libvorbis
         media-libs/openal
-        net-libs/enet
         net-misc/curl
+        x11-dri/glu
         x11-dri/mesa
         x11-libs/libX11
         x11-libs/libXrandr
@@ -32,6 +32,7 @@ DEPENDENCIES="
         providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
 "
 # bundled libraries:
+#        enet
 #        tinygettext
 #        wiiuse
 #        bullet
@@ -42,7 +43,6 @@ REMOTE_IDS="sourceforge:${PN} github:${PN}"
 UPSTREAM_DOCUMENTATION="${HOMEPAGE}/FAQ"
 
 DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/build_against_system_enet.patch
     "${FILES}"/link_against_system_libs.patch
     "${FILES}"/build_against_jpeg_9.patch
 )
