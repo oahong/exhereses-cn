@@ -12,19 +12,22 @@ found in commercial 3d engines."
 LICENCES="FIXME"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
+MYOPTIONS="
+    ( providers: ijg-jpeg jpeg-turbo ) [[ number-selected = exactly-one ]]
+"
 
 DEPENDENCIES="
     build:
         x11-proto/xproto
     build+run:
         app-arch/bzip2
-        media-libs/jpeg
         media-libs/libpng:=
         sys-libs/zlib
         x11-dri/mesa
         x11-libs/libX11
         x11-libs/libXxf86vm
+        providers:ijg-jpeg? ( media-libs/jpeg:= )
+        providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
 "
 
 MYWORK=${WORK}/source/${PN^}
