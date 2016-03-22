@@ -16,7 +16,7 @@ MYOPTIONS="anthy debug gnome gtk3 libnotify qt4
 
 DEPENDENCIES="
     build:
-        dev-lang/perl [[ note = [ autogen.sh use it ] ]]
+        dev-lang/perl:* [[ note = [ autogen.sh use it ] ]]
         dev-util/intltool[>=0.36.3]
         virtual/pkg-config
         sys-devel/gettext[>=0.17]
