@@ -1,4 +1,4 @@
-# Copyright 2009,2010 Hong Hao <oahong@gmail.com>
+# Copyright 2009-2016 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ] gitlab [ tag=v${PV} ]
@@ -15,8 +15,9 @@ DOWNLOADS="http://download.evolonline.org/manaplus/download/${PV}/${PNV}.tar.xz"
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS="opengl"
+MYOPTIONS="opengl sdl2"
 
+# pugixml
 DEPENDENCIES="
     build:
         virtual/pkg-config
@@ -24,16 +25,25 @@ DEPENDENCIES="
     build+run:
         dev-games/physfs
         dev-libs/libxml2
-        media-libs/SDL:0
-        media-libs/SDL_gfx
-        media-libs/SDL_image:1
-        media-libs/SDL_mixer[ogg]
-        media-libs/SDL_net
-        media-libs/SDL_ttf:0
         media-libs/libpng
         net-misc/curl
         x11-libs/libX11
         opengl? ( x11-dri/mesa )
+        !sdl2? (
+            media-libs/SDL:0[X]
+            media-libs/SDL_gfx:0
+            media-libs/SDL_image:1
+            media-libs/SDL_mixer:0[ogg]
+            media-libs/SDL_net:0
+            media-libs/SDL_ttf:0
+        )
+        sdl2? (
+            media-libs/SDL:2[X]
+            media-libs/SDL_image:2
+            media-libs/SDL_ttf:2
+            media-libs/SDL_mixer:2[ogg]
+            media-libs/SDL_net:2
+        )
      suggestion:
         x11-apps/xdg-utils
         x11-utils/xsel
@@ -41,12 +51,10 @@ DEPENDENCIES="
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --with-dyecmd
-    # SDL:2 has a testing mask
-    --without-sdl2
     --enable-eathena
     --enable-tmwa
 )
-DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( opengl )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( opengl sdl2 )
 
 manaplus_src_prepare() {
     edo sed -e "s/pkg-config/${PKG_CONFIG}/" -i configure.ac
