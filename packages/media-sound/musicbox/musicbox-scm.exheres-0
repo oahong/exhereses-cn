@@ -13,8 +13,16 @@ DEPENDENCIES="
     build+run:
         dev-python/requests[python_abis:*(-)?]
         dev-python/beautifulsoup4[python_abis:*(-)?]
-        dev-python/pycrypto
+        dev-python/pycrypto[python_abis:*(-)?]
     run:
         media-sound/mpg123
+    suggestion:
+        net-misc/aria2     [[ note = [ cache music to local storage ] ]]
+        x11-libs/libnotify [[ note = [ notification support ] ]]
+        (
+            dev-python/PyQt4[dbus][python_abis:*(-)?]
+            dev-python/dbus-python[python_abis:*(-)?]
+            x11-libs/qt:4[dbus]
+        )  [[ *note = [ desktop lyrics ] ]]
 "
 
