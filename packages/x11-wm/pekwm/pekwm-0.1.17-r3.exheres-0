@@ -22,7 +22,7 @@ DOWNLOADS="${HOMEPAGE}/projects/${PN}/files/${PNV}.tar.bz2"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="debug jpeg"
+MYOPTIONS="debug jpeg jpeg? ( ( providers: ijg-jpeg jpeg-turbo ) [[ number-selected = exactly-one ]] )"
 
 DEPENDENCIES="
     build:
@@ -36,7 +36,8 @@ DEPENDENCIES="
         x11-libs/libXinerama
         x11-libs/libXpm
         x11-libs/libXrandr[>=1.2.0]
-        jpeg? ( media-libs/jpeg )
+        providers:ijg-jpeg? ( media-libs/jpeg:= )
+        providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
 "
 
 REMOTE_IDS="freecode:${PN}"
@@ -64,7 +65,6 @@ Name=PekWM
 Comment=Use PekWM as your window manager
 Exec=pekwm
 TryExec=pekwm
-Icon=
 Type=Application
 EOF
 }
