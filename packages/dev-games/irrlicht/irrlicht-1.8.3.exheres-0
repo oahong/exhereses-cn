@@ -3,6 +3,9 @@
 
 require sourceforge [ suffix=zip ]
 
+# source/Irrlicht/Makefile
+SOVER="${PV}"
+
 SUMMARY="Lightning fast realtime 3D engine"
 DESCRIPTION="Irrlicht Engine is an open source high performance realtime 3D engine written and
 usable in C++ and also available for .NET languages. It is completely cross-platform, using D3D,
@@ -40,15 +43,15 @@ src_prepare() {
 
 src_compile() {
     emake -C "${MYWORK}" sharedlib CC=${CC} CXX=${CXX} AR=${AR} \
-        NDEBUG=1 VERSION_RELEASE=1
+        NDEBUG=1
 }
 
 src_install() {
     insinto /usr/$(exhost --target)/include/${PN}
     doins include/*.h
 
-    dolib.so "${MYWORK}"/lib${PN^}.so.${PV}
-    dosym lib${PN^}.so.${PV} /usr/$(exhost --target)/lib/lib${PN^}.so.$(ever range 1-2 ${PV})
-    dosym lib${PN^}.so.${PV} /usr/$(exhost --target)/lib/lib${PN^}.so
+    dolib.so "${MYWORK}"/lib${PN^}.so.${SOVER}
+    dosym lib${PN^}.so.${SOVER} /usr/$(exhost --target)/lib/lib${PN^}.so.$(ever range 1-2 ${SOVER})
+    dosym lib${PN^}.so.${SOVER} /usr/$(exhost --target)/lib/lib${PN^}.so
 }
 
