@@ -26,9 +26,15 @@ DEPENDENCIES="
 REMOTE_IDS="freecode:lbreakout"
 UPSTREAM_CHANGELOG="http://sourceforge.net/projects/lgames/files/${PN}/ChangeLog/view"
 
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/lbreakout2-2.6.5-musl.patch
+)
+
 DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --enable-nls
     --localstatedir=/var/lib/games/${PN}
     --with-docdir=/usr/share/doc/${PNVR}
+    gt_cv_func_gnugettext{1,2}_libc=yes
 )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'network sdl-net' )
 DEFAULT_SRC_COMPILE_PARAMS=( AR=${AR} )
