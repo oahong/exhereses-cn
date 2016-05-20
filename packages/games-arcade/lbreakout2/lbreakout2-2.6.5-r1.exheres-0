@@ -17,10 +17,10 @@ DEPENDENCIES="
     build:
         sys-devel/gettext
     build+run:
-        media-libs/libpng
-        media-libs/SDL[>=1.2.0]
-        media-libs/SDL_mixer
-        network? ( media-libs/SDL_net )
+        media-libs/libpng:=
+        media-libs/SDL:0[>=1.2.0]
+        media-libs/SDL_mixer:0
+        network? ( media-libs/SDL_net:0 )
 "
 
 REMOTE_IDS="freecode:lbreakout"
