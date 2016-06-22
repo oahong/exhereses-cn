@@ -1,0 +1,28 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+FONT=deepin
+require xfont
+
+SUMMARY="Deepin open symbol fonts"
+DESCRIPTION="
+Deepin open symbol is a substitution for Wingdings, which can perfectly solve the issue of displaying symbols in
+WPS. It allows you to seamlessly transit from Wingdings to Deepin OpenSymbol."
+HOMEPAGE="https://www.deepin.org"
+DOWNLOADS="http://packages.deepin.com/deepin/pool/main/t/ttf-deepin-opensymbol/ttf-deepin-opensymbol_0.20160605.orig.tar.xz"
+
+LICENCES="FIXME"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+WORK=${WORKBASE}
+
+src_install() {
+    insinto /usr/share/fonts/X11/${FONT}
+    doins *.ttf
+    insinto /usr/share/fontconfig/conf.avail
+    doins "${FILES}"/59-${PN}.conf
+    xfont_src_install
+}
+
