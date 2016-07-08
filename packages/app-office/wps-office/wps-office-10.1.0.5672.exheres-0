@@ -1,7 +1,7 @@
 # Copyright 2013-2015 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-REV=a20p1
+REV=a21
 MY_PNV=${PN}_${PV}~${REV}_amd64
 require gtk-icon-cache freedesktop-mime freedesktop-desktop
 
