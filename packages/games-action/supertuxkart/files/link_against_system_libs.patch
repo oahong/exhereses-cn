@@ -1,19 +1,19 @@
 Description: Link against system copies of zlib/libpng/libjpeg/bzip2
 Forwarded: not-yet
 Author: Vincent Cheng <vcheng@debian.org>
-Last-Update: 2015-05-13
+Last-Update: 2016-08-24
 
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -315,6 +315,11 @@
-     ${OGGVORBIS_LIBRARIES}
+@@ -351,6 +351,11 @@ target_link_libraries(supertuxkart
      ${OPENAL_LIBRARY}
      ${OPENGL_LIBRARIES}
+     ${FREETYPE_LIBRARIES}
 +    X11
 +    z
 +    png
 +    jpeg
 +    bz2
      )
- 
+
  if(UNIX AND NOT APPLE)

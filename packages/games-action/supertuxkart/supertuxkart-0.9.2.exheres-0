@@ -18,6 +18,8 @@ DEPENDENCIES="
     build:
         x11-proto/xproto
     build+run:
+        dev-libs/angelscript[>=2.31]
+        media-libs/freetype:2
         media-libs/libogg
         media-libs/libpng:=
         media-libs/libvorbis
@@ -28,6 +30,7 @@ DEPENDENCIES="
         x11-libs/libX11
         x11-libs/libXrandr
         bidi? ( dev-libs/fribidi )
+        wiiremote? ( net-wireless/bluez )
         providers:ijg-jpeg? ( media-libs/jpeg:= )
         providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
 "
@@ -45,12 +48,14 @@ UPSTREAM_DOCUMENTATION="${HOMEPAGE}/FAQ"
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/link_against_system_libs.patch
     "${FILES}"/build_against_jpeg_9.patch
+    "${FILES}"/${PNV}-angelscript-compatibility.patch
 )
 
 CMAKE_SRC_CONFIGURE_PARAMS=(
     -DUSE_XRANDR:BOOL=TRUE
     -DCMAKE_INSTALL_PREFIX:PATH=/usr
     -DSTK_INSTALL_BINARY_DIR:PAHT=/usr/$(exhost --target)/bin
+    -DUSE_SYSTEM_ANGELSCRIPT=ON
 )
 
 CMAKE_SRC_CONFIGURE_OPTION_USES=( 'bidi FRIBIDI' 'wiiremote WIIUSE' )
