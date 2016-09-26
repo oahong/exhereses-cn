@@ -1,0 +1,22 @@
+# Copyright 2016 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import=setuptools test=pytest ]
+
+SUMMARY="Clean single-source support for Python 3 and 2"
+DESCRIPTION="future is the missing compatibility layer between Python 2 and Python 3. It allows you
+to use a single, clean Python 3.x-compatible codebase to support both Python 2 and Python 3 with
+minimal overhead.
+"
+HOMEPAGE="http://python-future.org"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+# send requests to various websites
+RESTRICT="test"
+
