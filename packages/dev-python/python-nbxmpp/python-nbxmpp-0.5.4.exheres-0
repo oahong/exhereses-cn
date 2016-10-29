@@ -1,7 +1,9 @@
 # Copyright 2014 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require setup-py [ import=distutils work=${PNV/python-} ]
+HASH="44b8365a76c434be407e5f699104d8ba29256ef6"
+require gitlab [ prefix='https://dev.gajim.org' user=gajim ref=nbxmpp-${PV} ]
+require setup-py [ import=distutils work=${PNV/python-} work=${PN}-nbxmpp-${PV}-${HASH} ]
 
 SUMMARY="Non blocking Jabber/XMPP module"
 DESCRIPTION="
@@ -10,7 +12,6 @@ to use Jabber/XMPP networks in a non-blocking way. This library is initialy a
 fork of xmpppy one, but using non-blocking sockets.
 "
 HOMEPAGE="https://python-nbxmpp.gajim.org"
-DOWNLOADS="${HOMEPAGE}/downloads/8 -> ${PNV}.tar.gz"
 
 LICENCES="GPL-3"
 SLOT="0"
