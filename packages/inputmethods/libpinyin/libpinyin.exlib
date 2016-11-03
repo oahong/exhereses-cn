@@ -15,7 +15,7 @@ else
     DOWNLOADS+=" mirror://sourceforge/${PN}/${PNV}.tar.gz"
 fi
 
-LICENCES="GPL-2"
+LICENCES="GPL-3"
 SLOT="0"
 MYOPTIONS=""
 
