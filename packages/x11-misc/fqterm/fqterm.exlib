@@ -4,7 +4,7 @@
 
 require cmake [ api=2 ] github [ user=mytbk tag=${PVR/_/.} ]
 
-export_exlib_phases src_prepare src_install
+export_exlib_phases src_install
 
 SUMMARY="A modern terminal emulator for Linux"
 DESCRIPTION="
@@ -15,6 +15,7 @@ can be used to login BBS sites or *NIX hosts."
 LICENCES="GPL-2"
 SLOT="0"
 MYOPTIONS="
+    qt5
     ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
 "
 
@@ -24,27 +25,31 @@ DEPENDENCIES="
         dev-lang/python:=[>=2.5]
         sys-sound/alsa-lib
         x11-libs/libX11
-        x11-libs/qt:4[X(+)][ssl(+)]
         providers:libressl? ( dev-libs/libressl:= )
         providers:openssl? ( dev-libs/openssl )
+        !qt5? ( x11-libs/qt:4[X(+)][ssl(+)] )
+        qt5? (
+            x11-libs/qtbase:5
+            x11-libs/qtmultimedia:5
+            x11-libs/qtscript:5
+            x11-libs/qttools:5 [[ note = [ Qt5LinguistTools ] ]]
+        )
 "
 
 CMAKE_SOURCE=${WORKBASE}/${PN}-${PVR/_/.}
+CMAKE_OPTION_USES=(
+    'qt5 QT5'
+)
 
 DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/Use-CMAKE_INSTALL_FULL_DATAROOTDIR.patch
+    "${FILES}"/Use-CMAKE_INSTALL_DATAROOTDIR.patch
+    "${FILES}"/${PN}-libressl.patch
 )
-#README.txt has not beeen updated in years
-DEFAULT_SRC_INSTALL_EXCLUDE=( README.txt )
-
-fqterm_src_prepare() {
-    cmake_src_prepare
-    edo sed -e '/Icon=/s:/usr/local:/usr:' -i res/${PN}.desktop
-}
 
 fqterm_src_install() {
     cmake_src_install
     herebin ${PN} <<EOF
+#! /bin/bash
 export FQTERM_RESOURCE=/usr/share/FQTerm
 /usr/x86_64-pc-linux-gnu/bin/fqterm.bin \$@
 EOF
