@@ -5,3 +5,7 @@ require fqterm
 
 PLATFORMS="~amd64 ~x86"
 
+DEFAULT_SRC_PREPARE_PATCHES+=(
+    "${FILES}"/${PN}-libressl.patch
+)
+

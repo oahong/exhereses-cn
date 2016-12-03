@@ -43,7 +43,6 @@ CMAKE_OPTION_USES=(
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/Use-CMAKE_INSTALL_DATAROOTDIR.patch
-    "${FILES}"/${PN}-libressl.patch
 )
 
 fqterm_src_install() {

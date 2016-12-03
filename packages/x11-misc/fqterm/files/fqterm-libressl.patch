@@ -1,5 +1,5 @@
 Source: https://github.com/mytbk/fqterm/issues/12
-Upstream: no
+Upstream: yes, in master branch
 Reason: Build against libressl
 
 diff --git a/src/protocol/internal/ssh_diffie-hellman.h b/src/protocol/internal/ssh_diffie-hellman.h
