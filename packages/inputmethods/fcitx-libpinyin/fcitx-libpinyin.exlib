@@ -1,12 +1,14 @@
 # Copyright 2012 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
+MODEL_TEXT=model.text.20161206.tar.gz
 require github [ user=fcitx ] cmake [ api=2 ] gtk-icon-cache
+
 export_exlib_phases src_prepare
 
 SUMMARY="Libpinyin Wrapper for Fcitx"
-HOMEPAGE="http://fcitx.googlecode.com"
-DOWNLOADS="http://download.fcitx-im.org/data/model.text.20130308.tar.gz"
+HOMEPAGE="https://www.fcitx-im.org"
+DOWNLOADS="https://download.fcitx-im.org/data/${MODEL_TEXT}"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -19,19 +21,18 @@ DEPENDENCIES="
         dev-util/pkg-config
     build+run:
         inputmethods/fcitx[>=4.2.8][qt4?]
-        inputmethods/libpinyin[>=1.2.91]
+        inputmethods/libpinyin[>=1.7.0]
         dev-libs/glib:2
         sys-apps/dbus
-        qt4? ( x11-libs/qt:4[webkit] )
+        qt4? ( x11-libs/qt:4[webkit][>=4.8.0] )
 "
 
-CMAKE_SRC_CONFIGURE_PARAMS=( -DCMAKE_INSTALL_PREFIX:PATH=/usr )
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'qt4 QT' )
 
 fcitx-libpinyin_src_prepare() {
     cmake_src_prepare
-    edo sed -e "s#\${CMAKE_INSTALL_PREFIX}#/usr/$(exhost --target)#" \
-        -i CMakeLists.txt
-    edo cp "${FETCHEDDIR}"/model.text.20130308.tar.gz "${WORKBASE}"/${PNVR}/data
+    edo sed -e 's#share#${CMAKE_INSTALL_DATAROOTDIR}#g' \
+        -i data/CMakeLists.txt
+    edo cp "${FETCHEDDIR}"/${MODEL_TEXT} "${WORKBASE}"/${PNVR}/data
 }
 
