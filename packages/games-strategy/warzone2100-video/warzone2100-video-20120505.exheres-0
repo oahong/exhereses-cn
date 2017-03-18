@@ -5,9 +5,7 @@ VIDEO="sequences.wz"
 BASEURI="mirror://sourceforge/${PN%-*}/${PN%-*}/Videos"
 
 SUMMARY="Video file for Warzone2100"
-HOMEPAGE="http://wz2100.net"
-# FIXME: use sourceforge mirrors
-#    standard-quality? ( mirror://sourceforge/warzone2100/${PN%-*}/Videos/2.2/standard-quality-en/${VIDEIO} )
+HOMEPAGE="https://wz2100.net"
 DOWNLOADS="
     hi-quality? ( ${BASEURI}/high-quality-en/${VIDEO} -> ${VIDEO}.hi )
     standard-quality? ( ${BASEURI}/standard-quality-en/${VIDEO} -> ${VIDEO}.st )
