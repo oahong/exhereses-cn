@@ -15,18 +15,17 @@ PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
+    build:
+        virtual/pkg-config
     build+run:
-        media-libs/SDL:0
-        media-libs/SDL_mixer
-        media-libs/SDL_image:1
-        media-libs/SDL_ttf:0
-        media-libs/SDL_net
+        media-libs/SDL:2
+        media-libs/SDL_mixer:2
+        media-libs/SDL_image:2
+        media-libs/SDL_ttf:2
+        media-libs/SDL_net:2
         sys-libs/zlib
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/${PN}-buildsystem.patch
-)
 DEFAULT_SRC_COMPILE_PARAMS=(
     DATADIR=/usr/share/${PN}/
     DOCDIR=/usr/share/doc/${PNVR}/
@@ -36,4 +35,11 @@ DEFAULT_SRC_INSTALL_PARAMS=(
     ${DEFAULT_SRC_COMPILE_PARAMS[@]}
     BINDIR=/usr/$(exhost --target)/bin/
 )
+
+src_prepare() {
+    edo find . -type f -exec chmod 644 {} \;
+    edo sed -e "s/pkg-config/$(exhost --tool-prefix)pkg-config/" \
+        -i Makefile
+    default
+}
 
