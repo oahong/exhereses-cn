@@ -17,7 +17,7 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYLOCALE=(
     de pt ja eo fr fa vi da ur ru tr sv pl es pt_BR jv cs
-    it en_US hi uk ar ro nl zh_CN sk ko ms el ta
+    it en_US hi uk ar ro nl zh_CN sk sr ko ms el ta
 )
 
 MYOPTIONS="( linguas: ${MYLOCALE[@]} )"
@@ -26,15 +26,15 @@ DEPENDENCIES="
     build+run:
         media-libs/SDL:0
         media-libs/SDL_image:1
-        media-libs/SDL_mixer
+        media-libs/SDL_mixer:0
         media-libs/SDL_ttf:0
-        media-libs/SDL_net
+        media-libs/SDL_net:0
 "
 
-RESTRICT="test"
+#RESTRICT="test"
 REMOTE_IDS="sourceforge:legendofedgar"
 
-DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} CXX=${CC} DATA_DIR=/usr/share/${PN}/ )
+DEFAULT_SRC_COMPILE_PARAMS=( CC=${CC} DATA_DIR=/usr/share/${PN}/ )
 DEFAULT_SRC_INSTALL_PARAMS=(
     BIN_DIR="${IMAGE}"/usr/$(exhost --target)/bin/
     DOC_DIR="${IMAGE}"/usr/share/doc/${PNVR}/
