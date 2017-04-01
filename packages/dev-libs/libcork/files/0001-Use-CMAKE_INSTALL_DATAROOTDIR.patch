@@ -1,0 +1,59 @@
+From 18abaed93c13e702ec8f65fd517b3a1c27e64818 Mon Sep 17 00:00:00 2001
+From: Hong Hao <oahong@gmail.com>
+Date: Fri, 31 Mar 2017 16:00:26 +0800
+Subject: [PATCH] Use CMAKE_INSTALL_DATAROOTDIR
+
+---
+ docs/CMakeLists.txt     | 4 ++--
+ docs/old/CMakeLists.txt | 2 +-
+ share/CMakeLists.txt    | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/docs/CMakeLists.txt b/docs/CMakeLists.txt
+index cdda9e1..f65f8b2 100644
+--- a/docs/CMakeLists.txt
++++ b/docs/CMakeLists.txt
+@@ -46,7 +46,7 @@ macro(install_links section)
+     if (links)
+         install(
+             FILES ${links}
+-            DESTINATION "share/man/man${section}"
++	    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/man/man${section}"
+         )
+     endif (links)
+ endmacro(install_links section)
+@@ -90,7 +90,7 @@ macro(pandocify name)
+     # copies.
+     install(
+         FILES ${dest}
+-        DESTINATION "share/man/man${section}"
++	DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/man/man${section}"
+     )
+ endmacro(pandocify)
+ 
+diff --git a/docs/old/CMakeLists.txt b/docs/old/CMakeLists.txt
+index 58b19cd..6caf3db 100644
+--- a/docs/old/CMakeLists.txt
++++ b/docs/old/CMakeLists.txt
+@@ -82,6 +82,6 @@ if (GENERATE_DOC)
+ 
+   install(
+     DIRECTORY "${SPHINX_HTML_DIR}"
+-    DESTINATION "share/doc/${PROJECT_NAME}"
++    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/doc/${PROJECT_NAME}"
+   )
+ endif (GENERATE_DOC)
+diff --git a/share/CMakeLists.txt b/share/CMakeLists.txt
+index ff7d230..eb05220 100644
+--- a/share/CMakeLists.txt
++++ b/share/CMakeLists.txt
+@@ -8,5 +8,5 @@
+ # ----------------------------------------------------------------------
+ 
+ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/valgrind
+-    DESTINATION share
++	DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}
+     FILES_MATCHING PATTERN "*.supp")
+-- 
+2.12.2
+

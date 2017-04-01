@@ -1,0 +1,43 @@
+# Copyright 2017 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=redjack ] cmake
+SUMMARY="A simple, easily embeddable cross-platform C library"
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DENABLE_SHARED:BOOL=TRUE
+    -DENABLE_STATIC:BOOL=FALSE
+    -DGENERATE_DOC:BOOL=FALSE
+)
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/0001-Use-CMAKE_INSTALL_DATAROOTDIR.patch
+)
+DEFAULT_SRC_INSTALL_EXCLUDE=(
+    RELEASE-VERSION
+)
+
+src_prepare() {
+    default
+
+    edo cat <<EOF>version.sh
+#/bin/bash
+echo ${PV} > RELEASE-VERSION
+echo ${PV}
+EOF
+    edo sed -e '/rev-parse/s/git/true/' \
+        -i CMakeLists.txt \
+        -e 's/\(GENERATE_DOC \)TRUE/\1FALSE/' \
+        -i docs/old/CMakeLists.txt
+}
+
