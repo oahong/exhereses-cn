@@ -1,0 +1,28 @@
+# Copyright 2017 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=jvirkki tag=v${PV} ]
+SUMMARY="A simple and small bloom filter implementation in plain C"
+
+LICENCES="BSD-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+src_prepare() {
+    default
+    edo sed -e 's/OPT=-O3/OPT=/' \
+        -e "s/ar /$(exhost --tool-prefix)ar /" \
+        -i Makefile
+}
+
+src_install() {
+    dolib.so build/${PN}.so.${PV}
+    dosym ${PN}.so.$(ever major 1) /usr/$(exhost --target)/lib/${PN}.so
+    insinto /usr/$(exhost --target)/include
+    doins bloom.h
+    emagicdocs
+}
+
