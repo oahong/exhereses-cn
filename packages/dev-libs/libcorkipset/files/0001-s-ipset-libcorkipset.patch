@@ -1,0 +1,607 @@
+From a8303cfa5d98bc58e4993016f2d393b3157c058c Mon Sep 17 00:00:00 2001
+From: Hong Hao <oahong@gmail.com>
+Date: Fri, 31 Mar 2017 18:26:32 +0800
+Subject: [PATCH] s/ipset/libcorkipset/
+
+---
+ CMakeLists.txt                              |  4 ++--
+ docs/CMakeLists.txt                         |  4 ++--
+ examples/CMakeLists.txt                     |  2 +-
+ examples/ipv4-set-size.c                    |  2 +-
+ include/{ipset => libcorkipset}/bdd/nodes.h |  0
+ include/{ipset => libcorkipset}/bits.h      |  0
+ include/{ipset => libcorkipset}/errors.h    |  0
+ include/{ipset => libcorkipset}/ipset.h     |  2 +-
+ include/{ipset => libcorkipset}/logging.h   |  0
+ src/CMakeLists.txt                          | 20 ++++++++++----------
+ src/ipsetbuild/ipsetbuild.c                 |  2 +-
+ src/ipsetcat/ipsetcat.c                     |  2 +-
+ src/ipsetdot/ipsetdot.c                     |  2 +-
+ src/{ipset.pc.in => libcorkipset.pc.in}     |  0
+ src/libipset/bdd/assignments.c              |  2 +-
+ src/libipset/bdd/basics.c                   |  6 +++---
+ src/libipset/bdd/bdd-iterator.c             |  4 ++--
+ src/libipset/bdd/expanded.c                 |  6 +++---
+ src/libipset/bdd/reachable.c                |  4 ++--
+ src/libipset/bdd/read.c                     |  6 +++---
+ src/libipset/bdd/write.c                    |  4 ++--
+ src/libipset/general.c                      |  4 ++--
+ src/libipset/map/allocation.c               |  4 ++--
+ src/libipset/map/inspection-template.c.in   |  8 ++++----
+ src/libipset/map/inspection.c               |  4 ++--
+ src/libipset/map/storage.c                  |  6 +++---
+ src/libipset/set/allocation.c               |  4 ++--
+ src/libipset/set/inspection-template.c.in   |  8 ++++----
+ src/libipset/set/inspection.c               |  4 ++--
+ src/libipset/set/iterator.c                 |  8 ++++----
+ src/libipset/set/storage.c                  |  6 +++---
+ tests/CMakeLists.txt                        |  2 +-
+ tests/test-assignment.c                     |  4 ++--
+ tests/test-bdd.c                            |  4 ++--
+ tests/test-ipmap.c                          |  2 +-
+ tests/test-ipset.c                          |  2 +-
+ tests/test-iterator.c                       |  2 +-
+ 37 files changed, 72 insertions(+), 72 deletions(-)
+ rename include/{ipset => libcorkipset}/bdd/nodes.h (100%)
+ rename include/{ipset => libcorkipset}/bits.h (100%)
+ rename include/{ipset => libcorkipset}/errors.h (100%)
+ rename include/{ipset => libcorkipset}/ipset.h (99%)
+ rename include/{ipset => libcorkipset}/logging.h (100%)
+ rename src/{ipset.pc.in => libcorkipset.pc.in} (100%)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8787668..233e2ec 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,7 +8,7 @@
+ # ----------------------------------------------------------------------
+ 
+ cmake_minimum_required(VERSION 2.6)
+-set(PROJECT_NAME ipset)
++set(PROJECT_NAME libcorkipset)
+ set(RELEASE_DATE 2013-12-11)
+ project(${PROJECT_NAME})
+ enable_testing()
+@@ -94,7 +94,7 @@ endif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
+ 
+ add_subdirectory(docs)
+ add_subdirectory(include)
+-add_subdirectory(share)
++#add_subdirectory(share)
+ add_subdirectory(src)
+ add_subdirectory(examples)
+ add_subdirectory(tests)
+diff --git a/docs/CMakeLists.txt b/docs/CMakeLists.txt
+index dc82aad..7ffaf4b 100644
+--- a/docs/CMakeLists.txt
++++ b/docs/CMakeLists.txt
+@@ -10,8 +10,8 @@
+ # Fill in this with the text that you want to include in the header and footer
+ # of each man page.
+ 
+-set(MAN_HEADER "ipset documentation")
+-set(MAN_FOOTER "ipset")
++set(MAN_HEADER "libcorkipset documentation")
++set(MAN_FOOTER "libcorkipset")
+ 
+ # Fill this in with any man pages that should be built from a pandoc source
+ # file.  For a man page called foo.5, there should be a pandoc source file
+diff --git a/examples/CMakeLists.txt b/examples/CMakeLists.txt
+index 08da18c..99cda2f 100644
+--- a/examples/CMakeLists.txt
++++ b/examples/CMakeLists.txt
+@@ -13,4 +13,4 @@ include_directories(../include)
+ # Examples
+ 
+ add_executable(ipv4-set-size ipv4-set-size.c)
+-target_link_libraries(ipv4-set-size ${CORK_LIBRARIES} libipset)
++target_link_libraries(ipv4-set-size ${CORK_LIBRARIES} libcorkipset)
+diff --git a/examples/ipv4-set-size.c b/examples/ipv4-set-size.c
+index c13cbf7..a53059b 100644
+--- a/examples/ipv4-set-size.c
++++ b/examples/ipv4-set-size.c
+@@ -14,7 +14,7 @@
+ #include <time.h>
+ 
+ #include <libcork/core.h>
+-#include <ipset/ipset.h>
++#include <libcorkipset/ipset.h>
+ 
+ 
+ static inline void
+diff --git a/include/ipset/bdd/nodes.h b/include/libcorkipset/bdd/nodes.h
+similarity index 100%
+rename from include/ipset/bdd/nodes.h
+rename to include/libcorkipset/bdd/nodes.h
+diff --git a/include/ipset/bits.h b/include/libcorkipset/bits.h
+similarity index 100%
+rename from include/ipset/bits.h
+rename to include/libcorkipset/bits.h
+diff --git a/include/ipset/errors.h b/include/libcorkipset/errors.h
+similarity index 100%
+rename from include/ipset/errors.h
+rename to include/libcorkipset/errors.h
+diff --git a/include/ipset/ipset.h b/include/libcorkipset/ipset.h
+similarity index 99%
+rename from include/ipset/ipset.h
+rename to include/libcorkipset/ipset.h
+index cbb435f..de36a88 100644
+--- a/include/ipset/ipset.h
++++ b/include/libcorkipset/ipset.h
+@@ -16,7 +16,7 @@
+ #include <libcork/core.h>
+ #include <libcork/ds.h>
+ 
+-#include <ipset/bdd/nodes.h>
++#include <libcorkipset/bdd/nodes.h>
+ 
+ 
+ struct ip_set {
+diff --git a/include/ipset/logging.h b/include/libcorkipset/logging.h
+similarity index 100%
+rename from include/ipset/logging.h
+rename to include/libcorkipset/logging.h
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 5b25cbb..a2407a8 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -61,16 +61,16 @@ set(LIBIPSET_SRC
+ #
+ # [1] http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html#Updating-version-info
+ 
+-add_library(libipset SHARED ${LIBIPSET_SRC})
+-set_target_properties(libipset PROPERTIES
+-    OUTPUT_NAME ipset
++add_library(libcorkipset SHARED ${LIBIPSET_SRC})
++set_target_properties(libcorkipset PROPERTIES
++    OUTPUT_NAME corkipset
+     VERSION 1.1.0
+     SOVERSION 1)
+-target_link_libraries(libipset
++target_link_libraries(libcorkipset
+     ${CORK_LIBRARIES}
+ )
+ 
+-install(TARGETS libipset DESTINATION ${CMAKE_INSTALL_LIBDIR})
++install(TARGETS libcorkipset DESTINATION ${CMAKE_INSTALL_LIBDIR})
+ 
+ #-----------------------------------------------------------------------
+ # Utility commands
+@@ -80,7 +80,7 @@ set(IPSETBUILD_SRC
+ )
+ 
+ add_executable(ipsetbuild ${IPSETBUILD_SRC})
+-target_link_libraries(ipsetbuild libipset)
++target_link_libraries(ipsetbuild libcorkipset)
+ install(TARGETS ipsetbuild DESTINATION bin)
+ 
+ set(IPSETCAT_SRC
+@@ -88,7 +88,7 @@ set(IPSETCAT_SRC
+ )
+ 
+ add_executable(ipsetcat ${IPSETCAT_SRC})
+-target_link_libraries(ipsetcat libipset)
++target_link_libraries(ipsetcat libcorkipset)
+ install(TARGETS ipsetcat DESTINATION bin)
+ 
+ set(IPSETDOT_SRC
+@@ -96,13 +96,13 @@ set(IPSETDOT_SRC
+ )
+ 
+ add_executable(ipsetdot ${IPSETBUILD_SRC})
+-target_link_libraries(ipsetdot libipset)
++target_link_libraries(ipsetdot libcorkipset)
+ install(TARGETS ipsetdot DESTINATION bin)
+ 
+ #-----------------------------------------------------------------------
+ # Generate the pkg-config file
+ 
+ set(prefix ${CMAKE_INSTALL_PREFIX})
+-configure_file(ipset.pc.in ${CMAKE_CURRENT_BINARY_DIR}/ipset.pc @ONLY)
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ipset.pc
++configure_file(libcorkipset.pc.in ${CMAKE_CURRENT_BINARY_DIR}/libcorkipset.pc @ONLY)
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libcorkipset.pc
+         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+diff --git a/src/ipsetbuild/ipsetbuild.c b/src/ipsetbuild/ipsetbuild.c
+index 9950e5c..badce7b 100644
+--- a/src/ipsetbuild/ipsetbuild.c
++++ b/src/ipsetbuild/ipsetbuild.c
+@@ -18,7 +18,7 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/ipset.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ static char  *output_filename = NULL;
+diff --git a/src/ipsetcat/ipsetcat.c b/src/ipsetcat/ipsetcat.c
+index 588f5f8..aefaf51 100644
+--- a/src/ipsetcat/ipsetcat.c
++++ b/src/ipsetcat/ipsetcat.c
+@@ -18,7 +18,7 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/ipset.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ static char  *input_filename = NULL;
+diff --git a/src/ipsetdot/ipsetdot.c b/src/ipsetdot/ipsetdot.c
+index 2154620..4443b12 100644
+--- a/src/ipsetdot/ipsetdot.c
++++ b/src/ipsetdot/ipsetdot.c
+@@ -18,7 +18,7 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/ipset.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ static char  *input_filename = NULL;
+diff --git a/src/ipset.pc.in b/src/libcorkipset.pc.in
+similarity index 100%
+rename from src/ipset.pc.in
+rename to src/libcorkipset.pc.in
+diff --git a/src/libipset/bdd/assignments.c b/src/libipset/bdd/assignments.c
+index 41d5702..e3f5938 100644
+--- a/src/libipset/bdd/assignments.c
++++ b/src/libipset/bdd/assignments.c
+@@ -10,7 +10,7 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
++#include "libcorkipset/bdd/nodes.h"
+ 
+ 
+ struct ipset_assignment *
+diff --git a/src/libipset/bdd/basics.c b/src/libipset/bdd/basics.c
+index 3db6f17..535bd91 100644
+--- a/src/libipset/bdd/basics.c
++++ b/src/libipset/bdd/basics.c
+@@ -13,9 +13,9 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/bits.h"
+-#include "ipset/logging.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/bits.h"
++#include "libcorkipset/logging.h"
+ 
+ 
+ void
+diff --git a/src/libipset/bdd/bdd-iterator.c b/src/libipset/bdd/bdd-iterator.c
+index c246245..cf59925 100644
+--- a/src/libipset/bdd/bdd-iterator.c
++++ b/src/libipset/bdd/bdd-iterator.c
+@@ -10,8 +10,8 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/logging.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/logging.h"
+ 
+ 
+ /**
+diff --git a/src/libipset/bdd/expanded.c b/src/libipset/bdd/expanded.c
+index 6a97fd7..704ea2f 100644
+--- a/src/libipset/bdd/expanded.c
++++ b/src/libipset/bdd/expanded.c
+@@ -12,9 +12,9 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/bits.h"
+-#include "ipset/logging.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/bits.h"
++#include "libcorkipset/logging.h"
+ 
+ 
+ static void
+diff --git a/src/libipset/bdd/reachable.c b/src/libipset/bdd/reachable.c
+index 8af8624..a567be2 100644
+--- a/src/libipset/bdd/reachable.c
++++ b/src/libipset/bdd/reachable.c
+@@ -11,8 +11,8 @@
+ #include <libcork/core.h>
+ #include <libcork/ds.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/logging.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/logging.h"
+ 
+ 
+ size_t
+diff --git a/src/libipset/bdd/read.c b/src/libipset/bdd/read.c
+index 9c59a79..91aa31c 100644
+--- a/src/libipset/bdd/read.c
++++ b/src/libipset/bdd/read.c
+@@ -16,9 +16,9 @@
+ #include <libcork/ds.h>
+ #include <libcork/helpers/errors.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/errors.h"
+-#include "ipset/logging.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/errors.h"
++#include "libcorkipset/logging.h"
+ 
+ 
+ static const char  MAGIC_NUMBER[] = "IP set";
+diff --git a/src/libipset/bdd/write.c b/src/libipset/bdd/write.c
+index 0b5633e..5d03097 100644
+--- a/src/libipset/bdd/write.c
++++ b/src/libipset/bdd/write.c
+@@ -11,8 +11,8 @@
+ #include <libcork/core.h>
+ #include <libcork/helpers/errors.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/logging.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/logging.h"
+ 
+ 
+ /*-----------------------------------------------------------------------
+diff --git a/src/libipset/general.c b/src/libipset/general.c
+index 82d3f92..4d2cfaa 100644
+--- a/src/libipset/general.c
++++ b/src/libipset/general.c
+@@ -10,8 +10,8 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/ipset.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ int
+diff --git a/src/libipset/map/allocation.c b/src/libipset/map/allocation.c
+index 0dee17b..714a3d4 100644
+--- a/src/libipset/map/allocation.c
++++ b/src/libipset/map/allocation.c
+@@ -10,8 +10,8 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/ipset.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ void
+diff --git a/src/libipset/map/inspection-template.c.in b/src/libipset/map/inspection-template.c.in
+index e6447d5..aa1cdd4 100644
+--- a/src/libipset/map/inspection-template.c.in
++++ b/src/libipset/map/inspection-template.c.in
+@@ -10,10 +10,10 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/bits.h"
+-#include "ipset/errors.h"
+-#include "ipset/ipset.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/bits.h"
++#include "libcorkipset/errors.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ /**
+diff --git a/src/libipset/map/inspection.c b/src/libipset/map/inspection.c
+index e23253b..0502958 100644
+--- a/src/libipset/map/inspection.c
++++ b/src/libipset/map/inspection.c
+@@ -10,8 +10,8 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/ipset.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/ipset.h"
+ 
+ bool
+ ipmap_is_empty(const struct ip_map *map)
+diff --git a/src/libipset/map/storage.c b/src/libipset/map/storage.c
+index 79de233..ab135cb 100644
+--- a/src/libipset/map/storage.c
++++ b/src/libipset/map/storage.c
+@@ -15,9 +15,9 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/errors.h"
+-#include "ipset/ipset.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/errors.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ static void
+diff --git a/src/libipset/set/allocation.c b/src/libipset/set/allocation.c
+index a1e9392..901959b 100644
+--- a/src/libipset/set/allocation.c
++++ b/src/libipset/set/allocation.c
+@@ -10,8 +10,8 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/ipset.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ void
+diff --git a/src/libipset/set/inspection-template.c.in b/src/libipset/set/inspection-template.c.in
+index 6e0142c..2b67d3e 100644
+--- a/src/libipset/set/inspection-template.c.in
++++ b/src/libipset/set/inspection-template.c.in
+@@ -10,10 +10,10 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/bits.h"
+-#include "ipset/errors.h"
+-#include "ipset/ipset.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/bits.h"
++#include "libcorkipset/errors.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ /**
+diff --git a/src/libipset/set/inspection.c b/src/libipset/set/inspection.c
+index 2cb17ba..b544e8a 100644
+--- a/src/libipset/set/inspection.c
++++ b/src/libipset/set/inspection.c
+@@ -10,8 +10,8 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/ipset.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/ipset.h"
+ 
+ bool
+ ipset_is_empty(const struct ip_set *set)
+diff --git a/src/libipset/set/iterator.c b/src/libipset/set/iterator.c
+index e601caa..f1e27e0 100644
+--- a/src/libipset/set/iterator.c
++++ b/src/libipset/set/iterator.c
+@@ -12,10 +12,10 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/bits.h"
+-#include "ipset/ipset.h"
+-#include "ipset/logging.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/bits.h"
++#include "libcorkipset/ipset.h"
++#include "libcorkipset/logging.h"
+ 
+ 
+ #define IPV4_BIT_SIZE  32
+diff --git a/src/libipset/set/storage.c b/src/libipset/set/storage.c
+index 7dc0927..f5b0c21 100644
+--- a/src/libipset/set/storage.c
++++ b/src/libipset/set/storage.c
+@@ -15,9 +15,9 @@
+ 
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/errors.h"
+-#include "ipset/ipset.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/errors.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ static void
+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
+index c4c959a..6c00dd8 100644
+--- a/tests/CMakeLists.txt
++++ b/tests/CMakeLists.txt
+@@ -24,7 +24,7 @@ link_directories(${CHECK_LIBRARY_DIRS})
+ 
+ macro(make_test test_name)
+     add_executable(${test_name} ${test_name}.c)
+-    target_link_libraries(${test_name} ${CHECK_LIBRARIES} libipset)
++    target_link_libraries(${test_name} ${CHECK_LIBRARIES} libcorkipset)
+     add_test(${test_name} ${test_name})
+ endmacro(make_test)
+ 
+diff --git a/tests/test-assignment.c b/tests/test-assignment.c
+index 3e871bf..0b1fd52 100644
+--- a/tests/test-assignment.c
++++ b/tests/test-assignment.c
+@@ -14,8 +14,8 @@
+ #include <check.h>
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/bits.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/bits.h"
+ 
+ 
+ /*-----------------------------------------------------------------------
+diff --git a/tests/test-bdd.c b/tests/test-bdd.c
+index 23b90e7..15bc724 100644
+--- a/tests/test-bdd.c
++++ b/tests/test-bdd.c
+@@ -14,8 +14,8 @@
+ #include <check.h>
+ #include <libcork/core.h>
+ 
+-#include "ipset/bdd/nodes.h"
+-#include "ipset/bits.h"
++#include "libcorkipset/bdd/nodes.h"
++#include "libcorkipset/bits.h"
+ 
+ 
+ #define DESCRIBE_TEST  fprintf(stderr, "---\n%s\n", __func__)
+diff --git a/tests/test-ipmap.c b/tests/test-ipmap.c
+index 0e600b7..8612697 100644
+--- a/tests/test-ipmap.c
++++ b/tests/test-ipmap.c
+@@ -14,7 +14,7 @@
+ #include <check.h>
+ #include <libcork/core.h>
+ 
+-#include "ipset/ipset.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ #define DESCRIBE_TEST  fprintf(stderr, "---\n%s\n", __func__)
+diff --git a/tests/test-ipset.c b/tests/test-ipset.c
+index 0737e2e..3e1a30d 100644
+--- a/tests/test-ipset.c
++++ b/tests/test-ipset.c
+@@ -14,7 +14,7 @@
+ #include <check.h>
+ #include <libcork/core.h>
+ 
+-#include "ipset/ipset.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ #define DESCRIBE_TEST  fprintf(stderr, "---\n%s\n", __func__)
+diff --git a/tests/test-iterator.c b/tests/test-iterator.c
+index c1aea7f..abf8c12 100644
+--- a/tests/test-iterator.c
++++ b/tests/test-iterator.c
+@@ -13,7 +13,7 @@
+ #include <check.h>
+ #include <libcork/core.h>
+ 
+-#include "ipset/ipset.h"
++#include "libcorkipset/ipset.h"
+ 
+ 
+ #define IPV4_BIT_SIZE  32
+-- 
+2.12.2
+

@@ -1,0 +1,42 @@
+# Copyright 2017 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PV=${PV/_p/+}
+require debian-upstream [ debian_pv=${MY_PV}.orig suffix=tar.xz ] cmake
+
+SUMMARY="C library to store sets/maps of IP address"
+DESCRIPTION="The ipset library provides C data types for storing sets of IP addresses, and maps of
+IP addresses to integers. It supports both IPv4 and IPv6 addresses. It's implemented using \"Binary
+Decision Diagrams\" (BDDs, https://en.wikipedia.org/wiki/Binary_decision_diagram), which (we
+hypothesize) makes it space efficient for large sets.  "
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        dev-libs/libcork[>0.12.0]
+"
+
+WORK=${WORKBASE}/${PN}-${MY_PV}
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DGENERATE_DOC:BOOL=FALSE
+)
+DEFAULT_SRC_INSTALL_EXCLUDE=( RELEASE-VERSION )
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/0001-s-ipset-libcorkipset.patch )
+
+src_prepare() {
+    default
+
+    edo cat <<EOF>version.sh
+#/bin/bash
+echo ${PV} > RELEASE-VERSION
+echo ${PV}
+EOF
+}
+
