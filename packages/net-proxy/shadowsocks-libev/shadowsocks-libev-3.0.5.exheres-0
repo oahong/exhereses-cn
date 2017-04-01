@@ -1,0 +1,46 @@
+# Copyright 2016-2017 Hong Hao <oahong@oahong.me>
+# Distributed under the terms of the GNU General Public License v2
+
+require autotools [ supported_automake=[ 1.15 ] supported_autoconf=[ 2.5 ] need_libtool=true ]
+require github [ user=shadowsocks tag=v${PV} ]
+
+SUMMARY="a lightweight secured SOCKS5 proxy"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="conntrack [[ description = [ Enable support for TOS or DSCP mark preservation ] ]]
+    doc
+"
+
+DEPENDENCIES="
+    build:
+        doc? (
+            app-doc/asciidoc
+            app-text/xmlto
+        )
+    build+run:
+        dev-libs/libbloom
+        dev-libs/libcork
+        dev-libs/libcorkipset
+        dev-libs/libev
+        dev-libs/libsodium[>=1.0.4]
+        dev-libs/mbedtls
+        dev-libs/pcre
+        net-dns/udns
+        conntrack? ( net-libs/libnetfilter_conntrack )
+"
+
+src_prepare() {
+    edo sed -e 's@AC_CONFIG_FILES(\[libbloom/Makefile libcork/Makefile libipset/Makefile\])@@' \
+        -i configure.ac
+    autotools_src_prepare
+}
+
+src_configure() {
+    econf --enable-shared                  \
+          --enable-system-shared-lib       \
+          $(option conntrack connmarktos)  \
+          $(option doc || echo --disable-documentation)
+}
+
