@@ -60,8 +60,8 @@ DEPENDENCIES+="
         x11-libs/libX11
         x11-libs/libXrandr
         x11-libs/qtbase:5[gui]
-        x11-libs/qtscript
-        x11-libs/qtx11extras
+        x11-libs/qtscript:5
+        x11-libs/qtx11extras:5
     run:
         fonts/dejavu
     suggestion:
