@@ -1,0 +1,50 @@
+# Copyright 2017 Hong Hao  <oahong@oahong.me>
+# Distributed under the terms of the GNU General Purpose License v2
+
+declare -A PACKAGE
+LINGUAS=( ja ko zh_CN zh_TW )
+PACKAGE=(
+	[ja]=SourceHanSerifJ
+	[ko]=SourceHanSerifK
+	[zh_CN]=SourceHanSerifSC
+	[zh_TW]=SourceHanSerifTC
+)
+BASE_URI="http://oahong.me/distfiles"
+
+FONT=adobe-fonts
+require xfont github [ user=$FONT ]
+
+SUMMARY="An open source Pan-CJK typeface"
+DESCRIPTION="Source Han Serif is the second Pan-CJK typeface family from Adobe Type, and the serif
+counterpart to Source Han Sans, both of which we released in response to a need for a unified
+typeface design to serve the 1.5 billion people in East Asia.
+
+Source Han Serif supports four different East Asian languages — Simplified Chinese, Traditional
+Chinese, Japanese, and Korean — and the 65,535 glyphs in each of its seven weights are designed to
+work together with a consistent design that emphasizes shared elements between the languages while
+honoring the diversity of each."
+DOWNLOADS=""
+
+for lang in ${LINGUAS[@]} ; do
+    DOWNLOADS+=" linguas:${lang}? ( ${BASE_URI}/${PACKAGE[$lang]}-${PV}.zip )"
+done
+
+LICENCES="OFL-1.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="( linguas: ${LINGUAS[@]} ) [[ number-selected = at-least-one ]]"
+
+WORK=${WORKBASE}
+
+src_compile() {
+    :
+}
+
+src_install() {
+    emagicdocs
+
+    insinto /usr/share/fonts/X11/${FONT}
+    doins *.otf
+    fix_fonts
+}
+
