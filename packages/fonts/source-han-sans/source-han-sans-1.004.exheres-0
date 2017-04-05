@@ -27,7 +27,7 @@ for lang in ${LINGUAS[@]} ; do
     DOWNLOADS+=" linguas:${lang}? ( ${BASE_URI}/${PACKAGE[$lang]}-${PV}.zip )"
 done
 
-LICENCES="Apache-2.0"
+LICENCES="OFL-1.1"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="( linguas: ${LINGUAS[@]} ) [[ number-selected = at-least-one ]]"
@@ -45,3 +45,4 @@ src_install() {
     doins SourceHanSans*/*.otf
     fix_fonts
 }
+
