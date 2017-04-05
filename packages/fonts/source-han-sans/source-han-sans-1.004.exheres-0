@@ -9,18 +9,16 @@ PACKAGE=(
 	[zh_CN]=SourceHanSansSC
 	[zh_TW]=SourceHanSansTC
 )
-BASE_URI="http://oahong.me/~oahong/distfiles"
+BASE_URI="http://oahong.me/distfiles"
 
 FONT=adobe-fonts
 require xfont github [ user=$FONT ]
 
-SUMMARY="A set of Pan-CJK fonts designed to complement Source Sans Pro"
+SUMMARY="Source Han Sans is a set of OpenType/CFF Pan-CJK fonts"
 DESCRIPTION="
-Source Han Sans is a sans serif Pan-CJK font family that is offered in seven weights—ExtraLight,
-Light, Normal, Regular, Medium, Bold, and Heavy—and in several OpenType/CFF-based deployment
-configurations to accommodate various system requirements or limitations. As the name suggests,
-Pan-CJK fonts are intended to support the characters necessary to render or display text in
-Simplified Chinese, Traditional Chinese, Japanese, and Korean."
+Source Han Sans, available in seven weights, is a typeface family which provides full support for
+Japanese, Korean, Traditional Chinese, and Simplified Chinese, all in one font. It also includes
+Latin, Greek, and Cyrillic glyphs from our popular Source Sans family."
 DOWNLOADS=""
 
 for lang in ${LINGUAS[@]} ; do
@@ -42,7 +40,7 @@ src_install() {
     emagicdocs
 
     insinto /usr/share/fonts/X11/${FONT}
-    doins SourceHanSans*/*.otf
+    doins *.otf
     fix_fonts
 }
 
