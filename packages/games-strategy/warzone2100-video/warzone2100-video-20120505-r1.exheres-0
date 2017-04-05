@@ -4,6 +4,12 @@
 VIDEO="sequences.wz"
 BASEURI="mirror://sourceforge/${PN%-*}/${PN%-*}/Videos"
 
+require checksums [ sha1=[ \
+    ${VIDEO}.hi='e5dcd2ab55b39c67edfb1d2a9b3d3fbd9c04899a'  \
+    ${VIDEO}.st='7ade8edd200afee3e4a675d1a5b739b32e574916'  \
+    ${VIDEO}.low='3e59a0dee479d8351a9f48c3a58adf9cf7e680ce' \
+] ]
+
 SUMMARY="Video file for Warzone2100"
 HOMEPAGE="https://wz2100.net"
 DOWNLOADS="
