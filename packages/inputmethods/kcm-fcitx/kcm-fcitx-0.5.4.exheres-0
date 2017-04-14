@@ -6,26 +6,31 @@ require cmake github
 SUMMARY="KDE Config Module for Fcitx"
 DOWNLOADS="http://download.fcitx-im.org/${PN}/${PNV}.tar.xz"
 
-LICENCES="GPL-3"
+LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        app-arch/xz
-        virtual/pkg-config
+        kde-frameworks/extra-cmake-modules[>=1.0.0]
         sys-devel/gettext
+        virtual/pkg-config
+        x11-proto/xproto
     build+run:
+        inputmethods/fcitx-qt5[>=1.1.0]
         inputmethods/fcitx[dbus][>=4.2.8]
-        x11-libs/libxkbfile
-        kde-frameworks/kcoreaddons
-        kde-frameworks/kwidgetsaddons
         kde-frameworks/kcmutils
-        kde-frameworks/kitemviews
+        kde-frameworks/kcoreaddons
         kde-frameworks/ki18n
         kde-frameworks/kio
+        kde-frameworks/kitemviews
         kde-frameworks/knewstuff
+        kde-frameworks/kwidgetsaddons
+        x11-libs/libX11
+        x11-libs/libxkbfile
+        x11-libs/qtbase:5[>=5.3.0]
+        x11-libs/qtx11extras:5[>=5.3.0]
 "
 
 CMAKE_SRC_CONFIGURE_PARAMS=( -DCONFIG_INSTALL_DIR:PATH=/etc )
