@@ -15,9 +15,10 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         virtual/pkg-config
-        kde-frameworks/extra-cmake-modules[>=0.4.0]
+        kde-frameworks/extra-cmake-modules[>=1.4.0]
     build+run:
-        inputmethods/fcitx
-        x11-libs/qtbase:5[gui]
+        inputmethods/fcitx[>=4.2.8]
+        x11-libs/libxkbcommon[>=0.5.0]
+        x11-libs/qtbase:5[gui][>=5.1.0]
 "
 
