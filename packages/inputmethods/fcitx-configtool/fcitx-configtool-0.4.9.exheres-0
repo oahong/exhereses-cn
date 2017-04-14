@@ -3,15 +3,16 @@
 
 require cmake
 
-SUMMARY="Simple configuration tool for fcitx"
+SUMMARY="Configuration tool for fcitx"
 HOMEPAGE="http://fcitx.googlecode.com"
 DOWNLOADS="http://download.fcitx-im.org/${PN}/${PNV}.tar.xz"
 
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="( gtk gtk3 ) [[ number-selected = exactly-one ]]"
+MYOPTIONS="( providers: gtk2 gtk3 ) [[ number-selected = exactly-one ]]"
 
+# FIXME: unique is optional
 DEPENDENCIES="
     build:
         virtual/pkg-config
@@ -19,17 +20,15 @@ DEPENDENCIES="
     build+run:
         app-text/iso-codes
         inputmethods/fcitx[>=4.2.8]
-        gtk? (
+        providers:gtk2? (
             dev-libs/dbus-glib
             dev-libs/unique:1
             x11-libs/gtk+:2[>=2.22]
         )
-        gtk3? (
-            x11-libs/gtk+:3[>=3.4]
-        )
+        providers:gtk3? ( x11-libs/gtk+:3[>=3.20] )
 "
 
 CMAKE_SRC_CONFIGURE_ENABLES=(
-    'gtk3 GTK3' 'gtk GTK2'
+    'providers:gtk2 GTK2' 'providers:gtk3 GTK3'
 )
 
