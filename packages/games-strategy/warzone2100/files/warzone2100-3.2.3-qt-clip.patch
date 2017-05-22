@@ -1,0 +1,26 @@
+Upstream: Yes
+From ef37bca38289f4f79c6533acd93ed326858a3f68 Mon Sep 17 00:00:00 2001
+From: Cyp <cyp@wz2100.net>
+Date: Wed, 26 Apr 2017 11:02:39 +0200
+Subject: [PATCH] qt: Fix build.
+
+A header was missing.
+
+Fixes ticket:4580.
+---
+ lib/qtgame/wzapp_qt.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/lib/qtgame/wzapp_qt.cpp b/lib/qtgame/wzapp_qt.cpp
+index 3047c18..5202d3c 100644
+--- a/lib/qtgame/wzapp_qt.cpp
++++ b/lib/qtgame/wzapp_qt.cpp
+@@ -42,6 +42,7 @@
+ 
+ #include "lib/exceptionhandler/dumpinfo.h"
+ #include "lib/framework/file.h"
++#include "lib/framework/math_ext.h"
+ #include "lib/ivis_opengl/piestate.h"
+ #include "lib/ivis_opengl/pieclip.h"
+ #include "lib/ivis_opengl/screen.h"
+

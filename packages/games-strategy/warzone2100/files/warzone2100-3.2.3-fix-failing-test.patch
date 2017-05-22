@@ -1,0 +1,25 @@
+From af3cb08ecf0f4bf8be0c43b8b09e7b139bbc4b47 Mon Sep 17 00:00:00 2001
+From: Arnaud Lefebvre <a.lefebvre@outlook.fr>
+Date: Mon, 8 May 2017 02:08:32 +0200
+Subject: [PATCH] fix font test
+
+---
+ tests/ivis_linktest.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/ivis_linktest.cpp b/tests/ivis_linktest.cpp
+index 6ecd4670a..5b095bd69 100644
+--- a/tests/ivis_linktest.cpp
++++ b/tests/ivis_linktest.cpp
+@@ -66,7 +66,7 @@ int war_GetScreen()
+ 
+ void mainLoop()
+ {
+-	iV_DrawTextRotated("Press ESC to exit.", 100, 100, 0.0f);
++	iV_DrawTextRotated("Press ESC to exit.", 100, 100, 0.0f, font_regular);
+ 	pie_ScreenFlip(CLEAR_BLACK);
+ 	frameUpdate(); // General housekeeping
+ 
+-- 
+2.12.2
+

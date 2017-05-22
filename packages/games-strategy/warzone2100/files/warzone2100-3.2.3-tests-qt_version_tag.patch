@@ -1,0 +1,35 @@
+From ccddbd51fa3f449fb9c43d700364ac45d5e88d65 Mon Sep 17 00:00:00 2001
+From: Arnaud Lefebvre <a.lefebvre@outlook.fr>
+Date: Tue, 9 May 2017 00:07:50 +0200
+Subject: [PATCH] tests: add qt5 libs to build targets
+
+Fix the "undefined symbol qt_version_tag" error while compiling tests
+---
+ tests/Makefile.am | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/tests/Makefile.am b/tests/Makefile.am
+index 75d07da5f..da7b783fe 100644
+--- a/tests/Makefile.am
++++ b/tests/Makefile.am
+@@ -18,7 +18,7 @@ check_PROGRAMS = maptest modeltest framework_linktest ivis_linktest
+ #qtscripttest_LDADD = $(PHYSFS_LIBS) $(QT5_LIBS)
+ 
+ framework_linktest_SOURCES = framework_linktest.cpp
+-framework_linktest_LDADD = $(top_builddir)/lib/framework/libframework.a $(PHYSFS_LIBS) $(LIBCRYPTO_LIBS) $(LDFLAGS)
++framework_linktest_LDADD = $(top_builddir)/lib/framework/libframework.a $(PHYSFS_LIBS) $(LIBCRYPTO_LIBS) $(QT5_LIBS) $(LDFLAGS)
+ 
+ ivis_linktest_SOURCES = ivis_linktest.cpp
+ ivis_linktest_LDADD =
+@@ -36,7 +36,7 @@ ivis_linktest_LDADD += $(top_builddir)/lib/framework/libframework.a \
+ modeltest_SOURCES = modeltest.c
+ 
+ maptest_SOURCES = ../tools/map/mapload.cpp maptest.cpp
+-maptest_LDADD = $(PHYSFS_LIBS) $(PNG_LIBS)
++maptest_LDADD = $(PHYSFS_LIBS) $(PNG_LIBS) $(QT5_LIBS)
+ 
+ noinst_HEADERS = ../tools/map/mapload.h lint.h
+ 
+-- 
+2.12.2
+
