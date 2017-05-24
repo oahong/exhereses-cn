@@ -4,10 +4,6 @@
 require ibus-pinyin
 
 PLATFORMS="~amd64 ~x86"
-DEPENDENCIES="
-    build:
-        gnome-desktop/gnome-common
-"
 
 src_prepare() {
     echo -e "data/db/android/pydict.py\nscripts/pydict.py" >> po/POTFILES.in
