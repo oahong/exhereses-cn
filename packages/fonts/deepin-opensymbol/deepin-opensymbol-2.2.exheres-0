@@ -9,20 +9,20 @@ DESCRIPTION="
 Deepin open symbol is a substitution for Wingdings, which can perfectly solve the issue of displaying symbols in
 WPS. It allows you to seamlessly transit from Wingdings to Deepin OpenSymbol."
 HOMEPAGE="https://www.deepin.org"
-DOWNLOADS="http://packages.deepin.com/deepin/pool/main/t/ttf-deepin-opensymbol/ttf-deepin-opensymbol_0.20160605.orig.tar.xz"
+DOWNLOADS="http://packages.deepin.com/deepin/pool/main/t/ttf-deepin-opensymbol/ttf-${PN}_${PV}.tar.xz"
 
 LICENCES="FIXME"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
 
-WORK=${WORKBASE}
+WORK=${WORKBASE}/ttf-${PNV}
 
 src_install() {
     insinto /usr/share/fonts/X11/${FONT}
     doins *.ttf
     insinto /usr/share/fontconfig/conf.avail
-    doins "${FILES}"/59-${PN}.conf
+    doins debian/59-${PN}.conf
     xfont_src_install
 }
 
