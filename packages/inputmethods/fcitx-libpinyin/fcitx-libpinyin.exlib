@@ -12,22 +12,26 @@ DOWNLOADS="https://download.fcitx-im.org/data/${MODEL_TEXT}"
 
 LICENCES="GPL-2"
 SLOT="0"
-MYOPTIONS="qt4 [[ description = [ Build dict manager ] ]]"
+MYOPTIONS="qt5 [[ description = [ Build QT5 based dict manager ] ]]"
 
 DEPENDENCIES="
     build:
-        sys-devel/gettext
         dev-util/intltool
         dev-util/pkg-config
+        sys-devel/gettext
     build+run:
-        inputmethods/fcitx[>=4.2.8][qt4?]
-        inputmethods/libpinyin[>=1.7.0]
         dev-libs/glib:2
+        inputmethods/fcitx[>=4.2.8]
+        inputmethods/libpinyin[>=1.9.91]
         sys-apps/dbus
-        qt4? ( x11-libs/qt:4[webkit][>=4.8.0] )
+        qt5? (
+            inputmethods/fcitx-qt5[>=1.1]
+            x11-libs/qtbase:5[>=5.7]
+            x11-libs/qtwebengine:5[>=5.7]
+        )
 "
 
-CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'qt4 QT' )
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'qt5 QT' )
 
 fcitx-libpinyin_src_prepare() {
     cmake_src_prepare
