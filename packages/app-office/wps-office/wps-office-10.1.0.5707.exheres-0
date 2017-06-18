@@ -34,6 +34,8 @@ DEPENDENCIES="
         x11-libs/libX11
         x11-libs/libXext
         x11-libs/libXrender
+     suggestion:
+        x11-fonts/deepin-opensymbol [[ note = [ An open source alternative to symbol fonts ] ]]
 "
 
 RESTRICT="strip"
