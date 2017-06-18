@@ -1,17 +1,17 @@
-# Copyright 2009-2016 Hong Hao <oahong@gmail.com>
+# Copyright 2009-2017 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ] gitlab [ tag=v${PV} ]
 export_exlib_phases src_prepare
 
-SUMMARY="The Mana Plus Client"
+SUMMARY="Advanced client for The Mana World and Evol Online"
 HOMEPAGE="http://manaplus.org"
 DESCRIPTION="ManaPlus is extended client for Evol Online, The Mana World and similar servers based
 on eAthena fork.  As a 2D style game, Evol Online aims to create a friendly environment where people
 can escape reality and interact with others while enjoying themselves through a fantasy style game.
 The Mana World (TMW) is a serious effort to create an innovative free and open source MMORPG. TMW
 uses 2D graphics and aims to create a large and diverse interactive world."
-DOWNLOADS="http://download.evolonline.org/manaplus/download/${PV}/${PNV}.tar.xz"
+#DOWNLOADS="http://download.evolonline.org/manaplus/download/${PV}/${PNV}.tar.xz"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -48,11 +48,14 @@ DEPENDENCIES="
         x11-apps/xdg-utils
         x11-utils/xsel
 "
-
+#            media-libs/SDL2_gfx
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --with-dyecmd
     --enable-eathena
     --enable-tmwa
+    --with-manaplusgame
+    --with-internalsdlgfx
+    --enable-libxml=libxml
 )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( opengl sdl2 )
 
