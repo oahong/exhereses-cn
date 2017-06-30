@@ -11,7 +11,7 @@ on eAthena fork.  As a 2D style game, Evol Online aims to create a friendly envi
 can escape reality and interact with others while enjoying themselves through a fantasy style game.
 The Mana World (TMW) is a serious effort to create an innovative free and open source MMORPG. TMW
 uses 2D graphics and aims to create a large and diverse interactive world."
-#DOWNLOADS="http://download.evolonline.org/manaplus/download/${PV}/${PNV}.tar.xz"
+DOWNLOADS="http://download.evolonline.org/manaplus/download/${PV}/${PNV}.tar.xz"
 
 LICENCES="GPL-2"
 SLOT="0"
