@@ -21,9 +21,8 @@ MYOPTIONS="opengl sdl2"
 DEPENDENCIES="
     build:
         virtual/pkg-config
-        sys-devel/gettext
+        sys-devel/gettext[>=0.16.1]
     build+run:
-        dev-games/physfs
         dev-libs/libxml2
         media-libs/libpng
         net-misc/curl
@@ -50,10 +49,10 @@ DEPENDENCIES="
 "
 #            media-libs/SDL2_gfx
 DEFAULT_SRC_CONFIGURE_PARAMS=(
-    --with-dyecmd
     --enable-eathena
     --enable-tmwa
     --with-manaplusgame
+    --with-dyecmd
     --with-internalsdlgfx
     --enable-libxml=libxml
 )
