@@ -33,11 +33,6 @@ DEPENDENCIES="
 
 REMOTE_IDS="launchpad:man-db"
 
-src_prepare() {
-    # Disable test man-9
-    edo sed -e '/man-8/s/man-9//' -i src/tests/Makefile.in
-}
-
 src_configure() {
     local myconf
     if option berkdb ; then
