@@ -22,7 +22,7 @@ DEPENDENCIES="
     build+run:
         dev-libs/glib:2
         inputmethods/fcitx[>=4.2.8]
-        inputmethods/libpinyin[>=1.9.91]
+        inputmethods/libpinyin[>=2.1.0]
         sys-apps/dbus
         qt5? (
             inputmethods/fcitx-qt5[>=1.1]
@@ -35,8 +35,6 @@ CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'qt5 QT' )
 
 fcitx-libpinyin_src_prepare() {
     cmake_src_prepare
-    edo sed -e 's#share#${CMAKE_INSTALL_DATAROOTDIR}#g' \
-        -i data/CMakeLists.txt
     edo cp "${FETCHEDDIR}"/${MODEL_TEXT} "${WORKBASE}"/${PNVR}/data
 }
 
