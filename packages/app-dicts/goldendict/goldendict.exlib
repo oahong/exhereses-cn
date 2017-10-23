@@ -4,14 +4,17 @@
 
 require qmake [ slot=5 ]
 
-export_exlib_phases src_prepare src_install pkg_postinst
+export_exlib_phases src_prepare src_configure src_install pkg_postinst
 
 SUMMARY="A feature-rich dictionary lookup program"
 HOMEPAGE="http://goldendict.org/"
 
 LICENCES="GPL-3"
 SLOT="0"
-MYOPTIONS=""
+MYOPTIONS="
+    internal-player [[ description = [ Build internal audio player ] ]]
+    tiff
+"
 
 DEPENDENCIES="
     build:
@@ -21,10 +24,8 @@ DEPENDENCIES="
     build+run:
         app-arch/lzo:2
         app-spell/hunspell:=
-        media-libs/libao
         media-libs/libogg
         media-libs/libvorbis
-        media/ffmpeg
         x11-libs/libX11
         x11-libs/libXtst
         x11-libs/qtbase:5
@@ -32,6 +33,11 @@ DEPENDENCIES="
         x11-libs/qttools:5
         x11-libs/qtwebkit:5
         x11-libs/qtx11extras:5
+        internal-player? (
+            media/ffmpeg
+            media-libs/libao
+        )
+        tiff? ( media-libs/tiff )
     recommendation:
         x11-server/xorg-server[record] [[ description = [ required for hotkeys monitoring mechanism ] ]]
 "
@@ -42,11 +48,21 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/do-not-run-git.patch
 )
 
-EQMAKE_PARAMS=( PREFIX=/usr CONFIG+=no_epwing_support )
-
 goldendict_src_prepare() {
     edo sed -e "/target\.path/s#bin#$(exhost --target)/bin#" \
         -i ${PN}.pro
+}
+
+goldendict_src_configure() {
+    local qmake_params=(
+        PREFIX=/usr
+        CONFIG+=no_epwing_support
+    )
+
+    option tiff || qmake_params+=( CONFIG+=no_extra_tiff_handler )
+    option internal-player || qmake_params+=( DISABLE_INTERNAL_PLAYER=1 )
+
+    eqmake "${qmake_params[@]}"
 }
 
 # TODO: `make install` installs crap like .cc and .hh files to /usr/share/doc. Two other files:
