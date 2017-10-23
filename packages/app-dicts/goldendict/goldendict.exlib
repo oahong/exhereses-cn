@@ -2,7 +2,7 @@
 # Copyright 2013 Ivan Diorditsa <ivan.diorditsa@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require qmake
+require qmake [ slot=5 ]
 
 export_exlib_phases src_prepare src_install pkg_postinst
 
@@ -20,14 +20,18 @@ DEPENDENCIES="
         x11-proto/xproto
     build+run:
         app-arch/lzo:2
-        app-spell/hunspell
+        app-spell/hunspell:=
         media-libs/libao
         media-libs/libogg
         media-libs/libvorbis
         media/ffmpeg
         x11-libs/libX11
         x11-libs/libXtst
-        x11-libs/qt:4[>=4.5][webkit]
+        x11-libs/qtbase:5
+        x11-libs/qtsvg:5
+        x11-libs/qttools:5
+        x11-libs/qtwebkit:5
+        x11-libs/qtx11extras:5
     recommendation:
         x11-server/xorg-server[record] [[ description = [ required for hotkeys monitoring mechanism ] ]]
 "
