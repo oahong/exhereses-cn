@@ -20,7 +20,7 @@ DEPENDENCIES="
     build+run:
         inputmethods/fcitx-qt5[>=1.1.0]
         inputmethods/fcitx[dbus][>=4.2.8]
-        kde-frameworks/kcmutils
+        kde-frameworks/kconfigwidgets
         kde-frameworks/kcoreaddons
         kde-frameworks/ki18n
         kde-frameworks/kio
