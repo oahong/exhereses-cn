@@ -14,3 +14,8 @@ src_unpack() {
     unpack --if-compressed ${PNV}.tar.xz
 }
 
+src_prepare() {
+    edo sed -e "s/4.2.9.3/${PV}/g" -i CMakeLists.txt
+    fcitx_src_prepare
+}
+
