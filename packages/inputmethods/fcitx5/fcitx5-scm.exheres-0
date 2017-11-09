@@ -1,0 +1,73 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SPELL_EN_DICT=en_dict-20121020.tar.gz
+
+require github [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.6.0 ]
+
+SUMMARY="Next generation of fcitx"
+DOWNLOADS="
+    https://download.fcitx-im.org/data/${SPELL_EN_DICT}
+"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="doc" # enchant is not optional in current stage
+
+DEPENDENCIES="
+    build:
+        kde-frameworks/extra-cmake-modules[>=1.0.0]
+        sys-devel/gettext
+        virtual/pkg-config
+        doc? ( app-doc/doxygen )
+    build+run:
+        app-spell/enchant
+        app-text/iso-codes
+        dev-libs/expat
+        dev-libs/fmt
+        dev-libs/glib:2
+        sys-apps/systemd
+        sys-apps/util-linux [[ note = [ libuuid ] ]]
+        sys-libs/wayland
+        sys-libs/wayland-protocols
+        x11-apps/xkeyboard-config
+        x11-dri/mesa[wayland]
+        x11-libs/cairo[X]
+        x11-libs/gdk-pixbuf
+        x11-libs/libxcb
+        x11-libs/libxkbcommon[X]
+        x11-libs/libxkbfile
+        x11-libs/pango
+        x11-libs/xcb-imdkit
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DENABLE_COVERAGE:BOOL=FALSE
+    -DENABLE_ENCHANT:BOOL=TRUE
+    -DENABLE_PRESAGE:BOOL=FALSE
+    -DENABLE_TEST:BOOL=TRUE
+)
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'doc DOC' )
+
+src_prepare() {
+    edo cp "${FETCHEDDIR}"/${SPELL_EN_DICT} "${CMAKE_SOURCE}"/src/modules/spell/dict
+    edo sed -e '/DESTINATION/s@share@${FCITX_INSTALL_DATADIR}@' \
+        -i ../${PNV}/src/lib/fcitx-utils/Fcitx5Macros.cmake
+    default
+}
+
+src_compile() {
+    default
+    option doc && emake doc
+}
+
+src_install() {
+    default
+    if option doc ; then
+        edo pushd doc
+        dodoc -r html
+        edo popd
+    fi
+}
+
