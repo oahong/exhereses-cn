@@ -1,0 +1,67 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+OPENGRAM_LM_TAR=lm_sc.3gm.arpa-20140820.tar.bz2
+OPENGRAM_DICT_TAR=dict.utf8-20170423.tar.xz
+TABLE_DICT_TAR=table.tar.gz
+
+SCM_kenlm_REPOSITORY=https://github.com/kpu/kenlm.git
+SCM_kenlm_REVISION=f3243eaff1366c7c60263ec0d21c9bfe4ab3591c
+SCM_SECONDARY_REPOSITORIES="kenlm"
+SCM_EXTERNAL_REFS="src/libime/core/kenlm:kenlm"
+
+require github [ user=fcitx ] cmake [ api=2 ]
+
+SUMMARY="A library to support generic input method implementation"
+DOWNLOADS="
+    https://10gbps-io.dl.sourceforge.net/project/open-gram/${OPENGRAM_LM_TAR}
+    https://download.fcitx-im.org/data/${OPENGRAM_DICT_TAR}
+    https://download.fcitx-im.org/data/${TABLE_DICT_TAR}
+"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="doc"
+
+DEPENDENCIES="
+    build:
+        kde-frameworks/extra-cmake-modules[>=1.0]
+        doc? ( app-doc/doxygen )
+        dev-lang/python[>=3.0] [[ note = [ to convert opengram data ] ]]
+    build+run:
+        inputmethods/fcitx5
+        dev-libs/boost[>=1.61]
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DENABLE_TEST:BOOL=TRUE
+)
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
+    'doc DOC'
+)
+
+src_prepare() {
+    local f=
+    for f in ${ARCHIVES}; do
+        edo cp "${FETCHEDDIR}"/${f} "${CMAKE_SOURCE}"/data
+    done
+    cmake_src_prepare
+}
+
+src_compile() {
+    # opengram data conversion scripts need unicode
+    export LC_ALL=en_US.UTF-8
+    default
+    option doc && emake doc
+}
+
+src_install() {
+    default
+    if option doc ; then
+        edo pushd doc
+        dodoc -r html
+        edo popd
+    fi
+}
+
