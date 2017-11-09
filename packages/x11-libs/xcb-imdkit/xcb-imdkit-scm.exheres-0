@@ -1,0 +1,21 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=wengxt ] scm-git cmake [ api=2 ]
+SUMMARY="input method development support for xcb"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+        kde-frameworks/extra-cmake-modules[>=0.0.11]
+    build+run:
+        x11-libs/libxcb
+        x11-utils/xcb-util-keysyms
+        x11-utils/xcb-util
+"
+
