@@ -1,0 +1,43 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+PY_STROKE=py_stroke-20121124.tar.gz
+PY_TABLE=py_table-20121124.tar.gz
+require github [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.4.0 ]
+
+SUMMARY="Chinese addons for fcitx5"
+DOWNLOADS="
+    http://download.fcitx-im.org/data/${PY_STROKE}
+    http://download.fcitx-im.org/data/${PY_TABLE}
+"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="opencc [[ description = [ Enable OpenCC for chttrans ] ]]"
+
+DEPENDENCIES="
+    build:
+        kde-frameworks/extra-cmake-modules[>=1.0.0]
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        inputmethods/fcitx5
+        inputmethods/libime
+        dev-libs/fmt
+        net-misc/curl
+        dev-libs/boost[>=1.61]
+        opencc? ( cjk/opencc )
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_TEST:BOOL=FALSE )
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'opencc OPENCC' )
+
+src_prepare() {
+    local f=
+    for f in ${ARCHIVES} ; do
+        cp ${FETCHEDDIR}/${f} "${CMAKE_SOURCE}"/modules/pinyinhelper
+    done
+    cmake_src_prepare
+}
+
