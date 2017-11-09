@@ -1,0 +1,50 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+CPU_FEATURES="sse3 ssse3 sse4.1 sse4.2 sse4a"
+require github [ user=s-yata ]
+
+SUMMARY="Matching Algorithm with Recursively Implemented StorAge"
+DESCRIPTION="Matching Algorithm with Recursively Implemented StorAge (MARISA) is a static and
+space-efficient trie data structure. And libmarisa is a C++ library to provide an implementation of
+MARISA. Also, the package of libmarisa contains a set of command line tools for building and
+operating a MARISA-based dictionary.
+
+A MARISA-based dictionary supports not only lookup but also reverse lookup, common prefix search and
+predictive search.
+
+* Lookup is to check whether or not a given string exists in a dictionary.
+* Reverse lookup is to restore a key from its ID.
+* Common prefix search is to find keys from prefixes of a given string.
+* Predictive search is to find keys starting with a given string."
+DOWNLOADS="https://${PN}.googlecode.com/files/${PNV/-trie}.tar.gz"
+
+LICENCES="|| ( BSD-2 LGPL-2.1 )"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    ( platform: amd64 x86 )
+    x86_cpu_features: sse2 ${CPU_FEATURES}
+    amd64_cpu_features: ${CPU_FEATURES}
+"
+
+DEPENDENCIES=""
+
+WORK=${WORKBASE}/${PNV/-trie}
+
+src_configure() {
+    local myconf=()
+
+    for feature in ${CPU_FEATURES} ; do
+        if option amd64_cpu_features:${feature} || option x86_cpu_features:${feature} ; then
+            myconf+=" --enable-${feature}"
+        fi
+    done
+
+    if option platform:amd64 || option x86_cpu_features:sse2; then
+        myconf+=" --enable-sse2"
+    fi
+
+    econf ${myconf[@]}
+}
+
