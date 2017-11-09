@@ -1,0 +1,19 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=rime tag=${PV} ]
+
+SUMMARY="Rime Schema data"
+
+LICENCES="FIXME"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        inputmethods/librime
+"
+
+WORK=${WORKBASE}/${PN}
+
