@@ -1,0 +1,48 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.6 ]
+
+SUMMARY="gtk im module and glib based dbus client library for fcitx5"
+DOWNLOADS=""
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    gobject-introspection
+    ( providers: gtk gtk3 ) [[ number-selected = at-least-one ]]
+"
+
+DEPENDENCIES="
+    build:
+        kde-frameworks/extra-cmake-modules[>=1.0.0]
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2
+        inputmethods/fcitx5
+        x11-libs/libX11
+        x11-libs/libxkbcommon[X]
+        providers:gtk? ( x11-libs/gtk+:2 )
+        providers:gtk3? ( x11-libs/gtk+:3 )
+
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_SNOOPER:BOOL=TRUE )
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
+    'gobject-introspection GIR'
+    'providers:gtk GTK2_IM_MODULE'
+    'providers:gtk3 GTK3_IM_MODULE'
+)
+
+src_prepare() {
+    edo sed -e '/target_include_directories/s@im-fcitx5@im-fcitx-gtk3@' \
+        -i "${CMAKE_SOURCE}"/gtk3/CMakeLists.txt
+    cmake_src_prepare
+}
+
+pkg_postinst() {
+    option providers:gtk && gtk-query-immodules-2.0 --update-cache
+    option providers:gtk3 && gtk-query-immodules-3.0 --update-cache
+}
+
