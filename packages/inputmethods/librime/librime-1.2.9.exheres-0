@@ -1,0 +1,43 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=rime ] cmake [ api=2 ]
+
+SUMMARY="Rime Input Method Engine, the core library"
+HOMEPAGE="http://rime.im"
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        x11-proto/xproto
+    build+run:
+        cjk/opencc
+        dev-db/leveldb
+        dev-libs/marisa-trie
+        dev-libs/yaml-cpp
+        x11-libs/libX11
+    test:
+        dev-cpp/gtest
+"
+
+CMAKE_SOURCE=${WORKBASE}/${PN}-rime-${PV}
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DBUILD_SHARED_LIBS:BOOL=TURE
+    -DBUILD_STATIC:BOOL=FALSE
+    -DBUILD_TEST:BOOL=TRUE
+    -DENABLE_LOGGING:BOOL=FALSE
+    -DBOOST_USE_CXX11:BOOL=TRUE
+    -DBOOST_USE_SIGNALS2:BOOL=TRUE
+)
+
+src_prepare() {
+    cmake_src_prepare
+    edo sed -e '/RimeConfig/s@share@${CMAKE_INSTALL_DATAROOTDIR}@' \
+        -i "${CMAKE_SOURCE}"/CMakeLists.txt
+}
+
