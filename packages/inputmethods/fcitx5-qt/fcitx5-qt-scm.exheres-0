@@ -5,7 +5,12 @@ require github [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.6.0 ]
 
 SUMMARY="Qt library and IM module for fcitx5"
 
-LICENCES="LGPL-2.1"
+LICENCES="
+(
+    LGPL-2.1 [[ note = [ Fcitx5QtWidgetsAddons ] ]]
+    BSD-3 [[ note = [ Fcitx5Qt{4,5}DBusAddons Library and Input context plugin ] ]]
+) [[ last-checked = a4b043 ]]
+"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="qt4 qt5"
