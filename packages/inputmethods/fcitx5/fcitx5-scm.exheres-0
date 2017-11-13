@@ -52,8 +52,8 @@ CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'doc DOC' )
 
 src_prepare() {
     edo cp "${FETCHEDDIR}"/${SPELL_EN_DICT} "${CMAKE_SOURCE}"/src/modules/spell/dict
-    edo sed -e '/DESTINATION/s@share@${FCITX_INSTALL_DATADIR}@' \
-        -i ../${PNV}/src/lib/fcitx-utils/Fcitx5Macros.cmake
+    edo sed -e '/DESTINATION/s@share/locale@${FCITX_INSTALL_LOCALEDIR}@' \
+        -i "${CMAKE_SOURCE}"/src/lib/fcitx-utils/Fcitx5Macros.cmake
     default
 }
 
