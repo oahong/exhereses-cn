@@ -1,0 +1,94 @@
+Description: 
+	Man page is a bit confusing. (Closes: #503151)
+	.
+	Updated README and man page as per suggestion in
+	the bug report.
+Origin: http://bugs.debian.org/cgi-bin/bugreport.cgi?msg=5;bug=503151
+Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=503151
+Author: Reuben Thomas <rrt@femur.dyndns.org>
+
+--- a/README
++++ b/README
+@@ -71,6 +71,11 @@
+   	to WAV (or any other sound format for that matter) using
+   	sox ('sox track.cdr track.wav'). Audio tracks can be written
+   	in WAV format by using the -w switch.
++
++		The output type depends on the input type (data is just copied).
++		If the input is in ISO format, the output will be. On the other
++		hand, if the input is raw audio data, the output will be CDR or
++		WAV (the latter if -w is given).
+   	
+   	---
+   	
+@@ -125,6 +130,10 @@
+ 	The -r flag makes binchunker output MODE2/2352 tracks in raw
+ 	format, from offset 0 for 2352 bytes. Good for MPEG/VCD.
+ 	
++	The -p and -r flags works only with MODE2/2352 input (if input
++	is in PSX mode pass -p flag or if it is in raw format pass
++	-r flag).
++
+ 	The -w flag makes binchunker write audio tracks in WAV format.
+ 	
+ 	The -s flag makes binchunker swap byte order in the samples of
+--- a/bchunk.1
++++ b/bchunk.1
+@@ -22,10 +22,15 @@
+ mounted through a loop device on Linux systems, or
+ written on a CD-R using cdrecord.
+ The .cdr tracks are in the native CD audio format. They can
+-be either written on a CD-R using cdrecord -audio, or converted
++be either written on a CD-R using cdrecord \(hyaudio, or converted
+ to WAV (or any other sound format for that matter) using
+ sox.
+ .LP
++The output type depends on the input type (data is just copied).
++If the input is in ISO format, the output will be. On the other
++hand, if the input is raw audio data, the output will be CDR or
++WAV (the latter if \(hyw is given).
++.LP
+ It is advisable to edit the .cue file to either MODE2/2352/2048 or
+ MODE2/2352/2324 depending on whether an ISO filesystem or a VCD is
+ desired, respectively.
+@@ -46,10 +51,12 @@
+ .BI \-p
+ Makes binchunker go into PSX mode and truncate MODE2/2352 tracks to
+ 2336 bytes at offset 0 instead of normal 2048 bytes at offset 24.
++Use this option if input is in PSX mode.
+ .TP 10
+ .BI \-r
+ Makes binchunker output MODE2/2352 tracks in raw format, from offset
+-0 for 2352 bytes. Good for MPEG/VCD.
++0 for 2352 bytes. Good for MPEG/VCD. Use this option if input is in
++raw format.
+ .SH FILES
+ .LP
+ .TP 5
+@@ -62,11 +69,11 @@
+ .B *.iso
+ Tracks in ISO9660 CD filesystem format. Can be either written on a
+ CD-R using cdrecord, or mounted (on Linux platforms at least)
+-through a loop device ('mount track.iso /mnt/cdrom -o loop=/dev/loop0,blocksize=1024').
++through a loop device ('mount track.iso /mnt/cdrom \(hyo loop=/dev/loop0,blocksize=1024').
+ .TP 5
+ .B *.cdr
+ Audio tracks in native CD audio format. They can be either written on a
+-CD-R using 'cdrecord -audio', or converted to WAV (or any other sound
++CD-R using 'cdrecord \(hyaudio', or converted to WAV (or any other sound
+ format for that matter) using sox ('sox track.cdr track.wav').
+ .TP 5
+ .B *.wav
+@@ -78,7 +85,6 @@
+ .BR cdrdao (1)
+ .SH AUTHORS
+ .LP
+-.NF
+ Heikki Hannikainen <hessu@hes.iki.fi>
+ .br
+ Bob Marietta <marietrg@SLU.EDU>
+@@ -89,4 +95,3 @@
+ .br
+ Matthew Green <mrg@eterna.com.au>
+ .br
+-.FI

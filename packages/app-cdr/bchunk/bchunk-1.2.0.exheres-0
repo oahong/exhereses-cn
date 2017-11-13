@@ -21,6 +21,10 @@ DEPENDENCIES=""
 
 UPSTREAM_CHANGELOG="${HOMEPAGE}/ChangeLog"
 
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/*.patch
+)
+
 DEFAULT_SRC_COMPILE_PARAMS=(
     CC="${CC}" LD="${CC}" CFLAGS=${CFLAGS}
 )
@@ -29,3 +33,4 @@ src_install() {
     dobin ${PN}
     doman ${PN}.1
 }
+
