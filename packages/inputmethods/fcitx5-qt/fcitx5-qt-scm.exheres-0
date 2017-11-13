@@ -8,7 +8,7 @@ SUMMARY="Qt library and IM module for fcitx5"
 LICENCES="LGPL-2.1"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
+MYOPTIONS="qt4 qt5"
 
 DEPENDENCIES="
     build+run:
@@ -16,8 +16,15 @@ DEPENDENCIES="
         x11-libs/libX11
         x11-libs/libxcb
         x11-libs/libxkbcommon[X][>=0.5.0]
-        x11-libs/qt[dbus]
-        x11-libs/qtbase:5[gui]
-        x11-libs/qtx11extras:5
+        qt4? ( x11-libs/qt[dbus][>=4.8.0] )
+        qt5? (
+            x11-libs/qtbase:5[gui][>=5.1.0]
+            x11-libs/qtdeclarative:5[>=5.1.0]
+            x11-libs/qtx11extras:5[>=5.1.0]
+        )
 "
+
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
+    'qt4 QT4' 'qt5 QT5'
+)
 
