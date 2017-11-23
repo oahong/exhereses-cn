@@ -1,0 +1,23 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=shadowsocks tag=v${PV} ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+
+SUMMARY="A simple obfuscating tool, designed as plugin server of shadowsocks"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/libcork
+        dev-libs/libev
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    ${FILES}/0001-Use-libcork-dev-in-system.patch
+)
+
