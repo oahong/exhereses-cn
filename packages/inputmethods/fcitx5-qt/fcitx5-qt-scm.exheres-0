@@ -15,7 +15,11 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="qt4 qt5"
 
+# last checked: 752173326b5d66bd15327dfe9839e69279825899
 DEPENDENCIES="
+    build:
+        kde-frameworks/extra-cmake-modules[>=1.4.0]
+        sys-devel/gettext
     build+run:
         inputmethods/fcitx5
         x11-libs/libX11

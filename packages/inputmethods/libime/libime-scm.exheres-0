@@ -24,6 +24,7 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="doc"
 
+# last checked: 00368a00a3a154cae2ecf188aa1a8cfd80c389da
 DEPENDENCIES="
     build:
         kde-frameworks/extra-cmake-modules[>=1.0]

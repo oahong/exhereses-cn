@@ -9,6 +9,7 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
 
+# last checked: 8da896ae5676cde77e3dd6f57cbd840439ac73d3
 DEPENDENCIES="
     build:
         kde-frameworks/extra-cmake-modules[>=1.0.0]

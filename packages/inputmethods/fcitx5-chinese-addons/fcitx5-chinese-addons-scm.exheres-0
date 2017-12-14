@@ -16,6 +16,7 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="opencc [[ description = [ Enable OpenCC for chttrans ] ]]"
 
+# last checked: e6c713549eba0fa99d4ec696a0329a3dfcc6dd72
 DEPENDENCIES="
     build:
         kde-frameworks/extra-cmake-modules[>=1.0.0]
@@ -30,7 +31,7 @@ DEPENDENCIES="
         opencc? ( cjk/opencc )
 "
 
-CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_TEST:BOOL=FALSE )
+CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_TEST:BOOL=TRUE )
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'opencc OPENCC' )
 
 src_prepare() {
