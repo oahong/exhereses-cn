@@ -1,0 +1,38 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=tsujan tag=V${PV} ] cmake [ api=2 ]
+
+SUMMARY="A Linux SVG-based theme engine for Qt5 and KDE"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        x11-proto/xproto
+    build+run:
+        x11-libs/libX11
+        x11-libs/qtbase:5
+        x11-libs/qtsvg:5
+        x11-libs/qtx11extras:5
+"
+
+CMAKE_SOURCE=${WORKBASE}/${PN}-${PV}/${PN}
+
+CMAKE_SRC_CONFIGURE_OPTION_PARAMS=(
+    # Disable QT4 support
+    -DENABLE_QT4:BOOL=FALSE
+)
+
+src_prepare() {
+    edo sed -e 's@${CMAKE_INSTALL_PREFIX}/share@${CMAKE_INSTALL_DATAROOTDIR}@g' \
+        -i ${CMAKE_SOURCE}/style/CMakeLists.txt \
+        -i ${CMAKE_SOURCE}/themes/CMakeLists.txt \
+        -i ${CMAKE_SOURCE}/kvantumpreview/CMakeLists.txt \
+        -i ${CMAKE_SOURCE}/kvantummanager/CMakeLists.txt
+    cmake_src_prepare
+}
+
