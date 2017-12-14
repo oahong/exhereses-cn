@@ -1,0 +1,14 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=PapirusDevelopmentTeam ] gtk-icon-cache
+
+SUMMARY="Papirus icon theme for Linux"
+
+LICENCES="LGPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
