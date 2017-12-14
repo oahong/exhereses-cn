@@ -1,0 +1,17 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=PapirusDevelopmentTeam ]
+SUMMARY="Arc KDE customization"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    suggestion:
+        x11-themes/papirus-icon-theme
+        x11-themes/Kvantum
+"
+
