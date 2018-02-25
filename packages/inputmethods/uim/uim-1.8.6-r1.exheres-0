@@ -20,8 +20,7 @@ DEPENDENCIES="
         dev-util/intltool[>=0.36.3]
         virtual/pkg-config
         sys-devel/gettext[>=0.17]
-        x11-proto/xextproto
-        x11-proto/xproto
+        x11-proto/xorgproto
     build+run:
         anthy? ( cjk/anthy[>=8622] )
         dev-libs/glib
