@@ -58,8 +58,7 @@ DEPENDENCIES="
         dev-util/intltool
         sys-devel/gettext
         virtual/pkg-config
-        x11-proto/kbproto
-        x11-proto/xproto
+        x11-proto/xorgproto
         kde-frameworks/extra-cmake-modules[>=0.0.11]
     build+run:
         app-text/iso-codes
