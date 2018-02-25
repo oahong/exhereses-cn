@@ -27,7 +27,7 @@ MYOPTIONS="debug jpeg jpeg? ( ( providers: ijg-jpeg jpeg-turbo ) [[ number-selec
 DEPENDENCIES="
     build:
         virtual/pkg-config
-        x11-proto/xproto
+        x11-proto/xorgproto
     build+run:
         media-libs/libpng[>=1.2.0]
         x11-libs/libX11
