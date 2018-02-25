@@ -16,7 +16,7 @@ MYOPTIONS="bidi wiiremote [[ description = [ Support for wiimote input devices ]
 
 DEPENDENCIES="
     build:
-        x11-proto/xproto
+        x11-proto/xorgproto
     build+run:
         dev-libs/angelscript[>=2.31]
         media-libs/freetype:2
