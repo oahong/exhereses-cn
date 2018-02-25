@@ -27,7 +27,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        x11-proto/xproto
+        x11-proto/xorgproto
     build+run:
         media-libs/giflib
         media-libs/imlib2[X]
