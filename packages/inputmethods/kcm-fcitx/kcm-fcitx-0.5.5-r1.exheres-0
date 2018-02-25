@@ -16,7 +16,7 @@ DEPENDENCIES="
         kde-frameworks/extra-cmake-modules[>=1.0.0]
         sys-devel/gettext
         virtual/pkg-config
-        x11-proto/xproto
+        x11-proto/xorgproto
     build+run:
         inputmethods/fcitx-qt5[>=1.1.0]
         inputmethods/fcitx[dbus][>=4.2.8]
