@@ -19,8 +19,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         virtual/pkg-config
-        x11-proto/recordproto
-        x11-proto/xproto
+        x11-proto/xorgproto
     build+run:
         app-arch/lzo:2
         app-spell/hunspell:=
