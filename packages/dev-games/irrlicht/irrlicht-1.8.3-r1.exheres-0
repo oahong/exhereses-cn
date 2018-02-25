@@ -21,7 +21,7 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        x11-proto/xproto
+        x11-proto/xorgproto
     build+run:
         app-arch/bzip2
         media-libs/libpng:=
