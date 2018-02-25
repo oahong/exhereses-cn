@@ -15,7 +15,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
         virtual/pkg-config
-        x11-proto/xproto
+        x11-proto/xorgproto
     build+run:
         dev-libs/icu[>=4.0]
         inputmethods/ibus[>=1.3.7]
