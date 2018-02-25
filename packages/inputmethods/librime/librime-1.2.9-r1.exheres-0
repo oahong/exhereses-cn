@@ -13,7 +13,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        x11-proto/xproto
+        x11-proto/xorgproto
     build+run:
         cjk/opencc
         dev-db/leveldb
