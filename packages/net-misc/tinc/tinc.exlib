@@ -16,13 +16,6 @@ MYOPTIONS="
     parts: binaries documentation
 "
 
-DEFAULT_SRC_CONFIGURE_PARAMS=(
-    --enable-uml
-    --enable-zlib
-    --disable-tunemu
-)
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( lzo vde )
-
 DEPENDENCIES="
     build:
         virtual/pkg-config
@@ -35,8 +28,19 @@ DEPENDENCIES="
         providers:openssl? ( dev-libs/openssl )
 "
 
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --enable-jumbograms
+    --enable-uml
+    --enable-zlib
+    --disable-tunemu
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( lzo vde )
+
 tinc_src_install() {
     default
+    insinto /usr/share/doc/${PNVR}
+    doins -r doc/sample-config
+    keepdir /etc/tinc
     expart binaries /usr/$(exhost --target)/bin
     expart documentation /usr/share/{doc,info,man}
 }
