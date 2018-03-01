@@ -1,0 +1,37 @@
+# Copyright 2018 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require systemd-service
+require cargo [ disable_default_features=true ] github [ user=shadowsocks tag=v${PV} ]
+
+SUMMARY="A rust port of shadowsocks"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    sodium
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
+"
+
+DEPENDENCIES="
+    build:
+    build+run:
+        sodium? ( dev-libs/libsodium )
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
+"
+
+# Listen and connect to random ports
+RESTRICT="test"
+ECARGO_FEATURE_ENABLES=( 'sodium sodium' )
+
+src_install() {
+    cargo_src_install
+    insinto /etc/default
+    doins debian/${PN}.default
+    insinto /etc/${PN}
+    doins debian/config.json
+    systemd_files_doins ${SYSTEMDSYSTEMUNITDIR} debian/${PN}*.service
+}
+
