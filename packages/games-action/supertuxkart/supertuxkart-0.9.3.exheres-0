@@ -25,7 +25,6 @@ DEPENDENCIES="
         media-libs/libvorbis
         media-libs/openal
         net-misc/curl
-        x11-dri/glu
         x11-dri/mesa
         x11-libs/libX11
         x11-libs/libXrandr
@@ -39,7 +38,7 @@ DEPENDENCIES="
 #        tinygettext
 #        wiiuse
 #        bullet
-#        glew angelscript
+#        glew
 #        dev-games/irrlicht[>=1.8]
 
 REMOTE_IDS="sourceforge:${PN} github:${PN}"
@@ -47,11 +46,11 @@ UPSTREAM_DOCUMENTATION="${HOMEPAGE}/FAQ"
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/link_against_system_libs.patch
-    "${FILES}"/build_against_jpeg_9.patch
     "${FILES}"/${PNV}-angelscript-compatibility.patch
 )
 
 CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DBUILD_RECORDER:BOOL=FALSE
     -DUSE_XRANDR:BOOL=TRUE
     -DCMAKE_INSTALL_PREFIX:PATH=/usr
     -DSTK_INSTALL_BINARY_DIR:PAHT=/usr/$(exhost --target)/bin
