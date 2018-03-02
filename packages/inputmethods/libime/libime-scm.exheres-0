@@ -6,7 +6,7 @@ OPENGRAM_DICT_TAR=dict.utf8-20170423.tar.xz
 TABLE_DICT_TAR=table.tar.gz
 
 SCM_kenlm_REPOSITORY=https://github.com/kpu/kenlm.git
-SCM_kenlm_REVISION=f3243eaff1366c7c60263ec0d21c9bfe4ab3591c
+SCM_kenlm_REVISION=25d7ab59620740ddeec7e0fdc6758b8b00a93bcb
 SCM_SECONDARY_REPOSITORIES="kenlm"
 SCM_EXTERNAL_REFS="src/libime/core/kenlm:kenlm"
 
