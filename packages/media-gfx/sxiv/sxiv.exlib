@@ -1,16 +1,16 @@
 # Copyright 2012 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=muennich tag=v${PV} ]
+require github [ user=muennich tag=v${PV} ] gtk-icon-cache freedesktop-mime
 export_exlib_phases src_compile src_install
 
-SUMMARY="Simple (or small or suckless) X Image Viewer"
+SUMMARY="Simple X Image Viewer"
 DESCRIPTION="
-sxiv is an alternative to feh and qiv. Its only dependencies besides xlib are imlib2 and giflib. The
-primary goal for writing sxiv is to create an image viewer, which only has the most basic features
+The primary goal of sxiv is to create an image viewer, which only has the most basic features
 required for fast image viewing (the ones I want). It has vi key bindings and works nicely with
 tiling window managers. Its code base should be kept small and clean to make it easy for you to dig
 into it and customize it for your needs.
+
 Features:
 * Basic image operations, e.g. zooming, panning, rotating
 * Customizable key and mouse button mappings (in config.h)
@@ -31,8 +31,9 @@ DEPENDENCIES="
     build+run:
         media-libs/giflib
         media-libs/imlib2[X]
-        media-libs/libexif
         x11-libs/libX11
+        x11-libs/libXft
+        media-libs/libexif
 "
 
 DEFAULT_SRC_COMPILE_PARAMS=(
@@ -51,6 +52,10 @@ sxiv_src_compile() {
 
 sxiv_src_install() {
     default
+    emake -C icon \
+        PREFIX=/usr DESTDIR="${IMAGE}" install
+    insinto /usr/share/applications
+    doins ${PN}.desktop
     dodir /usr/$(exhost --target)
     edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
 }
