@@ -89,8 +89,6 @@ DEPENDENCIES="
         qt4? ( x11-libs/qt:4[>=4.5][dbus] )
     recommendation:
         inputmethods/fcitx-configtool
-    suggestion:
-        kde/kdeplasma-addons[kimpanel] [[ note = [ KDE plasma integration ] ]]
 "
 # fcitx-config script:
 #        xdg-utils / fcitx-config
