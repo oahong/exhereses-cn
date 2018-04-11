@@ -33,8 +33,7 @@ DEPENDENCIES="
         x11-libs/qtwebkit:5
         x11-libs/qtx11extras:5
         internal-player? (
-            media/ffmpeg
-            media-libs/libao
+            x11-libs/qtmultimedia:5
         )
         tiff? ( media-libs/tiff )
     recommendation:
@@ -56,10 +55,11 @@ goldendict_src_configure() {
     local qmake_params=(
         PREFIX=/usr
         CONFIG+=no_epwing_support
+        CONFIG+=no_ffmpeg_player
     )
 
     option tiff || qmake_params+=( CONFIG+=no_extra_tiff_handler )
-    option internal-player || qmake_params+=( DISABLE_INTERNAL_PLAYER=1 )
+    option internal-player || qmake_params+=( CONFIG+=no_qtmultimedia_player)
 
     eqmake "${qmake_params[@]}"
 }
