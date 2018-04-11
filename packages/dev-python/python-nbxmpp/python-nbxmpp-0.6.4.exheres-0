@@ -1,7 +1,7 @@
 # Copyright 2014 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-HASH="44b8365a76c434be407e5f699104d8ba29256ef6"
+HASH="ad40cafa84a639a1b63e7b5e6224e82c18143258"
 require gitlab [ prefix='https://dev.gajim.org' user=gajim ref=nbxmpp-${PV} ]
 require setup-py [ import=distutils work=${PNV/python-} work=${PN}-nbxmpp-${PV}-${HASH} ]
 
