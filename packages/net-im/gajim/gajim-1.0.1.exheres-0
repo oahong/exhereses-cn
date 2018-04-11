@@ -1,0 +1,32 @@
+# Copyright 2011-2018 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require gitlab [ prefix='https://dev.gajim.org' user=gajim ]
+require gtk-icon-cache setup-py [ import=setuptools has_bin=true blacklist=2 ]
+
+SUMMARY="A full featured and easy to use jabber client"
+HOMEPAGE="http://www.gajim.org"
+DOWNLOADS="${HOMEPAGE}/downloads/$(ever range -2)/${PNV}.tar.bz2"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+        dev-util/intltool
+        sys-devel/gettext
+    build+run:
+        dev-python/pyasn1[python_abis:*(-)?]
+        dev-python/pyopenssl[python_abis:*(-)?]
+        dev-python/python-nbxmpp[>=0.6.4][python_abis:*(-)?]
+    recommendation:
+        dev-python/dbus-python[python_abis:*(-)?] [[ note = [ gajim-remote ] ]]
+        (
+            dev-libs/libsecret[gobject-introspection]
+            dev-python/keyring[python_abis:*(-)?]
+        ) [[ note = [ password storage ] ]]
+"
+
