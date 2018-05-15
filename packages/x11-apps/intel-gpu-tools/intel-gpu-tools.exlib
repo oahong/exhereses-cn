@@ -3,7 +3,7 @@
 # dependencies are copied from gentoo portage
 
 SCM_REPOSITORY="http://anongit.freedesktop.org/git/xorg/app/intel-gpu-tools.git"
-SCM_TAG="${PN}-${PV}"
+SCM_TAG="${PNV}"
 require scm-git autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
 
 export_exlib_phases src_prepare
@@ -22,7 +22,7 @@ DEPENDENCIES="
         app-doc/gtk-doc-autotools
         x11-utils/util-macros
     build+run:
-        dev-libs/glib
+        dev-libs/glib:2
         dev-libs/libunwind
         x11-dri/libdrm[>=2.4.64][video_drivers:intel]
         x11-libs/cairo
