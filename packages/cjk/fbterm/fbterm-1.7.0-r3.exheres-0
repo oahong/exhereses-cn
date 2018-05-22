@@ -42,6 +42,10 @@ DEPENDENCIES="
         fonts/unifont-ttf
 "
 
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}/fbterm-fix-build.patch"
+)
+
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( gpm 'video_drivers:vesa vesa' )
 
 WORK=${WORKBASE}/${PN}-$(ever range 1-2)
@@ -50,14 +54,6 @@ src_prepare() {
     edo sed -e '/AC_PROG_RANLIB/aAM_PROG_AR' \
         -i configure.ac
     autotools_src_prepare
-}
-
-src_install() {
-    default
-
-    dodir /usr/share/terminfo
-    $(type -P tic) -o "${IMAGE}/usr/share/terminfo/" \
-        "${WORK}"/terminfo/${PN} || die "Failed to generate terminfo database"
 }
 
 pkg_postinst() {
