@@ -1,8 +1,8 @@
 # Copyright 2013-2015 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-REV=a21
-MY_PNV=${PN}_${PV}~${REV}_amd64
+REV=${PV##*.}
+MY_PNV=${PN}_${PV}_amd64
 require gtk-icon-cache freedesktop-mime freedesktop-desktop
 
 SUMMARY="Kingsoft office for Linux"
@@ -56,7 +56,7 @@ src_install() {
     edo cp -aR opt usr etc "${IMAGE}"
     dodir /usr/$(exhost --target)
     edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
-    edo rmdir "${IMAGE}"/usr/share/icons/hicolor/32x32/apps
+    edo rmdir "${IMAGE}"/usr/share/icons/hicolor/16x16/apps
     edo rm -r "${IMAGE}"/etc/fonts/conf.d
 
     # Replace /lib64/ld-linux-x86-64.so.2 with our loader
