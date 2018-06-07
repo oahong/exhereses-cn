@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require gitlab [ prefix='https://dev.gajim.org' user=gajim ]
-require gtk-icon-cache setup-py [ import=setuptools has_bin=true blacklist=2 ]
+require gtk-icon-cache setup-py [ import=setuptools has_bin=true blacklist="2 3.4" ]
 
 SUMMARY="A full featured and easy to use jabber client"
 HOMEPAGE="http://www.gajim.org"
@@ -20,13 +20,17 @@ DEPENDENCIES="
         sys-devel/gettext
     build+run:
         dev-python/pyasn1[python_abis:*(-)?]
-        dev-python/pyopenssl[python_abis:*(-)?]
-        dev-python/python-nbxmpp[>=0.6.4][python_abis:*(-)?]
+        gnome-bindings/pygobject:3[cairo][python_abis:*(-)?]
+        dev-python/pyopenssl[>=0.12][python_abis:*(-)?]
+        dev-python/python-nbxmpp[>=0.6.6][python_abis:*(-)?]
     recommendation:
-        dev-python/dbus-python[python_abis:*(-)?] [[ note = [ gajim-remote ] ]]
+        dev-python/dbus-python[>=1.2.0][python_abis:*(-)?] [[ note = [ gajim-remote ] ]]
         (
-            dev-libs/libsecret[gobject-introspection]
+            dev-libs/libsecret:1[gobject-introspection]
             dev-python/keyring[python_abis:*(-)?]
         ) [[ note = [ password storage ] ]]
 "
+
+# Tests require access to X server
+RESTRICT="test"
 
