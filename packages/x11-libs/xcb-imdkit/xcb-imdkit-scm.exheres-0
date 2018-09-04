@@ -1,7 +1,7 @@
 # Copyright 2017 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=wengxt ] scm-git cmake [ api=2 ]
+require gitlab [ user=fcitx ] scm-git cmake [ api=2 ]
 SUMMARY="input method development support for xcb"
 
 LICENCES="LGPL-2.1"

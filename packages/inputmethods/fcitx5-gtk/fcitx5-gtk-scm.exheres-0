@@ -1,7 +1,7 @@
 # Copyright 2017 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.6 ]
+require gitlab [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.6 ]
 
 SUMMARY="gtk im module and glib based dbus client library for fcitx5"
 DOWNLOADS=""

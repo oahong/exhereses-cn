@@ -1,7 +1,7 @@
 # Copyright 2017 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.6.0 ]
+require gitlab [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.6.0 ]
 
 SUMMARY="Qt library and IM module for fcitx5"
 

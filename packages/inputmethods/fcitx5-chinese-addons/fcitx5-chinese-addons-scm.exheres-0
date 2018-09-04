@@ -3,7 +3,7 @@
 
 PY_STROKE=py_stroke-20121124.tar.gz
 PY_TABLE=py_table-20121124.tar.gz
-require github [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.4.0 ]
+require gitlab [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.4.0 ]
 
 SUMMARY="Chinese addons for fcitx5"
 DOWNLOADS="

@@ -3,7 +3,7 @@
 
 SPELL_EN_DICT=en_dict-20121020.tar.gz
 
-require github [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.6.0 ]
+require gitlab [ user=fcitx ] cmake [ api=2 cmake_minimum_version=3.6.0 ]
 
 SUMMARY="Next generation of fcitx"
 DOWNLOADS="

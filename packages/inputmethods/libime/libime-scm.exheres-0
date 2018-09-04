@@ -10,7 +10,7 @@ SCM_kenlm_REVISION=25d7ab59620740ddeec7e0fdc6758b8b00a93bcb
 SCM_SECONDARY_REPOSITORIES="kenlm"
 SCM_EXTERNAL_REFS="src/libime/core/kenlm:kenlm"
 
-require github [ user=fcitx ] cmake [ api=2 ]
+require gitlab [ user=fcitx ] cmake [ api=2 ]
 
 SUMMARY="A library to support generic input method implementation"
 DOWNLOADS="
