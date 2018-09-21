@@ -1,0 +1,60 @@
+# Copyright 2018 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake [ api=2 ]
+
+SUMMARY="Simple and Fast Multimedia Library"
+DESCRIPTION="
+SFML provides a simple interface to the various components of your PC, to ease the development of
+games and multimedia applications. It is composed of five modules: system, window, graphics, audio
+and network.
+SFML has official bindings for the C and .Net languages. And thanks to its active community, it is
+also available in many other languages such as Java, Ruby, Python, Go, and more.
+With SFML, your application can compile and run out of the box on the most common
+operating systems: Windows, Linux, macOS and soon Android & iOS."
+HOMEPAGE="https://www.sfml-dev.org"
+DOWNLOADS="${HOMEPAGE}/files/${PNV}-sources.zip"
+
+LICENCES="ZLIB"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    doc
+    ( providers: eudev systemd ) [[ number-selected = exactly-one ]]
+"
+
+DEPENDENCIES="
+    build:
+        x11-proto/xorgproto
+        doc? ( app-doc/doxygen )
+    build+run:
+        media-libs/flac
+        media-libs/freetype:2
+        media-libs/libvorbis
+        media-libs/openal
+        x11-dri/mesa
+        x11-libs/libX11
+        x11-libs/libXrandr
+        providers:eudev? ( sys-apps/eudev )
+        providers:systemd? ( sys-apps/systemd )
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DSFML_MISC_INSTALL_PREFIX:PATH=/usr/share/doc/${PNV}
+    -DSFML_BUILD_WINDOW:BOOL=TRUE
+    -DSFML_BUILD_GRAPHICS:BOOL=TRUE
+    -DSFML_BUILD_AUDIO:BOOL=TRUE
+    -DSFML_BUILD_NETWORK:BOOL=TRUE
+    -DSFML_USE_SYSTEM_DEPS:BOOL=TRUE
+)
+CMAKE_SRC_CONFIGURE_OPTIONS=(
+    'doc SFML_BUILD_DOC'
+)
+
+src_prepare() {
+    cmake_src_prepare
+    edo sed -e "s/pkg-config/$(exhost --tool-prefix)pkg-config/" \
+        -i cmake/Modules/FindUDev.cmake
+    edo sed -e '/DESTINATION/s/doc//g' -i doc/CMakeLists.txt
+}
+
