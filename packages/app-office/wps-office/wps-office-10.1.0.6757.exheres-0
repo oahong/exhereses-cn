@@ -56,8 +56,7 @@ src_install() {
     edo cp -aR opt usr etc "${IMAGE}"
     dodir /usr/$(exhost --target)
     edo mv "${IMAGE}"/usr/{bin,$(exhost --target)}
-    edo rmdir "${IMAGE}"/usr/share/icons/hicolor/16x16/apps
-    edo rm -r "${IMAGE}"/etc/fonts/conf.d
+    edo rmdir "${IMAGE}"//usr/share/icons/hicolor/16x16/apps
 
     # Replace /lib64/ld-linux-x86-64.so.2 with our loader
     ELF_INTERPRETER=/usr/$(exhost --build)/lib/ld-linux-x86-64.so.2
