@@ -1,0 +1,34 @@
+# Copyright 2009 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake [ api=2 ] github [ user=iptux-src tag=v${PV} ] gtk-icon-cache
+
+SUMMARY="IP Messenger client for Linux"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+        sys-devel/gettext
+    build+run:
+        dev-libs/glib:2[>=2.32.0]
+        x11-libs/gtk+:2[>=2.16.0]
+        dev-libs/jsoncpp[>=1.0]
+    recommendation:
+        media-libs/gstreamer:0.10
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DCMAKE_INSTALL_PREFIX:PATH=/usr
+)
+
+src_install() {
+    cmake_src_install
+    dodir /usr/$(exhost --target)
+    edo mv ${IMAGE}/usr/bin ${IMAGE}/usr/$(exhost --target)
+}
+
