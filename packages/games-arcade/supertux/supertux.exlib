@@ -1,7 +1,8 @@
 # Copyright 2010 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ release=v${PV} pnv=${PNV} suffix=tar.bz2 ] cmake [ api=2 ]
+MY_PNV=SuperTux-v${PV}-Source
+require github [ release=v${PV} suffix=tar.gz ] cmake [ api=2 ]
 
 export_exlib_phases src_prepare
 
@@ -31,9 +32,8 @@ DEPENDENCIES="
         x11-dri/mesa
 "
 
-WORK=${WORKBASE}/${PNV/_alpha/a}
-
 CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DENABLE_BOOST_STATIC_LIBS:bool=OFF
     -DENABLE_OPENGL:bool=ON
     -DGLBINDING_ENABLED:bool=OFF
     -DCMAKE_INSTALL_PREFIX:path=/usr
@@ -47,11 +47,10 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
 DEFAULT_SRC_INSTALL_EXTRA_DOCS=( WHATNEW.txt )
 
 supertux_src_prepare() {
-    cmake_src_prepare
     # Stop runnig git in the compile phase
     edo sed -e '/FIND_PROGRAM/s@git@NOGIT@' \
-        -i "${WORK}"/CMakeLists.txt \
-        -e "/DESTINATION/s@include@$(exhost --target)/&@" \
-        -i "${WORK}"/external/tinygettext/CMakeLists.txt
+        -i "${CMAKE_SOURCE}"/CMakeLists.txt
+
+    cmake_src_prepare
 }
 
