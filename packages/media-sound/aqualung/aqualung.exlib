@@ -15,7 +15,7 @@ adjacent tracks.
 Aqualung also supports high quality sample rate conversion between the file and the
 output device, when necessary.
 "
-HOMEPAGE="http://aqualung.factorial.hu"
+HOMEPAGE="http://aqualung.jeremyevans.net"
 DOWNLOADS=""
 
 LICENCES="GPL-2"
@@ -34,10 +34,10 @@ DEPENDENCIES="
     build+run:
         dev-libs/glib:2
         dev-libs/libxml2
-        x11-libs/gtk+:2[>=2.10]
+        x11-libs/gtk+:2[>=2.18]
         cdda? ( dev-libs/libcdio[>=0.76] )
         cddb? ( media-libs/libcddb[>=1.2.1] )
-        lua? ( dev-lang/lua[>=5.1] )
+        lua? ( dev-lang/lua:=[>=5.1&<=5.3] )
         jack? ( media-sound/jack-audio-connection-kit )
         pulseaudio? ( media-sound/pulseaudio )
         sys-sound/alsa-lib
@@ -50,7 +50,7 @@ DEPENDENCIES="
         media-libs/libsndfile[>=1.0.18]
         media-libs/libvorbis
         media-sound/lame
-        modplug? ( media-libs/libmodplug[>=0.8] )
+        modplug? ( media-libs/libmodplug[>=0.8.4] )
         musepack? ( media-libs/libmpcdec )
         wavpack? ( media-sound/wavpack )
 "
@@ -79,6 +79,9 @@ DEFAULT_SRC_CONFIGURE_OPTION_WITHS=(
     'modplug mod' 'musepack mpc'
     'ffmpeg lavc' mac wavpack
     cdda cddb lua ladspa
+)
+DEFAULT_SRC_COMPILE_PARAMS=(
+    "AR=$AR"
 )
 
 aqualung_src_install() {
