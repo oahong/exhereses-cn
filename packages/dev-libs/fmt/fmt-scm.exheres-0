@@ -1,0 +1,13 @@
+# Copyright 2017 Hong Hao <oahong@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require fmt
+
+PLATFORMS="~amd64"
+
+src_prepare() {
+    default
+
+    edo sed -i 's;share/pkgconfig;lib/pkgconfig;' "${CMAKE_SOURCE}"/CMakeLists.txt
+}
+
