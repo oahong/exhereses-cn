@@ -1,21 +1,7 @@
 # Copyright 2017 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=fmtlib tag=${PV} ] cmake [ api=2 ]
+require fmt
 
-SUMMARY="Small, safe and fast formatting library"
-
-LICENCES="BSD-2"
-SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
-
-DEPENDENCIES=""
-
-CMAKE_SRC_CONFIGURE_PARAMS=(
-    -DBUILD_SHARED_LIBS:BOOL=TRUE
-    -DFMT_INSTALL:BOOL=TRUE
-    -DFMT_TEST:BOOL=FALSE
-    -DFMT_DOC:BOOL=FALSE
-)
 
