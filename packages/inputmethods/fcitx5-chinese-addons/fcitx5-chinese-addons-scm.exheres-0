@@ -14,7 +14,7 @@ DOWNLOADS="
 LICENCES="LGPL-2.1"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="opencc [[ description = [ Enable OpenCC for chttrans ] ]]"
+MYOPTIONS="qt5 opencc [[ description = [ Enable OpenCC for chttrans ] ]]"
 
 # last checked: e6c713549eba0fa99d4ec696a0329a3dfcc6dd72
 DEPENDENCIES="
@@ -29,10 +29,18 @@ DEPENDENCIES="
         net-misc/curl
         dev-libs/boost[>=1.61]
         opencc? ( cjk/opencc )
+        qt5? (
+            inputmethods/fcitx5-qt[qt5?]
+            x11-libs/qtbase:5
+            x11-libs/qtwebengine:5
+        )
 "
 
 CMAKE_SRC_CONFIGURE_PARAMS=( -DENABLE_TEST:BOOL=TRUE )
-CMAKE_SRC_CONFIGURE_OPTION_ENABLES=( 'opencc OPENCC' )
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
+    'opencc OPENCC'
+    'qt5 GUI'
+)
 
 src_prepare() {
     local f=
