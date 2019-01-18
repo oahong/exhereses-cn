@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 GITHUB_TAG=ver.${PV}
-require cmake github [ user=BYVoid pn=OpenCC ]
+require github [ user=BYVoid pn=OpenCC ] cmake [ api=2 ]
 
 SUMMARY="Open Chinese conversion library"
 HOMEPAGE="http://opencc.byvoid.com"
