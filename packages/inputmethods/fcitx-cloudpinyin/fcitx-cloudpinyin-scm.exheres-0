@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="https://github.com/fcitx/fcitx-cloudpinyin.git"
-require cmake scm-git
+require scm-git cmake [ api=2 ]
 
 SUMMARY="Cloud Pinyin module for Fcitx"
 HOMEPAGE="http://fcitx.googlecode.com"
