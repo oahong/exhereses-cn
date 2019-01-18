@@ -7,5 +7,5 @@ DOWNLOADS="https://github.com/ibus/${PN}/releases/download/${PV}/${PNV}-Source.t
 
 PLATFORMS="~amd64 ~x86"
 
-WORK=${WORKBASE}/${MY_PNV}
+CMAKE_SOURCE=${WORKBASE}/${MY_PNV}
 
