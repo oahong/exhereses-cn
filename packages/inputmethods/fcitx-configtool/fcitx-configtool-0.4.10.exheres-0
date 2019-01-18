@@ -1,7 +1,7 @@
 # Copyright 2010-2013 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require cmake
+require cmake [ api=2 ]
 
 SUMMARY="Configuration tool for fcitx"
 HOMEPAGE="http://fcitx.googlecode.com"
