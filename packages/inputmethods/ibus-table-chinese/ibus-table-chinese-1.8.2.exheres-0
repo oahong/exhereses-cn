@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 MY_PNV=${PNV}-Source
-require github [ user=definite ] cmake [ out_of_source=false ]
+require github [ user=definite ] cmake [ out_of_source=false api=2 ]
 
 SUMMARY="Chinese tables for IBus-Table"
 DESCRIPTION="
