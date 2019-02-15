@@ -1,0 +1,18 @@
+# Copyright 2019 <name>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import=setuptools ]
+
+SUMMARY="Persistent cache for requests library"
+
+LICENCES="BSD-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/requests[>=1.1.0][python_abis:*(-)?]
+"
+
+
