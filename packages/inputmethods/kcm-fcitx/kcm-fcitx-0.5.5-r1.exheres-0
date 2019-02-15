@@ -1,7 +1,7 @@
 # Copyright 2011-2015 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require cmake github
+require cmake [ api=2 ] github
 
 SUMMARY="KDE Config Module for Fcitx"
 DOWNLOADS="http://download.fcitx-im.org/${PN}/${PNV}.tar.xz"

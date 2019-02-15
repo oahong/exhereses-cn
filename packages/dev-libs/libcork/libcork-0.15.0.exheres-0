@@ -1,7 +1,7 @@
 # Copyright 2017 Hong Hao <oahong@oahong.me>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=redjack ] cmake
+require github [ user=redjack ] cmake [ api=2 ]
 SUMMARY="A simple, easily embeddable cross-platform C library"
 
 LICENCES="BSD-3"
@@ -28,7 +28,7 @@ DEFAULT_SRC_INSTALL_EXCLUDE=(
 )
 
 src_prepare() {
-    default
+    cmake_src_prepare
 
     edo cat <<EOF>version.sh
 #/bin/bash

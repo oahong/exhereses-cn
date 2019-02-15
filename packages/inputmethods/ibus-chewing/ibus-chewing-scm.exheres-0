@@ -1,7 +1,7 @@
 # Copyright 2009 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require ibus-engine [ python_dep=false maintainer=definite ] cmake
+require ibus-engine [ python_dep=false maintainer=definite ] cmake [ api=2 ]
 
 PLATFORMS="~x86"
 MYOPTIONS=""
