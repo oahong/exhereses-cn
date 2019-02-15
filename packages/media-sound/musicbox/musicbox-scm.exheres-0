@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require setup-py [ import=setuptools ] github [ user=darknessomi ]
+require utf8-locale
+
 SUMMARY="A sexy cli netease musicbox"
 
 LICENCES="MIT"
@@ -13,8 +15,9 @@ DEPENDENCIES="
     build+run:
         dev-python/beautifulsoup4[python_abis:*(-)?]
         dev-python/future[python_abis:*(-)?]
-        dev-python/pycrypto[python_abis:*(-)?]
+        dev-python/pycryptodomex[python_abis:*(-)?]
         dev-python/requests[python_abis:*(-)?]
+        dev-python/requests-cache[python_abis:*(-)?]
     run:
         media-sound/mpg123
     suggestion:
@@ -26,4 +29,17 @@ DEPENDENCIES="
             x11-libs/qt:4[dbus]
         )  [[ *note = [ desktop lyrics ] ]]
 "
+
+src_configure() {
+    require_utf8_locale
+    setup-py_src_configure
+}
+
+src_test() {
+     esandbox allow_net --connect "inet:0.0.0.0/0@53"
+     esandbox allow_net --connect "inet:0.0.0.0/0@80"
+     setup-py_src_test
+     esandbox disallow_net --connect "inet:0.0.0.0/0@80"
+     esandbox disallow_net --connect "inet:0.0.0.0/0@53"
+}
 
