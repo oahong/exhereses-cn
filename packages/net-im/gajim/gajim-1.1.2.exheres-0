@@ -19,10 +19,12 @@ DEPENDENCIES="
         dev-util/intltool
         sys-devel/gettext
     build+run:
+        dev-python/cssutils[>=1.0.2][python_abis:*(-)?]
+        dev-python/precis_i18n[>=1.0.0][python_abis:*(-)?]
         dev-python/pyasn1[python_abis:*(-)?]
         gnome-bindings/pygobject:3[cairo][python_abis:*(-)?]
         dev-python/pyopenssl[>=0.12][python_abis:*(-)?]
-        dev-python/python-nbxmpp[>=0.6.6][python_abis:*(-)?]
+        dev-python/python-nbxmpp[>=0.6.9][python_abis:*(-)?]
     recommendation:
         dev-python/dbus-python[>=1.2.0][python_abis:*(-)?] [[ note = [ gajim-remote ] ]]
         (
