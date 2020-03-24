@@ -19,7 +19,7 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        app-doc/gtk-doc-autotools
+        dev-doc/gtk-doc[>=1.32-r1]
         x11-utils/util-macros
     build+run:
         dev-libs/glib:2
