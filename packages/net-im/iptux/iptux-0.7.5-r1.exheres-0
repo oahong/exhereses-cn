@@ -19,7 +19,7 @@ DEPENDENCIES="
         x11-libs/gtk+:2[>=2.16.0]
         dev-libs/jsoncpp[>=1.0]
     recommendation:
-        media-libs/gstreamer:0.10
+        media-libs/gstreamer:1.0
 "
 
 CMAKE_SRC_CONFIGURE_PARAMS=(
