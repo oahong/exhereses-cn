@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require gitlab [ prefix='https://dev.gajim.org' user=gajim ]
-require gtk-icon-cache setup-py [ import=setuptools has_bin=true blacklist="2 3.4" ]
+require gtk-icon-cache setup-py [ import=setuptools has_bin=true blacklist="2 3.4 3.5 3.6" ]
 
 SUMMARY="A full featured and easy to use jabber client"
 HOMEPAGE="http://www.gajim.org"
-DOWNLOADS="${HOMEPAGE}/downloads/$(ever range -2)/${PNV}.tar.bz2"
+DOWNLOADS="${HOMEPAGE}/downloads/$(ever range -2)/${PNV}.tar.gz"
 
 LICENCES="GPL-3"
 SLOT="0"
@@ -19,12 +19,14 @@ DEPENDENCIES="
         dev-util/intltool
         sys-devel/gettext
     build+run:
-        dev-python/cssutils[>=1.0.2][python_abis:*(-)?]
+        dev-python/css-parser[python_abis:*(-)?]
+        dev-python/packaging[python_abis:*(-)?]
         dev-python/precis_i18n[>=1.0.0][python_abis:*(-)?]
         dev-python/pyasn1[python_abis:*(-)?]
+        dev-python/pycairo[>=1.16.0][python_abis:*(-)?]
         gnome-bindings/pygobject:3[cairo][python_abis:*(-)?]
-        dev-python/pyopenssl[>=0.12][python_abis:*(-)?]
-        dev-python/python-nbxmpp[>=0.6.9][python_abis:*(-)?]
+        dev-python/pyopenssl[>=16.2][python_abis:*(-)?]
+        dev-python/python-nbxmpp[>=2.0.1][python_abis:*(-)?]
     recommendation:
         dev-python/dbus-python[>=1.2.0][python_abis:*(-)?] [[ note = [ gajim-remote ] ]]
         (
