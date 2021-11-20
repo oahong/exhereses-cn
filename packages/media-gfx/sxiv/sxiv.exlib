@@ -36,9 +36,6 @@ DEPENDENCIES="
         media-libs/libexif
 "
 
-DEFAULT_SRC_COMPILE_PARAMS=(
-    CC=${CC} LDFLAGS=${LDFLAGS} CFLAGS=${CFLAGS}
-)
 DEFAULT_SRC_INSTALL_PARAMS=(
     PREFIX=/usr
     MANPREFIX=/usr/share/man
