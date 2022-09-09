@@ -1,7 +1,7 @@
 # Copyright 2017 Hong Hao <oahong@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=rime ] cmake [ api=2 ]
+require github [ user=rime ] cmake
 
 SUMMARY="Rime Input Method Engine, the core library"
 HOMEPAGE+=" https://rime.im"
