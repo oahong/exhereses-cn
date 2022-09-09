@@ -18,7 +18,7 @@ DEPENDENCIES="
         cjk/opencc
         dev-db/leveldb
         dev-libs/marisa-trie
-        dev-libs/yaml-cpp
+        dev-libs/yaml-cpp:=
         x11-libs/libX11
     test:
         dev-cpp/gtest
