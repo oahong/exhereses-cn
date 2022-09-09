@@ -4,7 +4,7 @@
 require github [ user=rime ] cmake [ api=2 ]
 
 SUMMARY="Rime Input Method Engine, the core library"
-HOMEPAGE="http://rime.im"
+HOMEPAGE+=" https://rime.im"
 
 LICENCES="BSD-3"
 SLOT="0"
